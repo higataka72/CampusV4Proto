@@ -94,36 +94,46 @@
                     <div class="form-group">
                         <label class="col-md-1 control-label"> </label>
                         <div class="col-md-1">
-                            <label class="control-label text-nowrap lavel-functionkey" id="lbl_UnofficialNotice">
-                                @Html.CheckBoxFor(model => model.UnofficialNotice)　内示
-                            </label>
+                            <div class="input-group">
+                                <label class="control-label text-nowrap lavel-functionkey" style="vertical-align: middle;" id="lbl_UnofficialNotice">
+                                    @Html.CheckBoxFor(model => model.UnofficialNotice)
+                                </label>
+                                <label class="control-label text-nowrap lavel-functionkey" style="vertical-align: middle;" id="lbl_UnofficialNotice">
+                                    &nbsp;内示
+                                </label>
+                            </div>
                         </div>
                         <div class="col-md-4">
-                            <label class="control-label text-nowrap" id="lbl_PriorArrangements" for="Text10">先行手配</label>
-                            <label class="control-label" for="Text11" style="text-align:left;">
-                                （
-                                @Html.RadioButtonFor(model => model.PriorArrangements, 1) 有り　
-                                @Html.RadioButtonFor(model => model.PriorArrangements, 2) 無し
-                                ）
-                            </label>
+                            <div class="input-group">
+                                <label class="control-label text-nowrap" id="lbl_PriorArrangements" for="Text10">先行手配</label>
+                                <label class="control-label" for="Text11" style="text-align:left;">
+                                    （
+                                    @Html.RadioButtonFor(model => model.PriorArrangements, 1)&nbsp;<label style="vertical-align: middle;">有り</label>
+                                    &nbsp;&nbsp;@Html.RadioButtonFor(model => model.PriorArrangements, 2)&nbsp;<label style="vertical-align: middle;">無し</label>
+                                    ）
+                                </label>
+                            </div>
                         </div>
-                        <div class="col-md-5">
-                            <label class="control-label text-nowrap lavel-functionkey" id="lbl_CancelFlag">
-                                @Html.CheckBoxFor(model => model.CancelFlag)　キャンセル　
-                            </label>
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_CancelFlag">
+                            @Html.CheckBoxFor(model => model.CancelFlag)
+                            &nbsp;<label style="vertical-align: middle;">キャンセル</label>
+                        </label>
+                        <div class="col-md-2">
                             @Html.C1().InputDate().Id("Text12").Value(Model.CancelDate)
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label"> </label>
                         <div class="col-md-4">
-                            <label class="control-label text-nowrap" id="lbl_InspectionReport" for="Text13">検査成績書</label>
-                            <label class="control-label" for="Text14" style="text-align:left;">
-                                （
-                                @Html.RadioButtonFor(model => model.InspectionReport, 1) 要　
-                                @Html.RadioButtonFor(model => model.InspectionReport, 2) 不要
-                                ）
-                            </label>
+                            <div class="input-group">
+                                <label class="control-label text-nowrap" id="lbl_InspectionReport" for="Text13">検査成績書</label>
+                                <label class="control-label" for="Text14" style="text-align:left;">
+                                    （
+                                    @Html.RadioButtonFor(model => model.InspectionReport, 1)&nbsp;<label style="vertical-align: middle;">要</label>
+                                    &nbsp;&nbsp;@Html.RadioButtonFor(model => model.InspectionReport, 2)&nbsp;<label style="vertical-align: middle;">不要</label>
+                                    ）
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -146,9 +156,11 @@
                             @Html.TextBoxFor(model => model.Subject, new { @class = "form-control", @placeholder = "(必須)" })
                         </div>
                         <div class="col-md-3">
-                            <label class="control-label text-nowrap lavel-functionkey" id="lbl_CompletePayment">
-                                @Html.CheckBoxFor(model => model.CompletePayment)　完納
-                            </label>
+                            <div class="input-group">
+                                <label class="control-label text-nowrap lavel-functionkey" id="lbl_CompletePayment">
+                                    @Html.CheckBoxFor(model => model.CompletePayment)&nbsp;&nbsp;<label style="vertical-align: middle;">完納</label>
+                                </label>
+                            </div>
                         </div>
                     </div>
                     @*<div class="form-group">
