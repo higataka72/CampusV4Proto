@@ -14,22 +14,75 @@
 
                 @using (Ajax.BeginForm("PortalInternalDetail", "Portal", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "PortalInternalDetail" }))
                 {
-                    @Html.HiddenFor(model => model.SelectCol, new { id = "SelectCol" })
 
-                    <div class="form-group">
-                        @(Html.C1().FlexGrid()
-                            .AutoGenerateColumns(false).Height("100px").Id("gridIndex")
-                            .Bind(Model.PortalInternalDashboardList).AllowAddNew(false).IsReadOnly(true)
-                            .Columns(b1 =>
-                            {
-                                b1.Add(cb => cb.Binding("EstimatedShippingNum").Width("120").Header("出荷予定数").DataType(DataType.Number));
-                                b1.Add(cb => cb.Binding("EstimatedDesignNum").Width("120").Header("設計予定数").DataType(DataType.Number));
-                                b1.Add(cb => cb.Binding("EstimatedOrderNum").Width("120").Header("発注予定数").DataType(DataType.Number));
-                                b1.Add(cb => cb.Binding("EstimatedComeInNum").Width("120").Header("入荷予定数").DataType(DataType.Number));
-                                b1.Add(cb => cb.Binding("PurchaseAmount").Width("120").Header("仕入金額計").DataType(DataType.Number));
-                                b1.Add(cb => cb.Binding("EarningsAmount").Width("120").Header("売上金額計").DataType(DataType.Number));
-                            }))
+                    <div class="row" style="display: inline-block;">
+                        <div class="top_tiles">
+                            <div class="animated flipInY col-md-3">
+                                <div class="tile-stats" style="background: #efffff;">
+                                    <div class="icon"><i class="fa fa-plane"></i></div>
+                                    <div class="count"><a href="#" onclick="clickDetail()">36</a></div>
+                                    <p></p>
+                                    <h3><a href="#" onclick="clickDetail()">出荷予定数</a></h3>
+                                </div>
+                            </div>
+                            <div class="animated flipInY col-md-3">
+                                <div class="tile-stats" style="background: #efffff;">
+                                    <div class="icon"><i class="fa fa-file-text"></i></div>
+                                    <div class="count"><a href="#" onclick="clickDetail()">10</a></div>
+                                    <p></p>
+                                    <h3><a href="#" onclick="clickDetail()">設計予定数</a></h3>
+                                </div>
+                            </div>
+                            <div class="animated flipInY col-md-3">
+                                <div class="tile-stats" style="background: #efffff;">
+                                    <div class="icon"><i class="fa fa-shopping-basket"></i></div>
+                                    <div class="count"><a href="#" onclick="clickDetail()">56</a></div>
+                                    <p></p>
+                                    <h3><a href="#" onclick="clickDetail()">発注予定数</a></h3>
+                                </div>
+                            </div>
+                            <div class="animated flipInY col-md-3">
+                                <div class="tile-stats" style="background: #efffff;">
+                                    <div class="icon"><i class="fa fa-cube"></i></div>
+                                    <div class="count"><a href="#" onclick="clickDetail()">126</a></div>
+                                    <p></p>
+                                    <h3><a href="#" onclick="clickDetail()">入荷予定数</a></h3>
+                                </div>
+                            </div>
+                            <div class="animated flipInY col-md-4">
+                                <div class="tile-stats" style="background: #efffff;">
+                                    <div class="icon"><i class="fa fa-calculator"></i></div>
+                                    <div class="count"><a href="#" onclick="clickDetail()">1,260,000</a></div>
+                                    <p></p>
+                                    <h3><a href="#" onclick="clickDetail()">仕入金額計</a></h3>
+                                </div>
+                            </div>
+                            <div class="animated flipInY col-md-4">
+                                <div class="tile-stats" style="background: #efffff;">
+                                    <div class="icon"><i class="fa fa-thumbs-o-up"></i></div>
+                                    <div class="count"><a href="#" onclick="clickDetail()">12,000,000</a></div>
+                                    <p></p>
+                                    <h3><a href="#" onclick="clickDetail()">売上金額計</a></h3>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    @*@Html.HiddenFor(model => model.SelectCol, new { id = "SelectCol" })*@
+                    @*<div class="form-group">
+                @(Html.C1().FlexGrid()
+                    .AutoGenerateColumns(false).Height("100px").Id("gridIndex")
+                    .Bind(Model.PortalInternalDashboardList).AllowAddNew(false).IsReadOnly(true)
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("EstimatedShippingNum").Width("120").Header("出荷予定数").DataType(DataType.Number));
+                        b1.Add(cb => cb.Binding("EstimatedDesignNum").Width("120").Header("設計予定数").DataType(DataType.Number));
+                        b1.Add(cb => cb.Binding("EstimatedOrderNum").Width("120").Header("発注予定数").DataType(DataType.Number));
+                        b1.Add(cb => cb.Binding("EstimatedComeInNum").Width("120").Header("入荷予定数").DataType(DataType.Number));
+                        b1.Add(cb => cb.Binding("PurchaseAmount").Width("120").Header("仕入金額計").DataType(DataType.Number));
+                        b1.Add(cb => cb.Binding("EarningsAmount").Width("120").Header("売上金額計").DataType(DataType.Number));
+                    }))
+            </div>*@
                     <input type="submit" value="1" name="btnDetailDetail" class="btn btn-primary" id="btnDetail" style="display:none;" />
                     <input type="submit" value="1" name="btnDetailDetailDetail" class="btn btn-primary" id="btnDetail" style="display:none;" />
                 }
@@ -53,19 +106,29 @@
 @section scripts{
     <script>
 
-        //ダッシュボードGridクリックイベント
-        var grid = wijmo.Control.getControl('#gridIndex');
-        grid.hostElement.addEventListener('click', function (e) {
-            var ht = grid.hitTest(e.pageX, e.pageY);
+        function clickDetail() {
+            document.getElementById('btnDetail').click();
+        }
 
-            if (ht.cellType == wijmo.grid.CellType.Cell) {
+        //c1.documentReady(function () {
+        //    document.getElementById('btnSearchJuchu').addEventListener('click', function () {
                 
-                var ShowSubmitBtnObj = document.getElementById('btnDetail');
-                document.getElementById('SelectCol').value = ht.col;
-                ShowSubmitBtnObj.click();
-            }
+        //        document.getElementById('btnDetail').click();
+        //    });
+        //});
+        //ダッシュボードGridクリックイベント
+        //var grid = wijmo.Control.getControl('#gridIndex');
+        //grid.hostElement.addEventListener('click', function (e) {
+        //    var ht = grid.hitTest(e.pageX, e.pageY);
 
-        });
+        //    if (ht.cellType == wijmo.grid.CellType.Cell) {
+                
+        //        var ShowSubmitBtnObj = document.getElementById('btnDetail');
+        //        document.getElementById('SelectCol').value = ht.col;
+        //        ShowSubmitBtnObj.click();
+        //    }
+
+        //});
 
     </script>
 }
