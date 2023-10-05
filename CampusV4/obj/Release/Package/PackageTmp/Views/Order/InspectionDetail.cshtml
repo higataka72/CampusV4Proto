@@ -1,0 +1,306 @@
+﻿@model CampusV4.Models.OrderViewModel
+
+<div id="ProductNumDetail">
+    <div style="transform-origin: left top;">
+        <div class="page-title">
+            <div class="title_left">
+                <ol class="breadcrumb">
+                    <li><a href="/Order/OrderRegist?mode=2">受注登録 <i class="fa fa-arrow-circle-left"></i></a></li>
+                    <li class="active">検収明細</li>
+                </ol>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    @using (Html.BeginForm("InspectionDetail", "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).Height("400px").Id("theInspectionDetailGrid").AllowAddNew(true).AllowDelete(true)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("Col_1").Width("50").Header("回").Format("n0").Align("center"));
+                                b1.Add(cb => cb.Binding("Col_2").Width("200").Header("注文番号"));
+                                b1.Add(cb => cb.Binding("Col_3").Width("80").Header("数量").Format("n0").Align("center"));
+                                b1.Add(cb => cb.Binding("Col_4").Width("120").Header("単価").Format("n0"));
+                                b1.Add(cb => cb.Binding("Col_5").Width("120").Header("金額").Format("n0"));
+                                b1.Add(cb => cb.Binding("Col_6").Width("150").Header("出荷予定日").Format("d"));
+                                b1.Add(cb => cb.Binding("Col_7").Width("150").Header("検収日").Format("d"));
+                                b1.Add(cb => cb.Binding("Col_8").Width("150").Header("キャンセル日").Format("d"));
+                            }))
+                        </div>
+
+                        <div class="form-group">　</div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-12" style="text-align: right">
+                                <a href="#" class="btn btn-primary" id="btnInsert">登録</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 処理終了後のメッセージ表示 *@
+<div id="dialog" style="width: 600px; height: 200px;">
+    <div class="wj-dialog-header">
+        @Html.Raw("メッセージ")
+    </div>
+    <div class="wj-dialog-body">
+        <p>
+            @Html.Raw("登録が完了しました")
+        </p>
+    </div>
+    <div class="wj-dialog-footer">
+        <button class="btn btn-default wj-hide-ok">OK</button>
+    </div>
+</div>
+@Html.C1().Popup("#dialog")
+
+@section scripts{
+    <script>
+        c1.documentReady(function () {
+            var tt = new wijmo.Tooltip();
+            var theGrid = wijmo.Control.getControl('#theInspectionDetailGrid');
+            theGrid.formatItem.addHandler(function (s, e) {
+                if (e.panel == s.columnHeaders) {
+                    if (s.columns[e.col].binding == 'Col_2') {
+                        tt.setTooltip(e.cell,
+                            e.getColumn().header +
+                            '<br><b>F3:行追加　F4:行削除</b>');
+                    }
+                }
+            });
+            theGrid.itemsSource = getData2();
+
+            // 検収明細系
+            // create some random data
+            function getData2() {
+                var detail = getDetail2(),
+                    data = [];
+                for (var i = 0; i < detail.length; i++) {
+                    data.push({
+                        Col_1: detail[i].Col_1,
+                        Col_2: detail[i].Col_2,
+                        Col_3: detail[i].Col_3,
+                        Col_4: detail[i].Col_4,
+                        Col_5: detail[i].Col_5,
+                        Col_6: detail[i].Col_6,
+                        Col_7: detail[i].Col_7,
+                        Col_8: detail[i].Col_8,
+                    });
+                }
+                return data;
+            }
+            function getDetail2() {
+                return [
+                    { Col_1: 1, Col_2: '000003101A01', Col_3: 10, Col_4: 1200, Col_5: 12000, Col_6: '2023/01/10', Col_7: '2023/01/16', Col_8: '' },
+                    { Col_1: 1, Col_2: '000003101B01', Col_3: 5, Col_4: 1300, Col_5: 6500, Col_6: '2023/01/10', Col_7: '2023/01/16', Col_8: '' },
+                    { Col_1: 2, Col_2: '000003101B01', Col_3: 5, Col_4: 1300, Col_5: 6500, Col_6: '2023/01/15', Col_7: '2023/01/16', Col_8: '' },
+                ];
+            }
+
+            // 出荷予定日
+            new CustomGridEditor(theGrid, 'Col_6', wijmo.input.InputDate, {
+                format: 'd'
+            });
+
+            // 検収日
+            new CustomGridEditor(theGrid, 'Col_7', wijmo.input.InputDate, {
+                format: 'd'
+            });
+
+            // キャンセル日
+            new CustomGridEditor(theGrid, 'Col_8', wijmo.input.InputDate, {
+                format: 'd'
+            });
+        });
+
+        // 完了メッセージ
+        var dialog = wijmo.Control.getControl('#dialog');
+        document.getElementById('btnInsert').addEventListener('click', function (e) {
+            // show the dialog (modal window)
+            dialog.show(true, function (sender) { });
+        });
+
+        // *** CustomGridEditor class (transpiled from TypeScript) ***
+        var CustomGridEditor = (function () {
+            /**
+             * Initializes a new instance of a CustomGridEditor.
+             */
+            function CustomGridEditor(flex, binding, edtClass, options) {
+                var _this = this;
+                // save references
+                this._grid = flex;
+                this._col = flex.columns.getColumn(binding);
+                // create editor
+                this._ctl = new edtClass(document.createElement('div'), options);
+                // connect grid events
+                this._grid.beginningEdit.addHandler(this._beginningEdit, this);
+                this._grid.scrollPositionChanged.addHandler(this._closeEditor, this);
+                // connect editor events
+                this._ctl.addEventListener(this._ctl.hostElement, 'keydown', function (e) {
+                    switch (e.keyCode) {
+                        case wijmo.Key.Tab:
+                        case wijmo.Key.Enter:
+                            _this._closeEditor(true);
+                            _this._grid.focus();
+                            // forward event to the grid so it will move the selection
+                            var evt = document.createEvent('HTMLEvents');
+                            evt.initEvent('keydown', true, true);
+                            evt['ctrlKey'] = e.ctrlKey;
+                            evt['shiftKey'] = e.shiftKey;
+                            evt['keyCode'] = e.keyCode;
+                            _this._grid.hostElement.dispatchEvent(evt);
+                            break;
+                        case wijmo.Key.Escape:
+                            _this._closeEditor(false);
+                            _this._grid.focus();
+                            break;
+                    }
+                });
+                this._ctl.lostFocus.addHandler(function () {
+                    setTimeout(function () {
+                        if (!_this._ctl.containsFocus()) {
+                            _this._closeEditor(true);
+                        }
+                    });
+                });
+                // open drop-down on f4/alt-down
+                this._grid.addEventListener(this._grid.hostElement, 'keydown', function (e) {
+                    _this._openDropDown = false;
+                    if (e.keyCode == wijmo.Key.F4 ||
+                        (e.altKey && (e.keyCode == wijmo.Key.Down || e.keyCode == wijmo.Key.Up))) {
+                        _this._openDropDown = true;
+                        _this._grid.startEditing(true);
+                        e.preventDefault();
+                    }
+                }, true);
+                // close editor when user resizes the window
+                window.addEventListener('resize', function () {
+                    if (_this._ctl.containsFocus()) {
+                        _this._closeEditor(true);
+                        _this._grid.focus();
+                    }
+                });
+            }
+            Object.defineProperty(CustomGridEditor.prototype, "control", {
+                // gets an instance of the control being hosted by this grid editor
+                get: function () {
+                    return this._ctl;
+                },
+                enumerable: true,
+                configurable: true
+            });
+            // handle the grid's beginningEdit event by canceling the built-in editor,
+            // initializing the custom editor and giving it the focus.
+            CustomGridEditor.prototype._beginningEdit = function (grid, args) {
+                var _this = this;
+                // check that this is our column
+                if (grid.columns[args.col] != this._col) {
+                    return;
+                }
+                // check that this is not the Delete key
+                // (which is used to clear cells and should not be messed with)
+                var evt = args.data;
+                if (evt && evt.keyCode == wijmo.Key.Delete) {
+                    return;
+                }
+                // cancel built-in editor
+                args.cancel = true;
+                // save cell being edited
+                this._rng = args.range;
+                // initialize editor host
+                var rc = grid.getCellBoundingRect(args.row, args.col);
+                wijmo.setCss(this._ctl.hostElement, {
+                    position: 'absolute',
+                    left: rc.left - 1 + pageXOffset,
+                    top: rc.top - 1 + pageYOffset,
+                    width: rc.width + 1,
+                    height: grid.rows[args.row].renderHeight + 1,
+                    borderRadius: '0px'
+                });
+                // initialize editor content
+                if (!wijmo.isUndefined(this._ctl['text'])) {
+                    this._ctl['text'] = grid.getCellData(this._rng.row, this._rng.col, true);
+                }
+                else {
+                    throw 'Can\'t set editor value/text...';
+                }
+                // start editing item
+                var ecv = wijmo.tryCast(grid.collectionView, 'IEditableCollectionView'), item = grid.rows[args.row].dataItem;
+                if (ecv && item) {
+                    setTimeout(function () {
+                        ecv.editItem(item);
+                    }, 210); // FlexGrid commits edits 200ms after losing focus
+                }
+                // activate editor
+                document.body.appendChild(this._ctl.hostElement);
+                this._ctl.focus();
+                setTimeout(function () {
+                    // get the key that triggered the editor
+                    var key = (evt && evt.charCode > 32)
+                        ? String.fromCharCode(evt.charCode)
+                        : null;
+                    // send key to editor
+                    if (key) {
+                        var input = _this._ctl.hostElement.querySelector('input');
+                        if (input instanceof HTMLInputElement) {
+                            input.value = key;
+                            wijmo.setSelectionRange(input, key.length, key.length);
+                            var evtInput = document.createEvent('HTMLEvents');
+                            evtInput.initEvent('input', true, false);
+                            input.dispatchEvent(evtInput);
+                        }
+                    }
+                    else {
+                        _this._ctl.focus();
+                    }
+                    // open drop-down on F4/alt-down
+                    if (_this._openDropDown && _this._ctl instanceof wijmo.input.DropDown) {
+                        _this._ctl.isDroppedDown = true;
+                    }
+                }, 50);
+            };
+            // close the custom editor, optionally saving the edits back to the grid
+            CustomGridEditor.prototype._closeEditor = function (saveEdits) {
+                if (this._rng) {
+                    var grid = this._grid, ctl = this._ctl, host = ctl.hostElement;
+                    // raise grid's cellEditEnding event
+                    var e = new wijmo.grid.CellEditEndingEventArgs(grid.cells, this._rng);
+                    grid.onCellEditEnding(e);
+                    // save editor value into grid
+                    if (saveEdits) {
+                        if (!wijmo.isUndefined(ctl['value'])) {
+                            this._grid.setCellData(this._rng.row, this._rng.col, ctl['value']);
+                        }
+                        else if (!wijmo.isUndefined(ctl['text'])) {
+                            this._grid.setCellData(this._rng.row, this._rng.col, ctl['text']);
+                        }
+                        else {
+                            throw 'Can\'t get editor value/text...';
+                        }
+                        this._grid.invalidate();
+                    }
+                    // close editor and remove it from the DOM
+                    if (ctl instanceof wijmo.input.DropDown) {
+                        ctl.isDroppedDown = false;
+                    }
+                    host.parentElement.removeChild(host);
+                    this._rng = null;
+                    // raise grid's cellEditEnded event
+                    grid.onCellEditEnded(e);
+                }
+            };
+            return CustomGridEditor;
+        }());
+
+    </script>
+}

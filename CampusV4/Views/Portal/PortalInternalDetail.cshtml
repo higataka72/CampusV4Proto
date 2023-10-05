@@ -1,0 +1,209 @@
+﻿@model CampusV4.Models.PortalInternalDetailViewModel
+
+<style>
+    .tooltip_row {
+        display: flex;
+    }
+
+    .tooltip_title {
+        width: 150px;
+        text-align: left;
+    }
+
+    .tooltip_data {
+        text-align: right;
+    }
+</style>
+<div id="Detail">
+    <div style="transform-origin: left top;">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    @using (Ajax.BeginForm("PortalInternalDetailDetail", "Portal", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "PortalInternalDetailDetail" }))
+                    {
+                        @Html.HiddenFor(model => model.SelectProductionNumber, new { id = "SelectProductionNumber" })
+                        <div class="form-group">
+                            @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).Height("250px").Id("DetailGridIndex")
+                            .Bind(Model.PortalInternalDetailDataList).AllowAddNew(false).IsReadOnly(true)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("RowNum").Width("50").Header("行").DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("CustomerName").Width("200").Header("得意先名"));
+                                b1.Add(cb => cb.Binding("Subject").Width("200").Header("件名"));
+                                b1.Add(cb => cb.Binding("ProductionNumber").Width("150").Header("製番"));
+                                b1.Add(cb => cb.Binding("Quantity").Width("150").Header("数量").DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Unit").Width("70").Header("単位"));
+                                b1.Add(cb => cb.Binding("UnitPrice").Width("150").Header("単価").DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Aamount").Width("150").Header("金額").DataType(DataType.Number));
+                            }))
+                        </div>
+                        <input type="submit" value="1" name="btnDetailDetail" class="btn btn-primary" id="btnDetailDetail" style="display:none;" />
+                    }
+
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div id="PortalInternalDetailDetail" class="form-group">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    //コンテキストメニュー作成
+    function createMenu(e) {
+        var div = document.createElement('div');
+        var menu = new wijmo.input.Menu(div, {
+            displayMemberPath: 'header',
+            selectedValuePath: 'cmd',
+            subItemsPath: 'items',
+            itemsSource: createMenuItem(e),
+            command: menuExecute()
+        });
+
+        return menu;
+    }
+
+    //コンテキストメニューItem作成
+    function createMenuItem(e) {
+        let ht = gridIndex.hitTest(e)
+        let row = ht.getRow();
+        let item = row.dataItem['Estimate'];
+
+        let menuItem = [{ header: '引合一覧', cmd: 'InquiryList', Estimate: item }];
+        menuItem.push({ header: '-' })
+
+
+        if (item === '有') {
+            menuItem.push({ header: '引合登録', cmd: 'Inquiry', Estimate: item });
+        } else if (item === '無') {
+            menuItem.push({
+                header: '受注登録', items: [
+                    { header: '受注登録モード', cmd: 'OrderMode1', Estimate: item },
+                    { header: '受注修正モード', cmd: 'OrderMode2', Estimate: item }]
+            });
+        }
+
+        menuItem.push({ header: '設計情報入力', cmd: 'DesignInformation', Estimate: item });
+
+
+        return menuItem;
+    }
+
+    function menuExecute() {
+        return {
+            executeCommand: (param) => {
+                switch (param.cmd) {
+                    case 'InquiryList':
+                        window.location.href = '/InquiryList/InquiryList';
+                        break;
+                    case 'Inquiry':
+                        window.location.href = '/Inquiry/Index';
+                        break;
+                    case 'OrderMode1':
+                        window.location.href = '/Order/OrderRegist?mode=1';
+                        break;
+                    case 'OrderMode2':
+                        window.location.href = '/Order/OrderRegist?mode=2';
+                        break;
+                    case 'DesignInformation':
+                        window.location.href = '/DesignInformation/DesignInformation';
+                        break;
+                }
+            },
+            canExecuteCommand: (param) => {
+                switch (param.cmd) {
+                    case 'InquiryList':
+                        return true;
+                    case 'Inquiry':
+                        return true;
+                    case 'OrderMode1':
+                        return true;
+                    case 'OrderMode2':
+                        return true;
+                    case 'DesignInformation':
+                        if (param.Estimate == '有') {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                }
+                return true
+            }
+        };
+    }
+
+    var gridIndex = wijmo.Control.getControl('#DetailGridIndex');
+    gridIndex.hostElement.addEventListener('contextmenu', function (e) {
+        ht = gridIndex.hitTest(e.pageX, e.pageY);
+        if (ht.cellType == wijmo.grid.CellType.Cell) {
+            var cellElement = document.elementFromPoint(e.clientX, e.clientY)
+            if (cellElement.className.indexOf('wj-cell') > -1) {
+                var menu = createMenu(e);
+                if (ht.cellType == wijmo.grid.CellType.Cell) {
+                    menu.owner = gridIndex.hostElement;
+                    if (menu.owner) {
+                        e.preventDefault();
+                        menu.show(e);
+                    }
+                }
+            }
+        }
+    }, true);
+
+
+    //FlexGrid Tooltips
+    var tip = new wijmo.Tooltip();
+    var rng = null;
+
+    gridIndex.hostElement.addEventListener('mousemove', function (e) {
+        var ht = gridIndex.hitTest(e.pageX, e.pageY);
+        if (!ht.range.equals(rng)) {
+            if (ht.cellType == wijmo.grid.CellType.Cell) {
+                rng = ht.range;
+                var cellElement = document.elementFromPoint(e.clientX, e.clientY),
+                    cellBounds = gridIndex.getCellBoundingRect(ht.row, ht.col),
+                    row = ht.getRow();
+
+                var data = '<div class="tooltip_row"><div class="tooltip_title"> 得意先名：</div>' + '<div class="tooltip_data">' + wijmo.escapeHtml(row.dataItem['CustomerName']) + '</div></div>'
+                    + '<div class="tooltip_row"><div class="tooltip_title"> 件名：</div>' + '<div class="tooltip_data">' + wijmo.escapeHtml(row.dataItem['Subject']) + '</div></div>'
+                    + '<div class="tooltip_row"><div class="tooltip_title"> 製番：</div>' + '<div class="tooltip_data">' + wijmo.escapeHtml(row.dataItem['ProductionNumber']) + '</div></div>'
+                    + '<div class="tooltip_row"><div class="tooltip_title"> 数量：</div>' + '<div class="tooltip_data">' + wijmo.escapeHtml(row.dataItem['Quantity']) + '</div></div>'
+                    + '<div class="tooltip_row"><div class="tooltip_title"> 単位：</div>' + '<div class="tooltip_data">' + wijmo.escapeHtml(row.dataItem['Unit']) + '</div></div>'
+                    + '<div class="tooltip_row"><div class="tooltip_title"> 単価：</div>' + '<div class="tooltip_data">' + wijmo.escapeHtml(row.dataItem['UnitPrice']) + '</div></div>'
+                    + '<div class="tooltip_row"><div class="tooltip_title"> 金額：</div>' + '<div class="tooltip_data">' + wijmo.escapeHtml(row.dataItem['Aamount']) + '</div></div>';
+
+                // 2列目のみ表示
+                if (cellElement.className.indexOf('wj-cell') > -1 && ht.col == 2) {
+                    tip.show(gridIndex.hostElement, data, cellBounds);
+                }
+            }
+        }
+    });
+
+    gridIndex.hostElement.addEventListener('mouseout', function (e) {
+        tip.hide();
+        rng = null;
+    });
+
+    //Gridクリックイベント
+    gridIndex.hostElement.addEventListener('click', function (e) {
+        var ht = gridIndex.hitTest(e.pageX, e.pageY);
+
+        if (ht.cellType == wijmo.grid.CellType.Cell) {
+
+            var ShowSubmitBtnObj = document.getElementById('btnDetailDetail');
+            var sel = gridIndex.selection;
+            for (var r = sel.topRow; r <= sel.bottomRow; r++) {
+                document.getElementById('SelectProductionNumber').value = gridIndex.rows[r].dataItem.ProductionNumber;
+
+            }
+            ShowSubmitBtnObj.click();
+        }
+    });
+
+</script>

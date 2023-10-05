@@ -1,0 +1,370 @@
+﻿@model CampusV4.Models.InquiryViewModel
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb">
+                <li class="active">引合登録</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("InquiryRegist", "Inquiry", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    if (Model.Mode == "ins")
+                    {
+                        <p class="h4">【登録】</p>
+                    }
+                    else
+                    {
+                        <p class="h4">【修正】</p>
+                    }
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label text-nowrap" id="lbl_InquiryNo" for="Text1">引合番号</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.InquiryNo, new { @class = "form-control", @disabled = "true" })
+                        </div>
+                        <label class="col-md-2 control-label text-nowrap" id="lbl_UserRequestNo" for="Text2">お客様依頼番号</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.UserRequestNo, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label text-nowrap lavel-functionkey" id="lbl_RequestDate" for="Text3">依頼日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDate().Id("Text3").Value(Model.RequestDate).Placeholder("(必須)")
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label text-nowrap lavel-functionkey" id="lbl_CampusId" for="Text4">CAMPUS-ID</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.CampusId, new { @id = "CampusId", @class = "form-control" })
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info" id="btnSearchJuchu"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(model => model.CompanyName, new { @id = "CompanyName", @class = "form-control", @placeholder = "(必須)" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label text-nowrap" id="lbl_EmailAddress" for="Text6">E-Mail</label>
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", @placeholder = "(必須)" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label  text-nowrap" id="lbl_Subject" for="Text7">件名</label>
+                        <div class="col-md-7">
+                            @Html.TextBoxFor(model => model.Subject, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label text-nowrap" id="lbl_cmbHinsyuCode" for="Select1">品種</label>
+                        <div class="col-md-2">
+                            @(Html.C1().AutoComplete().Id("cmbHinsyuCode")
+                                .Bind(Model.HinsyuDataList)
+                                .DisplayMemberPath("HinsyuCode")
+                                .HeaderPath("HinsyuCode")
+                                .SearchMemberPath("HinsyuCode, Hinmei")
+                                .SelectedValuePath("Hinmei")
+                                .SelectedValue(Model.Hinmei))
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Hinmei" for="Text8">品名</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.Hinmei, new { @id = "selectedHinmei", @class = "form-control", @placeholder = "(必須)" })
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info" id="btnSearchInquiryHistory"><i class="fa fa-search"></i> 引合履歴</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label text-nowrap" id="lbl_Quantity" for="Text9">数量</label>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control", @placeholder = "(必須)" })
+                        </div>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.Unit, new { @class = "form-control", @placeholder = "(必須)" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label text-nowrap" id="lbl_ContentValue" for="Text11">お問合せ内容</label>
+                        <div class="col-md-7">
+                            @Html.TextAreaFor(model => model.ContentValue, new { @class = "form-control", @placeholder = "(必須)" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label text-nowrap lavel-functionkey" id="lbl_FileName" for="Text12">依頼資料添付</label>
+                        <div class="col-md-7">
+                            <div class="dropzone dz-clickable" id="myDrop">
+                                <div class="dz-default dz-message" data-dz-message="">
+                                    <span>ファイルをドラッグ＆ドロップしてしてください。<br>またはここをクリック(タップ)して選択してください。</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label text-nowrap" id="lbl_QuotationRequestDate" for="Text13">見積回答希望日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDate().Id("Text13").Value(Model.QuotationRequestDate)
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_DesiredDeliveryDate" for="Text14">希望納期</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDate().Id("Text14").Value(Model.DesiredDeliveryDate)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label text-nowrap" id="lbl_ReferenceEstimateNo" for="Text15">参考見積番号</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ReferenceEstimateNo, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-5 col-md-offset-4" style="text-align: right">
+                            @if (Model.Mode == "upd")
+                            {
+                                <a href="/Inquiry/InquiryReceivedDetail" class="btn btn-primary">引合受</a>
+                                @*<a href="#" class="btn btn-primary" id="btnInquiryReceivedDetail">引合受</a>*@
+                            }
+                            <a href="/Inquiry/Customerinfo" class="btn btn-primary">お客様情報</a>
+                            <a href="#" class="btn btn-primary" id="btnInsert">登録</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 処理終了後のメッセージ表示 *@
+<div id="dialog" style="width: 600px; height: 200px;">
+    <div class="wj-dialog-header">
+        @Html.Raw("メッセージ")
+    </div>
+    <div class="wj-dialog-body">
+        <p>
+            @Html.Raw("登録が完了しました")
+        </p>
+    </div>
+    <div class="wj-dialog-footer">
+        <button class="btn btn-default wj-hide-ok">OK</button>
+    </div>
+</div>
+@Html.C1().Popup("#dialog")
+
+@Html.Partial("../Common/MasterSearch")
+@Html.Partial("../Common/InquiryHistorySearch")
+@*@Html.Partial("InquiryReceivedDetail", Model)*@
+
+@section scripts{
+    <script>
+        c1.documentReady(function () {
+            // ラベルツールチップ設定
+            var tt = new wijmo.Tooltip();
+            tt.setTooltip('#lbl_InquiryNo', '引合番号');
+            tt.setTooltip('#lbl_UserRequestNo', 'お客様依頼番号');
+            tt.setTooltip('#lbl_RequestDate', '依頼日<br><b>F2:検索 F5:クリア F9:終了</b>');
+            tt.setTooltip('#lbl_CampusId', 'CAMPUS-ID<br><b>F2:検索</b>');
+            tt.setTooltip('#lbl_EmailAddress', 'E-Mail');
+            tt.setTooltip('#lbl_Subject', '件名');
+            tt.setTooltip('#lbl_cmbHinsyuCode', '品種');
+            tt.setTooltip('#lbl_Hinmei', '品名');
+            tt.setTooltip('#lbl_Quantity', '数量');
+            tt.setTooltip('#lbl_ContentValue', 'お問合せ内容');
+            tt.setTooltip('#lbl_FileName', '依頼資料添付<br><b>F10:参照</b>');
+            tt.setTooltip('#lbl_QuotationRequestDate', '見積回答希望日');
+            tt.setTooltip('#lbl_DesiredDeliveryDate', '希望納期');
+            tt.setTooltip('#lbl_ReferenceEstimateNo', '参考見積番号');
+            var theHinsyuCode = wijmo.Control.getControl('#cmbHinsyuCode');
+            var template = '<table><tr>' +
+                '<td>{HinsyuCode}</td>' +
+                '<td title="HINMEI">　{Hinmei}</td>' +
+                '</tr></table>';
+            theHinsyuCode.formatItem.addHandler(function (s, e) {
+                var html = wijmo.format(template, e.data);
+                e.item.innerHTML = html;
+            });
+            theHinsyuCode.selectedIndexChanged.addHandler(function (s, e) {
+                setSelectedHinmei(s);
+            });
+            function setSelectedHinmei(s) {
+                setText('selectedHinmei', s.selectedValue);
+            }
+            function setText(id, value) {
+                document.getElementById(id).value = value;
+            }
+            var dlgInquiryReceivedDetail = wijmo.Control.getControl('#dlgInquiryReceivedDetail');
+            //// show forms
+            //document.getElementById('btnInquiryReceivedDetail').addEventListener('click', function () {
+            //    dlgInquiryReceivedDetail.show(true, function (sender) {
+            //        switch (sender.dialogResult) {
+            //            case 'submit':
+            //                alert('form submitted');
+            //                break;
+            //            case 'wj-hide-create':
+            //                break;
+            //        }
+            //    });
+            //});
+
+        });
+
+        // ファイル添付（ドロップ対応）
+        Dropzone.autoDiscover = false;
+        var myDropzone = new Dropzone("div#myDrop", {
+            addRemoveLinks: true,
+            dictCancelUpload: "キャンセル",
+            dictCancelUploadConfirmation: "本当にアップロードしたファイルをキャンセルしますか？",
+            dictRemoveFile: "削除",
+            url: "/Inquiry/FileUpload",
+            removedfile: function (file) {
+                var name = file.name;
+                $.ajax({
+                    type: 'POST',
+                    url: "/Inquiry/FileDelete",
+                    data: { name: name },
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+                file.previewElement.remove();
+            }
+        });
+
+        var theDateNotText3 = wijmo.Control.getControl('#Text3');
+        theDateNotText3.isRequired = false;
+        var dataText3 = @Html.Raw(Json.Encode(Model.RequestDate));
+        if (dataText3 == null) {
+            theDateNotText3.value = null;
+        }
+
+        var theDateNotText13 = wijmo.Control.getControl('#Text13');
+        theDateNotText13.isRequired = false;
+        var dataText13 = @Html.Raw(Json.Encode(Model.QuotationRequestDate));
+        if (dataText13 == null) {
+            theDateNotText13.value = null;
+        }
+
+        var theDateNotText14 = wijmo.Control.getControl('#Text14');
+        theDateNotText14.isRequired = false;
+        var dataText14 = @Html.Raw(Json.Encode(Model.DesiredDeliveryDate));
+        if (dataText14 == null) {
+            theDateNotText14.value = null;
+        }
+
+        // 引合受け明細系
+        // create data maps
+        //var classificationMap = new wijmo.grid.DataMap(getClassification(), 'id', 'name');
+        //var theGrid = wijmo.Control.getControl('#theInquiryReceivedDetailGrid');
+        //theGrid.itemsSource = getData();
+        //theGrid.columns[0].dataMap = classificationMap;
+        //// create some random data
+        //function getData() {
+        //    var classification = getClassification(),
+        //        detail = getDetail(),
+        //        data = [];
+        //    for (var i = 0; i < detail.length; i++) {
+        //        data.push({
+        //            Col_1: detail[i].Col_1,
+        //            Col_2: detail[i].Col_2,
+        //            Col_3: detail[i].Col_3,
+        //            Col_4: detail[i].Col_4,
+        //            Col_5: detail[i].Col_5,
+        //        });
+        //    }
+        //    return data;
+        //}
+        //function getClassification() {
+        //    return [
+        //        { id: 0, name: 'AZ-001' },
+        //        { id: 1, name: 'AZ-002' },
+        //        { id: 2, name: 'AZ-003' },
+        //        { id: 3, name: 'AX-100' },
+        //        { id: 4, name: 'AX-101' },
+        //        { id: 5, name: 'AX-102' }
+        //    ];
+        //}
+        //function getDetail() {
+        //    return [
+        //        { Col_1: 0, Col_2: 10, Col_3: 100, Col_4: 1000, Col_5: '2023/01/10' },
+        //        { Col_1: 0, Col_2: 10, Col_3: 100, Col_4: 1000, Col_5: '2023/01/10' },
+        //        { Col_1: 0, Col_2: 10, Col_3: 100, Col_4: 1000, Col_5: '2023/01/10' },
+        //        { Col_1: 0, Col_2: 10, Col_3: 100, Col_4: 1000, Col_5: '2023/01/10' },
+        //        { Col_1: 0, Col_2: 10, Col_3: 100, Col_4: 1000, Col_5: '2023/01/10' },
+        //        { Col_1: 0, Col_2: 10, Col_3: 100, Col_4: 1000, Col_5: '2023/01/10' },
+        //        { Col_1: 0, Col_2: 10, Col_3: 100, Col_4: 1000, Col_5: '2023/01/10' },
+        //        { Col_1: 0, Col_2: 10, Col_3: 100, Col_4: 1000, Col_5: '2023/01/10' },
+        //        { Col_1: 0, Col_2: 10, Col_3: 100, Col_4: 1000, Col_5: '2023/01/10' },
+        //        { Col_1: 0, Col_2: 10, Col_3: 100, Col_4: 1000, Col_5: '2023/01/10' },
+        //        { Col_1: 0, Col_2: 10, Col_3: 100, Col_4: 1000, Col_5: '2023/01/10' }
+        //    ];
+        //}
+
+        // 完了メッセージ
+        var dialog = wijmo.Control.getControl('#dialog');
+        document.getElementById('btnInsert').addEventListener('click', function (e) {
+            // show the dialog (modal window)
+            dialog.show(true, function (sender) { });
+        });
+
+        // 検索（F2）
+        var dlgMasterSearch = wijmo.Control.getControl('#dlgMasterSearch');
+        c1.documentReady(function () {
+            document.getElementById('btnSearchJuchu').addEventListener('click', function () {
+                loadMasterData();
+
+                dlgMasterSearch.show(true, function (sender) {
+                    if (sender.dialogResult == 'wj-hide-ok') {
+                        document.getElementById('CampusId').setAttribute('value', masterSelected.code);
+                        document.getElementById('CompanyName').setAttribute('value', masterSelected.name);
+                    }
+                });
+            });
+            document.getElementById('CampusId').addEventListener('keydown', function (e) {
+                if (e.keyCode == 113) {
+                    let target = document.getElementById('btnSearchJuchu');
+                    let clickEvent = new Event('click', { "bubbles": true, "cancelable": true });
+                    target.dispatchEvent(clickEvent);
+                }
+            });
+        });
+
+        // 検索（引合履歴）
+        var dlgInquiryHistorySearch = wijmo.Control.getControl('#dlgInquiryHistorySearch');
+        c1.documentReady(function () {
+            document.getElementById('btnSearchInquiryHistory').addEventListener('click', function () {
+                loadMasterData2();
+
+                dlgInquiryHistorySearch.show(true, function (sender) {
+                    if (sender.dialogResult == 'wj-hide-ok') {
+                        document.getElementById('selectedHinmei').setAttribute('value', inquiryHistorySelected.hinmei);
+                    }
+                });
+            });
+            document.getElementById('selectedHinmei').addEventListener('keydown', function (e) {
+                if (e.keyCode == 113) {
+                    let target = document.getElementById('btnSearchInquiryHistory');
+                    let clickEvent = new Event('click', { "bubbles": true, "cancelable": true });
+                    target.dispatchEvent(clickEvent);
+                }
+            });
+        });
+        
+    </script>
+}

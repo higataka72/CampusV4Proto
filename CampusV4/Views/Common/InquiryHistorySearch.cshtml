@@ -1,0 +1,82 @@
+﻿<div id="dlgInquiryHistorySearch">
+    <form id="frmInquiryHistorySearch" class="form-horizontal">
+        <h4 class="modal-header">
+            引合履歴
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="col-md-1 control-label" for="Text1">品名</label>
+                <div class="col-md-6">
+                    <input class="form-control" id="Text1" name="Text1" type="text" oninput="loadMasterData2(this)" />
+                </div>
+            </div>
+            <div class="form-group">
+                @(Html.C1().FlexGrid().SelectionMode(SelectionMode.Row)
+                    .AutoGenerateColumns(false).IsReadOnly(true).Height("350px").Width("840px").Id("grdInquiryHistorySearch")
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("InquiryNum").Width("120").Header("引合番号"));
+                        b1.Add(cb => cb.Binding("Hinmei").Width("550").Header("品名"));
+                        b1.Add(cb => cb.Binding("Amount").Width("120").Header("見積金額").Align("right"));
+                    }))
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary wj-hide-ok">選択</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgInquiryHistorySearch")
+
+<script type="text/javascript">
+    var inquiryHistorySelected = {
+        inquirynum: "",
+        hinmei: "",
+        amount: ""
+    };
+
+    function loadMasterData2($this) {
+        var textValue = ($this == null) ? "Dummy" : $this.value;
+
+        inquiryHistorySelected.inquirynum = "";
+        inquiryHistorySelected.hinmei = "";
+        inquiryHistorySelected.amount = "";
+
+        $.ajax({
+            type: "POST",
+            url: "/Common/GetInquiryHistoryData",
+            data: {name: textValue },
+            dataType: "json",
+
+            success: function (result) {
+                var fg = wijmo.Control.getControl("#grdInquiryHistorySearch");
+                var data = JSON.parse(result);
+                fg.rows.clear();
+                var j = 0
+                for (var i in data) {
+                    var obj = [data[i].InquiryNum, data[i].Hinmei, data[i].Amount];
+                    // FlexGridに新規行を追加します。
+                    var row = new wijmo.grid.Row();
+                    fg.rows.push(row);
+                    for (var col = 0; col <= fg.columns.length - 1; col++) {
+                        //FlexGrid のセルにデータを入力します。
+                        fg.setCellData(j, col, obj[col]);
+                    }
+                    j++;
+                }
+            }
+        });
+    }
+
+    var inquiryHistorySearchGrid = wijmo.Control.getControl('#grdInquiryHistorySearch');
+    inquiryHistorySearchGrid.selectionChanged.addHandler(function (s, e) {
+        var sel = inquiryHistorySearchGrid.selection;
+        for (var r = sel.topRow; r <= sel.bottomRow; r++) {
+            inquiryHistorySelected.inquirynum = inquiryHistorySearchGrid.cells.getCellData(r, 0, false);
+            inquiryHistorySelected.hinmei = inquiryHistorySearchGrid.cells.getCellData(r, 1, false);
+            inquiryHistorySelected.amount = inquiryHistorySearchGrid.cells.getCellData(r, 2, false);
+        }
+    });
+</script>

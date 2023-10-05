@@ -1,0 +1,57 @@
+﻿<style>
+    #dlgEstimateReference {
+        width: 500px;
+    }
+</style>
+
+<div id="dlgEstimateReference">
+    <form id="frmEstimateReference" class="form-horizontal">
+        <h4 class="modal-header">
+            概算見積参照
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                @(Html.C1().FlexGrid()
+                    .AutoGenerateColumns(false).IsReadOnly(true).Height("308px").Id("grdEstimateReference")
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("Col_1").Width("150").Header("単価").Align("right"));
+                        b1.Add(cb => cb.Binding("Col_2").Width("150").Header("納期").Align("center"));
+                    }))
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default wj-hide">閉じる</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgEstimateReference")
+
+<script type="text/javascript">
+    function loadEstimateReferenceData() {
+        $.ajax({
+            type: "POST",
+            url: "/InquiryCostEstimate/GetEstimateReferenceData",
+            dataType: "json",
+            success: function (result) {
+                var fg = wijmo.Control.getControl("#grdEstimateReference");
+                var data = JSON.parse(result);
+                fg.rows.clear();
+                var j = 0
+                for (var i in data) {
+                    var obj = [data[i].Col_1, data[i].Col_2];
+                    // FlexGridに新規行を追加します。
+                    var row = new wijmo.grid.Row();
+                    fg.rows.push(row);
+                    for (var col = 0; col <= fg.columns.length - 1; col++) {
+                        //FlexGrid のセルにデータを入力します。
+                        fg.setCellData(j, col, obj[col]);
+                    }
+                    j++;
+                }
+            }
+        });
+    }
+</script>

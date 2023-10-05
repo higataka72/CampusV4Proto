@@ -1,0 +1,308 @@
+﻿body {
+    background: #efffff;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.navbar-nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav {
+        float: none;
+        margin-bottom: 6px;
+    }
+}
+
+.left_col {
+    background: #efffff;
+    border-right: 1px solid #d9dee4;
+}
+
+.nav_title {
+    background: #efffff;
+}
+
+.nav_menu {
+    background: #efffff;
+}
+
+.nav_menu a {
+    color: #007d7f;
+}
+
+.menu_section {
+    margin-top: 20px;
+}
+
+.menu_section h3 {
+    margin-left: -7px;
+    color: #007d7f;
+    text-shadow: none;
+    text-decoration: underline;
+    font-size: 20px;
+}
+
+.nav.side-menu > li > a, .nav.child_menu > li > a {
+    color: #007d7f;
+}
+
+.nav.side-menu > li > a:hover {
+    color: #b5c9b7 !important;
+}
+
+.nav.side-menu > li.active > a {
+    background: -webkit-gradient(linear,left top,left bottom,from(#e2feff),to(#ccf8f9)),#efffff;
+    background: linear-gradient(#e2feff,#ccf8f9),#efffff;
+}
+
+.sidebar-footer {
+    background: #efffff;
+}
+
+.sidebar-footer a {
+    background: #efffff;
+}
+
+.sidebar-footer a:hover {
+    background: #ccfff2;
+}
+/*
+.information {
+    margin-top: 12px;
+    margin-left: 6px;
+    margin-right: 6px;
+    border: 1px solid #000000;
+}
+*/
+.info-number .badge {
+    right: -14px;
+    top: -8px;
+}
+.form-control {
+    border-radius: 5px;
+}
+#file {
+    position: absolute;
+    opacity: 0;
+    width: 10px;
+}
+
+#fileName {
+    white-space: pre;
+}
+
+.fileUploadBtn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #007d7f;
+    color: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    border-radius: 5px;
+}
+
+    .fileUploadBtn:hover,
+    .fileUploadBtn:focus {
+        filter: brightness(1.2);
+    }
+.fileCancelBtn {
+    display: inline-block;
+    padding: 0.5rem 2rem;
+    background: #808080;
+    color: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    border-radius: 5px;
+}
+
+    .fileCancelBtn:hover,
+    .fileCancelBtn:focus {
+        filter: brightness(1.2);
+    }
+
+.dlg-group {
+    margin-bottom: 10px;
+}
+    .dlg-group label {
+        display: inline-block;
+        margin: 6px auto;
+        padding: 1px;
+        font-size: 15px;
+        text-align: right;
+        cursor: pointer;
+    }
+
+.dlg-group2 {
+    margin-bottom: 10px;
+}
+
+    .dlg-group2 label {
+        display: inline-block;
+        margin: 6px auto;
+        padding: 1px;
+        font-size: 15px;
+        text-align: left;
+        cursor: pointer;
+    }
+.icoKeybordF1::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url(./Images/keyF1.ico);
+    background-size: contain;
+    vertical-align: middle;
+    background-color: #4cff00;
+}
+.icoKeybordF2::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url(./Images/keyF2.ico);
+    background-size: contain;
+    vertical-align: middle;
+    background-color: #4cff00;
+}
+.icoKeybordF3::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url(./Images/keyF3.ico);
+    background-size: contain;
+    vertical-align: middle;
+    background-color: #4cff00;
+}
+.icoKeybordF4::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url(./Images/keyF4.ico);
+    background-size: contain;
+    vertical-align: middle;
+    background-color: #4cff00;
+}
+.icoKeybordF5::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url(./Images/keyF5.ico);
+    background-size: contain;
+    vertical-align: middle;
+    background-color: #4cff00;
+}
+.icoKeybordF6::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url(./Images/keyF6.ico);
+    background-size: contain;
+    vertical-align: middle;
+    background-color: #4cff00;
+}
+.icoKeybordF7::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url(./Images/keyF7.ico);
+    background-size: contain;
+    vertical-align: middle;
+    background-color: #4cff00;
+}
+.icoKeybordF8::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url(./Images/keyF8.ico);
+    background-size: contain;
+    vertical-align: middle;
+    background-color: #4cff00;
+}
+.icoKeybordF9::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url(./Images/keyF9.ico);
+    background-size: contain;
+    vertical-align: middle;
+    background-color: #4cff00;
+}
+.icoKeybordF10::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url(./Images/keyF10.ico);
+    background-size: contain;
+    vertical-align: middle;
+    background-color: #4cff00;
+}
+.text-nowrap {
+    white-space:nowrap;
+}
+.lavel-functionkey {
+    color: #007d7f;
+}
+.dropzone {
+    min-height: 100px;
+    border: 1px solid #e5e5e5;
+    padding: 0px 0px;
+}
+.breadcrumb {
+    font-size: 24px;
+}
+.badge-red {
+    background-color: red;
+}
+.no-spin::-webkit-inner-spin-button,
+.no-spin::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+    -moz-appearance: textfield !important;
+}
+.hr-custom1 {
+    margin-top: 0px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+.input-group .form-control:last-child,
+.input-group-addon:last-child,
+.input-group-btn:last-child >
+.btn, .input-group-btn:last-child >
+.dropdown-toggle,
+.input-group-btn:first-child >
+.btn:not(:first-child) {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    margin-bottom: 0px;
+}

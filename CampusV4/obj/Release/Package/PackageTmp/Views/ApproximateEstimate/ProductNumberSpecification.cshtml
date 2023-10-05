@@ -1,0 +1,67 @@
+﻿<style>
+    #dlgProductNumberSpecification {
+        width: 1290px;
+    }
+</style>
+
+<div id="dlgProductNumberSpecification">
+    <div id="frmProductNumberSpecification" class="form-horizontal">
+        <h4 class="modal-header">
+            製番指定
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">            
+            <div class="form-group">
+                @(Html.C1().FlexGrid()
+                    .AutoGenerateColumns(false).Height("308px").Id("grdProductNumberSpecification")
+                    .Columns(b1 =>
+                    {
+                    b1.Add(cb => cb.Binding("Col_1").Width("180").Header("顧客").IsReadOnly(true));
+                    b1.Add(cb => cb.Binding("Col_2").Width("150").Header("製番").IsReadOnly(true));
+                    b1.Add(cb => cb.Binding("Col_3").Width("80").Header("数量").WordWrap(true).DataType(DataType.Number).IsReadOnly(true));
+                    b1.Add(cb => cb.Binding("Col_4").Width("120").Header("単価").WordWrap(true).DataType(DataType.Number).IsReadOnly(true));
+                    b1.Add(cb => cb.Binding("Col_5").Width("120").Header("金額").WordWrap(true).DataType(DataType.Number).IsReadOnly(true));
+                    b1.Add(cb => cb.Binding("Col_6").Width("120").Header("受注日").Align("center").IsReadOnly(true));
+                    b1.Add(cb => cb.Binding("Col_7").Width("120").Header("出荷日").Align("center").IsReadOnly(true));
+                    b1.Add(cb => cb.Binding("Col_8").Width("120").Header("売上番号").IsReadOnly(true));
+                    b1.Add(cb => cb.Binding("Col_9").Width("120").Header("原価金額").WordWrap(true).DataType(DataType.Number).IsReadOnly(true));
+                    b1.Add(cb => cb.Binding("Col_10").Width("80").Header("原価率").Align("center").IsReadOnly(true));
+                }))
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="/ApproximateEstimate/PartsList" class="btn btn-primary">選択</a>
+            @*<button class="btn btn-primary" type="submit">選択</button>*@
+            <!-- <button type="button" class="btn btn-default wj-hide">閉じる</button> -->
+        </div>
+    </div>
+</div>
+
+@Html.C1().Popup("#dlgProductNumberSpecification")
+
+<script type="text/javascript">
+    function loadProductNumberSpecificationData() {
+        $.ajax({
+            type: "POST",
+            url: "/ApproximateEstimate/GetProductNumberSpecificationData",
+            dataType: "json",
+            success: function (result) {
+                var fg = wijmo.Control.getControl("#grdProductNumberSpecification");
+                var data = JSON.parse(result);
+                fg.rows.clear();
+                var j = 0
+                for (var i in data) {
+                    var obj = [data[i].Col_1, data[i].Col_2, data[i].Col_3, data[i].Col_4, data[i].Col_5, data[i].Col_6, data[i].Col_7, data[i].Col_8, data[i].Col_9, data[i].Col_10];
+                    // FlexGridに新規行を追加します。
+                    var row = new wijmo.grid.Row();
+                    fg.rows.push(row);
+                    for (var col = 0; col <= fg.columns.length - 1; col++) {
+                        //FlexGrid のセルにデータを入力します。
+                        fg.setCellData(j, col, obj[col]);
+                    }
+                    j++;
+                }
+            }
+        });
+    }
+</script>

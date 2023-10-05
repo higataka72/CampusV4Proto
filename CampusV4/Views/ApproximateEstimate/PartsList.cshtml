@@ -1,0 +1,325 @@
+﻿@model CampusV4.Models.ApproximateEstimateViewModel
+
+<div id="PartsList">
+    <div style="transform-origin: left top;">
+        <div class="page-title">
+            <div class="title_left">
+                <ol class="breadcrumb">
+                    <li><a href="/ApproximateEstimate/ConditionSpecification">概算見積条件指定 <i class="fa fa-arrow-circle-left"></i></a></li>
+                    <li class="active">部品一覧</li>
+                </ol>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    @using (Html.BeginForm("PartsList", "ApproximateEstimate", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_InquiryNo">引合番号</label>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.InquiryNo, new { @id = "InquiryNo", @class = "form-control", @placeholder = "(必須)" })
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-info" id="btnSearchHikiai"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_GroupingMark" for="Text2">分類記号</label>
+                            <div class="col-md-1">
+                                @(Html.C1().ComboBoxFor(model => model.GroupingMark).Id("cmbGroupingMark")
+                                    .Bind(Model.GroupingMarkList)
+                                    .DisplayMemberPath("GroupingMarkName")
+                                    .SelectedValuePath("GroupingMarkCode")
+                                    .CssStyle( "width" , "auto" ).SelectedValue(Model.GroupingMark)
+                                    .IsRequired(false)
+                                    .Placeholder("(必須)"))
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_ProductionNumber">製番</label>
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(model => model.ProductionNumber, new { @id = "ProductionNumber", @class = "form-control", @placeholder = "(必須)" })
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_RegistDate">登録日付</label>
+                            <div class="col-md-2">
+                                @Html.C1().InputDateFor(m => m.RegistDate).Placeholder("(必須)")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Subject">件名</label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.Subject, new { @id = "Subject", @class = "form-control", @disabled = "true" })
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Quantity">数量</label>
+                            <div class="col-md-1">
+                                @Html.TextBoxFor(model => model.Quantity, new { @id = "Quantity", @class = "form-control", @disabled = "true" })
+                            </div>
+                            <div class="col-md-1">
+                                @Html.TextBoxFor(model => model.Unit, new { @id = "Unit", @class = "form-control", @placeholder = "(必須)" })
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text6" for="Text6">納期</label>
+                            <div class="col-md-2">
+                                @Html.C1().InputDateFor(m => m.DeadlineDate).Placeholder("(必須)")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_cmbHinsyuCode" for="Select1">品種</label>
+                            <div class="col-md-1">
+                                @(Html.C1().AutoComplete().Id("cmbHinsyuCode")
+                                .Bind(Model.HinsyuDataList)
+                                .DisplayMemberPath("HinsyuCode")
+                                .HeaderPath("HinsyuCode")
+                                .SearchMemberPath("HinsyuCode, Hinmei")
+                                .SelectedValuePath("Hinmei")
+                                .SelectedValue(Model.Hinmei)
+                                .Placeholder("(必須)"))
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Hinmei" for="Text8">品名</label>
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(model => model.Hinmei, new { @id = "selectedHinmei", @class = "form-control", @placeholder = "(必須)" })
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_cmbSalesPersonCode">担当者</label>
+                            <div class="col-md-2">
+                                @(Html.C1().AutoComplete().Id("cmbSalesPersonCode")
+                                  .Bind(Model.ManagerDataList)
+                                  .DisplayMemberPath("SalesPersonCode")
+                                  .HeaderPath("SalesPersonCode")
+                                  .SearchMemberPath("SalesPersonCode, SalesPersonName")
+                                  .SelectedValuePath("SalesPersonName")
+                                  .SelectedValue(Model.ManagerName)
+                                  .Placeholder("(必須)"))
+                            </div>
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(model => model.ManagerName, new { @id = "selectedSalesPersonName", @class = "form-control", @disabled = "true" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Notes">注記</label>
+                            <div class="col-md-4">
+                                @Html.TextAreaFor(model => model.Notes, new { @id = "Notes", @class = "form-control", @rows = 4 })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).IsReadOnly(false).Height("320px").Id("gridPartsList").AllowAddNew(true)
+                            .Bind(Model.PartsList)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("Col_0").Width("40").Header(" ").Align("center").IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("Col_1").Width("50").Header("行").Align("center").IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("Col_2").Width("80").Header("部品分類").Align("center"));
+                                b1.Add(cb => cb.Binding("Col_3").Width("200").Header("部品名"));
+                                b1.Add(cb => cb.Binding("Col_4").Width("120").Header("図面番号／型式"));
+                                b1.Add(cb => cb.Binding("Col_5").Width("70").Header("入数").DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Col_6").Width("70").Header("個数").DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Col_7").Width("100").Header("単価").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Col_7_1").Width("100").Header("金額").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Col_8").Width("120").Header("納品日").WordWrap(true));
+                                b1.Add(cb => cb.Binding("Col_9").Width("150").Header("パートナー工場").Align("center").IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("Col_10").Width("150").Header("注記").Align("center"));
+                                b1.Add(cb => cb.Binding("Col_11").Width("150").Header("メーカー").Align("center"));
+                                b1.Add(cb => cb.Binding("Col_12").Width("100").Header("原価見積番号"));
+                            }))
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_SimilarProductNo">類似製番</label>
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(model => model.SimilarProductNo, new { @id = "SimilarProductNo", @class = "form-control", @disabled = "true" })
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_TotalAmount">総額</label>
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(model => model.TotalAmount, new { @id = "TotalAmount", @class = "form-control", @style = "text-align:right", @disabled = "true" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-3" style="text-align: right">
+                                <a href="#" class="btn btn-primary">催促メール送信</a>
+                                <a href="#" class="btn btn-primary" id="btnClear">クリア</a>
+                                <input type="submit" class="btn btn-primary" value="登録">
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("EstimateAnswer")
+@Html.Partial("../Common/MasterSearch")
+
+@* 処理終了後のメッセージ表示 *@
+<div id="dialog" style="width: 600px; height: 200px;">
+    <div class="wj-dialog-header">
+        @Html.Raw("メッセージ")
+    </div>
+    <div class="wj-dialog-body">
+        <p>
+            @Html.Raw("登録が完了しました")
+        </p>
+    </div>
+    <div class="wj-dialog-footer">
+        <button class="btn btn-default wj-hide-ok">OK</button>
+    </div>
+</div>
+
+@Html.C1().Popup("#dialog")
+
+@section scripts{
+    <script>
+        c1.documentReady(function () {
+            //document.getElementById('btnShow').addEventListener('click', function () {
+            //    $.ajax({
+            //        type: "POST",
+            //        url: "/ApproximateEstimate/GetPartsListData",
+            //        dataType: "json",
+            //        success: function (result) {
+            //            var fg = wijmo.Control.getControl("#gridPartsList");
+            //            var data = JSON.parse(result);
+            //            fg.rows.clear();
+            //            var j = 0
+            //            for (var i in data) {
+            //                var obj = [data[i].Col_1, data[i].Col_2, data[i].Col_3, data[i].Col_4, data[i].Col_5, data[i].Col_6, data[i].Col_7, data[i].Col_8, data[i].Col_9, data[i].Col_10, data[i].Col_11, data[i].Col_12];
+            //                // FlexGridに新規行を追加します。
+            //                var row = new wijmo.grid.Row();
+            //                fg.rows.push(row);
+            //                for (var col = 0; col <= fg.columns.length - 1; col++) {
+            //                    //FlexGrid のセルにデータを入力します。
+            //                    fg.setCellData(j, col, obj[col]);
+            //                }
+            //                j++;
+            //            }
+            //        }
+            //    });
+            //});
+
+            //製番イベント
+            var ObjSeiban = document.getElementById('ProductionNumber');
+            //フォーカスイン
+            ObjSeiban.addEventListener('focusin', SeibanFocusin_event);
+            function SeibanFocusin_event(e) {
+                if (this.value == '') {
+                    var ObjtxtInquiryNoValue = document.getElementById('InquiryNo').value;
+                    var ObjGroupingMarkCodeValue = wijmo.Control.getControl('#cmbGroupingMark').selectedValue;
+                    if (ObjGroupingMarkCodeValue == null || ObjGroupingMarkCodeValue == '') {
+                        this.value = ObjtxtInquiryNoValue
+                        document.getElementById('Subject').value = "金型Aの概算見積";
+                        document.getElementById('Quantity').value = "1";
+                    } else {
+                        this.value = ObjtxtInquiryNoValue + ObjGroupingMarkCodeValue;
+                        document.getElementById('Subject').value = "金型Aの概算見積";
+                        document.getElementById('Quantity').value = "1";
+                    }
+
+                } else {
+                    this.selectionStart = this.selectionEnd;
+                }
+            };
+
+            // 検索（引合番号：F2）
+            var dlgMasterSearch = wijmo.Control.getControl('#dlgMasterSearch');
+            document.getElementById('btnSearchHikiai').addEventListener('click', function () {
+                loadMasterData();
+
+                dlgMasterSearch.show(true, function (sender) {
+                    if (sender.dialogResult == 'wj-hide-ok') {
+                        document.getElementById('InquiryNo').setAttribute('value', masterSelected.code);
+                    }
+                });
+            });
+            document.getElementById('InquiryNo').addEventListener('keydown', function (e) {
+                if (e.keyCode == 113) {
+                    let target = document.getElementById('btnSearchHikiai');
+                    let clickEvent = new Event('click', { "bubbles": true, "cancelable": true });
+                    target.dispatchEvent(clickEvent);
+                }
+            });
+
+            // 品種コンボ
+            var theHinsyuCode = wijmo.Control.getControl('#cmbHinsyuCode');
+            var template = '<table><tr>' +
+                '<td>{HinsyuCode}</td>' +
+                '<td title="HINMEI">　{Hinmei}</td>' +
+                '</tr></table>';
+            theHinsyuCode.formatItem.addHandler(function (s, e) {
+                var html = wijmo.format(template, e.data);
+                e.item.innerHTML = html;
+            });
+            theHinsyuCode.selectedIndexChanged.addHandler(function (s, e) {
+                setSelectedHinmei(s);
+            });
+            function setSelectedHinmei(s) {
+                setText('selectedHinmei', s.selectedValue);
+            };
+            // 担当者リストボックス
+            var theSalesPersonCode = wijmo.Control.getControl('#cmbSalesPersonCode');
+            var template2 = '<table><tr>' +
+                '<td>{SalesPersonCode}</td>' +
+                '<td title="HINMEI">　{SalesPersonName}</td>' +
+                '</tr></table>';
+            theSalesPersonCode.formatItem.addHandler(function (s, e) {
+                var html = wijmo.format(template2, e.data);
+                e.item.innerHTML = html;
+            });
+            theSalesPersonCode.selectedIndexChanged.addHandler(function (s, e) {
+                setSelectedSalesPersonName(s);
+            });
+            function setSelectedSalesPersonName(s) {
+                setText('selectedSalesPersonName', s.selectedValue);
+            };
+
+            function setText(id, value) {
+                document.getElementById(id).value = value;
+            };
+            document.getElementById('btnClear').addEventListener('click', function () {
+                var fg = wijmo.Control.getControl("#gridPartsList");
+                fg.rows.clear();
+            });
+
+            // 見積回答呼出し
+            //var dlgEstimateAnswer = wijmo.Control.getControl('#dlgEstimateAnswer');
+            //var grid = wijmo.Control.getControl('#gridPartsList');
+            //grid.hostElement.addEventListener('dblclick', function (e) {
+            //    loadEstimateAnswerData();
+            //    dlgEstimateAnswer.show(true, function (sender) {
+            //        switch (sender.dialogResult) {
+            //            case 'submit':
+            //                alert('form submitted');
+            //                break;
+            //            case 'wj-hide-create':
+            //                break;
+            //        }
+            //    });
+            //});
+
+            // 見積依頼入力呼出し
+            document.getElementById('gridPartsList').addEventListener('keydown', function (e) {
+                if (e.keyCode == 118) {
+                    window.location.href = "/CostEstimateInput/CostEstimateInput";
+                }
+            });
+
+            // 見積回答呼出し
+            var dlgPartsSearch = wijmo.Control.getControl('#dlgEstimateAnswer');
+            document.getElementById('gridPartsList').addEventListener('keydown', function (e) {
+                if (e.keyCode == 119) {
+                    loadEstimateAnswerData();
+                    dlgPartsSearch.show(true, function (sender) {
+                        switch (sender.dialogResult) {
+                            case 'submit':
+                                alert('form submitted');
+                                break;
+                            case 'wj-hide-create':
+                                break;
+                        }
+                    });
+                }
+                
+            });
+        });
+    </script>
+}

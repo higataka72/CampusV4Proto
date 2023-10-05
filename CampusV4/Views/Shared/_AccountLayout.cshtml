@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ComponentOne ASP.NET MVC Project</title>
+    @Styles.Render("~/Content/css")
+    @Html.C1().Styles().Theme("cerulean")
+
+    @RenderSection("styles", required: false)
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    @Html.C1().Scripts().Basic().Finance().FlexSheet().FlexViewer().MultiRow().TransposedGrid().TransposedMultiRow()
+</head>
+<body class="login">
+    <div>
+        <a class="hiddenanchor" id="signup"></a>
+        <a class="hiddenanchor" id="signin"></a>
+
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <section class="login_content">
+                    @RenderBody()
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

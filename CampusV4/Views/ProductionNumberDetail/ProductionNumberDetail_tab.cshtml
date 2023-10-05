@@ -1,0 +1,268 @@
+﻿@model CampusV4.Models.ProductionNumberDetailModel
+
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("ProductionNumberDetail", "ProductionNumberDetail", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_InquiryNumber" for="Text1">引合番号</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.InquiryNumber, new { @class = "form-control", @id = "txtInquiryNumber" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_GroupingMark" for="Select1">分類記号</label>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.GroupingMark).Id("cmbGroupingMark")
+                                .Bind(Model.GroupingMarkList)
+                                .DisplayMemberPath("Code")
+                                .SelectedValuePath("Code")
+                                .HeaderPath("Code")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.GroupingMark)
+                                .IsRequired(false)
+                                )
+
+                        </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Subject" for="Text2">件名</label>
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(model => model.Subject, new { @class = "form-control", @id = "txtSubject", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_CampusId" for="Text3">CAMPUS-ID</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.CampusId, new { @id = "CampusId", @class = "form-control", @disabled = "true" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.CompanyName, new { @id = "CompanyName", @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_VarietyCode" for="Text4">品種</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.VarietyCode, new { @id = "VarietyCode", @class = "form-control", @disabled = "true" })
+                            </div>
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ProductName" for="Text5">品名</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.ProductName, new { @id = "ProductName", @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_EstimatedSubmitDate" for="Text6">見積提出日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.EstimatedSubmitDate).IsDisabled(true)
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_SalesEmployee" for="Text7">営業担当者</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.SalesEmployeeCode, new { @id = "SalesEmployeeCode", @class = "form-control", @disabled = "true" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.SalesEmployeeName, new { @id = "SalesEmployeeName", @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_OrderProbability" for="Select2">受注確度</label>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.OrderProbability).Id("cmbOrderProbability")
+                                .Bind(Model.OrderProbabilityList)
+                                .DisplayMemberPath("Name")
+                                .SelectedValuePath("Code")
+                                .HeaderPath("Name")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.OrderProbability)
+                                .IsRequired(false)
+                                .IsDisabled(true))
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_OrderDate" for="Text8">受注日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.OrderDate).IsDisabled(true)
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_LostOrderDate" for="Text9">失注日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.LostOrderDate).IsDisabled(true)
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_CancelDate" for="Text10">キャンセル日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.CancelDate).IsDisabled(true)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ShippingDate" for="Text11">納期</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.ShippingDate).IsDisabled(true)
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ProcurementPerson" for="Text12">調達担当者</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ProcurementPersonCode, new { @id = "ProcurementPersonCode", @class = "form-control", @disabled = "true" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ProcurementPersonName, new { @id = "ProcurementPersonName", @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Quantity" for="Text13">数量</label>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control no-spin", @id = "txt_Quantity", @type = "number", @style = "text-align:right", @disabled = "true" })
+                        </div>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.Unit, new { @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Rate" for="Text14">レート</label>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.Rate, new { @class = "form-control no-spin", @id = "txt_Rate", @type = "number", @style = "text-align:right", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_LocalOrdeReceived" for="Text15">受注額（内貨）</label>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.LocalOrdeReceived, new { @class = "form-control no-spin", @id = "txt_LocalOrdeReceived", @type = "number", @style = "text-align:right", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_OutsideOrdeReceived" for="Text16">受注額（外貨）</label>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.OutsideOrdeReceived, new { @class = "form-control no-spin", @id = "txt_OutsideOrdeReceived", @type = "number", @style = "text-align:right", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_MainDesignEmployee" for="Text17">設計担当者 主</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.MainDesignEmployeeCode, new { @id = "MainDesignEmployeeCode", @class = "form-control", @disabled = "true" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.MainDesignEmployeeName, new { @id = "MainDesignEmployeeName", @class = "form-control", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ProposedDate" for="Text18">見積提出日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.ProposedDate).IsDisabled(true)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_SubDesignEmployee" for="Text19">設計担当者 従</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.SubDesignEmployeeCode, new { @id = "SubDesignEmployeeCode", @class = "form-control", @disabled = "true" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.SubDesignEmployeeName, new { @id = "SubDesignEmployeeName", @class = "form-control", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_DrawingDate" for="Text20">出図日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.DrawingDate).IsDisabled(true)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_TestAssemblyEmployee" for="Text21">検査組立担当者</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.TestAssemblyEmployeeCode, new { @id = "TestAssemblyEmployeeCode", @class = "form-control", @disabled = "true" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.TestAssemblyEmployeeName, new { @id = "TestAssemblyEmployeeName", @class = "form-control", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_InspectionEeport" for="Text23">検査成績書</label>
+                        <div class="col-md-2">
+                            <label class="control-label" for="Text24">
+                                (&emsp;@Html.RadioButtonFor(model => model.InspectionEeport, "0", new { @disabled = "true" }) 要　
+                                @Html.RadioButtonFor(model => model.InspectionEeport, "1", new { @disabled = "true" }) 不要&emsp;)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_CostConfirmationEmployee" for="Text24">正式原価確認担当者</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.CostConfirmationEmployeeCode, new { @id = "CostConfirmationEmployeeCode", @class = "form-control", @disabled = "true" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.CostConfirmationEmployeeName, new { @id = "CostConfirmationEmployeeName", @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_CostConfirmationEmployee" for="Text25" style="text-align:center">&emsp;</label>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_rCount" for="Text26" style="text-align:center">件数</label>
+                        <label class="col-md-2 control-label text-nowrap" id="lbl_Price" for="Text27" style="text-align:center">金額</label>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ProcessingRatio" for="Text28" style="text-align:center">加工比率</label>
+                        <label class="col-md-2 control-label text-nowrap" id="lbl_OrderBalance" for="Text29" style="text-align:center">発注残金額</label>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_TotalPurchasePrice" for="Text30" style="text-align:center">総仕入額</label>
+                        <label class="col-md-2 control-label text-nowrap" id="lbl_ForecastProcessingRatio" for="Text31" style="text-align:center">予想加工比率</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_CostConfirmationEmployee" for="Text32">発注</label>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.OrderCount, new { @class = "form-control no-spin", @id = "txt_OrderCount", @type = "number", @style = "text-align:right", @disabled = "true" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.OrderPrice, new { @class = "form-control no-spin", @id = "txt_OrderPrice", @type = "number", @style = "text-align:right", @disabled = "true" })
+                        </div>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.OrderProcessingRatio, new { @class = "form-control no-spin", @id = "txt_OrderProcessingRatio", @type = "number", @style = "text-align:right", @disabled = "true" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.OrderBalance, new { @class = "form-control no-spin", @id = "txt_OrderBalance", @type = "number", @style = "text-align:right", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_OrderTotalPurchasePrice" for="Text33">&emsp;</label>
+                        <label class="col-md-2 control-label text-nowrap" id="lbl_OrdrForecastProcessingRatio" for="Text34">&emsp;</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_CostConfirmationEmployee" for="Text35">仕入</label>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.PurchaseCount, new { @class = "form-control no-spin", @id = "txt_PurchaseCount", @type = "number", @style = "text-align:right", @disabled = "true" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.PurchasePrice, new { @class = "form-control no-spin", @id = "txt_PurchasePrice", @type = "number", @style = "text-align:right", @disabled = "true" })
+                        </div>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.PurchaseProcessingRatio, new { @class = "form-control no-spin", @id = "txt_PurchaseProcessingRatio", @type = "number", @style = "text-align:right", @disabled = "true" })
+                        </div>
+                        <label class="col-md-2 control-label text-nowrap" id="lbl_OrderBalance" for="Text36">&emsp;</label>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.TotalPurchasePrice, new { @class = "form-control no-spin", @id = "txt_TotalPurchasePrice", @type = "number", @style = "text-align:right", @disabled = "true" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ForecastProcessingRatio, new { @class = "form-control no-spin", @id = "txt_ForecastProcessingRatio", @type = "number", @style = "text-align:right", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-1">
+                            <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                        </div>
+                        <div class="col-md-12" style="text-align: right">
+                            <input type="submit" value="検索" name="ShowSearchBtn" class="btn btn-primary"  style="display:none;" id="ShowSearchBtn" />
+                            @*<input type="button" value="分納明細" class="btn btn-primary" id="btnSplitdeliveryDetailList" />*@
+                            <input type="button" value="製番明細" class="btn btn-primary" id="btnProductionNumberDetaiList" />
+                            <input type="button" value="発注明細" class="btn btn-primary" id="btnOrderDetailList" />
+                            <input type="button" value="連絡確認" class="btn btn-primary" id="btnContactConfirmDataList" />
+                            <a href="#" class="btn btn-primary" id="btnProductionNumberDetailClose">閉じる</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("ProductionNumberDetaiList")
+@Html.Partial("OrderDetailList")
+@Html.Partial("ContactConfirmDataList")
+@Html.Partial("SplitdeliveryDetailList")

@@ -1,0 +1,102 @@
+﻿@model CampusV4.Models.CustomerBaseInfoViewModel
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb">
+                <li class="active">お客様基本情報</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("CustomerBaseInfoNext", "ReferenceEstimate", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Company" for="Company">御社名</label>
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(model => model.Company, new { @id = "Company", @class = "form-control", @placeholder = "(必須)" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Department" for="Department">部署名</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.Department, new { @id = "Department", @class = "form-control" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ManagerName" for="ManagerName">ご担当者様名</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.ManagerName, new { @id = "ManagerName", @class = "form-control", @placeholder = "(必須)" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ContactAddress" for="ContactAddress">連絡先</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.ContactAddress, new { @id = "ContactAddress", @class = "form-control" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_EMail" for="EMail">メールアドレス</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.EMail, new { @id = "EMail", @class = "form-control", @placeholder = "(必須)" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label text-nowrap" id="lbl_ConfirmerEMail" for="ConfirmerEMail">確認用メールアドレス</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.ConfirmerEMail, new { @id = "ConfirmerEMail", @class = "form-control", @placeholder = "(必須)" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_PostCode" for="PostCode">郵便番号</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.PostCode, new { @id = "PostCode", @class = "form-control" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextAreaFor(model => model.Address, new { @class = "form-control", @rows = 4 })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_TransmissionMatters" for="TransmissionMatters">伝達事項</label>
+                        <div class="col-md-5">
+                            @Html.TextAreaFor(model => model.TransmissionMatters, new { @id= "TransmissionMatters", @class = "form-control", @rows = 6 })
+                        </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-5 col-md-offset-4" style="text-align: right">
+                            <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                            <input type="submit" value="戻る" name="BackBtn" class="btn btn-primary" formaction="/ReferenceEstimate/CustomerBaseInfoBack" id="BackBtn" />
+                            <input type="submit" value="次へ" name="NextBtn" class="btn btn-primary" id="NextBtn" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        c1.documentReady(function () {
+            // ラベルツールチップ設定
+            var tt = new wijmo.Tooltip();
+            tt.setTooltip('#lbl_Company', '御社名');
+            tt.setTooltip('#lbl_Department', '部署名');
+            tt.setTooltip('#lbl_ManagerName', 'ご担当者様名');
+            tt.setTooltip('#lbl_ContactAddress', '連絡先');
+            tt.setTooltip('#lbl_EMail', 'メールアドレス');
+            tt.setTooltip('#lbl_ConfirmerEMail', '確認用メールアドレス');
+            tt.setTooltip('#lbl_PostCode', '郵便番号');
+            tt.setTooltip('#lbl_TransmissionMatters', '伝達事項');
+        });
+
+
+
+    </script>
+}

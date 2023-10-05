@@ -1,0 +1,92 @@
+﻿@model CampusV4.Models.M_EmployeeSearchViewModel
+
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>担当者マスタ一覧</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("EmployeeSearch", "M_Employee", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_UserId" for="UserId">担当者コード</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.UserId, new { @class = "form-control", @id = "UserId" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_UserName" for="UserName">担当者名</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @id = "UserName" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12" style="text-align: right">
+                            <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                            <input type="submit" value="新規登録" name="btnRegist" class="btn btn-primary" formaction="/M_Employee/EmployeeDetail?UserId=" id="btnRegist" />
+                            <input type="submit" value="検索" name="ShowSearchBtn" class="btn btn-primary" id="ShowSearchBtn"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).Height("450px").Id("flexgrid").AllowAddNew(false)
+                            .Bind(Model.EmployeeDataList)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("UserId").Width("150").Header("担当者コード").WordWrap(true).IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("UserName").Width("200").Header("担当者名").WordWrap(true).IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("UserNameAlt").Width("200").Header("担当者名（外国語）").WordWrap(true).IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("DepartmentCode").Width("150").Header("所属部門コード").WordWrap(true).IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("DepartmentName").Width("200").Header("所属部門名").WordWrap(true).IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("Email").Width("200").Header("E-mail").WordWrap(true).IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("DeleteFlg").Width("50").Header("削除").WordWrap(true));
+
+                            }))
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-12" style="text-align: right">
+                            <input type="submit" value="削除" name="btnClose" class="btn btn-primary" formaction="/M_Employee/EmployeeListDelete" id="btnClose" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+
+        // ラベルツールチップ設定
+        var tt = new wijmo.Tooltip();
+        tt.setTooltip('#lbl_UserId', '担当者コード');
+        tt.setTooltip('#lbl_UserName', '担当者名');
+
+
+
+        //Gridダブルクリックイベント
+        var grid = wijmo.Control.getControl('#flexgrid');
+        grid.hostElement.addEventListener('dblclick', function (e) {
+            var ht = grid.hitTest(e.pageX, e.pageY);
+
+            if (ht.cellType == wijmo.grid.CellType.Cell) {
+                var sel = grid.selection;
+                var Url = "";
+                for (var r = sel.topRow; r <= sel.bottomRow; r++) {
+                    var Url = grid.rows[r].dataItem.URL;
+                }
+                window.location.href = Url;
+            }
+
+        });
+
+    </script>
+}

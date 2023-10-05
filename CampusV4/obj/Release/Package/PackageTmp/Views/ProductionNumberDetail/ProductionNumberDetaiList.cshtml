@@ -1,0 +1,73 @@
+﻿<div id="dlgProductionNumberDetaiList">
+    <form id="frmProductionNumberDetaiList" class="form-horizontal">
+        <h4 class="modal-header">
+            製番明細画面
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                @(Html.C1().FlexGrid().SelectionMode(SelectionMode.Row)
+                    .AutoGenerateColumns(false).IsReadOnly(true).Height("350px").Width("950px").Id("grdProductionNumberDetaiList")
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("ProductionNumber").Width("110").Header("製番").WordWrap(true));
+                        b1.Add(cb => cb.Binding("Quantity").Width("100").Header("数量").WordWrap(true).DataType(DataType.Number));
+                        b1.Add(cb => cb.Binding("Unitprice").Width("100").Header("単価").WordWrap(true).DataType(DataType.Number));
+                        b1.Add(cb => cb.Binding("Price").Width("100").Header("金額").WordWrap(true).DataType(DataType.Number));
+                        b1.Add(cb => cb.Binding("ShipDate").Width("100").Header("出荷日").WordWrap(true));
+                        b1.Add(cb => cb.Binding("AcceptanceDate").Width("100").Header("検収日").WordWrap(true));
+                        b1.Add(cb => cb.Binding("EarningsNumber").Width("100").Header("売上番号").WordWrap(true));
+                        b1.Add(cb => cb.Binding("ExpectedCompleteDate").Width("100").Header("完成予定日").WordWrap(true));
+                        b1.Add(cb => cb.Binding("ShippingInstructionDate").Width("100").Header("出荷指示日").WordWrap(true));
+                    }))
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary wj-hide-ok">閉じる</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgProductionNumberDetaiList")
+
+<script type="text/javascript">
+
+    function loadbtnProductionNumberDetaiList(summaryProductionNumber) {
+
+        $.ajax({
+            type: "POST",
+            url: "/ProductionNumberDetail/GetProductionNumberDetail",
+            data: { SummaryProductionNumber: summaryProductionNumber },
+            dataType: "json",
+
+            success: function (result) {
+                var fg = wijmo.Control.getControl("#grdProductionNumberDetaiList");
+                var data = JSON.parse(result);
+                fg.rows.clear();
+                var j = 0
+                for (var i in data) {
+                    var obj = [
+                        data[i].ProductionNumber,
+                        data[i].Quantity,
+                        data[i].Unitprice,
+                        data[i].Price,
+                        data[i].ShipDate,
+                        data[i].AcceptanceDate,
+                        data[i].EarningsNumber,
+                        data[i].ExpectedCompleteDate,
+                        data[i].ShippingInstructionDate
+                    ];
+                    // FlexGridに新規行を追加します。
+                    var row = new wijmo.grid.Row();
+                    fg.rows.push(row);
+                    for (var col = 0; col <= fg.columns.length - 1; col++) {
+                        //FlexGrid のセルにデータを入力します。
+                        fg.setCellData(j, col, obj[col]);
+                    }
+                    j++;
+                }
+            }
+        });
+    }
+
+</script>

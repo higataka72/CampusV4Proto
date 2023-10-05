@@ -1,0 +1,273 @@
+﻿@{
+    var countries = new[] { "US", "Germany", "UK", "Japan", "Sweden", "Norway", "Denmark" };
+    var coutriesMap = new object[countries.Length];
+    for (var i = 0; i < countries.Length; i++)
+    {
+        coutriesMap[i] = new KeyValuePair<int, string>(i, countries[i]);
+    }
+}
+
+<style>
+    #popup label {
+        padding: 0px;
+    }
+
+    #popup .btn {
+        margin-bottom: 0px;
+    }
+
+    .wj-flexgrid {
+        max-height: 200px;
+        margin-bottom: 12px;
+    }
+
+    .modal-content {
+        width: 400px;
+    }
+    /* style our custom 'edit buttons' */
+    .wj-rowheaders .wj-cell .wj-glyph-pencil {
+        opacity: .3;
+        transform: scale(.5);
+    }
+
+    .wj-rowheaders .wj-cell:hover .wj-glyph-pencil {
+        opacity: 1;
+        color: #000080;
+        transform: scale(1);
+        transition: all linear 300ms;
+    }
+
+    /* wj-labeled-input: adapted from MDL styles */
+
+    /* label input container */
+    .wj-labeled-input {
+        position: relative;
+        font-size: 16px;
+        display: inline-block;
+        box-sizing: border-box;
+        width: 300px;
+        max-width: 100%;
+        margin: 0 20px;
+        padding: 20px 0;
+    }
+
+        /* Wijmo control in the container */
+        .wj-labeled-input .wj-control.wj-content {
+            margin: 0;
+            width: 100%;
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(0,0,0,.1);
+        }
+
+            .wj-labeled-input .wj-control.wj-content button {
+                opacity: 0.75;
+                border-color: rgba(0,0,0,.1);
+            }
+
+        .wj-labeled-input .wj-input-group .wj-form-control {
+            float: none;
+        }
+
+        /* label in the container (must come after the control) */
+        .wj-labeled-input label {
+            font-size: 16px;
+            top: 24px;
+            bottom: 0;
+            margin: 0;
+            pointer-events: none;
+            position: absolute;
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-align: left;
+            color: rgba(0, 0, 0, 0.258824);
+            transition-duration: .2s;
+            transition-timing-function: cubic-bezier(.4,0,.2,1);
+        }
+
+        /* move label out of the way when control is focused or not empty */
+        .wj-static-labels .wj-labeled-input :not(.wj-state-focused) + label,
+        .wj-labeled-input .wj-state-focused + label,
+        .wj-labeled-input :not(.wj-state-empty) + label {
+            font-size: 12px;
+            top: 4px;
+            color: rgb(63,81,181);
+            visibility: visible;
+        }
+
+        .wj-labeled-input .wj-state-invalid + label {
+            color: #d50000;
+        }
+
+        /* underline label */
+        .wj-labeled-input label:after {
+            background-color: rgb(63,81,181);
+            bottom: 20px;
+            content: '';
+            height: 2px;
+            left: 45%;
+            position: absolute;
+            transition-duration: .2s;
+            transition-timing-function: cubic-bezier(.4,0,.2,1);
+            visibility: hidden;
+            width: 10px;
+        }
+
+        /* show underline when focused */
+        .wj-labeled-input .wj-state-focused + label:after {
+            left: 0;
+            visibility: visible;
+            width: 100%;
+        }
+
+        .wj-labeled-input .wj-state-invalid + label:after {
+            background-color: #d50000;
+        }
+
+        /* validation message */
+        .wj-labeled-input .wj-error {
+            color: #d50000;
+            position: absolute;
+            font-size: 12px;
+            margin-top: 3px;
+            visibility: hidden;
+            display: block;
+        }
+
+        .wj-labeled-input .wj-control.wj-state-invalid ~ .wj-error {
+            visibility: visible;
+        }
+</style>
+
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>ダイアログポップアップ呼出し</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="item form-group">
+                    @(Html.C1().FlexGrid().Id("theGrid")
+                                .IsReadOnly(true)
+                                .AutoGenerateColumns(false)
+                                .SelectionMode(C1.Web.Mvc.Grid.SelectionMode.Row)
+                                .Columns(cols=>
+                                {
+                                    cols.Add().Binding("id").Header("ID").Width("50").IsReadOnly(true);
+                                    cols.Add().Binding("country").Header("Country").DataMap(dm=>dm.Bind(coutriesMap).DisplayMemberPath("Value").SelectedValuePath("Value"));
+                                    cols.Add().Binding("sales").Header("Sales").Format("n2");
+                                    cols.Add().Binding("expenses").Header("Expenses").Format("n2");
+                                })
+                            )
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- the popup editor -->
+<div id="popup" class="modal-content">
+    <div class="modal-header">
+        <button type="button" tabindex="-1" class="close wj-hide">
+            <span>&times;</span>
+        </button>
+        <h4 class="modal-title">テスト<span id="item-id"></span></h4>
+    </div>
+    <div class="modal-body">
+        <div class="wj-labeled-input">
+            <input id="country" />
+            <label for="country">テスト２</label>
+            @Html.C1().ComboBox("#country").Bind(countries).SelectedIndex(countries.Length - 1)
+        </div>
+        <div class="wj-labeled-input">
+            <input id="sales" />
+            <label for="sales">テスト３</label>
+            @Html.C1().InputNumber("#sales").Format("n2").Min(0).Step(100)
+        </div>
+        <div class="wj-labeled-input">
+            <input id="expenses" />
+            <label for="expenses">テスト４</label>
+            @Html.C1().InputNumber("#expenses").Format("n2").Min(0).Step(100)
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary wj-hide-ok">OK</button>
+            <button type="button" class="btn btn-default wj-hide">キャンセル</button>
+        </div>
+    </div>
+</div>
+@Html.C1().Popup("#popup")
+
+@section scripts{
+    <script>
+        c1.documentReady(function () {
+
+            // create some random data
+            var countries = 'US,Germany,UK,Japan,Sweden,Norway,Denmark'.split(',');
+            var data = [];
+            for (var i = 0; i < 100; i++) {
+                data.push({
+                    id: i,
+                    country: countries[i % countries.length],
+                    sales: Math.random() * 10000,
+                    expenses: Math.random() * 5000,
+                    overdue: (i + 1) % 4 == 0
+                });
+            }
+
+            // the grid with custom editing behavior
+            var theGrid = wijmo.Control.getControl('#theGrid');
+            theGrid.itemsSource = data;
+
+            // add 'edit button' to row header cells
+            theGrid.formatItem.addHandler(function (s, e) {
+                if (e.panel == s.rowHeaders && e.col == 0) {
+                    e.cell.innerHTML = '<span class="wj-glyph-pencil"></span>';
+                }
+            });
+
+            // handle button clicks
+            theGrid.addEventListener(theGrid.hostElement, 'click', function (e) {
+                var ht = theGrid.hitTest(e);
+                if (ht.panel == theGrid.rowHeaders) {
+
+                    // prepare form
+                    var item = theGrid.rows[ht.row].dataItem;
+                    formControls.itemId.textContent = item.id;
+                    formControls.country.text = item.country;
+                    formControls.sales.value = item.sales;
+                    formControls.expenses.value = item.expenses;
+
+                    // show the form
+                    formControls.popup.show(true, function (e) {
+                        if (e.dialogResult == 'wj-hide-ok') {
+
+                            // commit changes if the user pressed the OK button
+                            theGrid.collectionView.editItem(item);
+                            item.country = formControls.country.text;
+                            item.sales = formControls.sales.value;
+                            item.expenses = formControls.expenses.value;
+                            theGrid.collectionView.commitEdit();
+                        }
+
+                        // return focus to the grid
+                        theGrid.focus();
+                    });
+                }
+            });
+
+            // attach controls to input form
+            var formControls = {
+                popup: wijmo.Control.getControl('#popup'),
+                itemId: document.getElementById('item-id'),
+                country: wijmo.Control.getControl('#country'),
+                sales: wijmo.Control.getControl('#sales'),
+                expenses: wijmo.Control.getControl('#expenses'),
+            };
+        });
+    </script>
+}

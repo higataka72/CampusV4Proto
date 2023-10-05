@@ -1,0 +1,99 @@
+﻿@model CampusV4.Models.InquiryCostEstimateViewModel
+<style>
+    #dlgDrawingNumber {
+        width: 900px;
+    }
+</style>
+
+<div id="dlgDrawingNumber">
+    <form id="frmDrawingNumber" class="form-horizontal">
+        <h4 class="modal-header">
+            図面番号検索
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="col-md-1 control-label text-nowrap" id="lbl_cmbHinsyuCode" for="Select1">品種</label>
+                <div class="col-md-2">
+                    @(Html.C1().AutoComplete().Id("cmbHinsyuCode")
+                                .Bind(Model.HinsyuDataList)
+                                .DisplayMemberPath("HinsyuCode")
+                                .HeaderPath("HinsyuCode")
+                                .SearchMemberPath("HinsyuCode, Hinmei")
+                                .SelectedValuePath("Hinmei")
+                                .SelectedValue(Model.Hinmei))
+                </div>
+                <label class="col-md-1 control-label text-nowrap" id="lbl_Hinmei" for="Text1">品名</label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.Hinmei, new { @id = "selectedHinmei", @class = "form-control" })
+                </div>
+                <label class="col-md-2 control-label text-nowrap" id="lbl_Text1" for="Text2">図面番号／型式</label>
+                <div class="col-md-2">
+                    <input class="form-control" id="Text2" name="Text2" type="text" />
+                </div>
+            </div>
+            <div class="form-group">
+                @(Html.C1().FlexGrid()
+                    .AutoGenerateColumns(false).IsReadOnly(true).Height("308px").Id("grdDrawingNumber")
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("Col_1").Width("150").Header("製番"));
+                        b1.Add(cb => cb.Binding("Col_2").Width("280").Header("部品名"));
+                        b1.Add(cb => cb.Binding("Col_3").Width("120").Header("出荷日"));
+                        b1.Add(cb => cb.Binding("Col_4").Width("120").Header("数量"));
+                        b1.Add(cb => cb.Binding("Col_5").Width("120").Header("単価"));
+                    }))
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default wj-hide">閉じる</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgDrawingNumber")
+
+<script type="text/javascript">
+    function loadDrawingNumberData() {
+        $.ajax({
+            type: "POST",
+            url: "/InquiryCostEstimate/GetDrawingNumberData",
+            dataType: "json",
+            success: function (result) {
+                var fg = wijmo.Control.getControl("#grdDrawingNumber");
+                var data = JSON.parse(result);
+                fg.rows.clear();
+                var j = 0
+                for (var i in data) {
+                    var obj = [data[i].Col_1, data[i].Col_2, data[i].Col_3, data[i].Col_4, data[i].Col_5];
+                    // FlexGridに新規行を追加します。
+                    var row = new wijmo.grid.Row();
+                    fg.rows.push(row);
+                    for (var col = 0; col <= fg.columns.length - 1; col++) {
+                        //FlexGrid のセルにデータを入力します。
+                        fg.setCellData(j, col, obj[col]);
+                    }
+                    j++;
+                }
+            }
+        });
+    }
+    var theHinsyuCode = wijmo.Control.getControl('#cmbHinsyuCode');
+    var template = '<table><tr>' +
+        '<td>{HinsyuCode}</td>' +
+        '<td title="HINMEI">　{Hinmei}</td>' +
+        '</tr></table>';
+    theHinsyuCode.formatItem.addHandler(function (s, e) {
+        var html = wijmo.format(template, e.data);
+        e.item.innerHTML = html;
+    });
+    theHinsyuCode.selectedIndexChanged.addHandler(function (s, e) {
+        setSelectedHinmei(s);
+    });
+    function setSelectedHinmei(s) {
+        setText('selectedHinmei', s.selectedValue);
+    }
+    function setText(id, value) {
+        document.getElementById(id).value = value;
+    }
+</script>

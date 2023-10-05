@@ -1,0 +1,366 @@
+﻿@model CampusV4.Models.PartsListViewModel
+
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>部品リスト登録</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("PartsListDataList", "PartsList", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_InquiryNo" for="Text1">引合番号</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.InquiryNo, new { @class = "form-control", @placeholder = "(必須)", @id = "txtInquiryNo" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_GroupingMark" for="Text2">分類記号</label>
+                        <div class="col-md-1">
+                            @(Html.C1().ComboBoxFor(model => model.GroupingMark).Id("cmbGroupingMark")
+                                .Bind(Model.GroupingMarkList)
+                                .DisplayMemberPath("GroupingMarkName")
+                                .SelectedValuePath("GroupingMarkCode")
+                                .CssStyle( "width" , "auto" ).SelectedValue(Model.GroupingMark)
+                                .IsRequired(false))
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_ProductionNumber" for="Text3">製番</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ProductionNumber, new { @class = "form-control", @placeholder = "(必須)", @id = "txtProductionNumber" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_RegistDate" for="Text4">登録日付</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.RegistDate)
+
+                        </div>
+                        <div class="col-md-1">
+                            <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                        </div>
+                        <div class="col-md-1">
+                            <input type="submit" value="表示" name="submitBtn" class="btn btn-primary" id="ShowSubmitBtn" />
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Subject" for="Text5">件名</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(model => model.Subject, new { @class = "form-control", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Quantity" for="Text6">数量</label>
+                        <div class="col-md-1">
+                            @Html.C1().InputNumber().Id("Text6").Value(Model.Quantity).IsDisabled(true)
+                        </div>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.Unit, new { @class = "form-control", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ShippingDate" for="Text8">納期</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.ShippingDate)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_VarietyCode" for="Test9">品種</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.VarietyCode, new { @class = "form-control", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ProductName" for="Text10">品名</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(model => model.ProductName, new { @class = "form-control", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_EmployeeCode" for="Select2">担当者</label>
+                        <div class="col-md-2">
+                            @(Html.C1()
+                                .ComboBoxFor(model => model.EmployeeCode).Id("cmbEmployeeData")
+                                .Bind(Model.EmployeeDataList)
+                                .HeaderPath("EmployeeCode")
+                                .DisplayMemberPath("EmployeeCode")
+                                .SelectedValuePath("EmployeeCode")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.EmployeeCode)
+                                .IsRequired(false)
+                                )
+
+
+                        </div>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.EmployeeName, new { @id = "selectedEmployee", @class = "form-control", @disabled = "true" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Notice" for="Text12">注記</label>
+                        <div class="col-md-4">
+                            @Html.TextAreaFor(model => model.Notice, new { @class = "form-control", @style = "height:100px;" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_FileName" for="Text13">設計図書</label>
+                        <div class="col-md-6">
+                            <div class="dropzone dz-clickable" id="myDrop">
+                                <div class="dz-default dz-message" data-dz-message="">
+                                    <span>ファイルをドラッグ＆ドロップしてしてください。<br>またはここをクリック(タップ)して選択してください。</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).IsReadOnly(false).Height("400px").Id("flexgrid").AllowAddNew(true)
+                            .Bind(Model.GridDataList)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("RowNumber").Width("50").Header("行").WordWrap(true).DataType(DataType.Number).IsReadOnly(true).Align("center"));
+                                b1.Add(cb => cb.Binding("RowNo").Width("60").Header("No.").WordWrap(true).DataType(DataType.Number).IsReadOnly(true).Align("center"));
+                                b1.Add(cb => cb.Binding("ListRev").Width("70").Header("ListRev.").WordWrap(true).Align("center"));
+                                b1.Add(cb => cb.Binding("PartsCode").Width("80").Header("部品分類").WordWrap(true).Align("center"));
+                                b1.Add(cb => cb.Binding("PartsName").Width("250").Header("部品名").WordWrap(true));
+                                b1.Add(cb => cb.Binding("DrawingNumber").Width("150").Header("図面番号/型式").WordWrap(true));
+                                b1.Add(cb => cb.Binding("RowCheck").Width("50").Header("図面").DataType(DataType.Boolean));
+                                b1.Add(cb => cb.Binding("DwgRev").Width("100").Header("DWG/REV").WordWrap(true));
+                                b1.Add(cb => cb.Binding("IriSu").Width("80").Header("入数").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Kosu").Width("80").Header("個数").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Notice").Width("250").Header("注記").WordWrap(true));
+                                b1.Add(cb => cb.Binding("Maker").Width("100").Header("メーカー").WordWrap(true));
+                                b1.Add(cb => cb.Binding("CostEstimateNumber").Width("100").Header("原価見積番号").WordWrap(true));
+                            }))
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_LastUpdateDate" for="Text14">最終更新日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.LastUpdateDate)
+                        </div>
+                        <div class="col-md-2">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="Check1" value="Complete" />完了
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-12" style="text-align: right">
+                            <a href="#" class="btn btn-primary" id="btnFileSetting">ファイルパス設定</a>
+                            <a href="#" class="btn btn-primary" id="btnClear">クリア</a>
+                            <a href="#" class="btn btn-primary">設計図書</a>
+                            <a href="#" class="btn btn-primary">取込</a>
+                            <a href="#" class="btn btn-primary" id="btnInsert">登録</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("PartsFileSetting", Model)
+
+@* 処理終了後のメッセージ表示 *@
+<div id="dialog" style="width: 600px; height: 200px;">
+    <div class="wj-dialog-header">
+        @Html.Raw("メッセージ")
+    </div>
+    <div class="wj-dialog-body">
+        <p>
+            @Html.Raw("登録が完了しました")
+        </p>
+    </div>
+    <div class="wj-dialog-footer">
+        <button class="btn btn-default wj-hide-ok">OK</button>
+    </div>
+</div>
+
+@Html.C1().Popup("#dialog")
+
+
+@section scripts{
+    <script>
+
+        // ラベルツールチップ設定
+        var tt = new wijmo.Tooltip();
+        tt.setTooltip('#lbl_InquiryNo', '引合番号<br><b>F2:検索 F5:クリア F9:終了</b>');
+        tt.setTooltip('#lbl_GroupingMark', '分類記号<br><b>F2:検索 F5:クリア</b>');
+        tt.setTooltip('#lbl_ProductionNumber', '製番<br><b>F2:検索 F5:クリア</b>');
+        tt.setTooltip('#lbl_RegistDate', '登録日付<br><b>F1:削除 F5:クリア F9:終了</b>');
+        tt.setTooltip('#lbl_Subject', '件名');
+        tt.setTooltip('#lbl_Quantity', '数量');
+        tt.setTooltip('#lbl_ShippingDate', '納期');
+
+        tt.setTooltip('#lbl_VarietyCode', '品種<br><b>F2:検索</b>');
+        tt.setTooltip('#lbl_ProductName', '品名');
+
+        tt.setTooltip('#lbl_EmployeeCode', '担当者');
+        tt.setTooltip('#lbl_Notice', '注記');
+        tt.setTooltip('#lbl_FileName', '設計図書<br><b>F10:参照</b>');
+        tt.setTooltip('#lbl_LastUpdateDate', '最終更新日');
+
+
+        //引合番号イベント
+        var ObjInquiryNo = document.getElementById('txtInquiryNo');
+        //フォーカスアウト(bur)
+        ObjInquiryNo.addEventListener('blur', InquiryFocusin_event);
+        function InquiryFocusin_event(e) {
+            this.value = this.value.toString().padStart(9, '0')
+        }
+
+        //製番イベント
+        var ObjSeiban = document.getElementById('txtProductionNumber');
+        //フォーカスイン
+        ObjSeiban.addEventListener('focusin', SeibanFocusin_event);
+        function SeibanFocusin_event(e) {
+            if (this.value == '') {
+                var ObjtxtInquiryNoValue = document.getElementById('txtInquiryNo').value;
+                var ObjGroupingMarkCodeValue = wijmo.Control.getControl('#cmbGroupingMark').selectedValue;
+                if (ObjGroupingMarkCodeValue == null || ObjGroupingMarkCodeValue == '') {
+                    this.value = ObjtxtInquiryNoValue
+                } else {
+                    this.value = ObjtxtInquiryNoValue + ObjGroupingMarkCodeValue;
+                }
+
+            } else {
+                this.selectionStart = this.selectionEnd;
+            }
+        };
+        //Enter押下
+        ObjSeiban.addEventListener('keypress', SeibanEnter_event);
+        function SeibanEnter_event(e) {
+            if (e.keyCode === 13) {
+                var ShowSubmitBtnObj = document.getElementById('ShowSubmitBtn');
+                ShowSubmitBtnObj.click();
+            }
+            return false;
+        };
+
+
+        //担当者イベント
+        var theEmployeeCode = wijmo.Control.getControl('#cmbEmployeeData');
+        var template3 = '<table><tr>' +
+            '<td>{EmployeeCode}</td>' +
+            '<td title="EmployeeName">　{EmployeeName}</td>' +
+            '</tr></table>';
+        theEmployeeCode.formatItem.addHandler(function (s, e) {
+            var html = wijmo.format(template3, e.data);
+            e.item.innerHTML = html;
+        });
+        theEmployeeCode.selectedIndexChanged.addHandler(function (s, e) {
+            setSelectedEmployee(s);
+        });
+
+        function setSelectedEmployee(s) {
+            setText('selectedEmployee', s.selectedItem.EmployeeName);
+        }
+        function setText(id, value) {
+            document.getElementById(id).value = value;
+        }
+
+        //ファイル選択
+        // ファイル添付（ドロップ対応）
+        Dropzone.autoDiscover = false;
+        var myDropzone = new Dropzone("div#myDrop", {
+            addRemoveLinks: true,
+            dictCancelUpload: "キャンセル",
+            dictCancelUploadConfirmation: "本当にアップロードしたファイルをキャンセルしますか？",
+            dictRemoveFile: "削除",
+            url: "/Inquiry/FileUpload",
+            removedfile: function (file) {
+                var name = file.name;
+                $.ajax({
+                    type: 'POST',
+                    url: "/Inquiry/FileDelete",
+                    data: { name: name },
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+                file.previewElement.remove();
+            }
+        });
+
+
+        //FlexGrid
+        var grid = wijmo.Control.getControl('#flexgrid');
+        //ヘッダ設定
+        grid.columnHeaders.rows.defaultSize = 50;
+        grid.itemFormatter = function (panel, r, c, cell) {
+            if (panel.cellType == wijmo.grid.CellType.ColumnHeader) {
+                if (c == 2 && grid.columns[c].currentSort == "+") {
+                    cell.innerHTML = 'List<br/>Rev.' + "<span class='wj-glyph-up'></span>";
+                }
+                else if (c == 2 && grid.columns[c].currentSort == "-") {
+                    cell.innerHTML = 'List<br/>Rev.' + "<span class='wj-glyph-down'></span>";
+                }
+                else if (c == 2 && grid.columns[c].currentSort == null) {
+                    cell.innerHTML = 'List<br/>Rev.'
+                }
+
+                if (c == 4) {
+                    var hdrTips = new wijmo.Tooltip();
+                    hdrTips.setTooltip(cell, '部品分類 <br/> <b>F2:検索 F3:行追加 F4:行削除 F5:クリア</b>');
+                }
+
+                if (c == 7 && grid.columns[c].currentSort == "+") {
+                    cell.innerHTML = 'DWG/<br/>REV' + "<span class='wj-glyph-up'></span>";
+                }
+                else if (c == 7 && grid.columns[c].currentSort == "-") {
+                    cell.innerHTML = 'DWG/<br/>REV' + "<span class='wj-glyph-down'></span>";
+                }
+                else if (c == 7 && grid.columns[c].currentSort == null) {
+                    cell.innerHTML = 'DWG/<br/>REV'
+                }
+
+                if (c == 12 && grid.columns[c].currentSort == "+") {
+                    cell.innerHTML = '原価見積<br/>番号' + "<span class='wj-glyph-up'></span>";
+                }
+                else if (c == 12 && grid.columns[c].currentSort == "-") {
+                    cell.innerHTML = '原価見積<br/>番号' + "<span class='wj-glyph-down'></span>";
+                }
+                else if (c == 12 && grid.columns[c].currentSort == null) {
+                    cell.innerHTML = '原価見積<br/>番号'
+                }
+
+            }
+        };
+        //No設定
+        grid.cellEditEnding.addHandler(function (s, e) {
+            var col = s.columns[e.col];
+            var item = s.rows[e.row].dataItem;
+            if (item.RowNumber == null) {
+                s.rows[e.row].dataItem.RowNumber = e.row + 1;
+            }
+        });
+
+
+        //クリアボタンイベント
+        document.getElementById('btnClear').addEventListener('click', function (e) {
+            document.getElementById('txtInquiryNo').value = '';
+            var ShowSubmitBtnObj = document.getElementById('ShowSubmitBtn');
+            ShowSubmitBtnObj.click();
+        });
+
+        // 登録ボタンイベント
+        var dialog = wijmo.Control.getControl('#dialog');
+        document.getElementById('btnInsert').addEventListener('click', function (e) {
+            // show the dialog (modal window)
+            dialog.show(true, function (sender) { });
+        });
+
+        // show forms
+        var dlgPartsFileSetting = wijmo.Control.getControl('#dlgPartsFileSetting');
+        document.getElementById('btnFileSetting').addEventListener('click', function () {
+            dlgPartsFileSetting.show(true, function (sender) {
+                switch (sender.dialogResult) {
+                    case 'submit':
+                        alert('form submitted');
+                        break;
+                    case 'wj-hide-create':
+                        break;
+                }
+            });
+        });
+
+    </script>
+}

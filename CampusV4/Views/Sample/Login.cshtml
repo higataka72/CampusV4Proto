@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+<form>
+    <h1>CAMPUS ログイン</h1>
+    <div>
+        <input class="form-control" id="UserId" name="UserId" type="text" placeholder="ユーザーID" />
+    </div>
+    <div>
+        <input class="form-control" id="Password" name="Password" type="password" placeholder="パスワード" />
+    </div>
+    <div>
+        <a class="btn btn-default submit" href="/Sample/Index">ログイン</a>
+        <a class="reset_pass" href="#">ユーザーID・パスワードを忘れた方はこちら</a>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="separator">
+        <div class="clearfix"></div>
+        <br />
+
+        <div>
+            <h1><img src="~/Content/Images/ai-campus-logo.svg" width="78" height="16" /></h1>
+            <p>c2023 All Rights Reserved. Campus!</p>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,90 @@
+﻿<style>
+    #dlgEstimateSecurity {
+        width: 850px;
+    }
+</style>
+
+<div id="dlgEstimateSecurity">
+    <div id="frmEstimateSecurity" class="form-horizontal">
+        <h4 class="modal-header">
+            概算見積時見積回答引当
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="col-md-1 control-label text-nowrap" id="lbl_Text1" for="Text1">引合番号</label>
+                <div class="col-md-2">
+                    <input class="form-control" id="Text1" name="Text1" type="text" disabled />
+                </div>
+                <label class="col-md-1 control-label  text-nowrap" id="lbl_Select1" for="Select1">分類記号</label>
+                <div class="col-md-1">
+                    <select class="form-control" id="Select1" name="Select1" disabled>
+                        <option value=""></option>
+                        <option value="MA-001">MA-001</option>
+                        <option value="MA-002">MA-002</option>
+                        <option value="MA-003">MA-003</option>
+                        <option value="MA-004">MA-004</option>
+                        <option value="MA-005">MA-005</option>
+                        <option value="MA-006">MA-006</option>
+                        <option value="MA-007">MA-007</option>
+                        <option value="MA-008">MA-008</option>
+                        <option value="MA-009">MA-009</option>
+                        <option value="MA-010">MA-010</option>
+                    </select>
+                </div>
+                <label class="col-md-1 control-label text-nowrap" id="lbl_Text2" for="Text2">製番</label>
+                <div class="col-md-2">
+                    <input class="form-control" id="Text2" name="Text2" type="text" disabled />
+                </div>
+                <label class="col-md-1 control-label text-nowrap" for="Text3">部品分類</label>
+                <div class="col-md-2">
+                    <input class="form-control" id="Text3" name="Text3" type="text" disabled />
+                </div>
+            </div>
+            <div class="form-group">
+                @(Html.C1().FlexGrid()
+                    .AutoGenerateColumns(false).Height("308px").Id("grdEstimateSecurity")
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("Col_1").Width("150").Header("原価見積依頼番号").IsReadOnly(true));
+                        b1.Add(cb => cb.Binding("Col_2").Width("150").Header("見積回答番号").IsReadOnly(true));
+                        b1.Add(cb => cb.Binding("Col_3").Width("320").Header("パートナー工場").IsReadOnly(true));
+                        b1.Add(cb => cb.Binding("Col_4").Width("120").Header("数量").IsReadOnly(true));
+                    }))
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">登録</button>
+            <button type="button" class="btn btn-default wj-hide">閉じる</button>
+        </div>
+    </div>
+</div>
+
+@Html.C1().Popup("#dlgEstimateSecurity")
+
+<script type="text/javascript">
+    function loadEstimateSecurityData() {
+        $.ajax({
+            type: "POST",
+            url: "/InquiryCostEstimate/GetEstimateSecurityData",
+            dataType: "json",
+            success: function (result) {
+                var fg = wijmo.Control.getControl("#grdEstimateSecurity");
+                var data = JSON.parse(result);
+                fg.rows.clear();
+                var j = 0
+                for (var i in data) {
+                    var obj = [data[i].Col_1, data[i].Col_2, data[i].Col_3, data[i].Col_4];
+                    // FlexGridに新規行を追加します。
+                    var row = new wijmo.grid.Row();
+                    fg.rows.push(row);
+                    for (var col = 0; col <= fg.columns.length - 1; col++) {
+                        //FlexGrid のセルにデータを入力します。
+                        fg.setCellData(j, col, obj[col]);
+                    }
+                    j++;
+                }
+            }
+        });
+    }
+</script>

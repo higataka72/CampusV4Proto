@@ -1,0 +1,148 @@
+﻿@model CampusV4.Models.ProductionNumberDetailModel
+
+<style>
+    .wj-tabheader {
+        font-size: 18px;
+    }
+
+    .wj-tabpanel > div > .wj-tabpanes {
+        height: auto;
+        overflow: hidden;
+        color: #73879C;
+    }
+</style>
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>製番詳細</h3>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div id="theTabPanel">
+                        <div>
+                            <a>製番詳細</a>
+                            <div>
+                                @Html.Partial("ProductionNumberDetail_tab")
+                            </div>
+                        </div>
+                        <div>
+                            <a>製品仕様</a>
+                            <div>
+                                @Html.Partial("ProductionSpecification_tab_sample")
+                            </div>
+                        </div>
+                    </div>
+                    @Html.C1().TabPanel("#theTabPanel")
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts{
+    <script>
+
+        // ラベルツールチップ設定
+        var tt = new wijmo.Tooltip();
+        tt.setTooltip('#lbl_InquiryNumber', '引合番号<br><b>F2:検索 F5:クリア F9:終了</b>');
+        tt.setTooltip('#lbl_GroupingMark', '分類記号<br><b>F2:検索 F5:クリア</b>');
+
+        tt.setTooltip('#lbl_Subject', '件名');
+        tt.setTooltip('#lbl_CampusId', 'CAMPUS-ID');
+        tt.setTooltip('#lbl_VarietyCode', '品種');
+        tt.setTooltip('#lbl_ProductName', '品名');
+
+        tt.setTooltip('#lbl_EstimatedSubmitDate', '見積提出日');
+        tt.setTooltip('#lbl_SalesEmployee', '営業担当者');
+        tt.setTooltip('#lbl_OrderProbability', '受注確度');
+        tt.setTooltip('#lbl_OrderDate', '受注日');
+        tt.setTooltip('#lbl_LostOrderDate', '失注日');
+        tt.setTooltip('#lbl_CancelDate', 'キャンセル日');
+        tt.setTooltip('#lbl_ShippingDate', '納期');
+        tt.setTooltip('#lbl_ProcurementPerson', '調達担当者');
+        tt.setTooltip('#lbl_Quantity', '数量');
+        tt.setTooltip('#lbl_Rate', 'レート');
+        tt.setTooltip('#lbl_LocalOrdeReceived', '受注額（内貨）');
+        tt.setTooltip('#lbl_OutsideOrdeReceived', '受注額（外貨）');
+
+        tt.setTooltip('#lbl_MainDesignEmployee', '設計担当者 主');
+        tt.setTooltip('#lbl_ProposedDate', '見積提出日');
+        tt.setTooltip('#lbl_SubDesignEmployee', '設計担当者 従');
+        tt.setTooltip('#lbl_DrawingDate', '出図日');
+        tt.setTooltip('#lbl_TestAssemblyEmployee', '検査組立担当者');
+        tt.setTooltip('#lbl_InspectionEeport', '検査成績書');
+        tt.setTooltip('#lbl_CostConfirmationEmployee', '正式原価確認担当者');
+
+        //分類記号イベント
+        var ObjGroupingMark = wijmo.Control.getControl('#cmbGroupingMark');
+        //フォーカスアウト(bur)
+        //ObjGroupingMark.hostElement.addEventListener('blur', GroupingMark_event);
+        ObjGroupingMark.lostFocus.addHandler(GroupingMark_event);
+        function GroupingMark_event(e) {
+            var ShowSubmitBtnObj = document.getElementById('ShowSearchBtn');
+            ShowSubmitBtnObj.click();
+        };
+
+        //分納確認
+        //var dlgSplitdeliveryDetailList = wijmo.Control.getControl('#dlgSplitdeliveryDetailList');
+        //c1.documentReady(function () {
+        //    document.getElementById('btnSplitdeliveryDetailList').addEventListener('click', function () {
+        //        var summaryProductionNumber = document.getElementById("txtInquiryNumber").value;
+        //        loadbtnSplitdeliveryDetailData(summaryProductionNumber);
+        //        dlgSplitdeliveryDetailList.show(true, function (sender) {
+
+        //        });
+        //    });
+        //});
+
+
+        //製番明細
+        var dlgProductionNumberDetaiList = wijmo.Control.getControl('#dlgProductionNumberDetaiList');
+        c1.documentReady(function () {
+            document.getElementById('btnProductionNumberDetaiList').addEventListener('click', function () {
+                var summaryProductionNumber = document.getElementById("txtInquiryNumber").value;
+                loadbtnProductionNumberDetaiList(summaryProductionNumber);
+                dlgProductionNumberDetaiList.show(true, function (sender) {
+
+                });
+            });
+        });
+
+        //発注明細
+        var dlgOrderDetailList = wijmo.Control.getControl('#dlgOrderDetailList');
+        c1.documentReady(function () {
+            document.getElementById('btnOrderDetailList').addEventListener('click', function () {
+                var summaryProductionNumber = document.getElementById("txtInquiryNumber").value;
+                loadbtnOrderDetailList(summaryProductionNumber);
+                dlgOrderDetailList.show(true, function (sender) {
+
+                });
+            });
+        });
+
+        //連絡確認
+        var dlgContactConfirmDataList = wijmo.Control.getControl('#dlgContactConfirmDataList');
+        c1.documentReady(function () {
+            document.getElementById('btnContactConfirmDataList').addEventListener('click', function () {
+                var summaryProductionNumber = document.getElementById("txtInquiryNumber").value;
+                loadbtnContactConfirmDataList(summaryProductionNumber);
+                dlgContactConfirmDataList.show(true, function (sender) {
+
+                });
+            });
+        });
+
+        // 完了メッセージ
+        var dialog = wijmo.Control.getControl('#dialog');
+        document.getElementById('btnInsert').addEventListener('click', function (e) {
+            dialog.show(true, function (sender) { });
+        });
+    </script>
+}

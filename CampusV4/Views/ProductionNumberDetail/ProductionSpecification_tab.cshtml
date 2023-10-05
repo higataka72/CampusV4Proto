@@ -1,0 +1,41 @@
+﻿@model CampusV4.Models.ProductionNumberDetailModel
+
+@using (Html.BeginForm("ProductionSpecificationList", "ProductionNumberDetail", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).IsReadOnly(false).Width("520px").Id("flexgrid").AllowAddNew(false)
+                            .Bind(Model.ProductionSpecificationList)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("ItemName").Width("150").Header("項目").WordWrap(true).IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("ItemValue").Width("250").Header("値").WordWrap(true));
+
+                            }))
+    </div>
+
+    <div class="ln_solid"></div>
+    <div class="form-group">
+        <div style="width:520px;text-align:right">
+            <a href="#" class="btn btn-primary" id="btnInsert">登録</a>
+            <a href="#" class="btn btn-primary" id="btnProductionSpecificatioClose">閉じる</a>
+        </div>
+    </div>
+}
+
+@* 処理終了後のメッセージ表示 *@
+<div id="dialog" style="width: 600px; height: 200px;">
+    <div class="wj-dialog-header">
+        @Html.Raw("メッセージ")
+    </div>
+    <div class="wj-dialog-body">
+        <p>
+            @Html.Raw("登録が完了しました")
+        </p>
+    </div>
+    <div class="wj-dialog-footer">
+        <button class="btn btn-default wj-hide-ok">OK</button>
+    </div>
+</div>
+@Html.C1().Popup("#dialog")

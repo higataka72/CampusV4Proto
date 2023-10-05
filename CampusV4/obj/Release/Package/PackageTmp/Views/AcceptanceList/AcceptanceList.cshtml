@@ -1,0 +1,146 @@
+﻿@model CampusV4.Models.AcceptanceListViewModel
+
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>検収明細一覧</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("AcceptanceList", "AcceptanceList", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_CampusId" for="Text1">CAMPUS-ID</label>
+                        <div class="col-md-2">
+                            @(Html.C1()
+                                    .ComboBoxFor(model => model.CampusId).Id("cmbCampusId")
+                                    .Bind(Model.CampusIdList)
+                                    .HeaderPath("Code")
+                                    .DisplayMemberPath("Code")
+                                    .SelectedValuePath("Code")
+                                    .CssStyle( "width" , "auto" )
+                                    .SelectedValue(Model.CampusId)
+                                    .IsRequired(false)
+                                    )
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.CompanyName, new { @id = "CompanyName", @class = "form-control", @disabled = "true" })
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_RequestDate" for="Text2">締次検収日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.AcceptanceDate).Id("txtRequestDate").Format("yyyy年MM月")
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).IsReadOnly(true).Height("450px").Id("flexgrid").AllowAddNew(true)
+                            .Bind(Model.GridDataList)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("AcceptanceDate").Width("150").Header("伝票日付").WordWrap(true).DataType(DataType.Date));
+                                b1.Add(cb => cb.Binding("PurchasingNumber").Width("150").Header("伝票№"));
+                                b1.Add(cb => cb.Binding("ProductionNumber").Width("150").Header("製番").WordWrap(true));
+                                b1.Add(cb => cb.Binding("PartsName").Width("200").Header("品名").WordWrap(true));
+                                b1.Add(cb => cb.Binding("DrawingNumber").Width("150").Header("図面番号/型式").WordWrap(true));
+                                b1.Add(cb => cb.Binding("Quantity").Width("100").Header("数量").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Unitprice").Width("100").Header("単価").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Price").Width("100").Header("金額").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Tax").Width("100").Header("消費税").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("SumPrice").Width("100").Header("合計").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Campusfee").Width("150").Header("CAMPUS利用料").WordWrap(true).DataType(DataType.Number));
+
+                            }))
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_CampusId" for="Text3">合計金額</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                @Html.C1().InputNumber().Id("txt_PriceSum").Value(Model.PriceSum).IsDisabled(true)
+                            </div>
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_CampusId" for="Text4">消費税</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputNumber().Id("txt_TaxSim").Value(Model.TaxSum).IsDisabled(true)
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_CampusId" for="Text5">合計</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputNumber().Id("txt_SumPriceSum").Value(Model.SumPriceSum).IsDisabled(true)
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_CampusId" for="Text6">CAMPUS利用料</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputNumber().Id("txt_CampusfeeSum").Value(Model.CampusfeeSum).IsDisabled(true)
+                        </div>
+
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-12" style="text-align: right">
+                            <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                            <input type="submit" id="SearchSubmit" value="SearchSubmit" class="btn btn-primary" name="SearchSubmit" style="display:none;" />
+                            <a href="#" class="btn btn-primary" id="btnback">印刷</a>
+                            <input type="submit" value="戻る" name="BackBtn" class="btn btn-primary" formaction="/AcceptanceList/AcceptanceListBack" id="BackBtn" />
+                            <@*a href="#" class="btn btn-primary" id="btnClose">閉じる</a>*@
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+        // ラベルツールチップ設定
+        var tt = new wijmo.Tooltip();
+        tt.setTooltip('#lbl_CampusId', 'CAMPUS-ID<br><b>F2:検索</b>');
+        tt.setTooltip('#lbl_RequestDate', '締次検収日<br><b>F2:検索</b>');
+
+        c1.documentReady(function () {
+
+            //CAMPUS-IDイベント
+            var theCampusId = wijmo.Control.getControl('#cmbCampusId');
+            var template3 = '<table><tr>' +
+                '<td>{Code}</td>' +
+                '<td title="Name">　{Name}</td>' +
+                '</tr></table>';
+            theCampusId.formatItem.addHandler(function (s, e) {
+                var html = wijmo.format(template3, e.data);
+                e.item.innerHTML = html;
+            });
+            theCampusId.selectedIndexChanged.addHandler(function (s, e) {
+                document.getElementById('CompanyName').value = s.selectedItem.Name;
+            });
+
+            theCampusId.addEventListener(theCampusId.hostElement, 'keydown', function (e) {
+                if (e.keyCode == 113) {
+                    let btnSearchSubmit = document.getElementById('SearchSubmit');
+                    btnSearchSubmit.click();
+                }
+            });
+            //締次検収日イベント
+            var theRequestDate = wijmo.Control.getControl('#txtRequestDate');
+            theRequestDate.addEventListener(theRequestDate.hostElement, 'keydown', function (e) {
+                if (e.keyCode == 113) {
+                    let btnSearchSubmit = document.getElementById('SearchSubmit');
+                    btnSearchSubmit.click();
+                }
+            });
+
+
+        });
+
+    </script>
+}

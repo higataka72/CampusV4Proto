@@ -1,0 +1,244 @@
+﻿@model CampusV4.Models.YearFeedbackViewModel
+
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>年間フィードバック</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("Print", "YearFeedback", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_CampusId" for="Text5">CAMPUS-ID</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.CampusId, new { @id = "CampusId", @class = "form-control" })
+
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info" id="btnCampusId"><i class="fa fa-search"></i></button>
+                                </span>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.CompanyName, new { @id = "CompanyName", @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Department" for="Department">部署名</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.Department, new { @id = "Department", @class = "form-control" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ManagerName" for="ManagerName">ご担当者様名</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ManagerName, new { @id = "ManagerName", @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Evaluation" for="Text6">評価年度</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.Evaluation_yymm_From).Format("yyyy")
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ShippingDateRange" for="Text7" style="text-align:center">～</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.Evaluation_yymm_To).Format("yyyy")
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_CommentInputCode" for="cmbCommentEmployeeData">コメント入力者</label>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.CommentInputCode)
+                                .Id("cmbCommentEmployeeData")
+                                .Bind(Model.CommentInputDataList)
+                                .DisplayMemberPath("EmployeeCode")
+                                .SelectedValuePath("EmployeeCode")
+                                .HeaderPath("EmployeeCode")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.CommentInputCode)
+                                .IsRequired(false))
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.CommentInputName, new { @id = "selectedCommentInputName", @class = "form-control", @disabled = "true" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_Comparison1Code" for="cmbComparison1DataList">比較先１</label>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.Comparison1Code).Id("cmbComparison1DataList")
+                                .Bind(Model.ComparisonDataList)
+                                .DisplayMemberPath("Code")
+                                .SelectedValuePath("Code")
+                                .HeaderPath("Code")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.Comparison1Code)
+                                .IsRequired(false))
+
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.Comparison1Name, new { @id = "selectedComparison1Name", @class = "form-control", @disabled = "true" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_Comparison2Code" for="cmbComparison2DataList">比較先２</label>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.Comparison1Code).Id("cmbComparison2DataList")
+                                .Bind(Model.ComparisonDataList)
+                                .DisplayMemberPath("Code")
+                                .SelectedValuePath("Code")
+                                .HeaderPath("Code")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.Comparison2Code)
+                                .IsRequired(false))
+
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.Comparison2Name, new { @id = "selectedComparison2Name", @class = "form-control", @disabled = "true" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_ReferenceEestimate" for="txtReferenceEestimate1">参考仕入</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ReferenceEestimate1, new { @class = "form-control", @id = "txtReferenceEestimate1" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ReferenceEestimate2, new { @class = "form-control", @id = "txtReferenceEestimate2" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ReferenceEestimate3, new { @class = "form-control", @id = "txtReferenceEestimate3" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_ReferencePurchase" for="txtReferencePurchase1">参考見積</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ReferencePurchase1, new { @class = "form-control", @id = "txtReferencePurchase1" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ReferencePurchase2, new { @class = "form-control", @id = "txtReferencePurchase2" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ReferencePurchase3, new { @class = "form-control", @id = "txtReferencePurchase3" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Comment_YearFeedback" for="Comment_YearFeedback">コメント</label>
+                        <div class="col-md-4">
+                            @Html.TextAreaFor(model => model.Comment_YearFeedback, new { @id = "Comment_YearFeedback", @class = "form-control", @style = "height:100px;" })
+                        </div>
+                    </div>
+
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-12" style="text-align: right">
+                            <input type="submit" value="印刷" name="ShowPrintBtn" class="btn btn-primary" id="ShowSearchBtn" />
+                            <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@Html.Partial("../Common/MasterSearch")
+
+
+@section scripts{
+    <script>
+
+        // ラベルツールチップ設定
+        var tt = new wijmo.Tooltip();
+        tt.setTooltip('#lbl_CampusId', 'CAMPUS-ID<br><b>F2:検索 F5:クリア F9:終了</b>');
+        tt.setTooltip('#lbl_Department', '部署名');
+        tt.setTooltip('#lbl_ManagerName', 'ご担当者様名');
+        tt.setTooltip('#lbl_Evaluation', '評価年度');
+        tt.setTooltip('#lbl_CommentInputCode', 'コメント入力者<br><b>F2:検索 F5:クリア</b>');
+        tt.setTooltip('#lbl_Comparison1Code', '比較先１<br><b>F2:検索 F5:クリア</b>');
+        tt.setTooltip('#lbl_Comparison2Code', '比較先２<br><b>F2:検索 F5:クリア</b>');
+        tt.setTooltip('#lbl_ReferenceEestimate', '参考仕入<br><b>F2:検索 F5:クリア</b>');
+        tt.setTooltip('#lbl_ReferencePurchase', '参考見積<br><b>F2:検索 F5:クリア</b>');
+        tt.setTooltip('#lbl_Comment_YearFeedback', 'コメント');
+
+
+        // CampusId 検索（F2）
+        var dlgMasterSearch = wijmo.Control.getControl('#dlgMasterSearch');
+        c1.documentReady(function () {
+            //CAMPUS-ID
+            document.getElementById('btnCampusId').addEventListener('click', function () {
+                loadMasterData();
+
+                dlgMasterSearch.show(true, function (sender) {
+                    if (sender.dialogResult == 'wj-hide-ok') {
+                        document.getElementById('CampusId').setAttribute('value', masterSelected.code);
+                        document.getElementById('CompanyName').setAttribute('value', masterSelected.name);
+                    }
+                });
+            });
+            document.getElementById('CampusId').addEventListener('keydown', CampusIdKeyDownEvent);
+            function CampusIdKeyDownEvent(e) {
+                if (e.keyCode == 113) {
+                    let target = document.getElementById('btnCampusId');
+                    let clickEvent = new Event('click', { "bubbles": true, "cancelable": true });
+                    target.dispatchEvent(clickEvent);
+                }
+            }
+        });
+
+        //コメント入力者イベント
+        var theCommentInputCode = wijmo.Control.getControl('#cmbCommentEmployeeData');
+        var templateCommentInputCode = '<table><tr>' +
+            '<td>{EmployeeCode}</td>' +
+            '<td title="EmployeeName">　{EmployeeName}</td>' +
+            '</tr></table>';
+        theCommentInputCode.formatItem.addHandler(function (s, e) {
+            var html = wijmo.format(templateCommentInputCode, e.data);
+            e.item.innerHTML = html;
+        });
+        theCommentInputCode.selectedIndexChanged.addHandler(function (s, e) {
+            document.getElementById('selectedCommentInputName').value = s.selectedItem.EmployeeName;
+        });
+
+        //比較先イベント
+        var templateComparisonData = '<table><tr>' +
+            '<td>{Code}</td>' +
+            '<td title="Code">　{Name}</td>' +
+            '</tr></table>';
+
+        var theComparison1Data = wijmo.Control.getControl('#cmbComparison1DataList');
+        theComparison1Data.formatItem.addHandler(function (s, e) {
+            var html = wijmo.format(templateComparisonData, e.data);
+            e.item.innerHTML = html;
+        });
+        theComparison1Data.selectedIndexChanged.addHandler(function (s, e) {
+            document.getElementById('selectedComparison1Name').value = s.selectedItem.Name;
+        });
+
+        var theComparison2Data = wijmo.Control.getControl('#cmbComparison2DataList');
+        theComparison2Data.formatItem.addHandler(function (s, e) {
+            var html = wijmo.format(templateComparisonData, e.data);
+            e.item.innerHTML = html;
+        });
+        theComparison2Data.selectedIndexChanged.addHandler(function (s, e) {
+            document.getElementById('selectedComparison2Name').value = s.selectedItem.Name;
+        });
+
+    </script>
+}

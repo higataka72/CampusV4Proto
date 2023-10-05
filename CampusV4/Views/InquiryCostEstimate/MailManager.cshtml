@@ -1,0 +1,195 @@
+﻿@model CampusV4.Models.InquiryCostEstimateViewModel
+
+<style>
+    .breadcrumb {
+        font-size: 24px;
+    }
+</style>
+
+<div id="MailManager">
+    <div style="transform-origin: left top;">
+        <div class="page-title">
+            <div class="title_left">
+                <ol class="breadcrumb">
+                    <li>引合別原価見積一覧</li>
+                    <li><a href="/InquiryCostEstimate/EstimateReply?partsClass=A&partsName=Upper Main Cavity">見積回答 <i class="fa fa-arrow-circle-left"></i></a></li>
+                    <li class="active">メール送信</li>
+                </ol>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    @using (Html.BeginForm("MailManager", "InquiryCostEstimate", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <h4 class="modal-header">送信先一覧（パートナー工場）</h4>
+                        <div class="form-group">
+                            @(Html.C1().FlexGrid()
+                                .AutoGenerateColumns(false).Height("250px").Id("grdMailManager")
+                                .Bind(Model.MailManagerDataList)
+                                .Columns(b1 =>
+                                {
+                                    b1.Add(cb => cb.Binding("Col_1").Width("120").Header("選択").DataType(DataType.Boolean));
+                                    b1.Add(cb => cb.Binding("Col_2").Width("250").Header("パートナー工場").IsReadOnly(true));
+                                    b1.Add(cb => cb.Binding("Col_3").Width("100").Header("送信種別").IsReadOnly(true));
+                                    b1.Add(cb => cb.Binding("Col_4").Width("200").Header("送信先アドレス").IsReadOnly(true));
+                                    b1.Add(cb => cb.Binding("Col_5").Width("200").Header("送信先CC").IsReadOnly(true));
+                                    b1.Add(cb => cb.Binding("Col_6").Width("250").Header("件名").IsReadOnly(true));
+                                    b1.Add(cb => cb.Binding("Col_7").Width("250").Header("内容").IsReadOnly(true));
+                                }))
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4" style="text-align: right">
+                                @*<button type="button" class="btn btn-primary" id="btnSendHistory"><i class="fa fa-search"></i> 送信履歴</button>*@
+                                <a href="/InquiryCostEstimate/MailSendHistory" class="btn btn-primary">送信履歴</a>
+                                <button class="btn btn-primary"><i class="fa fa-envelope"></i> 送信</button>
+                            </div>
+                        </div>
+
+                        <h4 class="modal-header">送信メール編集</h4>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label" for="Text1">TO</label>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <input class="form-control" id="AddressTo" name="AddressTo" type="text" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-info" id="btnSearchTo"><i class="fa fa-search"></i> 宛先追加</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label" for="Text2">CC</label>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <input class="form-control" id="AddressCc" name="AddressCc" type="text" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-info" id="btnSearchCC"><i class="fa fa-search"></i>　CC追加</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label" for="Text4">件名</label>
+                            <div class="col-md-6">
+                                <input class="form-control" id="MailSubject" name="Text4" type="text" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-1 col-md-11">
+                                <textarea style="width:800px;height:200px" id="MailContent" type="text" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        @*<div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-8" style="text-align: right">
+                                <button class="btn btn-primary">保存</button>
+                            </div>
+                        </div>*@
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("../Common/MailAddressSearch")
+
+<script type="text/javascript">
+
+    
+    var dlgMailAddressSearch = wijmo.Control.getControl('#dlgMailAddressSearch');
+    var dlgMailSendHistory = wijmo.Control.getControl('#dlgMailSendHistory');
+    c1.documentReady(function () {
+        //宛先追加
+        document.getElementById('btnSearchTo').addEventListener('click', function () {
+            loadbtnSupplierData();
+
+            dlgMailAddressSearch.show(true, function (sender) {
+                if (sender.dialogResult == 'wj-hide-ok') {
+                    document.getElementById('AddressTo').setAttribute('value', MailAddressSelected.email);
+                }
+            });
+        });
+        document.getElementById('AddressTo').addEventListener('keydown', addressToDownEvent);
+        function addressToDownEvent(e) {
+            if (e.keyCode == 113) {
+                let target = document.getElementById('btnSearchTo');
+                let clickEvent = new Event('click', { "bubbles": true, "cancelable": true });
+                target.dispatchEvent(clickEvent);
+            }
+        }
+        //宛先追加
+        document.getElementById('btnSearchCC').addEventListener('click', function () {
+            loadbtnSupplierData();
+
+            dlgMailAddressSearch.show(true, function (sender) {
+                if (sender.dialogResult == 'wj-hide-ok') {
+                    document.getElementById('AddressCc').setAttribute('value', MailAddressSelected.email);
+                }
+            });
+        });
+        document.getElementById('AddressCc').addEventListener('keydown', addressToDownEvent);
+        function addressToDownEvent(e) {
+            if (e.keyCode == 113) {
+                let target = document.getElementById('btnSearchCC');
+                let clickEvent = new Event('click', { "bubbles": true, "cancelable": true });
+                target.dispatchEvent(clickEvent);
+            }
+        }
+        //メール送信履歴
+        //document.getElementById('btnSendHistory').addEventListener('click', function () {
+        //    //loadbtnSupplierData();
+
+        //    dlgMailSendHistory.show(true, function (sender) {
+        //        if (sender.dialogResult == 'wj-hide-ok') {
+        //            document.getElementById('AddressTo').setAttribute('value', MailAddressSelected.email);
+        //        }
+        //    });
+        //});
+    });
+
+    var grdMailManager = wijmo.Control.getControl('#grdMailManager');
+    function updateCurrentInfo() {
+        document.getElementById("AddressTo").value = wijmo.format('{Col_4}', grdMailManager.collectionView.currentItem);
+        document.getElementById("AddressCc").value = wijmo.format('{Col_5}', grdMailManager.collectionView.currentItem);
+        document.getElementById("MailSubject").value = wijmo.format('{Col_6}', grdMailManager.collectionView.currentItem);
+        document.getElementById("MailContent").value = wijmo.format('{Col_7}', grdMailManager.collectionView.currentItem);
+        
+    }
+
+    // update current item now and when the grid selection changes
+    updateCurrentInfo();
+    grdMailManager.collectionView.currentChanged.addHandler(updateCurrentInfo);
+
+    //function loadMailManagerData() {
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/InquiryCostEstimate/GetMailManagerData",
+    //        dataType: "json",
+    //        success: function (result) {
+    //            var fg = wijmo.Control.getControl("#grdMailManager");
+    //            var data = JSON.parse(result);
+    //            fg.rows.clear();
+    //            var j = 0
+    //            for (var i in data) {
+    //                var obj = [data[i].Col_1, data[i].Col_2, data[i].Col_3, data[i].Col_4];
+    //                // FlexGridに新規行を追加します。
+    //                var row = new wijmo.grid.Row();
+    //                fg.rows.push(row);
+    //                for (var col = 0; col <= fg.columns.length - 1; col++) {
+    //                    //FlexGrid のセルにデータを入力します。
+    //                    fg.setCellData(j, col, obj[col]);
+    //                }
+    //                j++;
+    //            }
+    //        }
+    //    });
+    //}
+</script>

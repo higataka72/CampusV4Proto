@@ -1,0 +1,251 @@
+﻿@model CampusV4.Models.InquiryCostEstimateViewModel
+
+<style>
+    .breadcrumb {
+        font-size: 24px;
+    }
+</style>
+
+<div id="EstimateReply">
+    <div style="transform-origin: left top;">
+        <div class="page-title">
+            <div class="title_left">
+                <ol class="breadcrumb">
+                    <li><a href="/InquiryCostEstimate/Index">引合別原価見積一覧 <i class="fa fa-arrow-circle-left"></i></a></li>
+                    <li class="active">見積回答</li>
+                </ol>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    @using (Html.BeginForm("Regist", "InquiryCostEstimate", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            <label class="col-md-1 control-label" for="Text1">部品分類</label>
+                            <div class="col-md-2">
+                                <input class="form-control" id="Text1" name="Text1" type="text" disabled value="A" />
+                            </div>
+                            <label class="col-md-1 control-label" for="Text2">部品名</label>
+                            <div class="col-md-6">
+                                <input class="form-control" id="Text2" name="Text2" type="text" disabled value="Upper Main Cavity" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label" for="Text3">数量</label>
+                            <div class="col-md-2">
+                                <input class="form-control" id="Text3" name="Text3" type="text" value="8" disabled />
+                            </div>
+                            <label class="col-md-1 control-label" for="Text4">納入希望日</label>
+                            <div class="col-md-4">
+                                <input class="form-control" id="Text4" name="Text4" type="text" value="2023/12/28" disabled />
+                            </div>
+                        </div>
+                        @*<div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                            <input id="filter" class="form-control">
+                        </div>*@
+                        <div class="form-group">
+                            @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).Height("495px").Id("grdEstimateReply").DefaultRowSize(45).FrozenColumns(5)
+                            .Bind(b => b.Bind(Model.EstimateReplyDataList).DisableServerRead(true))
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("Col_1").Width("120").Header("原価見積依頼番号").IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("Col_2").Width("120").Header("見積回答番号").IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("Col_3").Width("250").Header("パートナー工場").IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("Col_4").Width("60").Header("数量").IsReadOnly(true).Align("center"));
+                                b1.Add(cb => cb.Binding("Col_5").Width("70").Header("再").IsReadOnly(true).Align("center"));
+                                b1.Add(cb => cb.Binding("Col_7").Width("120").Header("表示選択").IsReadOnly(true).Align("center"));
+                                b1.Add(cb => cb.Binding("Col_8").Width("120").Header("見積依頼区分").IsReadOnly(true).Align("center"));
+                                b1.Add(cb => cb.Binding("Col_8_1").Width("120").Header("加工区分依頼").IsReadOnly(true).Align("center"));
+                                b1.Add(cb => cb.Binding("Col_9").Width("120").Header("辞退区分").IsReadOnly(true).Align("center"));
+                                b1.Add(cb => cb.Binding("Col_10").Width("80").Header("数量").IsReadOnly(true).Align("center"));
+                                b1.Add(cb => cb.Binding("Col_11").Width("100").Header("単価").IsReadOnly(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Col_12").Width("100").Header("金額").IsReadOnly(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Col_13").Width("100").Header("納期").IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("Col_13_1").Width("100").Header("概算金額").IsReadOnly(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Col_13_2").Width("100").Header("概算納期").IsReadOnly(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Col_13_3").Width("100").Header("差額").IsReadOnly(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Col_14").Width("120").Header("採用").DataType(DataType.Boolean));
+                                b1.Add(cb => cb.Binding("Col_15").Width("120").Header("採用数").DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Col_16").Width("120").Header("不採用").DataType(DataType.Boolean));
+                            }))
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-offset-4 col-md-2 control-label" for="Text5">合計数量</label>
+                            <div class="col-md-2">
+                                <input class="form-control" id="Text5" name="Text5" type="text" disabled />
+                            </div>
+                            <label class="col-md-2 control-label" for="Text6">合計金額</label>
+                            <div class="col-md-2">
+                                <input class="form-control" id="Text6" name="Text6" type="text" disabled />
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4" style="text-align: right">
+                                <input type="button" class="btn btn-primary" id="replyAll" onclick="loadEstimateReplyAllData();" value="全明細表示">
+                                <input type="button" class="btn btn-primary" id="reply" onclick="loadEstimateReplyData();" value="標準明細表示">
+                                <a href="/InquiryCostEstimate/MailManager" class="btn btn-primary">メール送信</a>
+                                <input type="submit" class="btn btn-primary" value="登録">
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("ReasonChoice")
+@Html.Partial("EstimateSecurity")
+
+<script type="text/javascript">
+    c1.documentReady(function () {
+        document.getElementById("replyAll").style.display = "inline";
+        document.getElementById("reply").style.display = "none";
+        var gridEstimateReply = wijmo.Control.getControl('#grdEstimateReply');
+        var dlgReasonChoice = wijmo.Control.getControl('#dlgReasonChoice');
+        var dlgEstimateSecurity = wijmo.Control.getControl('#dlgEstimateSecurity');
+        /*var dlgMailManager = wijmo.Control.getControl('#dlgMailManager');*/
+
+        //document.getElementById('filter').addEventListener('input', function (e) {
+        //    var filter = e.target.value.toLowerCase();
+        //    gridEstimateReply.collectionView.filter = function (item) {
+        //        return filter.length == 0 || item.Col_1.toLowerCase().indexOf(filter) > -1
+        //    }
+        //});
+
+        gridEstimateReply.formatItem.addHandler(function (s, e) {
+            if (e.panel == s.cells) {
+                if (s.columns[e.col].binding == 'Col_5') {
+                    var item = gridEstimateReply.cells.getCellData(e.row, e.col, false);
+                    e.cell.innerHTML = '<a class="btn btn-info" name="estimate_input"><i class="fa fa-pencil-square"></i></a>';
+                } else if (s.columns[e.col].binding == 'Col_15') {
+                    var item = gridEstimateReply.cells.getCellData(e.row, e.col, false);
+                    e.cell.innerHTML = '<div class="input-group"><input class="form-control" disabled value="' + item + '"><span class="input-group-btn"><a class="btn btn-info" name="estimate_security"><i class="fa fa-search"></i></a></span>';
+                }
+            }
+        });
+
+        gridEstimateReply.hostElement.addEventListener('mousedown', function (e) {
+            if (e.target.type === "checkbox") {
+                dlgReasonChoice.show(true, function (sender) {
+                    switch (sender.dialogResult) {
+                        case 'submit':
+                            alert('form submitted');
+                            break;
+                        case 'wj-hide-create':
+                            break;
+                    }
+                });
+            }
+        });
+
+        gridEstimateReply.hostElement.addEventListener('click', function (e) {
+            var target = wijmo.closest(e.target, 'a');
+            if (target instanceof HTMLAnchorElement) {
+                if (target.name == 'estimate_security') {
+                    loadEstimateSecurityData();
+                    dlgEstimateSecurity.show(true, function (sender) {
+                        switch (sender.dialogResult) {
+                            case 'submit':
+                                alert('form submitted');
+                                break;
+                            case 'wj-hide-create':
+                                break;
+                        }
+                    });
+                }
+            }
+        });
+
+        loadEstimateReplyData();
+
+        //document.getElementById('btnMailManager').addEventListener('click', function () {
+        //    loadMailManagerData();
+        //    dlgMailManager.show(true, function (sender) {
+        //        switch (sender.dialogResult) {
+        //            case 'submit':
+        //                alert('form submitted');
+        //                break;
+        //            case 'wj-hide-create':
+        //                break;
+        //        }
+        //    });
+        //});
+    });
+
+   
+    function loadEstimateReplyAllData() {
+        document.getElementById("replyAll").style.display = "none";
+        document.getElementById("reply").style.display = "inline";
+        var theGrid = wijmo.Control.getControl("#grdEstimateReply");
+        var filter = '';
+        theGrid.collectionView.filter = function (item) {
+            return filter.length == 0 || item.Col_7.toLowerCase().indexOf(filter) > -1
+        }
+        //$.ajax({
+        //    type: "POST",
+        //    url: "/InquiryCostEstimate/EstimateReplyAll",
+        //    dataType: "json",
+        //    success: function (result) {
+        //        var fg = wijmo.Control.getControl("#grdEstimateReply");
+        //        var data = JSON.parse(result);
+        //        fg.rows.clear();
+        //        var j = 0
+        //        for (var i in data) {
+        //            var obj = [data[i].Col_1, data[i].Col_2, data[i].Col_3, data[i].Col_4, data[i].Col_5,
+        //            data[i].Col_6, data[i].Col_7, data[i].Col_8, data[i].Col_9, data[i].Col_10,
+        //            data[i].Col_11, data[i].Col_12, data[i].Col_13, data[i].Col_14, data[i].Col_15, data[i].Col_16];
+        //            // FlexGridに新規行を追加します。
+        //            var row = new wijmo.grid.Row();
+        //            fg.rows.push(row);
+        //            for (var col = 0; col <= fg.columns.length - 1; col++) {
+        //                //FlexGrid のセルにデータを入力します。
+        //                fg.setCellData(j, col, obj[col]);
+        //            }
+        //            j++;
+        //        }
+        //    }
+        //});
+    }
+    function loadEstimateReplyData() {
+        document.getElementById("replyAll").style.display = "inline";
+        document.getElementById("reply").style.display = "none";
+        var theGrid = wijmo.Control.getControl("#grdEstimateReply");
+        var filter = '8';
+        theGrid.collectionView.filter = function (item) {
+            return filter.length == 0 || item.Col_10.toLowerCase().indexOf(filter) > -1
+        }
+        //$.ajax({
+        //    type: "POST",
+        //    url: "/InquiryCostEstimate/EstimateReplyDisplay",
+        //    dataType: "json",
+        //    success: function (result) {
+        //        var fg = wijmo.Control.getControl("#grdEstimateReply");
+        //        var data = JSON.parse(result);
+        //        fg.rows.clear();
+        //        var j = 0
+        //        for (var i in data) {
+        //            var obj = [data[i].Col_1, data[i].Col_2, data[i].Col_3, data[i].Col_4, data[i].Col_5,
+        //            data[i].Col_6, data[i].Col_7, data[i].Col_8, data[i].Col_9, data[i].Col_10,
+        //            data[i].Col_11, data[i].Col_12, data[i].Col_13, data[i].Col_14, data[i].Col_15, data[i].Col_16];
+        //            // FlexGridに新規行を追加します。
+        //            var row = new wijmo.grid.Row();
+        //            fg.rows.push(row);
+        //            for (var col = 0; col <= fg.columns.length - 1; col++) {
+        //                //FlexGrid のセルにデータを入力します。
+        //                fg.setCellData(j, col, obj[col]);
+        //            }
+        //            j++;
+        //        }
+        //    }
+        //});
+    }
+</script>

@@ -1,0 +1,76 @@
+﻿<div id="dlgMailAddressSearch">
+    <form id="frmMailAddressSearch" class="form-horizontal">
+        <h4 class="modal-header">
+            メールアドレス選択
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                @(Html.C1().FlexGrid().SelectionMode(SelectionMode.Row)
+                    .AutoGenerateColumns(false).IsReadOnly(true).Height("350px").Width("840px").Id("grdMailAddressSearch")
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("PartnerPersonCode").Width("120").Header("担当者コード"));
+                        b1.Add(cb => cb.Binding("PartnerPersonName").Width("150").Header("担当者名"));
+                        b1.Add(cb => cb.Binding("Email").Width("250").Header("E-Mail"));
+                    }))
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary wj-hide-ok">選択</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgMailAddressSearch")
+
+<script type="text/javascript">
+    var MailAddressSelected = {
+        partnerPersonCode: "",
+        partnerPersonName: "",
+        email: ""
+    };
+
+    function loadbtnSupplierData($this) {
+        var textValue = ($this == null) ? "" : $this.value;
+
+        MailAddressSelected.partnerPersonCode = "";
+        MailAddressSelected.partnerPersonName = "";
+        MailAddressSelected.email = "";
+
+        $.ajax({
+            type: "POST",
+            url: "/Common/GetMailAddressData",
+            data: {name: textValue },
+            dataType: "json",
+
+            success: function (result) {
+                var fg = wijmo.Control.getControl("#grdMailAddressSearch");
+                var data = JSON.parse(result);
+                fg.rows.clear();
+                var j = 0
+                for (var i in data) {
+                    var obj = [data[i].PartnerPersonCode, data[i].PartnerPersonName, data[i].emEmailail];
+                    // FlexGridに新規行を追加します。
+                    var row = new wijmo.grid.Row();
+                    fg.rows.push(row);
+                    for (var col = 0; col <= fg.columns.length - 1; col++) {
+                        //FlexGrid のセルにデータを入力します。
+                        fg.setCellData(j, col, obj[col]);
+                    }
+                    j++;
+                }
+            }
+        });
+    }
+
+    var mailAddressSearchGrid = wijmo.Control.getControl('#grdMailAddressSearch');
+    mailAddressSearchGrid.selectionChanged.addHandler(function (s, e) {
+        var sel = mailAddressSearchGrid.selection;
+        for (var r = sel.topRow; r <= sel.bottomRow; r++) {
+            MailAddressSelected.partnerPersonCode = mailAddressSearchGrid.cells.getCellData(r, 0, false);
+            MailAddressSelected.partnerPersonName = mailAddressSearchGrid.cells.getCellData(r, 1, false);
+            MailAddressSelected.email = mailAddressSearchGrid.cells.getCellData(r, 2, false);
+        }
+    });
+</script>

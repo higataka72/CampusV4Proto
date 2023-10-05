@@ -1,0 +1,81 @@
+﻿<div id="dlgSplitdeliveryDetailList">
+    <form id="frmSplitdeliveryDetailList" class="form-horizontal">
+        <h4 class="modal-header">
+            分納明細画面
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                @(Html.C1().FlexGrid().SelectionMode(SelectionMode.Row)
+                    .AutoGenerateColumns(false).IsReadOnly(true).Height("350px").Width("540px").Id("grdSplitdeliveryDetailList")
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("RowNumber").Width("50").Header("回").WordWrap(true).DataType(DataType.Number));
+                        b1.Add(cb => cb.Binding("Quantity").Width("100").Header("数量").WordWrap(true).DataType(DataType.Number));
+                        b1.Add(cb => cb.Binding("Unitprice").Width("100").Header("単価").WordWrap(true).DataType(DataType.Number));
+                        b1.Add(cb => cb.Binding("Price").Width("100").Header("金額").WordWrap(true).DataType(DataType.Number));
+                        b1.Add(cb => cb.Binding("ShippingDate").Width("100").Header("納期").WordWrap(true));
+                        b1.Add(cb => cb.Binding("CompletepPayment").Width("50").Header("完納").WordWrap(true).DataType(DataType.Boolean));
+                    }))
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary wj-hide-ok">閉じる</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgSplitdeliveryDetailList")
+
+<script type="text/javascript">
+
+    function loadbtnSplitdeliveryDetailData(summaryProductionNumber) {
+
+        $.ajax({
+            type: "POST",
+            url: "/ProductionNumberDetail/GetSplitdeliveryDetailData",
+            data: { SummaryProductionNumber: summaryProductionNumber },
+            dataType: "json",
+
+            success: function (result) {
+                var fg = wijmo.Control.getControl("#grdSplitdeliveryDetailList");
+                var data = JSON.parse(result);
+                fg.rows.clear();
+                var j = 0
+                for (var i in data) {
+                    var obj = [
+                            data[i].RowNumber,
+                            data[i].Quantity,
+                            data[i].Unitprice,
+                            data[i].Price,
+                            data[i].ShippingDate,
+                            data[i].CompletepPayment
+                        ];
+                    // FlexGridに新規行を追加します。
+                    var row = new wijmo.grid.Row();
+                    fg.rows.push(row);
+                    for (var col = 0; col <= fg.columns.length - 1; col++) {
+                        //FlexGrid のセルにデータを入力します。
+                        fg.setCellData(j, col, obj[col]);
+                    }
+                    j++;
+                }
+            }
+        });
+    }
+
+    var SplitdeliverySearchGrid = wijmo.Control.getControl('#grdSplitdeliveryDetailList');
+    SplitdeliverySearchGrid.selectionChanged.addHandler(function (s, e) {
+        var sel = SplitdeliverySearchGrid.selection;
+        for (var r = sel.topRow; r <= sel.bottomRow; r++) {
+            SplitdeliverySelected.RowNumber = SplitdeliverySearchGrid.cells.getCellData(r, 0, false);
+            SplitdeliverySelected.Quantity = SplitdeliverySearchGrid.cells.getCellData(r, 1, false);
+            SplitdeliverySelected.Unitprice = SplitdeliverySearchGrid.cells.getCellData(r, 2, false);
+            SplitdeliverySelected.Price = SplitdeliverySearchGrid.cells.getCellData(r, 3, false);
+            SplitdeliverySelected.ShippingDate = SplitdeliverySearchGrid.cells.getCellData(r, 4, false);
+            SplitdeliverySelected.AlignmentDate = SplitdeliverySearchGrid.cells.getCellData(r, 5, false);
+            SplitdeliverySelected.MeasurementSstartDate = SplitdeliverySearchGrid.cells.getCellData(r, 6, false);
+            SplitdeliverySelected.SupplierCode = SplitdeliverySearchGrid.cells.getCellData(r, 7, false);
+        }
+    });
+</script>

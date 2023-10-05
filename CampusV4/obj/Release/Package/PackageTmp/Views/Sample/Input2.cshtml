@@ -1,0 +1,64 @@
+﻿<div>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>テスト用呼出し</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="item form-group">
+                    <div class="col-md-offset-5 col-md-2">
+                        <button type="button" class="btn btn-info" id="btnMailManager">メール送信</button>
+                        <button class="btn btn-primary wj-hide-ok">選択</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="#" class="btn btn-primary" id="btnInsert">登録</a>
+<!-- モーダル・ダイアログ -->
+<div id="dialog" style="width: 600px; height: 200px;">
+    <div class="wj-dialog-header">
+        @Html.Raw("メッセージ")
+    </div>
+    <div class="wj-dialog-body">
+        <p>
+            @Html.Raw("登録が完了しました")
+        </p>
+    </div>
+    <div class="wj-dialog-footer">
+        <button class="btn btn-default wj-hide-ok">OK</button>
+    </div>
+</div>
+@Html.C1().Popup("#dialog")
+
+@Html.Partial("../Common/MailManager")
+@*@Html.C1().Popup("#exampleModalToggle")
+    @Html.C1().Popup("#exampleModalToggle2")*@
+
+@section scripts{
+    <script>
+        var dlgMailManager = wijmo.Control.getControl('#dlgMailManager');
+        // show forms
+        document.getElementById('btnMailManager').addEventListener('click', function () {
+            dlgMailManager.show(true, function (sender) {
+                switch (sender.dialogResult) {
+                    case 'submit':
+                        alert('form submitted');
+                        break;
+                    case 'wj-hide-create':
+                        break;
+                }
+            });
+        });
+        var dialog = wijmo.Control.getControl('#dialog');
+        document.getElementById('btnInsert').addEventListener('click', function (e) {
+            // show the dialog (modal window)
+            dialog.show(true, function (sender) { });
+        });
+    </script>
+}

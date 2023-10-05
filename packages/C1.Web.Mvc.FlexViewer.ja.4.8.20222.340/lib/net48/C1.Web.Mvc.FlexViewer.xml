@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>C1.Web.Mvc.FlexViewer</name>
+    </assembly>
+    <members>
+        <member name="T:C1.Web.Mvc.Viewer.PdfViewer">
+            <summary>PDFドキュメントソースを表示するためのPDFビューアコントロールを定義します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Viewer.ViewerBase">
+            <summary>ビューアコントロールの抽象クラスを定義します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.ViewerBase.#ctor(System.Web.Mvc.HtmlHelper,System.String)">
+            <summary>１つのViewerBaseインスタンスを作成します。</summary>
+            <param name="helper">HTMLヘルパー</param>
+            <param name="selector">セレクタ</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.ViewMode">
+            <summary>ビューモードを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.OnClientPageIndexChanged">
+            <summary>ページインデックスが変更された後に発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.OnClientViewModeChanged">
+            <summary>ビューモードが変更された後に発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.ZoomFactor">
+            <summary>ズーム倍率を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.OnClientZoomFactorChanged">
+            <summary>ズーム倍率が変更された後に発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.ServiceUrl">
+            <summary>サービスのURLを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.FilePath">
+            <summary>ドキュメントのパスを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.OnClientQueryLoadingData">
+            <summary>ドキュメントをロードする前に、サービスに送られる要求データを問い合わせます。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.FullScreen">
+            <summary>ビューアが全画面表示モードであるかどうかを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.OnClientFullScreenChanged">
+            <summary>全画面表示モードが変更された後に発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.SelectMouseMode">
+            <summary>マウスのクリックアンドドラッグでテキストを選択するかどうかを示す値を取得または設定します。このプロパティは、デスクトップでのみ機能します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.OnClientSelectMouseModeChanged">
+            <summary>マウスモードの選択が変更された後に発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.ZoomMode">
+            <summary>ドキュメントページを表示する現在のズームモードを示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.ThresholdWidth">
+            <summary>モバイルテンプレートとPCテンプレートの切り替えに使用するしきい値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.MouseMode">
+            <summary>マウス動作を示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.OnClientMouseModeChanged">
+            <summary>マウスモードが変更された後に発生します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.PdfViewer.#ctor(System.Web.Mvc.HtmlHelper,System.String)">
+            <summary>1つのPdfViewerインスタンスを作成します。</summary>
+            <param name="helper">HTMLヘルパー</param>
+            <param name="selector">セレクタ</param>
+        </member>
+        <member name="T:C1.Web.Mvc.Viewer.ReportViewer">
+            <summary>FlexReportのドキュメントソースを表示するためのレポートビューアコントロールを定義します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.ReportViewer.#ctor(System.Web.Mvc.HtmlHelper,System.String)">
+            <summary>１つのReportViewerインスタンスを作成します。</summary>
+            <param name="helper">HTMLヘルパー</param>
+            <param name="selector">セレクタ</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ReportViewer.ReportName">
+            <summary>レポート名を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ReportViewer.Paginated">
+            <summary>コンテンツを一連の固定サイズのページとして表すかどうかを示す値を取得または設定します。</summary>
+            <remarks>デフォルト値はnullです。その場合は、ドキュメントソースのデフォルト値が使用されます。</remarks>
+        </member>
+        <member name="T:C1.Web.Mvc.Viewer.Fluent.PdfViewerBuilder">
+            <summary>PdfViewerのビルダ。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2">
+            <summary>ViewerBaseのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.#ctor(`0)">
+            <summary>１つのViewerBaseBuilderインスタンスを作成します。</summary>
+            <param name="component">構成する<see cref="T:C1.Web.Mvc.Viewer.ViewerBase" />オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.ViewMode(C1.Web.Mvc.Viewer.ViewMode)">
+            <summary>ViewModeプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.OnClientPageIndexChanged(System.String)">
+            <summary>OnClientPageIndexChangedプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.OnClientViewModeChanged(System.String)">
+            <summary>OnClientViewModeChangedプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.ZoomFactor(System.Double)">
+            <summary>ZoomFactorプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.OnClientZoomFactorChanged(System.String)">
+            <summary>OnClientZoomFactorChangedプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.ServiceUrl(System.String)">
+            <summary>ServiceUrlプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.FilePath(System.String)">
+            <summary>FilePathプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.OnClientQueryLoadingData(System.String)">
+            <summary>OnClientQueryLoadingDataプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.FullScreen(System.Boolean)">
+            <summary>FullScreenプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.OnClientFullScreenChanged(System.String)">
+            <summary>OnClientFullScreenChangedプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.SelectMouseMode(System.Boolean)">
+            <summary>SelectMouseModeプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.OnClientSelectMouseModeChanged(System.String)">
+            <summary>OnClientSelectMouseModeChangedプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.ZoomMode(C1.Web.Mvc.Viewer.ZoomMode)">
+            <summary>ZoomModeプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.ThresholdWidth(System.Int32)">
+            <summary>ThresholdWidthプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.MouseMode(C1.Web.Mvc.Viewer.MouseMode)">
+            <summary>MouseModeプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.OnClientMouseModeChanged(System.String)">
+            <summary>Configurates the <see cref="P:C1.Web.Mvc.Viewer.ViewerBase.OnClientMouseModeChanged" /> client event. マウスモードが変更された後に発生します。</summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.PdfViewerBuilder.#ctor(C1.Web.Mvc.Viewer.PdfViewer)">
+            <summary>1つのPdfViewerBuilderインスタンスを作成します。</summary>
+            <param name="component">構成する<see cref="T:C1.Web.Mvc.Viewer.PdfViewer" />オブジェクト。</param>
+        </member>
+        <member name="T:C1.Web.Mvc.Viewer.Fluent.ReportViewerBuilder">
+            <summary>ReportViewerのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ReportViewerBuilder.#ctor(C1.Web.Mvc.Viewer.ReportViewer)">
+            <summary>１つのReportViewerBuilderインスタンスを作成します。</summary>
+            <param name="component">構成する<see cref="T:C1.Web.Mvc.Viewer.ReportViewer" />オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ReportViewerBuilder.ReportName(System.String)">
+            <summary>ReportNameプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ReportViewerBuilder.Paginated(System.Nullable{System.Boolean})">
+            <summary>Paginatedプロパティを設定します。</summary>
+            <remarks>コンテンツを一連の固定サイズのページとして表すかどうかを示す値を取得または設定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Viewer.MouseMode">
+            <summary>マウスモードを指定します。マウスモードは、ビューアのマウス動作を定義します。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Viewer.MouseMode.SelectTool">
+            <summary>テキスト選択。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Viewer.MouseMode.MoveTool">
+            <summary>ページ移動。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Viewer.MouseMode.RubberbandTool">
+            <summary>ズーム用ラバーバンド。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Viewer.MouseMode.MagnifierTool">
+            <summary>拡大鏡ツール。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Viewer.ViewMode">
+            <summary>ビューモードを定義します。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Viewer.ViewMode.Single">
+            <summary>単一ビューモード。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Viewer.ViewMode.Continuous">
+            <summary>連続ビューモード。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Viewer.ZoomMode">
+            <summary>FlexViewerのサポートされるズームモードを記述します。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Viewer.ZoomMode.Custom">
+            <summary>カスタムズームモード。実際のズーム倍率は、@see:ZoomFactorプロパティの値によって決定されます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Viewer.ZoomMode.PageWidth">
+            <summary>ビューパネル内のページ幅に合うように、必要に応じてページがズームインまたはズームアウトされます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Viewer.ZoomMode.WholePage">
+            <summary>ビューパネル内のページ全体に合うように、必要に応じてページがズームインまたはズームアウトされます。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Viewer.WebResources.Definitions.Viewer">
+            <summary>C1 FlexViewerコントロールに関連するjsおよびcssを定義します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Viewer.C1Viewer">
+            <summary>C1 FlexViewerコントロールに関連するjsおよびcssを定義します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.ViewerWebResourcesManager.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>ビューア関連コントロールのリソースマネージャーを作成します。</summary>
+            <param name="helper">指定されたヘルパー。</param>
+        </member>
+        <member name="T:C1.Web.Mvc.Viewer.Fluent.ControlBuilderFactoryExtension">
+            <summary>ControlBuilderFactoryを拡張してビューア関連コントロールを作成します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ControlBuilderFactoryExtension.ReportViewer(C1.Web.Mvc.Fluent.ControlBuilderFactory,System.String)">
+            <summary>ReportViewerBuilderを作成します。</summary>
+            <param name="controlBuilderFactory">ControlBuilderFactory。</param>
+            <param name="selector">セレクタ</param>
+            <returns>ReportViewerBuilder</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ControlBuilderFactoryExtension.PdfViewer(C1.Web.Mvc.Fluent.ControlBuilderFactory,System.String)">
+            <summary>PdfViewerBuilderを作成します。</summary>
+            <param name="controlBuilderFactory">ControlBuilderFactory。</param>
+            <param name="selector">セレクタ</param>
+            <returns>PdfViewerBuilder</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ControlBuilderFactoryExtension.FlexViewerResources(C1.Web.Mvc.Fluent.ControlBuilderFactory,System.Type[])">
+            <summary>指定されたコントロールタイプのcssおよびjsリソースをレンダリングします。</summary>
+            <param name="controlBuilderFactory">ControlBuilderFactory</param>
+            <param name="controlTypes">コントロールのタイプを指定します。</param>
+            <returns>HTML文字列</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Viewer.Fluent.ScriptsBuilderExtension">
+            <summary>ビューアスクリプト用に<see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />クラスを拡張します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ScriptsBuilderExtension.FlexViewer(C1.Web.Mvc.Fluent.ScriptsBuilder)">
+            <summary>ビューア関連のスクリプトバンドルを登録します。このバンドルには、ReportViewerコントロールとPdfViewerコントロールが含まれています。</summary>
+            <param name="scriptsBuilder">
+                <see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />。</param>
+            <returns>
+                <see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Viewer.LicenseDetector">
+            <summary>C1.Web.Mvc.FlexViewerライセンスを検出するためのクラスを定義します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.LicenseDetector.#ctor">
+            <summary>コンストラクタ。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ReportViewer.Parameters">
+            <summary>
+            レポートの実行に使用されるパラメータを記述する {name: value} ペアのディクショナリを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.RequestHeaders">
+            <summary>
+            データを送信または要求するときに使用する要求ヘッダーを含むオブジェクトを取得または設定します。このプロパティは、認証が必要なシナリオでよく使用されます。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.OnClientBeforeSendRequest">
+            <summary>
+            サーバーに要求が送信されるたびに発生します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ReportViewerBuilder.Parameters(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Viewer.ReportViewer.Parameters" /> を構成します。
+            レポートの実行に使用されるパラメータを記述する {name: value} ペアのディクショナリを設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.RequestHeaders(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Viewer.ViewerBase.RequestHeaders" /> を構成します。
+            データを送信または要求するときに使用する要求ヘッダーを含むオブジェクトを設定します。このプロパティは、認証が必要なシナリオでよく使用されます。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.OnClientBeforeSendRequest(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Viewer.ViewerBase.OnClientBeforeSendRequest" /> クライアントイベントを構成します。
+            サーバーに要求が送信されるたびに発生します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="P:C1.Web.Mvc.Viewer.ViewerBase.OnClientZoomModeChanged">
+            <summary>
+            ズームモードが変更された後に発生します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Viewer.Fluent.ViewerBaseBuilder`2.OnClientZoomModeChanged(System.String)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.Viewer.ViewerBase.OnClientZoomModeChanged" /> クライアントイベントを構成します。
+            ズームモードが変更された後に発生します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+    </members>
+</doc>

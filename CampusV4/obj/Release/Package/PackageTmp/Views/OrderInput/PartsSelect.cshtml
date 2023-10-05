@@ -1,0 +1,99 @@
+﻿@model CampusV4.Models.OrderInputViewModel
+
+<div id="dlgPartsSearch">
+    <form id="frmPartsSearch" class="form-horizontal">
+        <h4 class="modal-header">
+            部品選択
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                @(Html.C1().FlexGrid()
+                    .Bind(Model.GridPartsSelectDataList)
+                    .SelectionMode(SelectionMode.Row)
+                    .AutoGenerateColumns(false)
+                    .Height("350px").Width("960px")
+                    .Id("grdPartsSearch")
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("RowCheck").Width("80").Header("選択").DataType(DataType.Boolean).Align("center"));
+                        b1.Add(cb => cb.Binding("RowNumber").Width("60").Header("行").IsReadOnly(true));
+                        b1.Add(cb => cb.Binding("No").Width("60").Header("No.").IsReadOnly(true));
+                        b1.Add(cb => cb.Binding("PartsCategory").Width("150").Header("部品分類").IsReadOnly(true));
+                        b1.Add(cb => cb.Binding("PartsName").Width("250").Header("部品名"));
+                        b1.Add(cb => cb.Binding("DrawingNumber").Width("150").Header("図面番号/型式").IsReadOnly(true));
+                        b1.Add(cb => cb.Binding("IriSu").Width("80").Header("入数").IsReadOnly(true));
+                        b1.Add(cb => cb.Binding("Kosu").Width("80").Header("個数").IsReadOnly(true));
+                    })
+                    .BooleanChecker(bc => bc.Column("RowCheck"))
+                    .BigCheckboxes(true)
+                    )
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary wj-hide-ok">選択</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgPartsSearch")
+
+<script type="text/javascript">
+    //var PartsSelected = {
+    //    RowCheck: false,
+    //    RowNumber: "",
+    //    PartsCategory: "",
+    //    PartsName: "",
+    //    DrawingNumber: "",
+    //    PartsModel: "",
+    //    IriSu: "",
+    //    Kosu: "",
+    //};
+
+    //function loadbtnPartsData($this) {
+    //    var textValue = ($this == null) ? "" : $this.value;
+
+    //    PartsSelected.RowCheck = false;
+    //    PartsSelected.RowNumber = "";
+    //    PartsSelected.PartsCategory = "";
+    //    PartsSelected.PartsName = "";
+    //    PartsSelected.DrawingNumber = "";
+    //    PartsSelected.PartsModel = "";
+    //    PartsSelected.IriSu = "";
+    //    PartsSelected.Kosu = "";
+
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/Common/GetPartsData",
+    //        data: { name: textValue },
+    //        dataType: "json",
+
+    //        success: function (result) {
+    //            var fg = wijmo.Control.getControl("#grdPartsSearch");
+    //            var data = JSON.parse(result);
+    //            fg.rows.clear();
+    //            var j = 0
+    //            for (var i in data) {
+    //                var obj = [data[i].RowCheck, data[i].RowNumber, data[i].PartsCategory, data[i].PartsName, data[i].DrawingNumber, data[i].PartsModel, data[i].IriSu, data[i].Kosu];
+    //                // FlexGridに新規行を追加します。
+    //                var row = new wijmo.grid.Row();
+    //                fg.rows.push(row);
+    //                for (var col = 0; col <= fg.columns.length - 1; col++) {
+    //                    //FlexGrid のセルにデータを入力します。
+    //                    fg.setCellData(j, col, obj[col]);
+    //                }
+    //                j++;
+    //            }
+    //        }
+    //    });
+    //}
+
+    //var partsSearchGrid = wijmo.Control.getControl('#grdPartsSearch');
+    //partsSearchGrid.selectionChanged.addHandler(function (s, e) {
+    //    var sel = partsSearchGrid.selection;
+    //    for (var r = sel.topRow; r <= sel.bottomRow; r++) {
+    //        PartsSelected.PartsCategory = partsSearchGrid.cells.getCellData(r, 2, false);
+    //        PartsSelected.PartsName = partsSearchGrid.cells.getCellData(r, 3, false);
+    //    }
+    //});
+</script>

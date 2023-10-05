@@ -1,0 +1,184 @@
+﻿@model CampusV4.Models.ReferenceEstimateViewModel
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb">
+                <li class="active">参考見積</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("ReferenceEstimateNext", "ReferenceEstimate", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label control-label text-nowrap">製品の基本情報を登録してください。</label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_cmbHinsyuCode" for="cmbHinsyuCode">品種</label>
+                        <div class="col-md-2">
+                            @(Html.C1().AutoComplete().Id("cmbHinsyuCode")
+                            .Bind(Model.HinsyuDataList)
+                            .DisplayMemberPath("HinsyuCode")
+                            .HeaderPath("HinsyuCode")
+                            .SearchMemberPath("HinsyuCode, Hinmei")
+                            .SelectedValuePath("Hinmei")
+                            .SelectedValue(Model.VarietyCode))
+                        </div>
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(model => model.ProductName, new { @id = "selectedProductName", @class = "form-control", @placeholder = "(必須)" })
+                        </div>
+                        <div class="col-md-1">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_HinsyuCodeTT"><i class="fa fa-info-circle fa-2x"></i></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_PkgSize" for="PkgSize">ＰＫＧサイズ</label>
+                        <div class="col-md-2 input-group">
+                            @Html.C1().InputNumber().Id("PkgSize").Value(Model.PkgSize)
+                        </div>
+                        <label class="control-label text-nowrap" style="text-align:left;" id="lbl_PkgSizeTT"><i class="fa fa-info-circle fa-2x"></i></label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_PkgNumRow" for="PkgNumRow">ＰＫＧ数</label>
+                        <div class="col-md-2 input-group">
+                            @Html.C1().InputNumber().Id("PkgNumRow").Value(Model.PkgNumRow)
+                            <label class="control-label text-nowrap" style="font-size:13px;">&emsp;行</label>
+                        </div>
+                        <div class="col-md-2 input-group">
+                            @Html.C1().InputNumber().Id("PkgNumCol").Value(Model.PkgNumCol)
+                            <label class="control-label text-nowrap" style="font-size:13px;">&emsp;列</label>
+                        </div>
+                        
+                        <div class="col-md-1">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_PkgNumTT"><i class="fa fa-info-circle fa-2x"></i></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_FreamSizeHight" for="FreamSizeHight">フレームサイズ</label>
+                        <div class="col-md-2 input-group">
+                            <label class="control-label text-nowrap" style="font-size:13px;">縦&emsp;&emsp;</label>
+                            @Html.C1().InputNumber().Id("FreamSizeHight").Value(Model.FreamSizeHight)
+                        </div>
+                        <div class="col-md-2 input-group">
+                            <label class="control-label text-nowrap" style="font-size:13px;">横&emsp;&emsp;</label>
+                            @Html.C1().InputNumber().Id("FreamSizeWidth").Value(Model.FreamSizeWidth)
+                        </div>
+                        <div class="col-md-1">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_FreamSizeTT"><i class="fa fa-info-circle fa-2x"></i></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_cmbVarietyDataList" for="cmbVarietyDataList">搭載装置</label>
+                        <div class="col-md-2">
+                            @(Html.C1().AutoComplete().Id("cmbVarietyDataList")
+                                .Bind(Model.VarietyDataList)
+                                .DisplayMemberPath("ItemCode")
+                                .HeaderPath("ItemCode")
+                                .SearchMemberPath("ItemCode, ItemName")
+                                .SelectedValuePath("ItemName")
+                                .SelectedValue(Model.MountingDeviceCode))
+                        </div>
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(model => model.MountingDeviceName, new { @id = "selectedMountingDeviceName", @class = "form-control", @placeholder = "(必須)" })
+                        </div>
+                        <div class="col-md-1">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_MountingDeviceTT"><i class="fa fa-info-circle fa-2x"></i></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_TabletSize" for="TabletSize">タブレットサイズ</label>
+                        <div class="col-md-2 input-group">
+                            @Html.C1().InputNumber().Id("TabletSize").Value(Model.TabletSize)
+                        </div>
+                        <label class="control-label text-nowrap" id="lbl_TabletSizeTT"><i class="fa fa-info-circle fa-2x"></i></label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_TypeNum" for="TypeNum">型数</label>
+                        <div class="col-md-2 input-group">
+                            @Html.C1().InputNumber().Id("TypeNum").Value(Model.TypeNum)
+                            <label class="control-label">&emsp;型</label>
+                        </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-5 col-md-offset-4" style="text-align: right">
+                            <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                            <input type="submit" value="次へ" name="NextBtn" class="btn btn-primary" id="NextBtn" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        c1.documentReady(function () {
+            // ラベルツールチップ設定
+            var tt = new wijmo.Tooltip();
+            tt.setTooltip('#lbl_cmbHinsyuCode', '品種<br><b>F2:検索</b>');
+            tt.setTooltip('#lbl_PkgSize', 'ＰＫＧサイズ');
+            tt.setTooltip('#lbl_PkgNumRow', 'ＰＫＧ数');
+            tt.setTooltip('#lbl_FreamSizeHight', 'フレームサイズ');
+            tt.setTooltip('#lbl_cmbVarietyDataList', '搭載装置<br><b>F2:検索</b>');
+            tt.setTooltip('#lbl_TabletSize', 'タブレットサイズ');
+            tt.setTooltip('#lbl_TypeNum', '型数');
+            @{
+                @:tt.setTooltip('#lbl_HinsyuCodeTT', '@Model.VarietyCodeTT');
+                @:tt.setTooltip('#lbl_PkgSizeTT', '@Model.PkgSizeTT');
+                @:tt.setTooltip('#lbl_PkgNumTT', '@Model.PkgNumTT');
+                @:tt.setTooltip('#lbl_FreamSizeTT', '@Model.FreamSizeTT');
+                @:tt.setTooltip('#lbl_MountingDeviceTT', '@Model.MountingDeviceTT');
+                @:tt.setTooltip('#lbl_TabletSizeTT', '@Model.TabletSizeTT');
+            }
+
+
+            //品種イベント
+            var theHinsyuCode = wijmo.Control.getControl('#cmbHinsyuCode');
+            var templateHinsyuCode = '<table><tr>' +
+                '<td>{HinsyuCode}</td>' +
+                '<td title="Hinmei">　{Hinmei}</td>' +
+                '</tr></table>';
+            theHinsyuCode.formatItem.addHandler(function (s, e) {
+                var html = wijmo.format(templateHinsyuCode, e.data);
+                e.item.innerHTML = html;
+            });
+            theHinsyuCode.selectedIndexChanged.addHandler(function (s, e) {
+                document.getElementById('selectedProductName').value = s.selectedItem.Hinmei;
+            });
+
+            //搭載装置イベント
+            var theVarietyCode = wijmo.Control.getControl('#cmbVarietyDataList');
+            var templateVarietyCode = '<table><tr>' +
+                '<td>{ItemCode}</td>' +
+                '<td title="ItemName">　{ItemName}</td>' +
+                '</tr></table>';
+            theVarietyCode.formatItem.addHandler(function (s, e) {
+                var html = wijmo.format(templateVarietyCode, e.data);
+                e.item.innerHTML = html;
+            });
+            theVarietyCode.selectedIndexChanged.addHandler(function (s, e) {
+                document.getElementById('selectedMountingDeviceName').value = s.selectedItem.ItemName;
+            });
+
+
+        });
+
+
+
+    </script>
+}

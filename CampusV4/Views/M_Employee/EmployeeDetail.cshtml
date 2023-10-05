@@ -1,0 +1,305 @@
+﻿@model CampusV4.Models.M_EmployeeViewModel
+
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="/M_Employee/Index">担当者マスタ一覧 <i class="fa fa-arrow-circle-left"></i></a></li>
+                    <li class="active">担当者マスタ詳細</li>
+                </ol>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("EmployeeDetailSave", "M_Employee", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @Html.AntiForgeryToken()
+                    if (Model.Mode == "ins")
+                    {
+                        <p class="h4">【登録】</p>
+                    }
+                    else
+                    {
+                        <p class="h4">【修正】</p>
+                    }
+                    @Html.HiddenFor(model => model.Mode)
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_UserId" for="UserId">担当者コード</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.UserId, new { @class = "form-control", @id = "UserId", @placeholder = "(必須)" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_UserName" for="UserName">担当者名</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @id = "UserName", @placeholder = "(必須)" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_UserNameAlt" for="UserNameAlt">担当者名（外国語）</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.UserNameAlt, new { @class = "form-control", @id = "UserNameAlt" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_DepartmentCode" for="cmbDepartmentCode">所属部門</label>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.DepartmentCode)
+                                .Id("cmbDepartmentCode")
+                                .Bind(Model.DepartmentList)
+                                .DisplayMemberPath("Code")
+                                .HeaderPath("Code")
+                                .SelectedValuePath("Code")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.DepartmentCode)
+                                .IsRequired(false)
+                                .IsDisabled(false))
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.DepartmentName, new { @id = "selectedDepartmentName", @class = "form-control", @disabled = "true", @placeholder = "(必須)" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Email" for="Email">E-mail</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "Email", @placeholder = "(必須)" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Password" for="Password">パスワード</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @id = "Password", @placeholder = "(必須)" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_MenuId" for="cmbMenuId">メニュー</label>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.MenuId)
+                                .Id("cmbMenuId")
+                                .Bind(Model.MenuList)
+                                .DisplayMemberPath("Code")
+                                .HeaderPath("Code")
+                                .SelectedValuePath("Code")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.MenuId)
+                                .IsRequired(false)
+                                .IsDisabled(false))
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.MenuName, new { @id = "selectedMenuName", @class = "form-control", @disabled = "true", @placeholder = "(必須)" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_PasswordChangeDate" for="PasswordChangeDate">パスワード変更日</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.PasswordChangeDate, "{0:yyyy/MM/dd}" ,new { @id = "PasswordChangeDate", @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Retired">在職区分</label>
+                        <label class="col-md-2 control-label" style="text-align:left">
+                            @Html.RadioButtonFor(model => model.IsRetired, "0") 退職
+                            &emsp;&emsp;@Html.RadioButtonFor(model => model.IsRetired, "1") 在職
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_SupervisorPicCode" for="cmbSupervisorPicCode">上長担当者</label>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.SupervisorPicCode)
+                                    .Id("cmbSupervisorPicCode")
+                                    .Bind(Model.EmployeeList)
+                                    .DisplayMemberPath("EmployeeCode")
+                                    .SelectedValuePath("EmployeeCode")
+                                    .HeaderPath("EmployeeCode")
+                                    .CssStyle( "width" , "auto" )
+                                    .SelectedValue(Model.SupervisorPicCode)
+                                    .IsRequired(false)
+                                    .IsDisabled(false))
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.SupervisorPicName, new { @id = "selectedSupervisorPicName", @class = "form-control", @disabled = "true", @placeholder = "(必須)" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_IsApprover">承認者区分</label>
+                        <div class="col-md-4">
+                            <label class="control-label" id="lbl_IsApprovert">
+                                <input type="checkbox" name="Check1" value="IsApprover" /> 承認者
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_CreatedAt">作成日</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.CreatedAt, "{0:yyyy/MM/dd}", new { @id = "CreatedAt", @class = "form-control", @disabled = "true" })
+
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_CreatedName" for="CreatedName">作成者</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.CreatedName, new { @class = "form-control", @id = "CreatedName", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_CreatedPid" for="CreatedPid">作成プログラムID</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.CreatedPid, new { @class = "form-control", @id = "CreatedPid", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_UpdatedAt">更新日</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.UpdatedAt, "{0:yyyy/MM/dd}", new { @id = "UpdatedAt", @class = "form-control", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_UpdatedName" for="UpdatedName">更新者</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.UpdatedName, new { @class = "form-control", @id = "UpdatedName", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_UpdatedPid" for="UpdatedPid">更新プログラムID</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.UpdatedPid, new { @class = "form-control", @id = "UpdatedPid", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_DeletedAt">削除日</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.DeletedAt, "{0:yyyy/MM/dd}", new { @id = "DeletedAt", @class = "form-control", @disabled = "true" })
+
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_DeletedName" for="DeleteddName">削除者</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.DeletedName, new { @class = "form-control", @id = "DeletedName", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_DeletedPid" for="DeletedPid">削除プログラムID</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.DeletedPid, new { @class = "form-control", @id = "DeletedPid", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+
+                    <div class="form-group">
+                        <div class="col-md-12" style="text-align: right">
+                            <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                            <a href="#" class="btn btn-primary" id="btnInsert">登録</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 処理終了後のメッセージ表示 *@
+<div id="dialog" style="width: 600px; height: 200px;">
+    <div class="wj-dialog-header">
+        @Html.Raw("メッセージ")
+    </div>
+    <div class="wj-dialog-body">
+        <p>
+            @Html.Raw("登録が完了しました")
+        </p>
+    </div>
+    <div class="wj-dialog-footer">
+        <button class="btn btn-default wj-hide-ok">OK</button>
+    </div>
+</div>
+
+@Html.C1().Popup("#dialog")
+
+@section scripts{
+    <script>
+
+        // ラベルツールチップ設定
+        var tt = new wijmo.Tooltip();
+        tt.setTooltip('#lbl_UserId', '担当者コード');
+        tt.setTooltip('#lbl_UserName', '担当者名');
+        tt.setTooltip('#lbl_UserNameAlt', '担当者名（外国語）');
+        tt.setTooltip('#lbl_DepartmentCode', '所属部門');
+        tt.setTooltip('#lbl_Email', 'E-mail');
+        tt.setTooltip('#lbl_Password', 'パスワード');
+        tt.setTooltip('#lbl_MenuId', 'メニュー');
+        tt.setTooltip('#lbl_PasswordChangeDate', 'パスワード変更日');
+        tt.setTooltip('#lbl_Retired', '在職区分');
+        tt.setTooltip('#lbl_SupervisorPicCode', '上長担当者');
+        tt.setTooltip('#lbl_IsApprover', '承認者区分');
+
+        tt.setTooltip('#lbl_CreatedAt', '作成日');
+        tt.setTooltip('#lbl_CreatedName', '作成者');
+        tt.setTooltip('#lbl_CreatedPid', '作成プログラムID');
+
+        tt.setTooltip('#lbl_UpdatedAt', '更新日');
+        tt.setTooltip('#lbl_UpdatedName', '更新者');
+        tt.setTooltip('#lbl_UpdatedPid', '更新プログラムID');
+
+        tt.setTooltip('#lbl_DeletedAt', '削除日');
+        tt.setTooltip('#lbl_DeletedName', '削除者');
+        tt.setTooltip('#lbl_DeletedPid', '削除プログラムID');
+
+
+        var templateMaster = '<table><tr>' +
+            '<td>{Code}</td>' +
+            '<td title="Name">　{Name}</td>' +
+            '</tr></table>';
+        //所属部門イベント
+        var theDepartmentCode = wijmo.Control.getControl('#cmbDepartmentCode');
+        theDepartmentCode.formatItem.addHandler(function (s, e) {
+            var html = wijmo.format(templateMaster, e.data);
+            e.item.innerHTML = html;
+        });
+        theDepartmentCode.selectedIndexChanged.addHandler(function (s, e) {
+            document.getElementById('selectedDepartmentName').value = s.selectedItem.Name;
+        });
+
+        //メニューイベント
+        var theMenu = wijmo.Control.getControl('#cmbMenuId');
+        theMenu.formatItem.addHandler(function (s, e) {
+            var html = wijmo.format(templateMaster, e.data);
+            e.item.innerHTML = html;
+        });
+        theMenu.selectedIndexChanged.addHandler(function (s, e) {
+            document.getElementById('selectedMenuName').value = s.selectedItem.Name;
+        });
+
+        //受入担当者イベント
+        var theSupervisorPicCode = wijmo.Control.getControl('#cmbSupervisorPicCode');
+        var templateEmployee = '<table><tr>' +
+            '<td>{EmployeeCode}</td>' +
+            '<td title="EmployeeName">　{EmployeeName}</td>' +
+            '</tr></table>';
+        theSupervisorPicCode.formatItem.addHandler(function (s, e) {
+            var html = wijmo.format(templateEmployee, e.data);
+            e.item.innerHTML = html;
+        });
+        theSupervisorPicCode.selectedIndexChanged.addHandler(function (s, e) {
+            document.getElementById('selectedSupervisorPicName').value = s.selectedItem.EmployeeName;
+        });
+
+        
+
+        // 登録ボタンイベント
+        var dialog = wijmo.Control.getControl('#dialog');
+        document.getElementById('btnInsert').addEventListener('click', function (e) {
+            // show the dialog (modal window)
+            dialog.show(true, function (sender) { });
+        });
+
+    </script>
+}

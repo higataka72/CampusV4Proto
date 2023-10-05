@@ -1,0 +1,520 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>C1.Web.Mvc.MultiRow</name>
+    </assembly>
+    <members>
+        <member name="T:C1.Web.Mvc.MultiRow.CellGroup">
+            <summary>MultiRowのレイアウト定義を表します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.CellGroup.#ctor">
+            <summary>
+                <see cref="T:C1.Web.Mvc.MultiRow.CellGroup" />オブジェクトの新しいインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.CellGroup.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>
+                <see cref="T:C1.Web.Mvc.MultiRow.CellGroup" />オブジェクトの新しいインスタンスを初期化します。</summary>
+            <param name="helper">HtmlHelperインスタンス。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.CellGroup.Header">
+            <summary>グループヘッダー（ヘッダーが折りたたまれたときに表示されます）。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.CellGroup.Colspan">
+            <summary>グループ内のグリッド列の数。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.CellGroup.Cells">
+            <summary>セルオブジェクトの配列。Colspanプロパティを使用してColumnを拡張します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.CellGroup.Helper">
+            <summary>HTMLヘルパーオブジェクトを取得または設定します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.MultiRow.MultiRow`1">
+            <summary>MultiRowコントロールは、データを項目ごとに複数の行で表示および編集することができる強力で柔軟な方法を提供します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.MultiRow`1.#ctor(System.Web.Mvc.HtmlHelper,System.String)">
+            <summary>1つのMultiRowインスタンスを作成します。</summary>
+            <param name="helper">HTMLヘルパー</param>
+            <param name="selector">セレクタ</param>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.MultiRow`1.GetFlatColumns">
+            <summary>グリッド内のすべての列を取得します。</summary>
+            <returns>列のコレクション。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.MultiRow`1.GetColumn(C1.Web.Mvc.ColumnInfo)">
+            <summary>指定された情報に基づいて列を取得します。</summary>
+            <param name="columnInfo">列情報。</param>
+            <returns>指定された列情報と一致する列。</returns>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.Columns">
+            <summary>MultiRowでは使用できません。グリッドの列コレクションを取得します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.OnClientDraggingColumnOver">
+            <summary>このプロパティを隠蔽するためにオーバーライドします。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.OnClientDraggingRowOver">
+            <summary>このプロパティを隠蔽するためにオーバーライドします。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.AutoGenerateColumns">
+            <summary>MultiRowでは使用できません。グリッドがitemsSourceに基づいて自動的に列を生成するかどうかを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.AllowDragging">
+            <summary>MultiRowでは使用できません。ユーザーがマウスを使用して行、列、またはその両方をドラッグできるかどうかを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.AllowMerging">
+            <summary>MultiRowでは使用できません。グリッドのどの部分がセル結合を提供するかを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.ChildItemsPath">
+            <summary>MultiRowでは使用できません。階層グリッドで子の行の生成に使用されるプロパティの名前を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.OnClientDraggedColumn">
+            <summary>MultiRowでは使用できません。ユーザーが列のドラッグを終了したときに発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.OnClientDraggedRow">
+            <summary>MultiRowでは使用できません。ユーザーが行のドラッグを終了したときに発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.OnClientDraggingColumn">
+            <summary>MultiRowでは使用できません。ユーザーが列のドラッグを開始したときに発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.OnClientDraggingRow">
+            <summary>MultiRowでは使用できません。ユーザーが行のドラッグを開始したときに発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.ColumnLayout">
+            <summary>MultiRowでは使用できません。現在の列レイアウトを定義するJSON文字列を取得または設定します。列レイアウト文字列は、列とそのプロパティを持つ配列を表します。これを使用して、ユーザーによって定義された列のレイアウトを保存し、セッションをまたいでレイアウトを維持できます。また、ユーザーが列のレイアウトを変更できるようなアプリケーションで、元に戻す/やり直し機能を実装するためにこのプロパティを使用することもできます。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.NewRowAtTop">
+            <summary>
+            新しい行テンプレートをグリッドの上部に配置するか、下部に配置するかを示す値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.LayoutDefinition">
+            <summary>各データ項目の表示に使用される行のレイアウトを定義する配列を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.CenterHeadersVertically">
+            <summary>複数行にまたがるセルのコンテンツを垂直方向の中央揃えで配置するかどうかを決定する値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.CollapsedHeaders">
+            <summary>列ヘッダーを1行に折りたたみ、そこにグループヘッダーを表示するかどうかを決定する値を取得または設定します。</summary>
+            <remarks>null を設定すると、グリッドにすべてのヘッダー情報（グループおよび列）が表示されます。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.ShowHeaderCollapseButton">
+            <summary>グリッドの列ヘッダーパネルにボタンを表示して、ユーザーが列ヘッダーを折りたたんだり展開することができるようにするかどうかを決定する値を取得または設定します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1">
+            <summary>MultiRowのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.#ctor(C1.Web.Mvc.MultiRow.MultiRow{`0})">
+            <summary>1つのMultiRowBuilderインスタンスを作成します。</summary>
+            <param name="component">構成する<see cref="T:C1.Web.Mvc.MultiRow.MultiRow`1" />オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.AutoGenerateColumns(System.Boolean)">
+            <summary>AutoGenerateColumnsプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.AllowDragging(C1.Web.Mvc.Grid.AllowDragging)">
+            <summary>AllowDraggingプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.AllowMerging(C1.Web.Mvc.Grid.AllowMerging)">
+            <summary>AllowMergingプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.ChildItemsPath(System.String)">
+            <summary>ChildItemsPathプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.OnClientDraggedColumn(System.String)">
+            <summary>OnClientDraggedColumnプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.OnClientDraggedRow(System.String)">
+            <summary>OnClientDraggedRowプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.OnClientDraggingColumn(System.String)">
+            <summary>OnClientDraggingColumnプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.OnClientDraggingRow(System.String)">
+            <summary>OnClientDraggingRowプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.ColumnLayout(System.String)">
+            <summary>ColumnLayoutプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.NewRowAtTop(System.Boolean)">
+            <summary>
+            Configurates <see cref="P:C1.Web.Mvc.MultiRow.MultiRow`1.NewRowAtTop" />.
+            Sets a value that indicates whether the new row template should be located at the top of the grid or at the bottom.
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.CenterHeadersVertically(System.Boolean)">
+            <summary>CenterHeadersVerticallyプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.CollapsedHeaders(System.Nullable{System.Boolean})">
+            <summary>
+                <see cref="P:C1.Web.Mvc.MultiRow.MultiRow`1.CollapsedHeaders" /> を構成します。
+            列ヘッダーを 1 行に折りたたみ、そこにグループヘッダーを表示するかどうかを決定する値を設定します。</summary>
+            <remarks>null を設定すると、グリッドにすべてのヘッダー情報（グループおよび列）が表示されます。</remarks>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.ShowHeaderCollapseButton(System.Boolean)">
+            <summary>ShowHeaderCollapseButtonプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.LayoutDefinition(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.MultiRow.CellGroup,C1.Web.Mvc.MultiRow.Fluent.CellGroupBuilder}})">
+            <summary>
+                <see cref="T:C1.Web.Mvc.MultiRow.CellGroup" /> を設定します。</summary>
+            <param name="builder">ビルダアクション。</param>
+            <returns>MultiRowビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.Columns(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.Column,C1.Web.Mvc.Fluent.ColumnBuilder}})">
+            <summary>
+                <see cref="T:C1.Web.Mvc.Column" />を設定します。</summary>
+            <remarks>MultiRowでは使用できません。</remarks>
+            <param name="builder">ビルダアクション。</param>
+            <returns>MultiRowビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.OnClientDraggingColumnOver(System.String)">
+            <summary>このメソッドを隠蔽するためにオーバーライドします。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.OnClientDraggingRowOver(System.String)">
+            <summary>このメソッドを隠蔽するためにオーバーライドします。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.MultiRow.Cell">
+            <summary>MultiRowの1つのセルを表します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Cell.#ctor">
+            <summary>
+                <see cref="T:C1.Web.Mvc.MultiRow.Cell" />オブジェクトの新しいインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Cell.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>
+                <see cref="T:C1.Web.Mvc.MultiRow.Cell" />オブジェクトの新しいインスタンスを初期化します。</summary>
+            <param name="helper">HtmlHelperインスタンス。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.Cell.AllowMerging">
+            <summary>MultiRowでは使用できません。この行または列にあるセルを結合できるかどうかを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.Cell.AllowDragging">
+            <summary>MultiRowでは使用できません。ユーザーがマウスでこの行または列を新しい位置に移動できるかどうかを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.Cell.AllowResizing">
+            <summary>MultiRowでは使用できません。ユーザーがマウスで行または列をサイズ変更できるかどうかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.Cell.Visible">
+            <summary>MultiRowでは使用できません。この行または列が表示されているかどうかを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.Cell.Colspan">
+            <summary>グループ内のグリッド列の数。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.MultiRow.Fluent.CellBuilder">
+            <summary>Cellのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.CellBuilder.#ctor(C1.Web.Mvc.MultiRow.Cell)">
+            <summary>1つのCellBuilderインスタンスを作成します。</summary>
+            <param name="obj">Cellオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.CellBuilder.AllowMerging(System.Boolean)">
+            <summary>AllowMergingプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.CellBuilder.AllowDragging(System.Boolean)">
+            <summary>AllowDraggingプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.CellBuilder.AllowResizing(System.Boolean)">
+            <summary>AllowResizingプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.CellBuilder.Visible(System.Boolean)">
+            <summary>Visibleプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.CellBuilder.Colspan(System.Int32)">
+            <summary>Colspanプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.MultiRow.Fluent.CellGroupBuilder">
+            <summary>CellGroupのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.CellGroupBuilder.#ctor(C1.Web.Mvc.MultiRow.CellGroup)">
+            <summary>1つのCellGroupBuilderインスタンスを作成します。</summary>
+            <param name="obj">CellGroupオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.CellGroupBuilder.Header(System.String)">
+            <summary>Headerプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.CellGroupBuilder.Colspan(System.Int32)">
+            <summary>Colspanプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.CellGroupBuilder.Cells(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.MultiRow.Cell,C1.Web.Mvc.MultiRow.Fluent.CellBuilder}})">
+            <summary>
+                <see cref="T:C1.Web.Mvc.MultiRow.Cell" /> を設定します。</summary>
+            <param name="builder">ビルダアクション。</param>
+            <returns>セルグループビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.MultiRow.CellInfo">
+            <summary>MultiRow内の1つの列を記述するセル情報を表します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.CellInfo.#ctor">
+            <summary>
+                <see cref="T:C1.Web.Mvc.MultiRow.CellInfo" />オブジェクトの新しいインスタンスを初期化します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.CellInfo.Group">
+            <summary>セルが属するセルグループのインデックスを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.CellInfo.Index">
+            <summary>セルグループのセルコレクション内の列のインデックスを取得または設定します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.MultiRow.Fluent.ControlBuilderFactoryExtension">
+            <summary>ControlBuilderFactoryを拡張してMultiRowChart関連コントロールを作成します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.ControlBuilderFactoryExtension.MultiRow``1(C1.Web.Mvc.Fluent.ControlBuilderFactory,System.String)">
+            <summary>MultiRowBuilderを作成します。</summary>
+            <typeparam name="T">データ項目タイプ。</typeparam>
+            <param name="controlBuilderFactory">ControlBuilderFactory。</param>
+            <param name="selector">セレクタ。</param>
+            <returns>MultiRowBuilder。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.MultiRow.Fluent.MultiRowFilterExtension">
+            <summary>FlexGridFilterエクステンダを使用できるすべてのコントロールに 
+            拡張メソッドを追加する静的クラスを定義します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowFilterExtension.Filterable``1(C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder{``0},System.Action{C1.Web.Mvc.Fluent.FlexGridFilterBuilder{``0}})">
+            <summary>MultiRowにFlexGridFilterエクステンダを適用します。</summary>
+            <typeparam name="T">データレコードタイプ。</typeparam>
+            <param name="multiRowBuilder">指定されたMultiRowビルダ。</param>
+            <param name="gridFilterBuilder">指定されたFlexGridFilterビルダ。</param>
+            <returns>MultiRowビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowFilterExtension.Filterable``1(C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder{``0})">
+            <summary>MultiRowにデフォルトのFlexGridFilterエクステンダを適用します。</summary>
+            <typeparam name="T">データレコードタイプ。</typeparam>
+            <param name="multiRowBuilder">指定されたMultiRowビルダ。</param>
+            <returns>MultiRowフィルタ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.MultiRow.Fluent.MultiRowGroupPanelExtension">
+            <summary>FlexGridFilterエクステンダを使用できるすべてのコントロールに 
+            拡張メソッドを追加する静的クラスを定義します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowGroupPanelExtension.ShowGroupPanel``1(C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder{``0},System.Action{C1.Web.Mvc.Fluent.FlexGridGroupPanelBuilder{``0}},System.String)">
+            <summary>FlexGridにFlexGridGroupPanelエクステンダを適用します。</summary>
+            <typeparam name="T">データレコードタイプ。</typeparam>
+            <param name="gridBuilder">指定されたFlexGridビルダ。</param>
+            <param name="gridGroupPanelBuilder">指定されたFlexGridGroupPanelビルダ。</param>
+            <param name="selector">FlexGridGroupPanelのホスト要素の指定されたセレクタ。</param>
+            <returns>MultiRowビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowGroupPanelExtension.ShowGroupPanel``1(C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder{``0},System.String)">
+            <summary>FlexGridにデフォルトのFlexGridGroupPanelエクステンダを適用します。</summary>
+            <typeparam name="T">データレコードタイプ。</typeparam>
+            <param name="gridBuilder">指定されたFlexGridビルダ。</param>
+            <param name="selector">FlexGridGroupPanelのホスト要素の指定されたセレクタ。</param>
+            <returns>MultiRowビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.MultiRow.Fluent.ScriptsBuilderExtension">
+            <summary>MultiRowスクリプト用に<see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />クラスを拡張します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.ScriptsBuilderExtension.MultiRow(C1.Web.Mvc.Fluent.ScriptsBuilder)">
+            <summary>OLAP関連のスクリプトバンドルを登録します。</summary>
+            <param name="scriptsBuilder">
+                <see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />。</param>
+            <returns>
+                <see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.MultiRow.LicenseDetector">
+            <summary>C1.Web.Mvc.MultiRowライセンスを検出するためのクラスを定義します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.LicenseDetector.#ctor">
+            <summary>コンストラクタ。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.OnClientCollapsedHeadersChanging">
+            <summary>
+            collapsedHeaders プロパティの値が変化した後に発生します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.OnClientCollapsedHeadersChanged">
+            <summary>
+            collapsedHeaders プロパティの値が変化した後に発生します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.OnClientCollapsedHeadersChanging(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.MultiRow.MultiRow`1.OnClientCollapsedHeadersChanging" /> クライアントイベントを構成します。
+            collapsedHeaders プロパティの値が変化した後に発生します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.OnClientCollapsedHeadersChanged(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.MultiRow.MultiRow`1.OnClientCollapsedHeadersChanged" /> クライアントイベントを構成します。
+            collapsedHeaders プロパティの値が変化した後に発生します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.CellBuilder.Rowspan(System.Int32)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.MultiRow.Cell.Rowspan" /> を構成します。
+            グループ内のグリッド行の数。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.Cell.Rowspan">
+            <summary>
+            グループ内のグリッド行の数。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.MultiRow.HeaderCellGroup">
+            <summary>
+            MultiRow内のHeaderLayoutDefinitionを表します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.HeaderCellGroup.Helper">
+            <summary>
+            HtmlHelperオブジェクトを取得または設定します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.HeaderCellGroup.#ctor">
+            <summary>
+            1つの<see cref="T:C1.Web.Mvc.MultiRow.HeaderCellGroup" />インスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.HeaderCellGroup.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>
+            1つの<see cref="T:C1.Web.Mvc.MultiRow.HeaderCellGroup" />インスタンスを作成します。
+            </summary>
+            <param name="helper">HtmlHelperインスタンス。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.HeaderCellGroup.Header">
+            <summary>
+            グループヘッダー（ヘッダーが折りたたまれたときに表示される）。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.HeaderCellGroup.Colspan">
+            <summary>
+            グループがまたがるグリッド列の数。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.HeaderCellGroup.Cells">
+            <summary>
+            colspanプロパティでColumnを拡張するセルオブジェクトの配列。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.MultiRow.Fluent.HeaderCellGroupBuilder">
+            <summary>
+                <see cref="T:C1.Web.Mvc.MultiRow.HeaderCellGroup" />を構成するビルダーを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.HeaderCellGroupBuilder.Cells(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.MultiRow.Cell,C1.Web.Mvc.MultiRow.Fluent.CellBuilder}})">
+            <summary>
+                <see cref="T:C1.Web.Mvc.MultiRow.Cell" />を設定します。
+            </summary>
+            <param name="builder">ビルダアクション。</param>
+            <returns>セルグループビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.HeaderCellGroupBuilder.#ctor(C1.Web.Mvc.MultiRow.HeaderCellGroup)">
+            <summary>
+                <paramref name="obj" />を構成する1つの<see cref="T:C1.Web.Mvc.MultiRow.Fluent.HeaderCellGroupBuilder" />インスタンスを作成します。
+            </summary>
+            <param name="obj">構成される<see cref="T:C1.Web.Mvc.MultiRow.HeaderCellGroup" />オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.HeaderCellGroupBuilder.Header(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.MultiRow.HeaderCellGroup.Header" />を構成します。
+            グループヘッダー（ヘッダーが折りたたまれたときに表示される）。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.HeaderCellGroupBuilder.Colspan(System.Int32)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.MultiRow.HeaderCellGroup.Colspan" />を構成します。
+            グループがまたがるグリッド列の数。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.MultiRowGroupHeaders(System.Boolean)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.MultiRow.MultiRow`1.MultiRowGroupHeaders" />を構成します。
+            グループヘッダーに複数の行を含めるか、単一のヘッダー行を含めるかを決定する値を取得または設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.AllowPinning(System.Boolean)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.MultiRow.MultiRow`1.AllowPinning" />を構成します。
+            MultiRowでは無効にされています。グリッドで、列ヘッダーに固定ボタンを追加するか、またその固定ボタンをクリックすると列の固定状態を切り替えるかどうかを取得または設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.MultiRowBuilder`1.HeaderLayoutDefinition(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.MultiRow.HeaderCellGroup,C1.Web.Mvc.MultiRow.Fluent.HeaderCellGroupBuilder}})">
+            <summary>
+                <see cref="T:C1.Web.Mvc.MultiRow.HeaderCellGroup" />を設定します。
+            </summary>
+            <param name="builder">ビルダアクション。</param>
+            <returns>MultiRowビルダ。</returns>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.MultiRowGroupHeaders">
+            <summary>
+            グループヘッダーに複数の行を含めるか、単一のヘッダー行を含めるかを決定する値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.HeaderLayoutDefinition">
+            <summary>
+            グリッドの列ヘッダーの表示に使用される行のレイアウトを定義する配列を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.MultiRow`1.AllowPinning">
+            <summary>
+            MultiRowでは無効にされています。グリッドで、列ヘッダーに固定ボタンを追加するか、またその固定ボタンをクリックすると列の固定状態を切り替えるかどうかを取得または設定します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.MultiRow.Fluent.CellGroupBuilder.IsRowHeader(System.Boolean)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.MultiRow.CellGroup.IsRowHeader" /> を構成します。このノードが無効かどうかを示す値を取得または設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="P:C1.Web.Mvc.MultiRow.CellGroup.IsRowHeader">
+            <summary>
+            行ヘッダーグループであるかどうかを決定する値を取得または設定します。
+            </summary>
+        </member>
+    </members>
+</doc>

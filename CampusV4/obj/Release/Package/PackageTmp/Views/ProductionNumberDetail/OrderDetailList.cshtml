@@ -1,0 +1,74 @@
+﻿<div id="dlgOrderDetailList">
+    <form id="frmOrderDetailList" class="form-horizontal">
+        <h4 class="modal-header">
+            発注明細画面
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                @(Html.C1().FlexGrid().SelectionMode(SelectionMode.Row)
+                    .AutoGenerateColumns(false).IsReadOnly(true).Height("350px").Width("1110px").Id("grdOrderDetailList")
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("ProductionNumber").Width("110").Header("製番").WordWrap(true));
+                        b1.Add(cb => cb.Binding("OrderNumber").Width("100").Header("発注番号").WordWrap(true));
+                        b1.Add(cb => cb.Binding("PartnerName").Width("200").Header("パートナー工場").WordWrap(true));
+                        b1.Add(cb => cb.Binding("PartsName").Width("200").Header("部品名").WordWrap(true));
+                        b1.Add(cb => cb.Binding("Quantity").Width("100").Header("数量").WordWrap(true).DataType(DataType.Number));
+                        b1.Add(cb => cb.Binding("Price").Width("100").Header("金額").WordWrap(true).DataType(DataType.Number));
+                        b1.Add(cb => cb.Binding("ReceiptDate").Width("100").Header("受入日").WordWrap(true));
+                        b1.Add(cb => cb.Binding("AcceptanceDate").Width("100").Header("検収日").WordWrap(true));
+                        b1.Add(cb => cb.Binding("CompletePayment").Width("50").Header("完納").DataType(DataType.Boolean));
+
+                    }))
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary wj-hide-ok">閉じる</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgOrderDetailList")
+
+<script type="text/javascript">
+
+    function loadbtnOrderDetailList(summaryProductionNumber) {
+    
+        $.ajax({
+            type: "POST",
+            url: "/ProductionNumberDetail/GetOrderDetail",
+            data: { SummaryProductionNumber: summaryProductionNumber },
+            dataType: "json",
+
+            success: function (result) {
+                var fg = wijmo.Control.getControl("#grdOrderDetailList");
+                var data = JSON.parse(result);
+                fg.rows.clear();
+                var j = 0
+                for (var i in data) {
+                    var obj = [
+                        data[i].ProductionNumber,
+                        data[i].OrderNumber,
+                        data[i].PartnerName,
+                        data[i].PartsName,
+                        data[i].Quantity,
+                        data[i].Price,
+                        data[i].ReceiptDate,
+                        data[i].AcceptanceDate,
+                        data[i].CompletePayment
+                    ];
+                    // FlexGridに新規行を追加します。
+                    var row = new wijmo.grid.Row();
+                    fg.rows.push(row);
+                    for (var col = 0; col <= fg.columns.length - 1; col++) {
+                        //FlexGrid のセルにデータを入力します。
+                        fg.setCellData(j, col, obj[col]);
+                    }
+                    j++;
+                }
+            }
+        });
+    }
+
+</script>

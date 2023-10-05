@@ -1,0 +1,76 @@
+﻿@model CampusV4.Models.DesiredInterviewViewModel
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb">
+                <li class="active">面談日程</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("DesiredInterview", "ReferenceEstimate", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label control-label text-nowrap" id="lbl_cmbHinsyuCode">
+                            リモートによる面談日程をお取りいたします。<br>
+                            希望日時をご確認の上、確定を押してください。<br>
+                            後ほど、会議案内をご送付させていただきます。
+                        </label>
+                    </div>
+
+                    
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_DesiredDate" for="DesiredDate">希望日付</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.DesiredDate)
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_cmbDesiredTimeList" for="cmbDesiredTimeList">希望時間</label>
+                        <div class="col-md-2">
+                            @(Html.C1().AutoComplete().Id("cmbDesiredTimeList")
+                                .Bind(Model.DesiredTimeList)
+                                .DisplayMemberPath("Name")
+                                .SelectedValuePath("Code")
+                                .SelectedValue(Model.DesiredTime))
+                        </div>
+                    </div>
+
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-5 col-md-offset-4" style="text-align: right">
+                            <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                            <input type="submit" value="戻る" name="NextBtn" class="btn btn-primary" formaction="/ReferenceEstimate/DesiredInterviewBack" id="BackBtn" />
+                            <input type="submit" value="確定" name="NextBtn" class="btn btn-primary" id="CommitBtn" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        c1.documentReady(function () {
+            // ラベルツールチップ設定
+            var tt = new wijmo.Tooltip();
+            tt.setTooltip('#lbl_DesiredDate', '希望日付');
+            tt.setTooltip('#lbl_cmbDesiredTimeList', '希望時間');
+
+        });
+
+
+
+    </script>
+}

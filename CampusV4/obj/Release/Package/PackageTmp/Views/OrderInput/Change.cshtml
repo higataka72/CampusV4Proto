@@ -1,0 +1,51 @@
+﻿<style>
+    #dlgChange {
+        width: 600px;
+    }
+</style>
+
+<div id="dlgChange">
+    <form id="frmChange" class="form-horizontal">
+        <h4 class="modal-header">
+            変更
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label class="radio-inline">
+                        <input type="radio" name="Radio1" value="test"> 自己都合
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="Radio1" value="test"> 他社都合
+                    </label>
+                </div>
+                <label class="col-md-2 control-label text-nowrap" id="lbl_Text101" for="Text101">分納回数</label>
+                <div class="col-md-2">
+                    <input class="form-control" id="Text101" name="Text101" type="text" readonly />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label text-nowrap" id="lbl_Text102" for="Text102">変更後納期</label>
+                <div class="col-md-3">
+                    @Html.C1().InputDate().Id("Text102").IsDisabled(true)
+                </div>
+                <label class="col-md-2 control-label text-nowrap" id="lbl_Text103" for="Text103">変更後金額</label>
+                <div class="col-md-3">
+                    <input class="form-control" id="Text103" name="Text103" type="text" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label text-nowrap lavel-functionkey" id="lbl_Text104" for="Text104">変更理由</label>
+                <div class="col-md-10">
+                    <input class="form-control" id="Text104" name="Text104" type="text" />
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default wj-hide">登録</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgChange")

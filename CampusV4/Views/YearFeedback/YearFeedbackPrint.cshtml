@@ -1,0 +1,315 @@
+﻿@model CampusV4.Models.YearFeedbackPrintViewModel
+@using C1.Web.Mvc.Chart;
+
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>年間フィードバック</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    @using (Html.BeginForm("Print", "YearFeedback", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div id="theFlexRadar" class="form-group">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label text-nowrap" id="lbl_Empty1" style="text-align:center">&nbsp;</label>
+                                    <label class="col-md-3 control-label text-nowrap" id="lbl_TwoYearsBeforeEvaluation" for="TwoYearsBeforeEvaluation" style="text-align:center">対前々年評価</label>
+                                    <label class="col-md-2 control-label text-nowrap" id="lbl_Empty2" style="text-align:center">&nbsp;</label>
+                                    <label class="col-md-3 control-label text-nowrap" id="lbl_PreviousYearEvaluation" for="PreviousYearEvaluation" style="text-align:center">対前年評価</label>
+                                    <label class="col-md-2 control-label text-nowrap" id="lbl_Empty3" style="text-align:center">&nbsp;</label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label text-nowrap" id="lbl_Empty4" style="text-align:center">&nbsp;</label>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(model => model.TwoYearsBeforeEvaluation, new { @id = "TwoYearsBeforeEvaluation", @class = "form-control", @disabled = "true" })
+                                    </div>
+                                    <label class="col-md-2 control-label text-nowrap" id="lbl_Empty5" style="text-align:center">&nbsp;</label>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(model => model.PreviousYearEvaluation, new { @id = "PreviousYearEvaluation", @class = "form-control", @disabled = "true" })
+                                    </div>
+                                    <label class="col-md-2 control-label text-nowrap" id="lbl_Empty6" style="text-align:center">&nbsp;</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_Evaluation" for="Text6">評価年度</label>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputDateFor(m => m.Evaluation_yymm_From).Format("yyyy").IsDisabled(true)
+                                    </div>
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_ShippingDateRange" for="Text7" style="text-align:center">～</label>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputDateFor(m => m.Evaluation_yymm_To).Format("yyyy").IsDisabled(true)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_TotalEvaluationRank" for="TotalEvaluationRank">総合評価</label>
+                                    <div class="col-md-2">
+                                        @Html.TextBoxFor(model => model.TotalEvaluationRank, new { @id = "TotalEvaluationRank", @class = "form-control", @disabled = "true" })
+                                    </div>
+                                    @Html.Label(Model.TotalEvaluationName, new { @id = "TotalEvaluationName", @class = "col-md-3 control-label", @style = "text-align: left" })
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_Rank" for="Rank">年間順位</label>
+                                    <div class="col-md-2">
+                                        @Html.TextBoxFor(model => model.Rank, new { @id = "Rank", @class = "form-control", @disabled = "true" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_Empty7">&nbsp;</label>
+                                    <label class="col-md-2 control-label text-nowrap" id="lbl_CommentInputName" for="CommentInputName">コメント入力者</label>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(model => model.CommentInputName, new { @id = "CommentInputName", @class = "form-control", @disabled = "true" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_Comment_Print" for="Comment_Print">コメント</label>
+                                    <div class="col-md-8">
+                                        @Html.TextAreaFor(model => model.Comment_Print, new { @id = "Comment_Print", @class = "form-control", @rows = 4 })
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_Estimate">見積評価</label>
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_Estimate_Empty8">&nbsp;</label>
+                                    <label class="col-md-2 control-label text-nowrap" id="lbl_Estimate_FilingNum" style="text-align:center">提出件数</label>
+                                    <label class="col-md-2 control-label text-nowrap" id="lbl_Estimate_NotAdopted" style="text-align:center">不採用件数</label>
+                                    <label class="col-md-2 control-label text-nowrap" id="lbl_Estimate_AdoptionNum" style="text-align:center">採用件数</label>
+                                    <label class="col-md-2 control-label text-nowrap" id="lbl_Estimate_PreviousYearRatio" style="text-align:center">対前年比</label>
+                                    <label class="col-md-2 control-label text-nowrap" id="lbl_Estimate_TwoYearsBeforeRatio" style="text-align:center">対前々年比</label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_Empty_Estimate1">&nbsp;</label>
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_CurrentYeary_Estimate">当年</label>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("FilingNum_CurrentYear").Value(Model.FilingNum_CurrentYear).IsDisabled(true)
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("NotAdopted_CurrentYear").Value(Model.NotAdopted_CurrentYear).IsDisabled(true)
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("AdoptionNum_CurrentYear").Value(Model.AdoptionNum_CurrentYear).IsDisabled(true)
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("PreviousYearRatioEstimate").Value(Model.PreviousYearRatioEstimate).IsDisabled(true)
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("TwoYearsBeforeRatioEstimate").Value(Model.TwoYearsBeforeRatioEstimate).IsDisabled(true)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_Empty_Estimate2">&nbsp;</label>
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_LastYear_Estimate">前年</label>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("FilingNum_LastYear").Value(Model.FilingNum_LastYear).IsDisabled(true)
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("NotAdopted_LastYear").Value(Model.NotAdopted_LastYear).IsDisabled(true)
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("AdoptionNum_LastYear").Value(Model.AdoptionNum_LastYear).IsDisabled(true)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_Empty_Estimate3">&nbsp;</label>
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_TwoYearsBefore_Estimate">前々年</label>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("FilingNum_TwoYearsBefore").Value(Model.FilingNum_TwoYearsBefore).IsDisabled(true)
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("NotAdopted_TwoYearsBefore").Value(Model.NotAdopted_TwoYearsBefore).IsDisabled(true)
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("AdoptionNum_TwoYearsBefore").Value(Model.AdoptionNum_TwoYearsBefore).IsDisabled(true)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_Order">受注評価</label>
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_Order_Empty">&nbsp;</label>
+                                    <label class="col-md-2 control-label text-nowrap" id="lbll_Order_FilingNum" style="text-align:center">受注件数</label>
+                                    <label class="col-md-2 control-label text-nowrap" id="lbll_Order_NotAdopted" style="text-align:center">受注金額</label>
+                                    <label class="col-md-2 control-label text-nowrap" id="lbl_Order_Empty1">&nbsp;</label>
+                                    <label class="col-md-2 control-label text-nowrap" id="lbll_Order_PreviousYearRatio" style="text-align:center">対前年比</label>
+                                    <label class="col-md-2 control-label text-nowrap" id="lbll_Order_TwoYearsBeforeRatio" style="text-align:center">対前々年比</label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_Empty_Order2">&nbsp;</label>
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_CurrentYeary_Order">当年</label>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("OrderNum_CurrentYear").Value(Model.OrderNum_CurrentYear).IsDisabled(true)
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("OrderPrice_CurrentYear").Value(Model.OrderPrice_CurrentYear).IsDisabled(true)
+                                    </div>
+                                    <label class="col-md-2 control-label text-nowrap" id="lbll_Order_Number">件数</label>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("PreviousYearRatioOrder_Number").Value(Model.PreviousYearRatioOrder_Number).IsDisabled(true)
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("TwoYearsBeforeRatioOrder_Number").Value(Model.TwoYearsBeforeRatioOrder_Number).IsDisabled(true)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_Empty_Order3">&nbsp;</label>
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_CurrentYeary_Order">前年</label>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("OrderNum_LastYear").Value(Model.OrderNum_LastYear).IsDisabled(true)
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("OrderPrice_LastYear").Value(Model.OrderPrice_LastYear).IsDisabled(true)
+                                    </div>
+                                    <label class="col-md-2 control-label text-nowrap" id="lbll_Order_Price">金額</label>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("PreviousYearRatioOrder_Price").Value(Model.PreviousYearRatioOrder_Price).IsDisabled(true)
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("TwoYearsBeforeRatioOrder_Price").Value(Model.TwoYearsBeforeRatioOrder_Price).IsDisabled(true)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_Empty_Order4">&nbsp;</label>
+                                    <label class="col-md-1 control-label text-nowrap" id="lbl_TwoYearsBefore_Order">前々年</label>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("OrderNum_TwoYearsBefore").Value(Model.OrderNum_TwoYearsBefore).IsDisabled(true)
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.C1().InputNumber().Id("OrderPrice_TwoYearsBefore").Value(Model.OrderPrice_TwoYearsBefore).IsDisabled(true)
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_TwoYearsBefore_Order">取引履歴</label>
+                            <div class="col-md-11">
+                                @(Html.C1().FlexGrid()
+                                .AutoGenerateColumns(false).IsReadOnly(true).Height("200px").Id("flexgrid").AllowAddNew(false)
+                                .Bind(Model.TransactionHistoryList)
+                                .Columns(b1 =>
+                                {
+                                    b1.Add(cb => cb.Binding("TransactionHistoryKbn").Width("80").Header(" ").WordWrap(true));
+                                    b1.Add(cb => cb.Binding("Transaction").Width("100").Header("取引年月").WordWrap(true));
+                                    b1.Add(cb => cb.Binding("PartsCode").Width("80").Header("部品名コード").WordWrap(true));
+                                    b1.Add(cb => cb.Binding("PartsName").Width("350").Header("部品名").WordWrap(true));
+                                    b1.Add(cb => cb.Binding("Splitdelivery").Width("150").Header("分納回数").WordWrap(true).DataType(DataType.Number));
+                                    b1.Add(cb => cb.Binding("Quantity").Width("150").Header("数量").WordWrap(true).DataType(DataType.Number));
+                                    b1.Add(cb => cb.Binding("Price").Width("150").Header("金額").WordWrap(true).DataType(DataType.Number));
+                                }))
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-12" style="text-align: right">
+                                <input type="submit" value="印刷" name="ShowPrintBtn" class="btn btn-primary" id="ShowSearchBtn" />
+                                <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @section scripts{
+        <script>
+        /*
+            // ラベルツールチップ設定
+            var tt = new wijmo.Tooltip();
+            tt.setTooltip('#lbl_CampusId', 'CAMPUS-ID<br><b>F2:検索 F5:クリア F9:終了</b>');
+            tt.setTooltip('#lbl_Department', '部署名');
+            tt.setTooltip('#lbl_ManagerName', 'ご担当者様名');
+            tt.setTooltip('#lbl_Evaluation', '評価年度');
+            tt.setTooltip('#lbl_CommentInputCode', 'コメント入力者<br><b>F2:検索 F5:クリア</b>');
+            tt.setTooltip('#lbl_Comparison1Code', '比較先１<br><b>F2:検索 F5:クリア</b>');
+            tt.setTooltip('#lbl_Comparison2Code', '比較先２<br><b>F2:検索 F5:クリア</b>');
+            tt.setTooltip('#lbl_ReferenceEestimate', '参考仕入<br><b>F2:検索 F5:クリア</b>');
+            tt.setTooltip('#lbl_ReferencePurchase', '参考見積<br><b>F2:検索 F5:クリア</b>');
+            tt.setTooltip('#lbl_comment', 'コメント');
+            */
+
+        var theGrid = wijmo.Control.getControl('#flexgrid');
+        // グリッドヘッダ
+        theGrid.allowMerging = wijmo.grid.AllowMerging.ColumnHeaders;
+
+        // add extra header row to the grid
+        var panel = theGrid.columnHeaders;
+        panel.rows[0].allowMerging = true;
+
+        // populate the extra header row
+        for (col = 2; col <= 3; col++) {
+            panel.setCellData(0, col, '部品名');
+        }
+        // FlexRadar作成
+        c1.documentReady(function () {
+            var itemsSourceData = [];
+            var seriesData = [];
+            createRadarData();
+
+            var flexRadar = new wijmo.chart.radar.FlexRadar('#theFlexRadar',
+                {
+                    itemsSource: itemsSourceData,
+                    bindingX: 'colName',
+
+                    axisY: {
+                        min: 0,
+                        max: 100
+                    },
+                    series: seriesData,
+
+                });
+            flexRadar.legend.position = 'Top';
+
+
+            function createRadarData() {
+                var itemSourceData = {};
+                var seriesItemData = {};
+
+                @for (var t = 0; t < Model.RadarDataList.Count; t++)
+                    {
+                    @:itemSourceData = {};
+
+                    var item = Model.RadarDataList[t];
+
+                    @:itemSourceData['colName'] = '@item.colName';
+
+                    foreach(var RadarValue in item.RadarValueList)
+                    {
+                        @:itemSourceData['@RadarValue.CompanyId'] = @RadarValue.Value;
+                            if (t==0)
+                            {
+                                @:seriesItemData = {};
+                                @:seriesItemData['binding'] = '@RadarValue.CompanyId';
+                                @:seriesItemData['name'] = '@RadarValue.CompanyName';
+                                @:seriesData.push(seriesItemData);
+                            }
+                    }
+                    @:itemsSourceData.push(itemSourceData);
+                }
+
+            }
+        })
+
+        </script>
+    }

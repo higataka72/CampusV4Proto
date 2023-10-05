@@ -1,0 +1,257 @@
+﻿@model CampusV4.Models.PortalExternalDetailViewModel
+<style>
+    .design-header {
+        text-align: center;
+    }
+
+    .design-label {
+        width: 4%;
+        text-align: center;
+    }
+
+    .design-content {
+        width: 9%;
+    }
+
+    .cost-content {
+        width: 36%;
+    }
+
+    .cost-label {
+        width: 12%;
+        text-align: center;
+    }
+</style>
+
+<div id="PortalExternalDetail">
+    <div style="transform-origin: left top;">
+        <div class="page-title">
+            <div class="title_left">
+                <ol class="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li><a href="/Portal/index?LoginID=1">社外ポータル <i class="fa fa-arrow-circle-left"></i></a></li>
+                        <li class="active">詳細</li>
+                    </ol>
+                </ol>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    @using (Html.BeginForm("Index", "Portal", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <p class="h4">【設計項目】</p>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Variety" for="Variety">品種</label>
+                            <div class="col-md-1">
+                                @Html.TextBoxFor(model => model.Variety, new { @id = "Variety", @class = "form-control", @disabled = "true" })
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_ProductionCategory" for="ProductionCategory">製作区分</label>
+                            <div class="col-md-1">
+                                @Html.TextBoxFor(model => model.ProductionCategory, new { @id = "ProductionCategory", @class = "form-control", @disabled = "true" })
+                            </div>
+                            <label class="col-md-2 control-label text-nowrap" id="lbl_FreamSetNum" for="FreamSetNum">フレームセット数／shot</label>
+                            <div class="col-md-1">
+                                @Html.C1().InputNumber().Id("FreamSetNum").Value(Model.FreamSetNum).IsDisabled(true)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Material" for="Material">材質</label>
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(model => model.Material, new { @id = "Material", @class = "form-control", @disabled = "true" })
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_SurfaceTreatment" for="SurfaceTreatment">表面処理</label>
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(model => model.SurfaceTreatment, new { @id = "SurfaceTreatment", @class = "form-control", @disabled = "true" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_PkgNum">PKG数／frame</label>
+                            <div class="col-md-11">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3" class="design-header">
+                                                <label class="control-label">連</label>
+                                            </td>
+                                            <td class="design-label"></td>
+                                            <td colspan="3" class="design-header">
+                                                <label class="control-label">列</label>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="design-content">
+                                                @Html.C1().InputNumber().Id("PkgNumSerialFrom").Value(Model.PkgNumSerialFrom).IsDisabled(true)
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">～</label>
+                                            </td>
+                                            <td class="design-content">
+                                                @Html.C1().InputNumber().Id("PkgNumSerialTo").Value(Model.PkgNumSerialTo).IsDisabled(true)
+                                            </td>
+                                            <td class="design-label"></td>
+                                            <td class="design-content">
+                                                @Html.C1().InputNumber().Id("PkgNumColumnFrom").Value(Model.PkgNumColumnFrom).IsDisabled(true)
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">～</label>
+                                            </td>
+                                            <td class="design-content">
+                                                @Html.C1().InputNumber().Id("PkgNumColumnTo").Value(Model.PkgNumColumnTo).IsDisabled(true)
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_PkgSize">PKGサイズ</label>
+                            <div class="col-md-11">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3" class="design-header">
+                                                <label class="control-label">幅</label>
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3" class="design-header">
+                                                <label class="control-label">長</label>
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3" class="design-header">
+                                                <label class="control-label">厚</label>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="design-content">
+                                                @Html.C1().InputNumber().Id("PkgSizeWidthFrom").Value(Model.PkgSizeWidthFrom).IsDisabled(true)
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">～</label>
+                                            </td>
+                                            <td class="design-content">
+                                                @Html.C1().InputNumber().Id("PkgSizeWidthTo").Value(Model.PkgSizeWidthTo).IsDisabled(true)
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">×</label>
+                                            </td>
+                                            <td class="design-content">
+                                                @Html.C1().InputNumber().Id("PkgSizeLengthFrom").Value(Model.PkgSizeLengthFrom).IsDisabled(true)
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">～</label>
+                                            </td>
+                                            <td class="design-content">
+                                                @Html.C1().InputNumber().Id("PkgSizeLengthTo").Value(Model.PkgSizeLengthTo).IsDisabled(true)
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">×</label>
+                                            </td>
+                                            <td class="design-content">
+                                                @Html.C1().InputNumber().Id("PkgSizeThicknessFrom").Value(Model.PkgSizeThicknessFrom).IsDisabled(true)
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">～</label>
+                                            </td>
+                                            <td class="design-content">
+                                                @Html.C1().InputNumber().Id("PkgSizeThicknessTo").Value(Model.PkgSizeThicknessTo).IsDisabled(true)
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_LeadFrame">リードフレーム</label>
+                            <div class="col-md-11">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3" class="design-header">
+                                                <label class="control-label">幅</label>
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3" class="design-header">
+                                                <label class="control-label">長</label>
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3" class="design-header">
+                                                <label class="control-label">厚</label>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="design-content">
+                                                @Html.C1().InputNumber().Id("LeadFrameWidthFrom").Value(Model.LeadFrameWidthFrom).IsDisabled(true)
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">～</label>
+                                            </td>
+                                            <td class="design-content">
+                                                @Html.C1().InputNumber().Id("LeadFrameWidthTo").Value(Model.LeadFrameWidthTo).IsDisabled(true)
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">×</label>
+                                            </td>
+                                            <td class="design-content">
+                                                @Html.C1().InputNumber().Id("LeadFrameLengthFrom").Value(Model.LeadFrameLengthFrom).IsDisabled(true)
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">～</label>
+                                            </td>
+                                            <td class="design-content">
+                                                @Html.C1().InputNumber().Id("LeadFrameLengthTo").Value(Model.LeadFrameLengthTo).IsDisabled(true)
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">×</label>
+                                            </td>
+                                            <td class="design-content">
+                                                @Html.C1().InputNumber().Id("LeadFrameThicknessFrom").Value(Model.LeadFrameThicknessFrom).IsDisabled(true)
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">～</label>
+                                            </td>
+                                            <td class="design-content">
+                                                @Html.C1().InputNumber().Id("LeadFrameThicknessTo").Value(Model.LeadFrameThicknessTo).IsDisabled(true)
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-5 col-md-offset-4" style="text-align: right">
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+
+        // ラベルツールチップ設定
+        var tt = new wijmo.Tooltip();
+        tt.setTooltip('#lbl_Variety', '品種');
+        tt.setTooltip('#lbl_ProductionCategory', '製作区分');
+        tt.setTooltip('#lbl_FreamSetNum', 'フレームセット数／shot');
+        tt.setTooltip('#lbl_Material', '材質');
+        tt.setTooltip('#lbl_SurfaceTreatment', '表面処理');
+
+        tt.setTooltip('#lbl_PkgNum', 'PKG数／frame');
+        tt.setTooltip('#lbl_PkgSize', 'PKGサイズ');
+        tt.setTooltip('#lbl_LeadFrame', 'リードフレーム');
+
+    </script>
+}

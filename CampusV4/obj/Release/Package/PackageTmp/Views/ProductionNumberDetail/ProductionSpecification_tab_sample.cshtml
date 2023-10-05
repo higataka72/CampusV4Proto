@@ -1,0 +1,81 @@
+﻿@model CampusV4.Models.ProductionNumberDetailModel
+
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("ProductionSpecificationList", "ProductionNumberDetail", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div style="margin-top:10px">
+                        @foreach (var item in Model.ProductionSpecificationList)
+                        {
+                            <div class="form-group">
+                                <label class="col-md-1 control-label text-nowrap" id="lbl_InquiryNumber" for="Text1">@Html.DisplayFor(m => item.ItemName)</label>
+                                @{
+                                    var itemType = item.ItemType;
+                                }
+                                <div class="col-md-2">
+
+                                    @if (itemType == "1")
+                                    {
+                                        @Html.TextBoxFor(m => item.ItemValue, new { @class = "form-control" })
+                                    }
+                                    else if (itemType == "2")
+                                    {
+                                        @Html.TextBoxFor(m => item.ItemValue, new { @class = "form-control no-spin", @type = "number", @style = "text-align:right" })
+                                    }
+                                    else if (itemType == "3" || itemType == "4")
+                                    {
+                                        @(Html.C1().ComboBoxFor(m => item.ItemValue)
+                                .Bind(item.ItemCombValue)
+                                .DisplayMemberPath("Name")
+                                .SelectedValuePath("Code")
+                                .HeaderPath("Name")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(item.ItemValue)
+                                .IsRequired(false))
+
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBoxFor(m => item.ItemValue, new { @class = "form-control" })
+                                    }
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div style="width:520px;text-align:right">
+                            <a href="#" class="btn btn-primary" id="btnInsert">登録</a>
+                            <a href="#" class="btn btn-primary" id="btnProductionSpecificatioClose">閉じる</a>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 処理終了後のメッセージ表示 *@
+<div id="dialog" style="width: 600px; height: 200px;">
+    <div class="wj-dialog-header">
+        @Html.Raw("メッセージ")
+    </div>
+    <div class="wj-dialog-body">
+        <p>
+            @Html.Raw("登録が完了しました")
+        </p>
+    </div>
+    <div class="wj-dialog-footer">
+        <button class="btn btn-default wj-hide-ok">OK</button>
+    </div>
+</div>
+@Html.C1().Popup("#dialog")

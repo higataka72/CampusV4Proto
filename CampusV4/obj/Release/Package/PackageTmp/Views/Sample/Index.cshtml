@@ -1,0 +1,443 @@
+﻿@model CampusV4.Models.Sample1ViewModel
+
+<style>
+    .tooltip_row {
+        display: flex;
+    }
+    .tooltip_title {
+        width: 150px;
+        text-align: left;
+    }
+    .tooltip_data {
+        text-align: right;
+    }
+</style>
+<div id="Index">
+    <div style="transform-origin: left top;">
+        <div class="page-title">
+            <div class="title_left">
+                <ol class="breadcrumb">
+                    <li class="active">@HttpContext.GetGlobalResourceObject("SharedResource", "Sample.Index.Title")</li>
+                </ol>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @(Html.C1().FlexGrid()
+                        .AutoGenerateColumns(false).Height("308px").Id("gridIndex")
+                        .Bind(Model.IndexDataList)
+                        .Columns(b1 =>
+                        {
+                            b1.Add(cb => cb.Binding("Col_1").Width("50").Header("行").Align("center"));
+                            b1.Add(cb => cb.Binding("Col_2").Width("100").Header("部品分類").Align("center"));
+                            b1.Add(cb => cb.Binding("Col_3").Width("220").Header("部品名"));
+                            b1.Add(cb => cb.Binding("Col_4").Width("120").Header("入数").Align("center"));
+                            b1.Add(cb => cb.Binding("Col_5").Width("120").Header("個数").Align("center"));
+                            b1.Add(cb => cb.Binding("Col_6").Width("80").Header("依頼件数").Align("center"));
+                            b1.Add(cb => cb.Binding("Col_7").Width("120").Header("最終納期"));
+                        }))
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-7 col-md-offset-3" style="text-align: right">
+                                <a href="#" class="btn btn-primary" id="btnDialog">ダイアログ</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dlgSample">
+    <form id="frmSample" class="form-horizontal">
+        <h4 class="modal-header">
+            サンプルダイアログ
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body" id="body">
+            <div class="form-group">
+                @(Html.C1().FlexGrid()
+                    .AutoGenerateColumns(false).Height("308px").Id("gridDialog").IsDisabled(true)
+                    .Bind(Model.DialogDataList)
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("Col_1").Width("60").Header("回").IsReadOnly(true).Align("center"));
+                        b1.Add(cb => cb.Binding("Col_2").Width("80").Header("数量").IsReadOnly(true).Align("center"));
+                        b1.Add(cb => cb.Binding("Col_3").Width("120").Header("単価").IsReadOnly(true));
+                        b1.Add(cb => cb.Binding("Col_4").Width("120").Header("金額").IsReadOnly(true));
+                        b1.Add(cb => cb.Binding("Col_5").Width("120").Header("納期"));
+                    }))
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">登録</button>
+            <button type="button" class="btn btn-default wj-hide">閉じる</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgSample")
+
+@section scripts{
+    <script>
+        // *** CustomGridEditor class (transpiled from TypeScript) ***
+        var CustomGridEditor2 = (function () {
+            /**
+             * Initializes a new instance of a CustomGridEditor.
+             */
+            function CustomGridEditor2(flex, binding, edtClass, options) {
+                var _this = this;
+                // save references
+                this._grid = flex;
+                this._col = flex.columns.getColumn(binding);
+                // create editor
+                this._ctl = new edtClass(document.createElement('div'), options);
+                // connect grid events
+                this._grid.beginningEdit.addHandler(this._beginningEdit, this);
+                this._grid.scrollPositionChanged.addHandler(this._closeEditor, this);
+                // connect editor events
+                this._ctl.addEventListener(this._ctl.hostElement, 'keydown', function (e) {
+                    switch (e.keyCode) {
+                        case wijmo.Key.Tab:
+                        case wijmo.Key.Enter:
+                            _this._closeEditor(true);
+                            _this._grid.focus();
+                            // forward event to the grid so it will move the selection
+                            var evt = document.createEvent('HTMLEvents');
+                            evt.initEvent('keydown', true, true);
+                            evt['ctrlKey'] = e.ctrlKey;
+                            evt['shiftKey'] = e.shiftKey;
+                            evt['keyCode'] = e.keyCode;
+                            _this._grid.hostElement.dispatchEvent(evt);
+                            break;
+                        case wijmo.Key.Escape:
+                            _this._closeEditor(false);
+                            _this._grid.focus();
+                            break;
+                    }
+                });
+                this._ctl.lostFocus.addHandler(function () {
+                    setTimeout(function () {
+                        if (!_this._ctl.containsFocus()) {
+                            _this._closeEditor(true);
+                        }
+                    });
+                });
+                // open drop-down on f4/alt-down
+                this._grid.addEventListener(this._grid.hostElement, 'keydown', function (e) {
+                    _this._openDropDown = false;
+                    if (e.keyCode == wijmo.Key.F4 ||
+                        (e.altKey && (e.keyCode == wijmo.Key.Down || e.keyCode == wijmo.Key.Up))) {
+                        _this._openDropDown = true;
+                        _this._grid.startEditing(true);
+                        e.preventDefault();
+                    }
+                }, true);
+                // close editor when user resizes the window
+                window.addEventListener('resize', function () {
+                    if (_this._ctl.containsFocus()) {
+                        _this._closeEditor(true);
+                        _this._grid.focus();
+                    }
+                });
+            }
+            Object.defineProperty(CustomGridEditor2.prototype, "control", {
+                // gets an instance of the control being hosted by this grid editor
+                get: function () {
+                    return this._ctl;
+                },
+                enumerable: true,
+                configurable: true
+            });
+            // handle the grid's beginningEdit event by canceling the built-in editor,
+            // initializing the custom editor and giving it the focus.
+            CustomGridEditor2.prototype._beginningEdit = function (grid, args) {
+                var _this = this;
+                // check that this is our column
+                if (grid.columns[args.col] != this._col) {
+                    return;
+                }
+                // check that this is not the Delete key
+                // (which is used to clear cells and should not be messed with)
+                var evt = args.data;
+                if (evt && evt.keyCode == wijmo.Key.Delete) {
+                    return;
+                }
+                // cancel built-in editor
+                args.cancel = true;
+                // save cell being edited
+                this._rng = args.range;
+                // initialize editor host
+                var rc = grid.getCellBoundingRect(args.row, args.col);
+                wijmo.setCss(this._ctl.hostElement, {
+                    position: 'absolute',
+                    left: rc.left - 1 + pageXOffset,
+                    top: rc.top - 1 + pageYOffset,
+                    width: rc.width + 1,
+                    height: grid.rows[args.row].renderHeight + 1,
+                    borderRadius: '0px'
+                });
+                // initialize editor content
+                if (!wijmo.isUndefined(this._ctl['text'])) {
+                    this._ctl['text'] = grid.getCellData(this._rng.row, this._rng.col, true);
+                }
+                else {
+                    throw 'Can\'t set editor value/text...';
+                }
+                // start editing item
+                var ecv = wijmo.tryCast(grid.collectionView, 'IEditableCollectionView'), item = grid.rows[args.row].dataItem;
+                if (ecv && item) {
+                    setTimeout(function () {
+                        ecv.editItem(item);
+                    }, 210); // FlexGrid commits edits 200ms after losing focus
+                }
+                // activate editor
+                // console.log('??????');
+                // console.log(this._ctl.hostElement);
+                //console.log(grid.hostElement.parentElement);
+
+                document.body.appendChild(this._ctl.hostElement);
+                //const body = document.getElementById("dlgSample")
+                //grid.hostElement.appendChild(this._ctl.hostElement);
+
+                this._ctl.focus();
+                setTimeout(function () {
+                    // get the key that triggered the editor
+                    var key = (evt && evt.charCode > 32)
+                        ? String.fromCharCode(evt.charCode)
+                        : null;
+                    // send key to editor
+                    if (key) {
+                        var input = _this._ctl.hostElement.querySelector('input');
+                        if (input instanceof HTMLInputElement) {
+                            input.value = key;
+                            wijmo.setSelectionRange(input, key.length, key.length);
+                            var evtInput = document.createEvent('HTMLEvents');
+                            evtInput.initEvent('input', true, false);
+                            input.dispatchEvent(evtInput);
+                        }
+                    }
+                    else {
+                        _this._ctl.focus();
+                    }
+                    // open drop-down on F4/alt-down
+                    if (_this._openDropDown && _this._ctl instanceof wijmo.input.DropDown) {
+                        _this._ctl.isDroppedDown = true;
+                    }
+                }, 50);
+            };
+            // close the custom editor, optionally saving the edits back to the grid
+            CustomGridEditor2.prototype._closeEditor = function (saveEdits) {
+                if (this._rng) {
+                    var grid = this._grid, ctl = this._ctl, host = ctl.hostElement;
+                    // raise grid's cellEditEnding event
+                    var e = new wijmo.grid.CellEditEndingEventArgs(grid.cells, this._rng);
+                    grid.onCellEditEnding(e);
+                    // save editor value into grid
+                    if (saveEdits) {
+                        if (!wijmo.isUndefined(ctl['value'])) {
+                            this._grid.setCellData(this._rng.row, this._rng.col, ctl['value']);
+                        }
+                        else if (!wijmo.isUndefined(ctl['text'])) {
+                            this._grid.setCellData(this._rng.row, this._rng.col, ctl['text']);
+                        }
+                        else {
+                            throw 'Can\'t get editor value/text...';
+                        }
+                        this._grid.invalidate();
+                    }
+                    // close editor and remove it from the DOM
+                    if (ctl instanceof wijmo.input.DropDown) {
+                        ctl.isDroppedDown = false;
+                    }
+                    host.parentElement.removeChild(host);
+                    this._rng = null;
+                    // raise grid's cellEditEnded event
+                    grid.onCellEditEnded(e);
+                }
+            };
+            return CustomGridEditor2;
+        }());
+
+
+
+
+
+
+
+
+
+        c1.documentReady(function () {
+            var gridIndex = wijmo.Control.getControl('#gridIndex');
+            var gridDialog = wijmo.Control.getControl('#gridDialog');
+            var dlgSample = wijmo.Control.getControl('#dlgSample');
+
+            // 納期
+            new CustomGridEditor2(gridDialog, 'Col_5', wijmo.input.InputDate, {
+                format: 'd'
+            });
+
+            //new CustomGridEditor2(gridIndex, 'Col_7', wijmo.input.InputDate, {
+            //    format: 'd'
+            //});
+
+
+            // show forms
+            document.getElementById('btnDialog').addEventListener('click', function () {
+                dlgSample.show(true, function (sender) {
+                    switch (sender.dialogResult) {
+                        case 'submit':
+                            alert('form submitted');
+                            break;
+                        case 'wj-hide-create':
+                            break;
+                    }
+                });
+            });
+
+            //コンテキストメニュー作成
+            function createMenu(e) {
+                var div = document.createElement('div');
+                var menu = new wijmo.input.Menu(div, {
+                    displayMemberPath: 'header',
+                    selectedValuePath: 'cmd',
+                    subItemsPath: 'items',
+                    itemsSource: createMenuItem(e),
+                    command: menuExecute()
+                });
+
+                return menu;
+            }
+
+            //コンテキストメニューItem作成
+            function createMenuItem(e) {
+                let ht = gridIndex.hitTest(e)
+                let row = ht.getRow();
+                let item = row.dataItem['Col_2'];
+
+                let menuItem = [{ header: '引合一覧', cmd: 'InquiryList', col2: item}];
+                menuItem.push({ header: '-' })
+
+
+                if (item === 'A') {
+                    menuItem.push({ header: '引合登録', cmd: 'Inquiry', col2: item });
+                } else if (item === 'B') {
+                    menuItem.push({
+                        header: '受注登録', items: [
+                            { header: '受注登録モード', cmd: 'OrderMode1', col2: item },
+                            { header: '受注修正モード', cmd: 'OrderMode2', col2: item }]
+                    });
+                }
+
+                menuItem.push({ header: '設計情報入力', cmd: 'DesignInformation', col2: item });
+
+
+                return menuItem;
+            }
+
+            function menuExecute() {
+                return {
+                    executeCommand: (param) => {
+                        switch (param.cmd) {
+                            case 'InquiryList':
+                                window.location.href = '/InquiryList/InquiryList';
+                                break;
+                            case 'Inquiry':
+                                window.location.href = '/Inquiry/Index';
+                                break;
+                            case 'OrderMode1':
+                                window.location.href = '/Order/OrderRegist?mode=1';
+                                break;
+                            case 'OrderMode2':
+                                window.location.href = '/Order/OrderRegist?mode=2';
+                                break;
+                            case 'DesignInformation':
+                                window.location.href = '/DesignInformation/DesignInformation';
+                                break;
+                        }
+                    },
+                    canExecuteCommand: (param) => {
+                        switch (param.cmd) {
+                            case 'InquiryList':
+                                return true;
+                            case 'Inquiry':
+                                return true;
+                            case 'OrderMode1':
+                                return true;
+                            case 'OrderMode2':
+                                return true;
+                            case 'DesignInformation':
+                                if (param.col2 == 'D') {
+                                    return false;
+                                } else {
+                                    return true;
+                                }
+                        }
+                        return true
+                    }
+                };
+            }
+
+            gridIndex.hostElement.addEventListener('contextmenu', function (e) {
+                ht = gridIndex.hitTest(e.pageX, e.pageY);
+                if (ht.cellType == wijmo.grid.CellType.Cell) {
+                    var cellElement = document.elementFromPoint(e.clientX, e.clientY)
+                    if (cellElement.className.indexOf('wj-cell') > -1) {
+                        var menu = createMenu(e);
+                        if (ht.cellType == wijmo.grid.CellType.Cell) {
+                            menu.owner = gridIndex.hostElement;
+                            if (menu.owner) {
+                                e.preventDefault();
+                                menu.show(e);
+                            }
+                        }
+                    }
+                }
+            }, true);
+
+
+            //FlexGrid Tooltips
+            var tip = new wijmo.Tooltip();
+            var rng = null;
+
+            gridIndex.hostElement.addEventListener('mousemove', function (e) {
+                var ht = gridIndex.hitTest(e.pageX, e.pageY);
+                if (!ht.range.equals(rng)) {
+                    if (ht.cellType == wijmo.grid.CellType.Cell) {
+                        rng = ht.range;
+                        var cellElement = document.elementFromPoint(e.clientX, e.clientY),
+                            cellBounds = gridIndex.getCellBoundingRect(ht.row, ht.col),
+                            row = ht.getRow();
+
+                        var data = '<div class = "tooltip_row"><div class = "tooltip_title"> 行：</div>' + '<div class = "tooltip_data">' + wijmo.escapeHtml(row.dataItem['Col_1']) + '</div></div>'
+                            + '<div class = "tooltip_row"><div class = "tooltip_title"> 部品部門：</div>' + '<div class = "tooltip_data">' + wijmo.escapeHtml(row.dataItem['Col_2']) + '</div></div>'
+                            + '<div class = "tooltip_row"><div class = "tooltip_title"> 部品名：</div>' + '<div class = "tooltip_data">' + wijmo.escapeHtml(row.dataItem['Col_3']) + '</div></div>'
+                            + '<div class = "tooltip_row"><div class = "tooltip_title"> 入数：</div>' + '<div class = "tooltip_data">' + wijmo.escapeHtml(row.dataItem['Col_4']) + '</div></div>'
+                            + '<div class = "tooltip_row"><div class = "tooltip_title"> 個数：</div>' + '<div class = "tooltip_data">' + wijmo.escapeHtml(row.dataItem['Col_5']) + '</div></div>'
+                            + '<div class = "tooltip_row"><div class = "tooltip_title"> 依頼件数：</div>' + '<div class = "tooltip_data">' + wijmo.escapeHtml(row.dataItem['Col_6']) + '</div></div>'
+                            + '<div class = "tooltip_row"><div class = "tooltip_title"> 最終納期：</div>' + '<div class = "tooltip_data">' + wijmo.escapeHtml(row.dataItem['Col_7']) + '</div></div>'
+                            + '<div class = "tooltip_row"><div class = "tooltip_title"> 最終納期の次の日：</div>' + '<div class = "tooltip_data">' + wijmo.escapeHtml(row.dataItem['Col_8']) + '</div></div>';
+
+                        // 2列目のみ表示
+                        if (cellElement.className.indexOf('wj-cell') > -1 && ht.col == 2) {
+                            tip.show(gridIndex.hostElement, data, cellBounds);
+                        }
+                    }
+                }
+            });
+
+            gridIndex.hostElement.addEventListener('mouseout', function (e) {
+                tip.hide();
+                rng = null;
+            });
+
+        });
+    </script>
+}

@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>C1.Web.Mvc.TransposedGrid</name>
+    </assembly>
+    <members>
+        <member name="T:C1.Web.Mvc.TransposedGrid.TransposedGrid`1">
+            <summary>
+            グリッド コントロールは、転置レイアウトによってデータを表示します。この場合、列はデータ項目、また、行は項目のプロパティを表します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.TransposedGrid`1.#ctor(System.Web.Mvc.HtmlHelper,System.String)">
+            <summary>
+            1つの<see cref="T:C1.Web.Mvc.TransposedGrid.TransposedGrid`1" />インスタンスを作成します。
+            </summary>
+            <param name="helper">HTML ヘルパー</param>
+            <param name="selector">セレクタ</param>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedGrid.TransposedGrid`1.AutoGenerateRows">
+            <summary>
+            グリッドがitemsSource に基づいて行を自動的に
+                        生成するかどうかを 決定する値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedGrid.TransposedGrid`1.SortingType">
+            <summary>
+            列のヘッダーセルをクリックしたときにグリッドが列をソートする方法を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedGrid.TransposedGrid`1.HeadersVisibility">
+            <summary>
+            行ヘッダおよび列ヘッダが表示されるかどうかを決定する値を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedGrid.Fluent.ControlBuilderFactoryExtension">
+            <summary>
+            TransposedGrid関連のコントロールの作成用にControlBuilderFactoryを拡張します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.ControlBuilderFactoryExtension.TransposedGrid``1(C1.Web.Mvc.Fluent.ControlBuilderFactory,System.String)">
+            <summary>
+            TransposedGridBuilderを作成します。
+            </summary>
+            <typeparam name="T">データ項目タイプ。</typeparam>
+            <param name="controlBuilderFactory">ControlBuilderFactory。</param>
+            <param name="selector">セレクタ。</param>
+            <returns>TransposedGridBuilder。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedGrid.Fluent.ScriptsBuilderExtension">
+            <summary>
+            TransposedGridスクリプト用に<see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />クラスを拡張します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.ScriptsBuilderExtension.TransposedGrid(C1.Web.Mvc.Fluent.ScriptsBuilder)">
+            <summary>
+            OLAP関連のスクリプトバンドルを登録します。
+            </summary>
+            <param name="scriptsBuilder">
+                <see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />。</param>
+            <returns>
+                <see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridFilterExtension">
+            <summary>
+            FlexGridFilterエクステンダを使用できるすべてのコントロールに 拡張メソッドを追加する静的クラスを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridFilterExtension.Filterable``1(C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridBuilder{``0},System.Action{C1.Web.Mvc.Fluent.FlexGridFilterBuilder{``0}})">
+            <summary>
+            TransposedGridに FlexGridFilter エクステンダを適用します。
+            </summary>
+            <typeparam name="T">データレコードタイプ。</typeparam>
+            <param name="transposedGridBuilder">指定されたTransposedGridビルダ。</param>
+            <param name="gridFilterBuilder">指定されたFlexGridFilterビルダ。</param>
+            <returns>TransposedGridビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridFilterExtension.Filterable``1(C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridBuilder{``0})">
+            <summary>
+            TransposedGridに デフォルトのFlexGridFilter エクステンダを適用します。
+            </summary>
+            <typeparam name="T">データレコードタイプ。</typeparam>
+            <param name="transposedGridBuilder">指定されたTransposedGridビルダ。</param>
+            <returns>TransposedGridフィルタ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridFilterExtension.Filterable(C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridBuilder{System.Object},System.Action{C1.Web.Mvc.Fluent.FlexGridFilterBuilder{System.Object}})">
+            <summary>
+            TransposedGridに FlexGridFilter エクステンダを適用します。
+            </summary>
+            <param name="transposedGridBuilder">指定されたTransposedGridビルダ。</param>
+            <param name="gridFilterBuilder">指定されたFlexGridFilterビルダ。</param>
+            <returns>TransposedGridビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridFilterExtension.Filterable(C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridBuilder{System.Object})">
+            <summary>
+            TransposedGridに デフォルトのFlexGridFilter エクステンダを適用します。
+            </summary>
+            <param name="transposedGridBuilder">指定されたTransposedGridビルダ。</param>
+            <returns>TransposedGridフィルタ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridBuilder`1">
+            <summary>
+                <see cref="T:C1.Web.Mvc.TransposedGrid.TransposedGrid`1" />を構成するビルダーを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridBuilder`1.Rows(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.Column,C1.Web.Mvc.Fluent.ColumnBuilder}})">
+            <summary>
+            TransposedGrid.Rowsを構成します。
+            </summary>
+            <param name="builder">ビルダアクション。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridBuilder`1.AllowAddNew(System.Boolean)">
+            <summary>
+            TransposedGridではこのメソッドは使用できません。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridBuilder`1.AllowDelete(System.Boolean)">
+            <summary>
+            TransposedGridではこのメソッドは使用できません。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridBuilder`1.AutoGenerateColumns(System.Boolean)">
+            <summary>
+            TransposedGridではこのメソッドは使用できません。代わりにAutoGenerateRowsを使用してください。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridBuilder`1.#ctor(C1.Web.Mvc.TransposedGrid.TransposedGrid{`0})">
+            <summary>
+                <paramref name="component" />を構成する1つの<see cref="T:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridBuilder`1" />インスタンスを作成します。
+            </summary>
+            <param name="component">構成される<see cref="T:C1.Web.Mvc.TransposedGrid.TransposedGrid`1" />オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridBuilder`1.AutoGenerateRows(System.Boolean)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.TransposedGrid.TransposedGrid`1.AutoGenerateRows" />を構成します。
+            グリッドがitemsSource に基づいて行を自動的に
+                        生成するかどうかを 決定する値を設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridBuilder`1.SortingType(C1.Web.Mvc.Grid.AllowSorting)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.TransposedGrid.TransposedGrid`1.SortingType" /> を構成します。
+            列のヘッダーセルをクリックしたときにグリッドが列をソートする方法を設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridBuilder`1.HeadersVisibility(C1.Web.Mvc.Grid.HeadersVisibility)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.TransposedGrid.TransposedGrid`1.HeadersVisibility" /> を構成します。
+            行ヘッダおよび列ヘッダが表示されるかどうかを決定する値を設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedGrid.LicenseDetector">
+            <summary>
+            C1.Web.Mvc.TransposedGridライセンスを検出するためのクラスを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.LicenseDetector.#ctor">
+            <summary>
+            コンストラクター。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedGrid.TransposedGrid`1.RowGroups">
+            <summary>
+            TransposedGridの行コレクションを取得します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridBuilder`1.Rows(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.TransposedGrid.TransposedGridRow,C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridRowBuilder}})">
+            <summary>
+            TransposedGrid.Rows"/&gt;を構成します。
+            </summary>
+            <param name="builder">ビルダアクション。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridBuilder`1.RowGroups(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.TransposedGrid.TransposedGridRow,C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridRowBuilder}})">
+            <summary>
+            TransposedGrid.RowGroups"/&gt;を構成します。
+            </summary>
+            <param name="builder">ビルダアクション。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridRowBaseBuilder`2">
+            <summary>
+            <see cref="T:C1.Web.Mvc.TransposedGrid.TransposedGridRowBase" />を構成するビルダーを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridRowBaseBuilder`2.Rows(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.TransposedGrid.TransposedGridRow,C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridRowBuilder}})">
+            <summary>
+            TransposedGrid.RowGroups"/&gt;を構成します。
+            </summary>
+            <param name="builder">ビルダアクション。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridRowBaseBuilder`2.RowGroups(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.TransposedGrid.TransposedGridRow,C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridRowBuilder}})">
+            <summary>
+            TransposedGrid.RowGroups"/&gt;を構成します。
+            </summary>
+            <param name="builder">ビルダアクション。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridRowBaseBuilder`2.#ctor(`0)">
+            <summary>
+            <paramref name="obj" />を構成する1つの<see cref="T:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridRowBaseBuilder`2" />インスタンスを作成します。
+            </summary>
+            <param name="obj">構成される<see cref="T:C1.Web.Mvc.TransposedGrid.TransposedGridRowBase" />オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridRowBaseBuilder`2.Height(System.Nullable{System.Int32})">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedGrid.TransposedGridRowBase.Height" />を構成します。
+            行の高さを設定します。
+            </summary>
+            <remarks>
+            このプロパティをnullまたは負の値に設定すると、親コレクションのデフォルトサイズが使用されます。
+            </remarks>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridRowBuilder">
+            <summary>
+            <see cref="T:C1.Web.Mvc.TransposedGrid.TransposedGridRow" />を構成するビルダーを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridRowBuilder.#ctor(C1.Web.Mvc.TransposedGrid.TransposedGridRow)">
+            <summary>
+            <paramref name="obj" />を構成する1つの<see cref="T:C1.Web.Mvc.TransposedGrid.Fluent.TransposedGridRowBuilder" />インスタンスを作成します。
+            </summary>
+            <param name="obj">構成される<see cref="T:C1.Web.Mvc.TransposedGrid.TransposedGridRow" />オブジェクト。</param>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedGrid.TransposedGridRow">
+            <summary>
+            グリッド内の１つの列を表します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.TransposedGridRow.#ctor">
+            <summary>
+            1つの<see cref="T:C1.Web.Mvc.TransposedGrid.TransposedGridRow" />インスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.TransposedGridRow.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>
+            1つの<see cref="T:C1.Web.Mvc.TransposedGrid.TransposedGridRow" />インスタンスを作成します。
+            </summary>
+            <param name="helper">HtmlHelperインスタンス。</param>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedGrid.TransposedGridRowBase">
+            <summary>
+            TransposedGrid内の１つの行を表します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedGrid.TransposedGridRowBase.Height">
+            <summary>
+            行または列の高さを取得または設定します。
+            </summary>
+            <remarks>
+            このプロパティをnullまたは負の値に設定すると、親コレクションのデフォルトサイズが使用されます。
+            </remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedGrid.TransposedGridRowBase.RowGroups">
+            <summary>
+            TransposedGridの行コレクションを取得します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedGrid.TransposedGridRowBase.Helper">
+            <summary>
+            HtmlHelper オブジェクトを取得または設定します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.TransposedGridRowBase.#ctor">
+            <summary>
+            1つの<see cref="T:C1.Web.Mvc.ColumnBase" />インスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedGrid.TransposedGridRowBase.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>
+            1つの<see cref="T:C1.Web.Mvc.ColumnBase" />インスタンスを作成します。
+            </summary>
+            <param name="helper">HtmlHelperインスタンス。</param>
+        </member>
+    </members>
+</doc>

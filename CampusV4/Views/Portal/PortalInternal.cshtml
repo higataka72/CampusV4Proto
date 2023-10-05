@@ -1,0 +1,71 @@
+﻿@model CampusV4.Models.PortalInternalViewModel
+
+<div id="Index">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>ダッシュボード</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+
+
+                @using (Ajax.BeginForm("PortalInternalDetail", "Portal", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "PortalInternalDetail" }))
+                {
+                    @Html.HiddenFor(model => model.SelectCol, new { id = "SelectCol" })
+
+                    <div class="form-group">
+                        @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).Height("100px").Id("gridIndex")
+                            .Bind(Model.PortalInternalDashboardList).AllowAddNew(false).IsReadOnly(true)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("EstimatedShippingNum").Width("120").Header("出荷予定数").DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("EstimatedDesignNum").Width("120").Header("設計予定数").DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("EstimatedOrderNum").Width("120").Header("発注予定数").DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("EstimatedComeInNum").Width("120").Header("入荷予定数").DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("PurchaseAmount").Width("120").Header("仕入金額計").DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("EarningsAmount").Width("120").Header("売上金額計").DataType(DataType.Number));
+                            }))
+                    </div>
+                    <input type="submit" value="1" name="btnDetailDetail" class="btn btn-primary" id="btnDetail" style="display:none;" />
+                    <input type="submit" value="1" name="btnDetailDetailDetail" class="btn btn-primary" id="btnDetail" style="display:none;" />
+                }
+
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div id="PortalInternalDetail" class="form-group">
+            </div>
+        </div>
+       
+
+    </div>
+</div>
+
+@* Ajax.BeginFormを使うためのjqueryファイルの呼び出し *@
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+@section scripts{
+    <script>
+
+        //ダッシュボードGridクリックイベント
+        var grid = wijmo.Control.getControl('#gridIndex');
+        grid.hostElement.addEventListener('click', function (e) {
+            var ht = grid.hitTest(e.pageX, e.pageY);
+
+            if (ht.cellType == wijmo.grid.CellType.Cell) {
+                
+                var ShowSubmitBtnObj = document.getElementById('btnDetail');
+                document.getElementById('SelectCol').value = ht.col;
+                ShowSubmitBtnObj.click();
+            }
+
+        });
+
+    </script>
+}

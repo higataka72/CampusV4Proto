@@ -1,0 +1,136 @@
+﻿<div>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>引合</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("Input1", "Sample", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <p style="font-weight:bold;">登録しました（メッセージ枠）</p>
+                    <p style="font-weight:bold;"><u>[受注入力]</u></p>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label" for="Text1">受注番号</label>
+                        <div class="col-md-2">
+                            <input class="form-control" id="Text1" name="Text1" type="text" />
+                        </div>
+                        <label class="col-md-1 control-label" for="Text2">引合番号</label>
+                        <div class="col-md-2">
+                            <input class="form-control" id="Text2" name="Text2" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label" for="Text3">受注日</label>
+                        <div class="col-md-3">
+                            @Html.C1().InputDate().Id("Text3")
+                        </div>
+                        <label class="col-md-2 control-label" for="Text4">不具合製番</label>
+                        <div class="col-md-4">
+                            <input class="form-control" id="Text4" name="Text4" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label" for="Text5">稟議番号</label>
+                        <div class="col-md-2">
+                            <input class="form-control" id="Text5" name="Text5" type="text" />
+                        </div>
+                        <label class="col-md-1 control-label" for="Text6">納期</label>
+                        <div class="col-md-3">
+                            @Html.C1().InputDate().Id("Text6")
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label" for="Select1">分類記号</label>
+                        <div class="col-md-1">
+                            <select class="form-control" id="Select1" name="Select1">
+                            </select>
+                        </div>
+                        <label class="col-md-1 control-label" for="Text6">纏め製番</label>
+                        <div class="col-md-4">
+                            <input class="form-control" id="Text6" name="Text6" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label" for="Text7">注文番号</label>
+                        <div class="col-md-4">
+                            <input class="form-control" id="Text7" name="Text7" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="Select2">営業担当者</label>
+                        <div class="col-md-2">
+                            <select class="form-control" id="Select2" name="Select2">
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" id="Text8" name="Text8" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="Select3">調達担当者</label>
+                        <div class="col-md-2">
+                            <select class="form-control" id="Select3" name="Select3">
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" id="Text9" name="Text9" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-2">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="test" />内示
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="control-label">先行手配（</label>
+                            <label>
+                                <input type="radio" name="Radio1" value="test" /> 有り
+                            </label>
+                            <label>
+                                <input type="radio" name="Radio1" value="test" /> 無し
+                            </label>
+                            <label class="control-label">）</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-2">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="test" />キャンセル
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            @Html.C1().InputDate().Id("Text10")
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                    </div>
+                    <div class="form-group">
+
+                    </div>
+                    <div class="form-group">
+
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 col-md-offset-3">
+                            <a href="@Url.Action("Input2")" class="btn btn-primary">製番明細</a>
+                            <a href="#" class="btn btn-primary">検収明細</a>
+                            <a href="#" class="btn btn-primary">登録</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

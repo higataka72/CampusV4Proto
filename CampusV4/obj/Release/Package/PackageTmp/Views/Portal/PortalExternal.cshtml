@@ -1,0 +1,36 @@
+﻿@model CampusV4.Models.PortalExternalViewModel
+
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>パートナー工場</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @for (var t = 0; t < Model.PortalExternalPartnerDataList.Count; t++)
+                {
+                    <a href="PortalExternalDetail?Id=@Model.PortalExternalPartnerDataList[t].Id"><img src="@Model.PortalExternalPartnerDataList[t].FilePath" alt="@Model.PortalExternalPartnerDataList[t].FileName" width="200" height="150" /></a>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>パートナー工場による制作実績</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @for (var t = 0; t < Model.PortalExternalPartnerAchievementDataList.Count; t++)
+                {
+                    <a href="PortalExternalDetail?Id=@Model.PortalExternalPartnerAchievementDataList[t].Id"><img src="@Model.PortalExternalPartnerAchievementDataList[t].FilePath" alt="@Model.PortalExternalPartnerAchievementDataList[t].FileName" width="200" height="150" /></a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,388 @@
+﻿@model CampusV4.Models.CostEstimateInputViewModel
+
+<div id="FactorySelection">
+    <div style="transform-origin: left top;">
+        <div class="page-title">
+            <div class="title_left">
+                <ol class="breadcrumb">
+                    <li><a href="/CostEstimateInput/CostEstimateInput?mode=1">原価見積依頼入力 <i class="fa fa-arrow-circle-left"></i></a></li>
+                    <li class="active">工場選択</li>
+                </ol>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    @using (Html.BeginForm("FactorySelection", "CostEstimateInput", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @* 第1レベル *@
+                        <div class="form-group">
+                            <div class="col-md-1" style="width:150px">
+                                <input class="form-control" id="Text1" name="Text1" type="text" value="" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check1" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="width:150px">
+                                <input class="form-control" id="Text2" name="Text2" type="text" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check2" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="width:150px">
+                                <input class="form-control" id="Text3" name="Text3" type="text" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check3" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="width:80px">
+                                <input class="form-control" id="Text4" name="Text4" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:80px">
+                                <input class="form-control" id="Text5" name="Text5" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:80px">
+                                <input class="form-control" id="Text6" name="Text6" type="text" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check4" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        @* 第2レベル *@
+                        <div class="form-group">
+                            <div class="col-md-1" style="width:150px">
+                                <input class="form-control" id="Text1" name="Text1" type="text" value="" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check1" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="width:150px">
+                                <input class="form-control" id="Text2" name="Text2" type="text" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check2" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="width:150px">
+                                <input class="form-control" id="Text3" name="Text3" type="text" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check3" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="width:80px">
+                                <input class="form-control" id="Text4" name="Text4" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:80px">
+                                <input class="form-control" id="Text5" name="Text5" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:80px">
+                                <input class="form-control" id="Text6" name="Text6" type="text" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check4" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        @* 第3レベル *@
+                        <div class="form-group">
+                            <div class="col-md-1" style="width:150px">
+                                <input class="form-control" id="Text1" name="Text1" type="text" value="" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check1" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="width:150px">
+                                <input class="form-control" id="Text2" name="Text2" type="text" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check2" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="width:150px">
+                                <input class="form-control" id="Text3" name="Text3" type="text" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check3" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="width:80px">
+                                <input class="form-control" id="Text4" name="Text4" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:80px">
+                                <input class="form-control" id="Text5" name="Text5" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:80px">
+                                <input class="form-control" id="Text6" name="Text6" type="text" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check4" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        @* 第4レベル *@
+                        <div class="form-group">
+                            <div class="col-md-1" style="width:150px">
+                                <input class="form-control" id="Text1" name="Text1" type="text" value="" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check1" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="width:150px">
+                                <input class="form-control" id="Text2" name="Text2" type="text" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check2" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="width:150px">
+                                <input class="form-control" id="Text3" name="Text3" type="text" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check3" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="width:80px">
+                                <input class="form-control" id="Text4" name="Text4" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:80px">
+                                <input class="form-control" id="Text5" name="Text5" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:80px">
+                                <input class="form-control" id="Text6" name="Text6" type="text" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check4" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        @* 第5レベル *@
+                        <div class="form-group">
+                            <div class="col-md-1" style="width:150px">
+                                <input class="form-control" id="Text1" name="Text1" type="text" value="" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check1" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="width:150px">
+                                <input class="form-control" id="Text2" name="Text2" type="text" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check2" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="width:150px">
+                                <input class="form-control" id="Text3" name="Text3" type="text" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check3" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="width:80px">
+                                <input class="form-control" id="Text4" name="Text4" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:80px">
+                                <input class="form-control" id="Text5" name="Text5" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:80px">
+                                <input class="form-control" id="Text6" name="Text6" type="text" />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check4" value="Test" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-offset-7 col-md-2" style="text-align: right">
+                                <a href="/CostEstimateInput/FactorySelection?mode=1" class="btn btn-primary">検索</a>
+                                @*<input type="submit" value="検索" name="submitBtn" class="btn btn-primary" id="ShowSubmitBtn" />*@
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).Height("250px").Id("gridPartnerListDataList")
+                            .AllowAddNew(true)
+                            .AllowDelete(true)
+                            .Bind(Model.GridPartnerListDataList)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("RowCheck").Width("50").Header("　").DataType(DataType.Boolean));
+                                b1.Add(cb => cb.Binding("RowNumber").Width("60").Header("No"));
+                                b1.Add(cb => cb.Binding("PartnerName").Width("250").Header("パートナー工場"));
+                                b1.Add(cb => cb.Binding("PersonName").Width("180").Header("担当者名"));
+                                b1.Add(cb => cb.Binding("MemberType").Width("70").Header("会員"));
+                                b1.Add(cb => cb.Binding("Quality").Width("60").Header("品質"));
+                                b1.Add(cb => cb.Binding("Deadline").Width("60").Header("納期"));
+                                b1.Add(cb => cb.Binding("Cost").Width("60").Header("費用"));
+                                b1.Add(cb => cb.Binding("Correspondence").Width("60").Header("対応"));
+                                b1.Add(cb => cb.Binding("Shortening").Width("60").Header("短縮"));
+                                b1.Add(cb => cb.Binding("Efficiency").Width("60").Header("効率"));
+                            }))
+                            <div class="form-group">
+                                <div class="col-md-offset-6 col-md-3" style="text-align: right">
+                                    <button class="btn btn-primary" type="button" id="btnSelect">選択</button>
+                                    <a href="/CostEstimateInput/ConditionsMaintenance" class="btn btn-primary">キーワードメンテナンス</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).Height("130px").Id("gridGrobalDataList")
+                            .Bind(Model.GridGrobalListDataList)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("RowNumber").Width("50").Header("No").IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("SiteUrl").Width("400").Header("サイトＵＲＬ").IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("SearchKeyword").Width("250").Header("主検索キーワード").IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("SubKeyword").Width("250").Header("サブキーワード").IsReadOnly(true));
+                            }))
+                        </div>
+
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("../Common/MasterSearch")
+
+@section scripts{
+    <script>
+        c1.documentReady(function () {
+        });
+
+        //// 検索（受注番号：F2）
+        //var dlgMasterSearch = wijmo.Control.getControl('#dlgMasterSearch');
+        //c1.documentReady(function () {
+        //    document.getElementById('btnSearchJuchu').addEventListener('click', function () {
+        //        loadMasterData();
+
+        //        dlgMasterSearch.show(true, function (sender) {
+        //            if (sender.dialogResult == 'wj-hide-ok') {
+        //                document.getElementById('OrderNo').setAttribute('value', masterSelected.code);
+        //            }
+        //        });
+        //    });
+        //    document.getElementById('OrderNo').addEventListener('keydown', function (e) {
+        //        if (e.keyCode == 113) {
+        //            let target = document.getElementById('btnSearchJuchu');
+        //            let clickEvent = new Event('click', { "bubbles": true, "cancelable": true });
+        //            target.dispatchEvent(clickEvent);
+        //        }
+        //    });
+        //});
+
+        var dlgMasterSearch = wijmo.Control.getControl('#dlgMasterSearch');
+
+        // パートナー選択画面(ダブルクリック)
+        //var grid = wijmo.Control.getControl('#gridPartnerListDataList');
+        //grid.hostElement.addEventListener('dblclick', function (e) {
+        //    loadMasterData();
+        //    dlgMasterSearch.show(true, function (sender) {
+        //        switch (sender.dialogResult) {
+        //            case 'submit':
+        //                alert('form submitted');
+        //                break;
+        //            case 'wj-hide-create':
+        //                break;
+        //        }
+        //    });
+        //});
+        // パートナー選択画面(F2)
+        document.getElementById('gridPartnerListDataList').addEventListener('keydown', function (e) {
+            if (e.keyCode == 113) {
+                loadMasterData();
+                dlgMasterSearch.show(true, function (sender) {
+                    switch (sender.dialogResult) {
+                        case 'submit':
+                            alert('form submitted');
+                            break;
+                        case 'wj-hide-create':
+                            break;
+                    }
+                });
+            }
+        });
+    </script>
+}

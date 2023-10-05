@@ -1,0 +1,49 @@
+﻿<div id="dlgMailManager">
+    <form id="frmMailManager" class="form-horizontal">
+        <h4 class="modal-header">
+            メール送信
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body" style="width: 950px; height: 520px;">
+            <div class="form-group">
+                <label class="col-md-1 control-label" for="Text1">TO</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="Text1" name="Text1" type="text" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label" for="Text2">CC</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="Text1" name="Text2" type="text" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label" for="Text3">BCC</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="Text1" name="Text3" type="text" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label" for="Text4">件名</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="Text1" name="Text4" type="text" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-11">
+                    <textarea rows="15" cols="50" name="" type="text" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary wj-hide-ok">送信</button>
+            <button type="button" class="btn btn-default wj-hide">閉じる</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgMailManager")
+
+<script type="text/javascript">
+
+</script>

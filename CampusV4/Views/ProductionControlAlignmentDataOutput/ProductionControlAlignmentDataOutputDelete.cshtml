@@ -1,0 +1,59 @@
+﻿<style>
+    #dlgProductionControlAlignmentDataOutputDelete {
+        width: 1088px;
+    }
+</style>
+
+<div id="dlgProductionControlAlignmentDataOutputDelete">
+    <form id="frmProductionControlAlignmentDataOutputDelete" class="form-horizontal">
+        <h4 class="modal-header">
+            削除伝票選択
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                @(Html.C1().FlexGrid().SelectionMode(SelectionMode.Row)
+                    .AutoGenerateColumns(false).IsReadOnly(true).Height("308px").Id("grdProductionControlAlignmentDataOutputDelete")
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("Col_1").Width("80").Header("連番"));
+                        b1.Add(cb => cb.Binding("Col_2").Width("150").Header("出力日付"));
+                        b1.Add(cb => cb.Binding("Col_3").Width("220").Header("伝票日付の範囲"));
+                        b1.Add(cb => cb.Binding("Col_4").Width("220").Header("対象伝票"));
+                    }))
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary wj-hide-ok">選択</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgProductionControlAlignmentDataOutputDelete")
+
+<script type="text/javascript">
+    function loadProductionControlAlignmentDataOutputDelete() {
+        $.ajax({
+            type: "POST",
+            url: "/ProductionControlAlignmentDataOutput/GetProductionControlAlignmentDataOutputDelete",
+            dataType: "json",
+            success: function (result) {
+                var fg = wijmo.Control.getControl("#grdProductionControlAlignmentDataOutputDelete");
+                var data = JSON.parse(result);
+                fg.rows.clear();
+                var j = 0
+                for (var i in data) {
+                    var obj = [data[i].SeqNo, data[i].OutputDate, data[i].SlipDateRange, data[i].SlipNo];
+                    // FlexGridに新規行を追加します。
+                    var row = new wijmo.grid.Row();
+                    fg.rows.push(row);
+                    for (var col = 0; col <= fg.columns.length - 1; col++) {
+                        //FlexGrid のセルにデータを入力します。
+                        fg.setCellData(j, col, obj[col]);
+                    }
+                    j++;
+                }
+            }
+        });
+    }
+</script>

@@ -1,0 +1,178 @@
+﻿@model CampusV4.Models.OrderViewModel
+
+<div id="ProductNumDetail">
+    <div style="transform-origin: left top;">
+        <div class="page-title">
+            <div class="title_left">
+                <ol class="breadcrumb">
+                    <li><a href="/Order/OrderRegist?mode=2">受注登録 <i class="fa fa-arrow-circle-left"></i></a></li>
+                    <li class="active">製番明細</li>
+                </ol>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    @using (Html.BeginForm("ProductNumDetail", "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).Height("400px").Id("theProductNumDetailGrid")
+                            .AllowAddNew(true)
+                            .AllowDelete(true)
+                            .Bind(Model.ProductNumDataList)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("Col_1").Width("120").Header("製番"));
+                                b1.Add(cb => cb.Binding("Col_2").Width("80").Header("製番"));
+                                b1.Add(cb => cb.Binding("Col_3").Width("50").Header("製番").Align("center"));
+                                b1.Add(cb => cb.Binding("Col_4").Width("80").Header("数量").Align("center"));
+                                b1.Add(cb => cb.Binding("Col_5").Width("120").Header("単価").Align("right"));
+                                b1.Add(cb => cb.Binding("Col_6").Width("120").Header("金額").Align("right"));
+                                b1.Add(cb => cb.Binding("Col_7").Width("120").Header("納期").Format("d"));
+                                b1.Add(cb => cb.Binding("Col_8").Width("250").Header("件名"));
+                                b1.Add(cb => cb.Binding("Col_9").Width("120").Header("キャンセル日").Format("d"));
+                            }))
+                        </div>
+
+                        <div class="form-group">　</div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-12" style="text-align: right">
+                                <input type="button" class="btn btn-primary" onclick="loadEstimateSecurityData();" value="分割">
+                                @*<a href="/Order/ProductNumDetail?mode=1" class="btn btn-primary" id="btnSplit">分割</a>*@
+                                <a href="#" class="btn btn-primary" id="btnInsert">登録</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 処理終了後のメッセージ表示 *@
+<div id="dialog" style="width: 600px; height: 200px;">
+    <div class="wj-dialog-header">
+        @Html.Raw("メッセージ")
+    </div>
+    <div class="wj-dialog-body">
+        <p>
+            @Html.Raw("登録が完了しました")
+        </p>
+    </div>
+    <div class="wj-dialog-footer">
+        <button class="btn btn-default wj-hide-ok">OK</button>
+    </div>
+</div>
+@Html.C1().Popup("#dialog")
+
+@section scripts{
+    <script>
+        c1.documentReady(function () {
+            var tt = new wijmo.Tooltip();
+            var theGrid = wijmo.Control.getControl('#theProductNumDetailGrid');
+            var productNumMap = new wijmo.grid.DataMap(getProductNum(), 'name', 'bunrui');
+            theGrid.formatItem.addHandler(function (s, e) {
+                if (e.panel == s.columnHeaders) {
+                    if (s.columns[e.col].binding == 'Col_1') {
+                        tt.setTooltip(e.cell,
+                            e.getColumn().header +
+                            '<br><b>F3:行追加　F4:行削除</b>');
+                    }
+                }
+            });
+            ////ヘッダー結合
+            theGrid.allowMerging = wijmo.grid.AllowMerging.ColumnHeaders;
+            var panel = theGrid.columnHeaders;
+            panel.rows[0].allowMerging = true;
+            for (col = 0; col <= 2; col++) {
+                panel.setCellData(0, col, '製番');
+            }
+
+            // 分類記号
+            var classification = getProductNum();
+            theGrid.columns[1].dataMap = productNumMap;
+            function getProductNum() {
+                return [
+                    { bunrui: 'A', name: '半導体金型・部品' },
+                    { bunrui: 'B', name: 'Chase Holder' },
+                    { bunrui: 'C', name: 'Kit' },
+                    { bunrui: 'D', name: '装置ユニット・装置部品' },
+                    { bunrui: 'E', name: '打抜金型・部品' },
+                    { bunrui: 'G', name: 'LED金型・部品' },
+                    { bunrui: 'H', name: '車載用金型・部品' },
+                ];
+            }
+            var productNums = [
+                { bunrui: 'A', name: '半導体金型・部品' },
+                { bunrui: 'B', name: 'Chase Holder' },
+                { bunrui: 'C', name: 'Kit' },
+                { bunrui: 'D', name: '装置ユニット・装置部品' },
+                { bunrui: 'E', name: '打抜金型・部品' },
+                { bunrui: 'G', name: 'LED金型・部品' },
+                { bunrui: 'H', name: '車載用金型・部品' },
+            ];
+            var multiColumnEditor = new CustomGridEditor(theGrid, 'Col_2', wijmo.input.ComboBox, {
+                headerPath: 'bunrui',
+                displayMemberPath: 'bunrui',
+                itemsSource: productNums
+            });
+            var combo = multiColumnEditor.control;
+            combo.listBox.formatItem.addHandler(function (s, e) {
+                e.item.innerHTML = '<table><tr>' +
+                    '<td style="width:50px;"><b>' + e.data.bunrui + '</b></td>' +
+                    '<td style="width:150px;padding-right:6px"><b>' + e.data.name + '</b></td>' +
+                    '</tr></table>';
+            });
+
+            // 納期
+            new CustomGridEditor(theGrid, 'Col_7', wijmo.input.InputDate, {
+                format: 'd'
+            });
+
+            // キャンセル日
+            new CustomGridEditor(theGrid, 'Col_9', wijmo.input.InputDate, {
+                format: 'd'
+            });
+
+        });
+
+        // 完了メッセージ
+        var dialog = wijmo.Control.getControl('#dialog');
+        document.getElementById('btnInsert').addEventListener('click', function (e) {
+            // show the dialog (modal window)
+            dialog.show(true, function (sender) { });
+        });
+
+        // 分割
+        function loadEstimateSecurityData() {
+            $.ajax({
+                type: "POST",
+                url: "/Order/ProductNumDetailData?mode=1",
+                dataType: "json",
+                success: function (result) {
+                    var fg = wijmo.Control.getControl("#theProductNumDetailGrid");
+                    var data = JSON.parse(result);
+                    fg.rows.clear();
+                    var j = 0
+                    for (var i in data) {
+                        var obj = [data[i].Col_1, data[i].Col_2, data[i].Col_3, data[i].Col_4, data[i].Col_5, data[i].Col_6, data[i].Col_7, data[i].Col_8, data[i].Col_9];
+                        // FlexGridに新規行を追加します。
+                        var row = new wijmo.grid.Row();
+                        fg.rows.push(row);
+                        for (var col = 0; col <= fg.columns.length - 1; col++) {
+                            //FlexGrid のセルにデータを入力します。
+                            fg.setCellData(j, col, obj[col]);
+                        }
+                        j++;
+                    }
+                }
+            });
+        }
+
+    </script>
+}

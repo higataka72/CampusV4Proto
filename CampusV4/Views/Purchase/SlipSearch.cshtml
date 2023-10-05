@@ -1,0 +1,83 @@
+﻿@model CampusV4.Models.PurchaseViewModel
+<style>
+    #dlgSlipSearch {
+        width: 1200px;
+    }
+</style>
+<div id="dlgSlipSearch">
+    <form id="frmSlipSearch" class="form-horizontal">
+        <h4 class="modal-header">
+            発注伝票検索
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="col-md-1 control-label text-nowrap" id="lbl_cmbPartner" for="Select1">CAMPUS-ID</label>
+                <div class="col-md-2">
+                    @(Html.C1().AutoComplete().Id("cmbPartner")
+                                .Bind(Model.PartnerDataList)
+                                .DisplayMemberPath("PartnerCode")
+                                .HeaderPath("PartnerCode")
+                                .SearchMemberPath("PartnerCode, PartnerName")
+                                .SelectedValuePath("PartnerName")
+                                .SelectedValue(Model.PartnerName))
+                    
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.PartnerName, new { @id = "selectedPartnerName", @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label" for="Text1">製番</label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.ProductNumber, new { @id = "ProductNumber", @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @(Html.C1().FlexGrid()
+                    .Bind(Model.GridSlipSelectDataList)
+                    .SelectionMode(SelectionMode.Row)
+                    .AutoGenerateColumns(false)
+                    .Height("350px").Width("1200px")
+                    .Id("grdSlipSearch")
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("SlipDate").Width("150").Header("伝票日付"));
+                        b1.Add(cb => cb.Binding("SlipNo").Width("160").Header("発注番号"));
+                        b1.Add(cb => cb.Binding("ProductNumber").Width("160").Header("製番"));
+                        b1.Add(cb => cb.Binding("ProductName").Width("250").Header("品名"));
+                        b1.Add(cb => cb.Binding("DrawingNumber").Width("180").Header("図面番号/型番"));
+                        b1.Add(cb => cb.Binding("Suryo").Width("100").Header("数量"));
+                        b1.Add(cb => cb.Binding("Tanka").Width("100").Header("単価"));
+                    }))
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary wj-hide-ok">選択</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgSlipSearch")
+
+<script type="text/javascript">
+
+    var thePartner = wijmo.Control.getControl('#cmbPartner');
+    var template = '<table><tr>' +
+        '<td>{PartnerCode}</td>' +
+        '<td title="PartnerName">　{PartnerName}</td>' +
+        '</tr></table>';
+    thePartner.formatItem.addHandler(function (s, e) {
+        var html = wijmo.format(template, e.data);
+        e.item.innerHTML = html;
+    });
+    thePartner.selectedIndexChanged.addHandler(function (s, e) {
+        setSelectedPartnerName(s);
+    });
+    function setSelectedPartnerName(s) {
+        setText('selectedPartnerName', s.selectedValue);
+    }
+    function setText(id, value) {
+        document.getElementById(id).value = value;
+    }
+</script>

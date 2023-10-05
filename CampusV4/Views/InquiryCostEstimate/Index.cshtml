@@ -1,0 +1,476 @@
+﻿@model CampusV4.Models.InquiryCostEstimateViewModel
+
+<style>
+    .breadcrumb {
+        font-size: 24px;
+    }
+
+    .badge-red {
+        background-color: red;
+    }
+
+    .Emphasis {
+        background-color: red;
+    }
+</style>
+
+<div id="InquryCostEstimate">
+    <div style="transform-origin: left top;">
+        <div class="page-title">
+            <div class="title_left">
+                <!--
+                <h3>引合別原価見積一覧</h3>
+                -->
+                <ol class="breadcrumb">
+                    <li class="active">引合別原価見積一覧</li>
+                </ol>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    @using (Html.BeginForm("Index", "InquiryCostEstimate", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @*<p class="h4">【引合】</p>*@
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_Text1" for="Text1">引合番号</label>
+                            <div class="col-md-2">
+                                <input class="form-control" id="txtInquiryNo" name="txtInquiryNo" type="text" value="0000003655" />
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_Select1" for="Select1">分類記号</label>
+                            <div class="col-md-1">
+                                @(Html.C1().AutoComplete().Id("cmbClassificationCode")
+                                .Bind(Model.ClassificationDataList)
+                                .DisplayMemberPath("ClassificationCode")
+                                .HeaderPath("ClassificationCode")
+                                .SearchMemberPath("ClassificationCode, ClassificationSymbolName")
+                                .SelectedValuePath("ClassificationCode")
+                                .SelectedValue(Model.ClassificationSymbol)
+                                .Placeholder("(必須)"))
+                            </div>
+                            @*<label class="col-md-1 control-label  text-nowrap lavel-functionkey" id="lbl_Select1" for="Select1">分類記号</label>
+                                <div class="col-md-1">
+                                    <select class="form-control" id="Select1" name="Select1">
+                                        <option value=""></option>
+                                        <option value="MA-001" selected>A</option>
+                                        <option value="MA-002">B</option>
+                                        <option value="MA-003">C</option>
+                                        <option value="MA-004">D</option>
+                                        <option value="MA-005">E</option>
+                                        <option value="MA-006">F</option>
+                                    </select>
+                                </div>*@
+                            <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_Text2" for="Text2">製番</label>
+                            <div class="col-md-2">
+                                <input class="form-control" id="SerialNo" name="SerialNo" type="text" value="0000003655A" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text3" for="Text3">件名</label>
+                            <div class="col-md-3">
+                                <input class="form-control" id="Text3" name="Text3" type="text" disabled />
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text4" for="Text4">依頼日</label>
+                            <div class="col-md-2">
+                                @Html.C1().InputDate().Id("Text4").Text("2023/06/15")
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text5" for="Text5">納入希望日</label>
+                            <div class="col-md-2">
+                                @Html.C1().InputDate().Id("Text5").Text("2023/12/28")
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Select2" for="Select2">品種</label>
+                            <div class="col-md-1">
+                                <select class="form-control" id="Select2" name="Select2" disabled>
+                                </select>
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text6" for="Text6">品名</label>
+                            <div class="col-md-3">
+                                <input class="form-control" id="Text6" name="Text6" type="text" disabled />
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text7" for="Text7">数量</label>
+                            <div class="col-md-1">
+                                <input class="form-control" id="Text7" name="Text7" type="text" value="2" disabled />
+                            </div>
+                            <div class="col-md-1">
+                                <input class="form-control" id="Text8" name="Text8" type="text" value="式" disabled />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Select3" for="Select3">設計担当者</label>
+                            <div class="col-md-1">
+                                <select class="form-control" id="Select3" name="Select3" disabled>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" id="Text9" name="Text9" type="text" disabled />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_TextArea1" for="TextArea1">備考</label>
+                            <div class="col-md-4">
+                                <textarea class="form-control" id="TextArea1" name="TextArea1" style="height:100px;" disabled></textarea>
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_File1" for="file">依頼添付資料</label>
+                            <div class="col-md-4">
+                                <div class="dropzone dz-clickable" id="myDrop">
+                                    <div class="dz-default dz-message" data-dz-message="">
+                                        <span>ファイルをドラッグ＆ドロップしてしてください。<br>またはここをクリック(タップ)して選択してください。</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).IsReadOnly(false).Height("320px").Id("gridIndex")
+                            .DefaultRowSize(45)
+                            .FrozenColumns(4)
+                            .AllowAddNew(true)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("Col_1").Width("50").Header("行").Align("center"));
+                                b1.Add(cb => cb.Binding("Col_1_1").Width("60").Header("No.").Align("center"));
+                                b1.Add(cb => cb.Binding("Col_2").Width("80").Header("部品分類").Align("center"));
+                                b1.Add(cb => cb.Binding("Col_3").Width("220").Header("部品名"));
+                                b1.Add(cb => cb.Binding("Col_4").Width("180").Header("図面番号／型式"));
+                                b1.Add(cb => cb.Binding("Col_4_1").Width("50").Header("図面").DataType(DataType.Boolean).IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("Col_5").Width("80").Header("DWG/REV").Align("center"));
+                                b1.Add(cb => cb.Binding("Col_6").Width("80").Header("入数").Align("center"));
+                                b1.Add(cb => cb.Binding("Col_7").Width("80").Header("個数").Align("center"));
+                                b1.Add(cb => cb.Binding("Col_8").Width("180").Header("単価").Format("n0"));
+                                b1.Add(cb => cb.Binding("Col_9").Width("80").Header("依頼件数").Align("center"));
+                                b1.Add(cb => cb.Binding("Col_10").Width("80").Header("採用数").Align("center"));
+                                b1.Add(cb => cb.Binding("Col_11").Width("120").Header("採用金額").Align("right"));
+                                b1.Add(cb => cb.Binding("Col_12").Width("100").Header("最終納期"));
+                                b1.Add(cb => cb.Binding("Col_12_1").Width("150").Header("備考"));
+                                b1.Add(cb => cb.Binding("Col_12_2").Width("180").Header("CAMPUS-ID"));
+                                b1.Add(cb => cb.Binding("Col_13").Width("100").Header("フラグ"));
+                            }))
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text13" for="Text13">受注額</label>
+                            <div class="col-md-1">
+                                <input class="form-control" style="width:130px" id="Text13" name="Text13" type="text" value="" disabled />
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text14" for="Text14">発注額</label>
+                            <div class="col-md-1">
+                                <input class="form-control" style="width:130px" id="Text14" name="Text14" type="text" disabled />
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text15" for="Text15">利益額</label>
+                            <div class="col-md-1">
+                                <input class="form-control" style="width:130px" id="Text15" name="Text15" type="text" disabled />
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text16" for="Text16">利益率</label>
+                            <div class="col-md-1">
+                                <input class="form-control" id="Text16" name="Text16" type="text" disabled />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text11" for="Text11">完成予定日</label>
+                            <div class="col-md-2">
+                                @Html.C1().InputDate().Id("Text11")
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text12" for="Text12">出荷指示日</label>
+                            <div class="col-md-2">
+                                @Html.C1().InputDate().Id("Text12")
+                            </div>
+                            <div class="col-md-offset-2 col-md-2">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Check1" value="Test" />締切
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-1" style="text-align: right">
+                                <button id="btnSave" class="btn btn-default">部品名＋図番番号/型式 纏め</button>
+                            </div>
+                            <div class="col-md-7 col-md-offset-2" style="text-align: right">
+                                <a href="/CostEstimateInput/CostEstimateInput?mode=1" class="btn btn-primary">お見積依頼</a>
+                                <a href="#" class="btn btn-primary" id="btnAsseblableReference">組立可能数</a>
+                                <a href="#" class="btn btn-primary">印刷</a>
+                                <a href="#" class="btn btn-primary" id="btnInstallmentPayment">分納</a>
+                                <input type="submit" class="btn btn-primary" value="登録">
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("AssemblableReference")
+@Html.Partial("DrawingNumber", Model)
+@Html.Partial("EstimateReference")
+@Html.Partial("InstallmentPayment")
+@Html.Partial("../Common/MasterSearch")
+
+
+@section scripts{
+    <script>
+        Dropzone.autoDiscover = false;
+        var myDropzone = new Dropzone("div#myDrop", {
+            addRemoveLinks: true,
+            dictCancelUpload: "キャンセル",
+            dictCancelUploadConfirmation: "本当にアップロードしたファイルをキャンセルしますか？",
+            dictRemoveFile: "削除",
+            url: "/InquiryCostEstimate/FileUpload",
+            removedfile: function (file) {
+                var name = file.name;
+                $.ajax({
+                    type: 'POST',
+                    url: "/InquiryCostEstimate/FileDelete",
+                    data: { name: name },
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+                file.previewElement.remove();
+            }
+        });
+
+        c1.documentReady(function () {
+            getInquiryCostEstimateData();
+            // ラベルツールチップ設定
+            var tt = new wijmo.Tooltip();
+            tt.setTooltip('#lbl_Text1', '引合番号<br><b>F2:検索 F5:クリア F9:終了</b>');
+            tt.setTooltip('#lbl_Select1', '分類記号<br><b>F2:検索 F5:クリア</b>');
+            tt.setTooltip('#lbl_Text2', '製番<br><b>F2:検索 F7:組立可能数</b>');
+            tt.setTooltip('#lbl_Text3', '件名');
+            tt.setTooltip('#lbl_Text4', '依頼日');
+            tt.setTooltip('#lbl_Text5', '納入希望日');
+            tt.setTooltip('#lbl_Text6', '品名');
+            tt.setTooltip('#lbl_Text7', '数量');
+            tt.setTooltip('#lbl_Select3', '設計担当者');
+            /*tt.setTooltip('#lbl_Select4', '検査組立担当者');*/
+            tt.setTooltip('#lbl_TextArea1', '備考');
+            tt.setTooltip('#lbl_File1', '依頼添付資料');
+            tt.setTooltip('#lbl_Text13', '受注額');
+            tt.setTooltip('#lbl_Text14', '発注額');
+            tt.setTooltip('#lbl_Text15', '利益額');
+            tt.setTooltip('#lbl_Text16', '利益率');
+            tt.setTooltip('#lbl_Text11', '完成予定日');
+            tt.setTooltip('#lbl_Text12', '出荷指示日');
+
+            var gridIndex = wijmo.Control.getControl('#gridIndex');
+            var cmbClassificationCode = wijmo.Control.getControl('#cmbClassificationCode');
+            var dlgAssemblableReference = wijmo.Control.getControl('#dlgAssemblableReference');
+            var dlgDrawingNumber = wijmo.Control.getControl('#dlgDrawingNumber');
+            var dlgEstimateReference = wijmo.Control.getControl('#dlgEstimateReference');
+            var dlgInstallmentPayment = wijmo.Control.getControl('#dlgInstallmentPayment');
+
+            gridIndex.formatItem.addHandler(function (s, e) {
+                if (e.panel == s.cells) {
+                    if (s.columns[e.col].binding == 'Col_4') {
+                        var item = gridIndex.cells.getCellData(e.row, e.col, false);
+                        e.cell.innerHTML = '<div class="input-group"><input class="form-control" disabled value="' + item + '"><span class="input-group-btn"><a class="btn btn-info" name="drawing_number"><i class="fa fa-search"></i></a></span>';
+                    } else if (s.columns[e.col].binding == 'Col_8') {
+                        var item = gridIndex.cells.getCellData(e.row, e.col, false);
+                        e.cell.innerHTML = '<div class="input-group"><input class="form-control" style="text-align: right;" disabled value="' + item.toLocaleString() + '"><span class="input-group-btn"><a class="btn btn-info" name="estimate_reference"><i class="fa fa-search"></i></a></span>';
+                    } else if (s.columns[e.col].binding == 'Col_12_2') {
+                        var item = gridIndex.cells.getCellData(e.row, e.col, false);
+                        e.cell.innerHTML = '<div class="input-group"><input class="form-control" disabled value="' + item + '"><span class="input-group-btn"><a class="btn btn-info" name="campus_id"><i class="fa fa-search"></i></a></span>';
+                    } else if (s.columns[e.col].binding == 'Col_13') {
+                        var item = gridIndex.cells.getCellData(e.row, e.col, false);
+                        // e.cell.innerHTML = '<a class="btn btn-default" name="flag">' + item + '</a>';
+                        e.cell.innerHTML = '<div class="input-group"><input class="form-control" disabled value="' + item + '"><span class="input-group-btn"><a class="btn btn-info" name="flag"><i class="fa fa-pencil-square"></i></a></span>';
+                    }
+                }
+            });
+
+            // グリッド行の色を変更
+            gridIndex.itemFormatter = function (panel, r, c, cell) {
+                if (panel.cellType == wijmo.grid.CellType.Cell) {
+                    if (r == 0) {
+                        cell.style.backgroundColor = 'lightsteelblue';
+                    }
+                }
+            }
+
+            // 分類記号
+            var cmbClassificationCode = wijmo.Control.getControl('#cmbClassificationCode');
+            cmbClassificationCode.selectedIndexChanged.addHandler(function (s, e) {
+                getInquiryCostEstimateData();
+            });
+
+            var dlgMasterSearch = wijmo.Control.getControl('#dlgMasterSearch');
+            gridIndex.hostElement.addEventListener('click', function (e) {
+                var target = wijmo.closest(e.target, 'a');
+                if (target instanceof HTMLAnchorElement) {
+                    if (target.name == 'drawing_number') {
+                        loadDrawingNumberData();
+                        dlgDrawingNumber.show(true, function (sender) {
+                            switch (sender.dialogResult) {
+                                case 'submit':
+                                    alert('form submitted');
+                                    break;
+                                case 'wj-hide-create':
+                                    break;
+                            }
+                        });
+                    } else if (target.name == 'estimate_reference') {
+                        loadEstimateReferenceData();
+                        dlgEstimateReference.show(true, function (sender) {
+                            switch (sender.dialogResult) {
+                                case 'submit':
+                                    alert('form submitted');
+                                    break;
+                                case 'wj-hide-create':
+                                    break;
+                            }
+                        });
+                    } else if (target.name == 'campus_id') {
+                        loadEstimateReferenceData();
+                        dlgMasterSearch.show(true, function (sender) {
+                            switch (sender.dialogResult) {
+                                case 'submit':
+                                    alert('form submitted');
+                                    break;
+                                case 'wj-hide-create':
+                                    break;
+                            }
+                        });
+                    } else if (target.name == 'flag') {
+                        var ht = gridIndex.hitTest(e.pageX, e.pageY);
+                        gridIndex.setCellData(ht.row, 13, '〇', true);
+                    }
+                }
+            });
+
+            gridIndex.hostElement.addEventListener('dblclick', function (e) {
+                var ht = gridIndex.hitTest(e.pageX, e.pageY);
+
+                if (ht.cellType == wijmo.grid.CellType.Cell) {
+                    var sel = gridIndex.selection;
+                    var parts_class = "";
+                    var parts_name = "";
+                    for (var r = sel.topRow; r <= sel.bottomRow; r++) {
+                        parts_class = gridIndex.cells.getCellData(r, 1, false);
+                        parts_name = gridIndex.cells.getCellData(r, 2, false);
+                    }
+                    window.location.href = "/InquiryCostEstimate/EstimateReply?partsClass=" + parts_class + "&partsName=" + parts_name;
+                }
+
+            });
+
+            // show forms
+            document.getElementById('btnAsseblableReference').addEventListener('click', function () {
+                loadAssemblableReferenceData();
+                dlgAssemblableReference.show(true, function (sender) {
+                    switch (sender.dialogResult) {
+                        case 'submit':
+                            alert('form submitted');
+                            break;
+                        case 'wj-hide-create':
+                            break;
+                    }
+                });
+            });
+
+            document.getElementById('btnInstallmentPayment').addEventListener('click', function () {
+                loadInstallmentPaymentData();
+                dlgInstallmentPayment.show(true, function (sender) {
+                    switch (sender.dialogResult) {
+                        case 'submit':
+                            alert('form submitted');
+                            break;
+                        case 'wj-hide-create':
+                            break;
+                    }
+                });
+            });
+        });
+
+        function getInquiryCostEstimateData() {
+            $.ajax({
+                type: "POST",
+                url: "/InquiryCostEstimate/GetInquiryCostEstimateData",
+                dataType: "json",
+                success: function (result) {
+                    var fg = wijmo.Control.getControl("#gridIndex");
+                    var data = JSON.parse(result);
+                    fg.rows.clear();
+                    var j = 0
+                    for (var i in data) {
+                        var obj = [data[i].Col_1, data[i].Col_1_1, data[i].Col_2, data[i].Col_3, data[i].Col_4, data[i].Col_4_1, data[i].Col_5, data[i].Col_6, data[i].Col_7, data[i].Col_8, data[i].Col_9, data[i].Col_10, data[i].Col_11, data[i].Col_12, data[i].Col_12_1, data[i].Col_12_2, data[i].Col_13];
+                        // FlexGridに新規行を追加します。
+                        var row = new wijmo.grid.Row();
+                        fg.rows.push(row);
+                        for (var col = 0; col <= fg.columns.length - 1; col++) {
+                            //FlexGrid のセルにデータを入力します。
+                            fg.setCellData(j, col, obj[col]);
+                        }
+                        j++;
+                    }
+                }
+            });
+        }
+
+        /*const text1 = document.getElementById('Text1');*/
+        //const select1 = document.getElementById('Select1');
+
+        //text1.addEventListener('change', function (e) {
+        //    getInquiryCostEstimateData();
+        //});
+
+        //select1.addEventListener('change', function (e) {
+        //    getInquiryCostEstimateData();
+        //});
+
+        //引合番号イベント
+        var ObjInquiryNo = document.getElementById('txtInquiryNo');
+        //フォーカスアウト(bur)
+        ObjInquiryNo.addEventListener('blur', InquiryFocusin_event);
+        function InquiryFocusin_event(e) {
+            this.value = this.value.toString().padStart(9, '0')
+        }
+
+        // 分類記号
+        var theClassificationCode = wijmo.Control.getControl('#cmbClassificationCode');
+        var template = '<table><tr>' +
+            '<td>{ClassificationCode}</td>' +
+            '<td title="ClassificationSymbolName">　{ClassificationSymbolName}</td>' +
+            '</tr></table>';
+        theClassificationCode.formatItem.addHandler(function (s, e) {
+            var html = wijmo.format(template, e.data);
+            e.item.innerHTML = html;
+        });
+
+        //製番イベント
+        //フォーカスイン
+        var ObjSeiban = document.getElementById('SerialNo');
+        ObjSeiban.addEventListener('focusin', SeibanFocusin_event);
+        function SeibanFocusin_event(e) {
+            if (this.value == '') {
+                var ObjtxtInquiryNoValue = document.getElementById('txtInquiryNo').value;
+                var ObjGroupingMarkCodeValue = wijmo.Control.getControl('#cmbClassificationCode').selectedValue;
+                if (ObjGroupingMarkCodeValue == null || ObjGroupingMarkCodeValue == '') {
+                    this.value = ObjtxtInquiryNoValue
+                } else {
+                    this.value = ObjtxtInquiryNoValue + ObjGroupingMarkCodeValue;
+                }
+            } else {
+                this.selectionStart = this.selectionEnd;
+            }
+        };
+        ObjSeiban.addEventListener('focusout', SeibanFocusout_event);
+        function SeibanFocusout_event(e) {
+            if (this.value != '') {
+                getInquiryCostEstimateData();
+            }
+        };
+    </script>
+}

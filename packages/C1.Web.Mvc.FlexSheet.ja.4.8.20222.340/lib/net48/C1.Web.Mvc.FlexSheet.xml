@@ -1,0 +1,2805 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>C1.Web.Mvc.FlexSheet</name>
+    </assembly>
+    <members>
+        <member name="T:C1.Web.Mvc.Sheet.Workbook">
+            <summary>Excelワークブック。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Workbook.#ctor">
+            <summary>新しいインスタンスを作成します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Workbook.Application">
+            <summary>ファイルプロパティに表示される、このファイルを生成したアプリケーションの名前を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Workbook.Company">
+            <summary>ファイルプロパティに表示される、このファイルを生成した会社の名前を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Workbook.Creator">
+            <summary>作成者の名前を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Workbook.Created">
+            <summary>作成時刻を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Workbook.LastModifiedBy">
+            <summary>最後に変更を行った人の名前を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Workbook.Modified">
+            <summary>変更時刻を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Workbook.ActiveWorksheet">
+            <summary>現在のワークシートを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Workbook.Sheets">
+            <summary>ワークブックのワークシートコレクションを取得します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Workbook.Styles">
+            <summary>ワークブックのスタイルテーブルを取得します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Workbook.DefinedNames">
+            <summary>ワークブックの定義された名前項目を取得します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Worksheet">
+            <summary>Excelワークシート。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Worksheet.#ctor">
+            <summary>新しいインスタンスを作成します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Worksheet.FrozenPane">
+            <summary>ワークシートのFrozenPaneを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Worksheet.Name">
+            <summary>ワークシートの名前を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Worksheet.Columns">
+            <summary>ワークシート内の列定義を取得します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Worksheet.Rows">
+            <summary>ワークシートの行データを取得します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Worksheet.Visible">
+            <summary>ワークシートの表示/非表示を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Worksheet.SummaryBelow">
+            <summary>サマリー行を詳細行の下に表示するか、上に表示するかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.FrozenPane">
+            <summary>ワークシートのFrozenPane</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FrozenPane.#ctor">
+            <summary>FrozenPaneインスタンスを作成します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FrozenPane.Rows">
+            <summary>固定行インデックスを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FrozenPane.Columns">
+            <summary>固定列インデックスを取得または設定します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Cell">
+            <summary>Excelセル。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Cell.#ctor">
+            <summary>Cellインスタンスを作成します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Cell.Value">
+            <summary>セルの値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Cell.IsDate">
+            <summary>セルの値が日付かどうかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Cell.Formula">
+            <summary>セルの式を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Cell.Style">
+            <summary>セルのスタイルを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Cell.ColSpan">
+            <summary>セルが占有する列の数を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Cell.RowSpan">
+            <summary>セルが占有する行の数を取得または設定します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.CellPosition">
+            <summary>ワークシート内のセルの座標。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.CellPosition.#ctor(System.String)">
+            <summary>セル番地に基づいてCellPositionを作成します。</summary>
+            <param name="address">セル番地。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.CellPosition.#ctor(System.Int32,System.Int32)">
+            <summary>座標要素に基づいてCellPositionを作成します。</summary>
+            <param name="col">列番号。</param>
+            <param name="row">行番号。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellPosition.Row">
+            <summary>水平方向の座標を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellPosition.Col">
+            <summary>垂直方向の座標を取得または設定します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Range">
+            <summary>左上のセルと右下のセルで指定されたワークシートの四角形領域。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Range.#ctor(System.String)">
+            <summary>セル番地に基づいてRangeを作成します。</summary>
+            <param name="address">範囲のセル番地。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Range.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>座標と幅に基づいてRangeを作成します。</summary>
+            <param name="leftCol">列の開始番号。</param>
+            <param name="topRow">行の開始番号。</param>
+            <param name="cols">列の数。</param>
+            <param name="rows">行の数。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Range.From">
+            <summary>左上のセルの位置を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Range.To">
+            <summary>右下のセルの位置を取得または設定します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Column">
+            <summary>ワークシート内の1つの列。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Column.#ctor">
+            <summary>新しいインスタンスを作成します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Column.Width">
+            <summary>列の幅をピクセルまたは文字数（サフィックス「ch」が付く）単位で取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Column.Visible">
+            <summary>列の表示/非表示を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Column.AutoWidth">
+            <summary>列幅を自動調整するかどうかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Column.Style">
+            <summary>列のスタイルを取得または設定します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Row">
+            <summary>ワークシート内の1つの行。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Row.#ctor">
+            <summary>新しいインスタンスを作成します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Row.#ctor(System.Object[])">
+            <summary>セルデータを含む新しいRowを作成します。</summary>
+            <param name="values">セルデータ。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Row.Height">
+            <summary>行の高さ（ポイント）を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Row.Visible">
+            <summary>行の表示状態を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Row.GroupLevel">
+            <summary>グループ化された場合の行のレベルを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Row.Collapsed">
+            <summary>アウトライン内で現在の行より1レベル深い行が、折りたたまれたアウトライン状態であるかどうかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Row.Style">
+            <summary>行のスタイルを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Row.Cells">
+            <summary>行のセルを取得します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Style">
+            <summary>特定のセルの外観属性。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Style.#ctor">
+            <summary>Styleインスタンスを作成します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Style.Format">
+            <summary>Excel書式文字列を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Style.BaseOn">
+            <summary>このスタイルの継承元の基本スタイルを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Style.Font">
+            <summary>テキストのフォントを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Style.HAlign">
+            <summary>セルコンテンツの水平方向の配置を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Style.VAlign">
+            <summary>セルコンテンツの垂直方向の配置を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Style.Indent">
+            <summary>テキストのインデントを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Style.TextRotation">
+            <summary>テキストの回転角度を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Style.TextDirection">
+            <summary>テキストフローの方向を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Style.Fill">
+            <summary>セルの塗りつぶしを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Style.Border">
+            <summary>セル境界線を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Style.WrapText">
+            <summary>テキストを折り返すかどうかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Style.ShrinkToFit">
+            <summary>テキストを縮小してセルサイズに合わせるかどうかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Style.Locked">
+            <summary>セルをロックするかどうかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Font">
+            <summary>フォントスタイル。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Font.#ctor">
+            <summary>Fontインスタンスを作成します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Font.Family">
+            <summary>書体名を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Font.Size">
+            <summary>フォントサイズを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Font.Bold">
+            <summary>テキストを太字にするかどうかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Font.Italic">
+            <summary>テキストを斜体にするかどうかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Font.Underline">
+            <summary>下線の設定を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Font.Strikethrough">
+            <summary>取り消し線を表示するかどうかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Font.Superscript">
+            <summary>テキストを上付き文字にするかどうかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Font.Subscript">
+            <summary>テキストを下付き文字にするかどうかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Font.Color">
+            <summary>テキスト色を取得または設定します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.BorderCollection">
+            <summary>セルのすべての境界線。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.BorderCollection.#ctor">
+            <summary>境界線を作成します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.BorderCollection.#ctor(System.String)">
+            <summary>1色による均一な実線の境界線を作成します。</summary>
+            <param name="color">境界線の色。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.BorderCollection.Top">
+            <summary>上境界線を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.BorderCollection.Bottom">
+            <summary>下境界線を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.BorderCollection.Left">
+            <summary>左境界線を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.BorderCollection.Right">
+            <summary>右境界線を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.BorderCollection.Diagonal">
+            <summary>斜め罫線を取得または設定します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Border">
+            <summary>境界線のスタイル。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Border.#ctor">
+            <summary>境界線を作成します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Border.#ctor(System.String)">
+            <summary>1色による実線の境界線を作成します。</summary>
+            <param name="color">境界線の色。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Border.Color">
+            <summary>境界線の色を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Border.Type">
+            <summary>境界線の線種を取得または設定します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fill">
+            <summary>セルの塗りつぶしのスタイル。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fill.#ctor">
+            <summary>Fillインスタンスを作成します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Fill.Color">
+            <summary>塗りつぶし色を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Fill.Pattern">
+            <summary>塗りつぶしパターンを取得または設定します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.DefinedName">
+            <summary>ワークブックオブジェクトモデルの定義された名前項目の定義を表します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.DefinedName.#ctor">
+            <summary>定義された名前を作成します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.DefinedName.Name">
+            <summary>定義された名前項目の名前。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.DefinedName.Value">
+            <summary>定義された名前項目の値。この値は、式、文字列定数、またはセル範囲でもかまいません。たとえば、"Sum(1, 2, 3)"、"1.2"、"\"test\""、"sheet1!A1:B2"です。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.DefinedName.SheetName">
+            <summary>定義された名前項目がどのシート内で機能するかを示します。省略された場合、定義された名前項目はワークブック内で機能します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.HAlignType">
+            <summary>水平方向の配置のオプション。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.HAlignType.General">
+            <summary>水平方向の標準的な配置。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.HAlignType.Left">
+            <summary>水平方向に関して左揃えに配置。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.HAlignType.Center">
+            <summary>水平方向に関して中央に配置。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.HAlignType.Right">
+            <summary>水平方向に関して右揃えに配置。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.HAlignType.Fill">
+            <summary>繰り返し。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.HAlignType.Justify">
+            <summary>両端揃え。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.VAlignType">
+            <summary>垂直方向の配置のオプション。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.VAlignType.Top">
+            <summary>上揃え。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.VAlignType.Center">
+            <summary>垂直方向で中央に配置。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.VAlignType.Bottom">
+            <summary>下揃え。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.VAlignType.Justify">
+            <summary></summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.TextDirectionType">
+            <summary>テキストフローの方向。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.TextDirectionType.Context">
+            <summary>読みの方向は、テキストの最初の非空白文字をスキャンする
+            ことで決定されます。それが強い右から左表記の文字の場合は、
+            読みの方向は右から左になります。そうでない場合、読みの方向は左から右です。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.TextDirectionType.LeftToRight">
+            <summary>セル内の読みの方向は、英語のように左から右です。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.TextDirectionType.RightToLeft">
+            <summary>セル内の読みの方向は、ヘブライ語のように右から左です。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.BorderLinetype">
+            <summary>セル境界線のスタイル。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.BorderLinetype.None">
+            <summary>境界線の線スタイルが、なしになります（境界線は表示されません）。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.BorderLinetype.Thin">
+            <summary>境界線の線スタイルが細線になります。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.BorderLinetype.Medium">
+            <summary>境界線の線スタイルが中細線になります。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.BorderLinetype.Dashed">
+            <summary>境界線の線スタイルが破線になります。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.BorderLinetype.Dotted">
+            <summary>境界線の線スタイルが点線になります。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.BorderLinetype.Thick">
+            <summary>境界線の線スタイルが「太線」になります。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.BorderLinetype.Double">
+            <summary>境界線の線スタイルが二重線になります。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.BorderLinetype.Hair">
+            <summary>境界線の線スタイルが極細線になります。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.BorderLinetype.MediumDashed">
+            <summary>境界線の線スタイルが中細破線になります。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.BorderLinetype.ThinDashDotted">
+            <summary>境界線の線スタイルが細1点鎖線になります。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.BorderLinetype.MediumDashDotted">
+            <summary>境界線の線スタイルが中細1点鎖線になります。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.BorderLinetype.ThinDashDotDotted">
+            <summary>境界線の線スタイルが細2点鎖線になります。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.BorderLinetype.MediumDashDotDotted">
+            <summary>境界線の線スタイルが中細1点鎖線になります。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.BorderLinetype.SlantedMediumDashDotted">
+            <summary>境界線の線スタイルが1点鎖斜線になります。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.PatternStyle">
+            <summary>セル塗りつぶしのパターンタイプ。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.None">
+            <summary>パターンなし（透過）。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.Solid">
+            <summary>単色。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.Gray50">
+            <summary>50%灰色パターン。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.Gray75">
+            <summary>75%灰色パターン。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.Gray25">
+            <summary>25%灰色パターン。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.HorizontalStripe">
+            <summary>横縞。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.VerticalStripe">
+            <summary>縦縞。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.ReverseDiagonalStripe">
+            <summary>右下がり斜線縞パターン（＼）。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.DiagonalStripe">
+            <summary>左下がり斜線縞パターン（／）。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.DiagonalCrosshatch">
+            <summary>斜線格子パターン。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.ThickDiagonalCrosshatch">
+            <summary>太斜線格子パターン。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.ThinHorizontalStripe">
+            <summary>細線水平ストライプパターン。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.ThinVerticalStripe">
+            <summary>細線垂直ストライプパターン。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.ThinReverseDiagonalStripe">
+            <summary>細右下がり斜線縞パターン（＼）。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.ThinDiagonalStripe">
+            <summary>細左下がり斜線縞パターン（／）。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.ThinHorizontalCrosshatch">
+            <summary>細線横格子パターン。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.ThinDiagonalCrosshatch">
+            <summary>細斜線格子パターン（ひし形）。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.Gray12">
+            <summary>12%灰色パターン（ドット数が少ない）。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.PatternStyle.Gray06">
+            <summary>6%灰色パターン（ドット数が最少）。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.BoundSheet`1">
+            <summary>連結シートを表します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Sheet">
+            <summary>FlexSheetコントロール内のシートを表します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Sheet.#ctor">
+            <summary>1つのシートインスタンスを作成します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Sheet.SelectionRanges">
+            <summary>選択項目の配列を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Sheet.OnClientNameChanged">
+            <summary>シート名が変更された後で発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Sheet.Name">
+            <summary>シートの名前を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Sheet.Visible">
+            <summary>シートの表示/非表示を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Sheet.OnClientVisibleChanged">
+            <summary>シートの表示/非表示が変更された後に発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Sheet.Type">
+            <summary>シートタイプを取得します。jsonシリアライズを使用します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.BoundSheet`1.ShouldSerializeItemsSource">
+            <summary>ItemsSourceプロパティをシリアライズするかどうかを指定します。</summary>
+            <returns>trueの場合、プロパティはシリアライズされます。
+            そうでない場合は、シリアライズされません。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.BoundSheet`1.#ctor">
+            <summary>
+                <see cref="!:C1.Web.Mvc.Sheet.BoundSheet" />の新しいインスタンスを初期化します</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.BoundSheet`1.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>
+                <see cref="!:C1.Web.Mvc.Sheet.BoundSheet" />の新しいインスタンスを初期化します</summary>
+            <param name="helper">HtmlHelperインスタンス。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.BoundSheet`1.SortDescriptions">
+            <summary>ソート記述を取得します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.BoundSheet`1.GroupDescriptions">
+            <summary>グループ記述を取得します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.BoundSheet`1.PageSize">
+            <summary>指定されたページサイズで ItemsSource をページング可能にします。0 を指定すると、ページングが無効になります。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.BoundSheet`1.ItemsSource">
+            <summary>ItemsSource設定を取得します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.BoundSheet`1.ItemsSourceId">
+            <summary>この列で使用されるItemsSourceIdを取得または設定し、このコントロールに対してどのCollectionViewServiceを使用するかを指定します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fluent.DefinedNameBuilder">
+            <summary>
+                <see cref="T:C1.Web.Mvc.Sheet.DefinedName" /> を構成するためのビルダを定義します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.DefinedNameBuilder.#ctor(C1.Web.Mvc.Sheet.DefinedName)">
+            <summary>
+                <paramref name="obj" /> を構成するために 1 つの <see cref="T:C1.Web.Mvc.Sheet.Fluent.DefinedNameBuilder" /> インスタンスを作成します。</summary>
+            <param name="obj">構成する <see cref="T:C1.Web.Mvc.Sheet.DefinedName" /> オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.DefinedNameBuilder.Name(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.DefinedName.Name" /> を構成します。
+            定義された名前項目の名前を設定します。</summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.DefinedNameBuilder.SheetName(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.DefinedName.SheetName" /> を構成します。
+            定義された名前項目がどのシート内で機能するかを設定します。
+            省略された場合、定義された名前項目はワークブック内で機能します。</summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.DefinedNameBuilder.Value(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.DefinedName.Value" /> を構成します。
+            定義された名前項目の値を設定します。
+            この値は、式、文字列定数、またはセル範囲でもかまいません。
+            たとえば、"Sum(1, 2, 3)"、"1.2"、"\"test\""、"sheet1!A1:B2"です。</summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.FlexSheet">
+            <summary>FlexSheetコントロールは、FlexGridコントロールを拡張してExcelと同様の機能を提供します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FlexSheet.#ctor(System.Web.Mvc.HtmlHelper,System.String)">
+            <summary>1つのFlexSheetインスタンスを作成します。</summary>
+            <param name="helper">HTMLヘルパー</param>
+            <param name="selector">セレクタ</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FlexSheet.RegisterStartupScript(System.Web.UI.HtmlTextWriter)">
+            <summary>エクステンダ起動スクリプトをレンダリングするためにオーバーライドされます。</summary>
+            <param name="writer">指定されたライタ</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FlexSheet.CreateChildComponents">
+            <summary>すべての子コンポーネントが追加されたことを確認します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.SelectedSheetIndex">
+            <summary>FlexSheet内の現在のシートのインデックスを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.IsTabHolderVisible">
+            <summary>TabHolderが表示されているかどうかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.FilePath">
+            <summary>xlsxファイルのパスを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.Workbook">
+            <summary>Workbookモデルを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.SaveActionUrl">
+            <summary>保存アクションのURLを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.LoadActionUrl">
+            <summary>ロードアクションのURLを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.ScrollToSelection">
+            <summary>選択範囲をビューまでスクロールするかどうかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.AppendedSheets">
+            <summary>FlexSheet添付シートを取得します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientSelectedSheetChanged">
+            <summary>現在のシートインデックスが変更されると発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientDraggingRowColumn">
+            <summary>FlexSheetの行または列をドラッグすると発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientDroppingRowColumn">
+            <summary>FlexSheetの行または列をドロップすると発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientRemoteSaving">
+            <summary>ファイルをサーバーに保存する前に発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientRemoteSaved">
+            <summary>ファイルをサーバーに正常に保存すると発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.FileStream">
+            <summary>xlsxファイルのストリームを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientLoaded">
+            <summary>@see:FlexSheetが@see:Workbookインスタンスをロードした後に発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.AllowDragging">
+            <summary>ユーザーがマウスを使用して行、列、またはその両方をドラッグできるかどうかを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.AllowResizing">
+            <summary>ユーザーがマウスを使用して行、列、またはその両方をサイズ変更できるかどうかを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.ShowSelectedHeaders">
+            <summary>選択したヘッダーセルの表示にクラス名を追加するかどうかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.ShowMarquee">
+            <summary>グリッドの現在の選択範囲の周囲にマーキー要素を表示するかどうかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.SaveContentType">
+            <summary>リモート保存データの型を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientRemoteLoading">
+            <summary>サーバーからデータをリモートロードする前に発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientRemoteLoaded">
+            <summary>サーバーからデータをリモートロードした後に発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientUnknownFunction">
+            <summary>@see:FlexSheetで不明な式が検出されたときに発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientSheetVisibleChanged">
+            <summary>FlexSheetのシートコレクション内のシートの表示/非表示が変更された後に発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientSortingColumn">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientSortedColumn">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientSheetCleared">
+            <summary>FlexSheetがクリアされたときに発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.ShowFilterIcons">
+            <summary>フィルタアイコンの表示/非表示を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientColumnChanged">
+            <summary>列を挿入または削除した後に発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientPrepareChangingColumn">
+            <summary>列を挿入または削除する前に発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientPrepareChangingRow">
+            <summary>行を挿入または削除する前に発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientRowChanged">
+            <summary>行を挿入または削除した後に発生します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.NewRowAtTop">
+            <summary>新しい行テンプレートをグリッドの上部に配置するか、下部に配置するかを示す値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.DefinedNames">
+            <summary>FlexSheet で定義された名前付き範囲/式を表す DefinedName オブジェクトのコレクションを取得します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.ItemsSource">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.ItemsSourceId">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.AllowSorting">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.AutoGenerateColumns">
+            <summary>
+            Gets Sets Auto Generate Columns on FlexSheet
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.QuickAutoSize">
+            <summary>FlexSheet ではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.CellsTemplate">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.ChildItemsPath">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.ColumnHeadersTemplate">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.GroupHeaderFormat">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.HeadersVisibility">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.ItemFormatter">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.RowHeadersTemplate">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.ShowGroups">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.ShowSort">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.StickyHeaders">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.SortRowIndex">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.TopLeftCellsTemplate">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.TreeIndent">
+            <summary>FlexSheetではこのプロパティは使用できません。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.Columns">
+            <summary>FlexSheetではこのプロパティは非推奨です。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.FormulaBar">
+            <summary>数式バーの設定に使用されるエクステンダを定義します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FormulaBar.RegisterStartupScript(System.Web.UI.HtmlTextWriter)">
+            <summary>ライタにエクステンダインスタンスをレンダリングします。</summary>
+            <param name="writer">指定されたライタ。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FormulaBar.#ctor(C1.Web.Mvc.Sheet.FlexSheet,System.String)">
+            <summary>FormulaBarクラスの新しいインスタンスを初期化します。</summary>
+            <param name="sheet">数式バーを使用する、指定された<see cref="T:C1.Web.Mvc.Sheet.FlexSheet" />オブジェクト。</param>
+            <param name="selector">セレクタ。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FormulaBar.Selector">
+            <summary>セレクタを指定する値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FormulaBar.IsDisabled">
+            <summary>コントロールが無効かどうかを判定する値を取得または設定します。</summary>
+            <remarks>無効化されたコントロールは、マウスイベントやキーボードイベントを取得できません。</remarks>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder">
+            <summary>FlexSheetのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.#ctor(C1.Web.Mvc.Sheet.FlexSheet)">
+            <summary>1つのFlexSheetBuilderインスタンスを作成します。</summary>
+            <param name="component">構成する<see cref="T:C1.Web.Mvc.Sheet.FlexSheet" />オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.SelectedSheetIndex(System.Nullable{System.Int32})">
+            <summary>SelectedSheetIndexプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.IsTabHolderVisible(System.Boolean)">
+            <summary>IsTabHolderVisibleプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientSelectedSheetChanged(System.String)">
+            <summary>OnClientSelectedSheetChangedプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientDraggingRowColumn(System.String)">
+            <summary>OnClientDraggingRowColumnプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientDroppingRowColumn(System.String)">
+            <summary>OnClientDroppingRowColumnプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientRemoteSaving(System.String)">
+            <summary>OnClientRemoteSavingプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientRemoteSaved(System.String)">
+            <summary>OnClientRemoteSavedプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientLoaded(System.String)">
+            <summary>OnClientLoadedプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.SaveContentType(C1.Web.Mvc.Sheet.ContentType)">
+            <summary>SaveContentTypeプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientRemoteLoading(System.String)">
+            <summary>OnClientRemoteLoadingプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientRemoteLoaded(System.String)">
+            <summary>OnClientRemoteLoadedプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientUnknownFunction(System.String)">
+            <summary>OnClientUnknownFunctionプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientSheetVisibleChanged(System.String)">
+            <summary>OnClientSheetVisibleChangedプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientSortingColumn(System.String)">
+            <summary>OnClientSortingColumnプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientSortedColumn(System.String)">
+            <summary>OnClientSortedColumnプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientSheetCleared(System.String)">
+            <summary>OnClientSheetClearedプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.ShowFilterIcons(System.Boolean)">
+            <summary>ShowFilterIconsプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientColumnChanged(System.String)">
+            <summary>OnClientColumnChangedプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientPrepareChangingColumn(System.String)">
+            <summary>OnClientPrepareChangingColumnプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientPrepareChangingRow(System.String)">
+            <summary>OnClientPrepareChangingRowプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientRowChanged(System.String)">
+            <summary>OnClientRowChangedプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.NewRowAtTop(System.Boolean)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.FlexSheet.NewRowAtTop" />を構成します。新しい行テンプレートをグリッドの上部に配置するか、下部に配置するかを示す値を取得します。</summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.Select(System.Int32,System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean)">
+            <summary>セルの範囲を選択し、オプションで選択範囲を表示範囲までスクロールします。</summary>
+            <param name="row">この範囲の最初の行のインデックス。</param>
+            <param name="col">この範囲の最初の列のインデックス。</param>
+            <param name="row2">この範囲の最後の行のインデックス。</param>
+            <param name="col2">この範囲の最後の列のインデックス。</param>
+            <param name="scrollToSelection">選択範囲をビューまでスクロールするかどうかを指定します。</param>
+            <returns>現在のFlexSheetビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.Load(C1.Web.Mvc.Sheet.Workbook)">
+            <summary>Workbookインスタンスをロードします。</summary>
+            <param name="workbook">Workbookインスタンス</param>
+            <returns>現在のFlexSheetビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.Load(System.String)">
+            <summary>ファイルパスを指定してxlsxファイルをロードします。</summary>
+            <param name="filePath">xlsxファイルのパス</param>
+            <returns>現在のFlexSheetビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.Load(System.IO.Stream)">
+            <summary>FileStreamからxlsxファイルをロードします。</summary>
+            <param name="fileStream">xlsxファイルのファイルストリーム</param>
+            <returns>現在のFlexSheetビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.RemoteLoad(System.String)">
+            <summary>リモートロードのLoadActionUrlを設定します。</summary>
+            <param name="loadActionUrl">ロードアクションのURL。</param>
+            <returns>現在のFlexSheetビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.RemoteSave(System.String,C1.Web.Mvc.Sheet.ContentType)">
+            <summary>リモート保存のSaveActionUrlを設定します。</summary>
+            <param name="saveActionUrl">保存アクションのURL。</param>
+            <param name="saveContentType">コンテンツの型。</param>
+            <returns>現在のFlexSheetビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.AddBoundSheet``1(System.Action{C1.Web.Mvc.Sheet.Fluent.BoundSheetBuilder{``0}})">
+            <summary>
+            連結シートを追加します。これは、ロードしたワークブックまたはxlsxファイルの後に配置されます。
+            </summary>
+            <typeparam name="T">データ項目タイプ</typeparam>
+            <param name="build">構築アクション</param>
+            <returns>現在のFlexSheetビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.AddBoundSheet(System.Action{C1.Web.Mvc.Sheet.Fluent.BoundSheetBuilder{System.Object}})">
+            <summary>
+            連結シートを追加します。これは、ロードしたワークブックまたはxlsxファイルの後に配置されます。
+            </summary>
+            <param name="build">構築アクション</param>
+            <returns>現在のFlexSheetビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.AddUnboundSheet(System.String,System.Int32,System.Int32)">
+            <summary>非連結シートを追加します。これは、ロードしたワークブックまたはxlsxファイルの後に配置されます。</summary>
+            <param name="name">シート名</param>
+            <param name="rowCount">シート内の行の数。</param>
+            <param name="columnCount">シート内の列の数。</param>
+            <returns>現在のFlexSheetビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.AddUnboundSheet(System.Action{C1.Web.Mvc.Sheet.Fluent.UnboundSheetBuilder})">
+            <summary>
+            非連結シートを追加します。これは、ロードしたワークブックまたはxlsxファイルの後に配置されます。
+            </summary>
+            <param name="build">構築アクション</param>
+            <returns>現在のFlexSheetビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.DefinedNames(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.Sheet.DefinedName,C1.Web.Mvc.Sheet.Fluent.DefinedNameBuilder}})">
+            <summary>
+            <see cref="P:C1.Web.Mvc.Sheet.FlexSheet.DefinedNames" />を設定します。
+            </summary>
+            <param name="build">構築アクション</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.AllowAddNew(System.Boolean)">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.Bind(System.Action{C1.Web.Mvc.Fluent.CollectionViewServiceBuilder{System.Object}})">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.Bind(System.String)">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.Bind(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.BindODataSource(System.Action{C1.Web.Mvc.Fluent.ODataCollectionViewServiceBuilder{System.Object}})">
+            <summary>FlexSheet ではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.BindODataVirtualSource(System.Action{C1.Web.Mvc.Fluent.ODataVirtualCollectionViewServiceBuilder{System.Object}})">
+            <summary>FlexSheet ではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.GroupBy(System.String[])">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OrderBy(System.String[])">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.ItemsSourceId(System.String)">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OrderByDescending(System.String[])">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.PageSize(System.Int32)">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.AllowSorting(System.Boolean)">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.AutoGenerateColumns(System.Boolean)">
+            <summary>
+            Sets a boolean value decides auto generate columns on FlexSheet.
+            </summary>
+            <param name="value">The value</param>
+            <returns>現在のFlexSheetビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.QuickAutoSize(System.Nullable{System.Boolean})">
+            <summary>FlexSheet ではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.CellsTemplate(System.Action{C1.Web.Mvc.Fluent.CellTemplateBuilder})">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.ChildItemsPath(System.String)">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.ColumnHeadersTemplate(System.Action{C1.Web.Mvc.Fluent.CellTemplateBuilder})">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.GroupHeaderFormat(System.String)">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.HeadersVisibility(C1.Web.Mvc.Grid.HeadersVisibility)">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.ItemFormatter(System.String)">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.ShowGroups(System.Boolean)">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.ShowSort(System.Boolean)">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.StickyHeaders(System.Boolean)">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.SortRowIndex(System.Nullable{System.Int32})">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.TopLeftCellsTemplate(System.Action{C1.Web.Mvc.Fluent.CellTemplateBuilder})">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.TreeIndent(System.Int32)">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.RowHeadersTemplate(System.Action{C1.Web.Mvc.Fluent.CellTemplateBuilder})">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.Columns(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.Column,C1.Web.Mvc.Fluent.ColumnBuilder}})">
+            <summary>FlexSheetではこのメソッドは非推奨です。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.ShowColumnFooters(System.Boolean,System.String)">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.ColumnFootersTemplate(System.Action{C1.Web.Mvc.Fluent.CellTemplateBuilder})">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.BottomLeftCellsTemplate(System.Action{C1.Web.Mvc.Fluent.CellTemplateBuilder})">
+            <summary>FlexSheetではこのメソッドは使用できません。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fluent.FormulaBarBuilder">
+            <summary>FormulaBarのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FormulaBarBuilder.Selector(System.String)">
+            <summary>Selectorプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FormulaBarBuilder.IsDisabled(System.Boolean)">
+            <summary>IsDisabledプロパティを設定します。</summary>
+            <remarks>コントロールが無効かどうかを判定する値を取得または設定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FormulaBarBuilder.#ctor(C1.Web.Mvc.Sheet.FormulaBar)">
+            <summary>1つのFormulaBarBuilderインスタンスを作成します。</summary>
+            <param name="extender">FormulaBarエクステンダ。</param>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.FlexSheetLoadResponse">
+            <summary>FlexSheetリモートロードの応答データ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FlexSheetLoadResponse.#ctor">
+            <summary>
+                <see cref="T:C1.Web.Mvc.Sheet.FlexSheetLoadResponse" />の新しいインスタンスを初期化します</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheetLoadResponse.FilePath">
+            <summary>xlsxファイルのパス。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheetLoadResponse.FileStream">
+            <summary>xlsxファイルのStream。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheetLoadResponse.Workbook">
+            <summary>Workbookオブジェクトモデル。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.FlexSheetSaveRequest">
+            <summary>FlexSheetリモート保存の要求データ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FlexSheetSaveRequest.#ctor">
+            <summary>
+                <see cref="T:C1.Web.Mvc.Sheet.FlexSheetSaveRequest" />の新しいインスタンスを初期化します</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FlexSheetSaveRequest.GetFileStream">
+            <summary>xlsxファイルのStream値を取得します。</summary>
+            <returns>Stream値</returns>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheetSaveRequest.Workbook">
+            <summary>Workbookオブジェクトモデル。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheetSaveRequest.ExtraData">
+            <summary>クライアントから送信された追加データ。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.UnboundSheet">
+            <summary>非連結シートを表します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.UnboundSheet.ColumnCount">
+            <summary>シート内の列数を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.UnboundSheet.RowCount">
+            <summary>シート内の行数を取得または設定します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fluent.BoundSheetBuilder`1">
+            <summary>BoundSheetのビルダ。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fluent.SheetBuilder`2">
+            <summary>シートのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.SheetBuilder`2.#ctor(`0)">
+            <summary>1つのSheetBuilderインスタンスを作成します。</summary>
+            <param name="obj">シートオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.SheetBuilder`2.OnClientNameChanged(System.String)">
+            <summary>OnClientNameChangedプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.SheetBuilder`2.Name(System.String)">
+            <summary>Nameプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.SheetBuilder`2.Visible(System.Boolean)">
+            <summary>Visibleプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.SheetBuilder`2.OnClientVisibleChanged(System.String)">
+            <summary>OnClientVisibleChangedプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.SheetBuilder`2.SelectionRanges(System.Action{C1.Web.Mvc.Sheet.Fluent.CellRangeFactory})">
+            <summary>
+            SelectionRangesプロパティを設定します。
+            </summary>
+            <param name="build">構築アクション</param>
+            <returns>Current builder</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.BoundSheetBuilder`1.#ctor(C1.Web.Mvc.Sheet.BoundSheet{`0})">
+            <summary>1つのBoundSheetBuilderインスタンスを作成します。</summary>
+            <param name="obj">BoundSheetオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.BoundSheetBuilder`1.ItemsSourceId(System.String)">
+            <summary>ItemsSourceIdプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.BoundSheetBuilder`1.Bind(System.Action{C1.Web.Mvc.Fluent.CollectionViewServiceBuilder{`0}})">
+            <summary>ビルダによってItemsSourceを設定します。</summary>
+            <param name="itemsSourceBuild">ItemsSourceを設定するためのビルドアクション</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.BoundSheetBuilder`1.Bind(System.Collections.Generic.IEnumerable{`0})">
+            <summary>コレクションに連結します。</summary>
+            <param name="sourceCollection">ソースコレクション</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.BoundSheetBuilder`1.Bind(System.String)">
+            <summary>読み取りアクションURLを設定します。</summary>
+            <param name="readActionUrl">アクションURL。</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.BoundSheetBuilder`1.BindODataVirtualSource(System.Action{C1.Web.Mvc.Fluent.ODataVirtualCollectionViewServiceBuilder{`0}})">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.BoundSheet`1.ItemsSource" /> を構成します。
+            ItemsSource を設定します。</summary>
+            <param name="build">
+                <see cref="T:C1.Web.Mvc.ODataVirtualCollectionViewService`1" /> を構築するアクション。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.BoundSheetBuilder`1.BindODataSource(System.Action{C1.Web.Mvc.Fluent.ODataCollectionViewServiceBuilder{`0}})">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.BoundSheet`1.ItemsSource" /> を構成します。
+            ItemsSource を設定します。</summary>
+            <param name="build">
+                <see cref="T:C1.Web.Mvc.ODataCollectionViewService`1" /> を構築するアクション。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.BoundSheetBuilder`1.GroupBy(System.String[])">
+            <summary>
+                <see cref="T:C1.Web.Mvc.PropertyGroupDescription" /> を設定します。</summary>
+            <param name="names">グループ化で使用されるプロパティ名</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.BoundSheetBuilder`1.OrderBy(System.String[])">
+            <summary>
+                <see cref="T:C1.Web.Mvc.SortDescription" /> を設定します。</summary>
+            <param name="names">ソートの基準になる名前</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.BoundSheetBuilder`1.OrderByDescending(System.String[])">
+            <summary>
+                <see cref="T:C1.Web.Mvc.SortDescription" /> を設定します。</summary>
+            <param name="names">降順のソートの基準になる名前</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.BoundSheetBuilder`1.PageSize(System.Int32)">
+            <summary>指定されたページサイズでItemsSourceをページング可能にします。
+            0はページングを無効にします。</summary>
+            <param name="pageSize">ページサイズ</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fluent.UnboundSheetBuilder">
+            <summary>UnboundSheetのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.UnboundSheetBuilder.#ctor(C1.Web.Mvc.Sheet.UnboundSheet)">
+            <summary>1つのUnboundSheetBuilderインスタンスを作成します。</summary>
+            <param name="obj">UnboundSheetオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.UnboundSheetBuilder.ColumnCount(System.Int32)">
+            <summary>ColumnCountプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.UnboundSheetBuilder.RowCount(System.Int32)">
+            <summary>RowCountプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.FlexSheetSaveResponse">
+            <summary>Flexsheetリモート保存への応答。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FlexSheetSaveResponse.#ctor">
+            <summary>
+                <see cref="T:C1.Web.Mvc.Sheet.FlexSheetSaveResponse" />の新しいインスタンスを初期化します</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.ContentType">
+            <summary>リモート保存コンテンツのタイプを指定します。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.ContentType.Xlsx">
+            <summary>xlsxファイル。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Sheet.ContentType.Workbook">
+            <summary>Workbookオブジェクトモデル。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.FlexSheetHelper">
+            <summary>クライアント側FlexSheetからの要求のロード処理をサポートします。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FlexSheetHelper.Load(System.IO.Stream)">
+            <summary>FileStreamインスタンスからデータをロードします。</summary>
+            <param name="fileStream">FileStreamインスタンス</param>
+            <returns>応答データ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FlexSheetHelper.Load(System.String)">
+            <summary>xlsxファイルからデータをロードします。</summary>
+            <param name="filePath">xlsxファイルのパス</param>
+            <returns>応答データ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FlexSheetHelper.Load(C1.Web.Mvc.Sheet.Workbook)">
+            <summary>Workbookインスタンスからデータをロードします。</summary>
+            <param name="workbook">Workbookインスタンス</param>
+            <returns>応答データ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FlexSheetHelper.Save(System.Boolean,System.String)">
+            <summary>保存結果を含むFlexSheetSaveResponseインスタンスを取得します。</summary>
+            <param name="success">操作が成功したかどうか</param>
+            <param name="error">エラーメッセージ</param>
+            <returns>応答データ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.WebResources.Definitions.FormulaBar">
+            <summary>C1 FormulaBarに関連するjsおよびcssを定義します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FlexSheetWebResourcesManager.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>FlexSheetWebResourcesManagerクラスの新しいインスタンスを初期化します。</summary>
+            <param name="helper">HtmlHelperのインスタンス</param>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.C1FlexSheet">
+            <summary>C1 FlexSheetに関連するjsおよびcssを定義します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.C1FormulaBar">
+            <summary>C1 FormulaBarに関連するjsおよびcssを定義します。</summary>
+        </member>
+        <member name="T:C1.JsonNet.Converters.StreamConverter">
+            <summary>StreamとBase64Stringの変換を行うコンバータを定義します。</summary>
+        </member>
+        <member name="M:C1.JsonNet.Converters.StreamConverter.CanConvert(System.Type)">
+            <summary>このインスタンスが指定されたオブジェクトタイプを変換できるかどうかを決定します。</summary>
+            <param name="objectType">オブジェクトのタイプ。</param>
+            <returns>このインスタンスが指定されたオブジェクトタイプを変換できる場合は <c>true</c>、そうでない場合は <c>false</c>。</returns>
+        </member>
+        <member name="M:C1.JsonNet.Converters.StreamConverter.WriteJson(C1.JsonNet.JsonWriter,System.Object)">
+            <summary>オブジェクトのJSON表現を書き込みます。</summary>
+            <param name="writer">書き込み先の <see cref="T:C1.JsonNet.JsonWriter" />。</param>
+            <param name="value">シリアライズされる値。</param>
+        </member>
+        <member name="M:C1.JsonNet.Converters.StreamConverter.ReadJson(C1.JsonNet.JsonReader,System.Type,System.Object)">
+            <summary>オブジェクトのJSON表現を読み取ります。</summary>
+            <param name="reader">読み取り元の <see cref="T:C1.JsonNet.JsonReader" />。</param>
+            <param name="objectType">オブジェクトのタイプ。</param>
+            <param name="existingValue">読み取られるオブジェクトの既存の値。</param>
+            <returns>シリアライズ解除後のオブジェクトの値。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.FlexSheetRequestModelBinder">
+            <summary>FlexSheet形式の要求のモデルバインダを定義します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FlexSheetRequestModelBinder.GetRequestContent(System.Web.HttpRequestBase)">
+            <summary>シリアライズ解除に使用される要求コンテンツを取得します。</summary>
+            <param name="request">HTTP要求。</param>
+            <returns>コンテンツ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FlexSheetRequestModelBinder.DeserializeModel(System.String,System.Type)">
+            <summary>モデルをシリアライズ解除します。</summary>
+            <param name="text">シリアライズ解除に使用される文字列。</param>
+            <param name="modelType">モデルの型。</param>
+            <returns>モデル。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.FlexSheetRequestAttribute">
+            <summary>FlexSheet要求のモデルバインダを呼び出す属性を表します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FlexSheetRequestAttribute.GetBinder">
+            <summary>関連するモデルバインダを取得します。</summary>
+            <returns>System.Web.Mvc.IModelBinderインタフェースを実装するオブジェクトへの参照</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fluent.CellRangeFactory">
+            <summary>柔軟なAPIでCellRangesを設定できるCellRangeFactory。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.CellRangeFactory.#ctor(System.Collections.Generic.IList{C1.Web.Mvc.Grid.CellRange})">
+            <summary>CellRangeFactoryのコンストラクタ。</summary>
+            <param name="ranges">Rangeリスト</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.CellRangeFactory.AddCellRange(System.Int32,System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>RangeリストにCellRangeを追加します。</summary>
+            <param name="row">最初の行のインデックス</param>
+            <param name="col">最初の列のインデックス</param>
+            <param name="row2">最後の行のインデックス</param>
+            <param name="col2">最後の列のインデックス</param>
+            <returns></returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fluent.ControlBuilderFactoryExtension">
+            <summary>ControlBuilderFactoryを拡張してFlexSheet関連コントロールを作成します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ControlBuilderFactoryExtension.FlexSheet(C1.Web.Mvc.Fluent.ControlBuilderFactory,System.String)">
+            <summary>FlexSheetBuilderを作成します。</summary>
+            <param name="controlBuilderFactory">ControlBuilderFactory</param>
+            <param name="selector">セレクタ</param>
+            <returns>FlexSheetBuilder</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ControlBuilderFactoryExtension.FlexSheetResources(C1.Web.Mvc.Fluent.ControlBuilderFactory,System.Type[])">
+            <summary>FlexSheetに関連するjsリソースをレンダリングします。</summary>
+            <param name="controlBuilderFactory">ControlBuilderFactory</param>
+            <param name="controlTypes">コントロールのタイプを指定します。</param>
+            <returns>HTML文字列</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fluent.FormulaBarExtension">
+            <summary>FormulaBarエクステンダを使用できるすべてのコントロールに 
+            拡張メソッドを追加する静的クラスを定義します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FormulaBarExtension.ShowFormulaBar(C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder,System.String)">
+            <summary>FlexSheetにFormulaBarエクステンダを適用します。</summary>
+            <param name="flexSheetBuilder">指定されたFlexSheetビルダ。</param>
+            <param name="selector">FormulaBarのホスト要素の指定されたセレクタ。</param>
+            <returns>FlexSheetビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FormulaBarExtension.ShowFormulaBar(C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder,System.Action{C1.Web.Mvc.Sheet.Fluent.FormulaBarBuilder})">
+            <summary>FlexSheetにFormulaBarエクステンダを適用します。</summary>
+            <param name="flexSheetBuilder">指定されたFlexSheetビルダ。</param>
+            <param name="formulaBarBuilder">指定されたFormulaBarビルダ。</param>
+            <returns>FlexSheetビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fluent.ScriptsBuilderExtension">
+            <summary>FlexSheetコントロールスクリプト用に<see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />クラスを拡張します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ScriptsBuilderExtension.FlexSheet(C1.Web.Mvc.Fluent.ScriptsBuilder)">
+            <summary>FlexSheet関連のスクリプトバンドルを登録します。このバンドルには、FlexSheetコントロールが含まれています。</summary>
+            <param name="scriptsBuilder">
+                <see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />。</param>
+            <returns>
+                <see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.LicenseDetector">
+            <summary>C1.Web.Mvc.Sheetライセンスを検出するためのクラスを定義します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.LicenseDetector.#ctor">
+            <summary>コンストラクタ。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Workbook.ColorThemes">
+            <summary>
+            ワークブックテーマの色を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Worksheet.Tables">
+            <summary>
+            このワークシート内のテーブルを取得します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.WorkbookTable">
+            <summary>
+            テーブル定義を表します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.WorkbookTable.#ctor">
+            <summary>
+            WorkbookTable インスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.WorkbookTable.#ctor(System.String,System.String,C1.Web.Mvc.Sheet.WorkbookTableStyle,System.Collections.Generic.List{C1.Web.Mvc.Sheet.WorkbookTableColumn})">
+            <summary>
+            WorkbookTable インスタンスを作成します。
+            </summary>
+            <param name="name">テーブルの名前。</param>
+            <param name="range">テーブルの範囲。</param>
+            <param name="style">テーブルで使用するテーブルスタイル。</param>
+            <param name="columns">テーブルの列。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTable.Name">
+            <summary>
+            テーブルの名前を取得または設定します。
+            </summary>
+            <remarks>
+            プログラムでテーブルを参照するために使用されます。
+            </remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTable.Range">
+            <summary>
+            テーブルが占有する関連シート内の範囲を取得または設定します。「A1:D4」などの A1 スタイルの参照を使用して表されます。
+            </summary>
+            <remarks>
+            合計行が表示される場合は、その合計行も参照に含まれます。
+            </remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTable.ShowHeaderRow">
+            <summary>
+            テーブルのヘッダー行を表示するかどうかを示します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTable.ShowTotalRow">
+            <summary>
+            テーブルの合計行を表示するかどうかを示します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTable.ShowBandedColumns">
+            <summary>
+            結合列形式が適用されるかどうかを示します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTable.ShowBandedRows">
+            <summary>
+            結合行形式が適用されるかどうかを示します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTable.AlterFirstColumn">
+            <summary>
+            テーブル内の最初の列にスタイルを適用するかどうかを示します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTable.AlterLastColumn">
+            <summary>
+            テーブル内の最後の列にスタイルを適用するかどうかを示します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTable.Style">
+            <summary>
+            テーブルで使用するテーブルスタイルを取得または設定します。
+            </summary>
+            <remarks>
+            スタイルを省略すると、デフォルトのスタイルは組み込みテーブルスタイル「TableStyleMedium9」になります。
+            </remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTable.Columns">
+            <summary>
+            テーブルの列を取得します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.WorkbookTableStyle">
+            <summary>
+            テーブルスタイル定義を表します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableStyle.Name">
+            <summary>
+            テーブルスタイルの名前を取得または設定します。
+            </summary>
+            <remarks>
+            ワークブックは、組み込み名「TableStyleLight1」から「TableStyleLight21」、「TableStyleMedium1」から「TableStyleMedium28」、「TableStyleDark1」から「TableStyleDark11」をサポートします。
+            </remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableStyle.WholeTableStyle">
+            <summary>
+            テーブルスタイル全体を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableStyle.FirstBandedColumnStyle">
+            <summary>
+            最初の列のストライプスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableStyle.SecondBandedColumnStyle">
+            <summary>
+            2 番目の列のストライプスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableStyle.FirstBandedRowStyle">
+            <summary>
+            最初の行のストライプスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableStyle.SecondBandedRowStyle">
+            <summary>
+            2 番目の行のストライプスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableStyle.FirstColumnStyle">
+            <summary>
+            最初の列のスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableStyle.LastColumnStyle">
+            <summary>
+            最後の列のスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableStyle.HeaderRowStyle">
+            <summary>
+            ヘッダー行のスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableStyle.TotalRowStyle">
+            <summary>
+            合計行のスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableStyle.FirstHeaderCellStyle">
+            <summary>
+            ヘッダー行の最初のセルのスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableStyle.LastHeaderCellStyle">
+            <summary>
+            ヘッダー行の最後のセルのスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableStyle.FirstTotalCellStyle">
+            <summary>
+            合計行の最初のセルのスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableStyle.LastTotalCellStyle">
+            <summary>
+            合計行の最後のセルのスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.WorkbookTableCommonStyle">
+            <summary>
+            テーブル共通スタイル定義を表します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableCommonStyle.Borders">
+            <summary>
+            テーブル境界線の設定を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.WorkbookTableBandedStyle">
+            <summary>
+            テーブルストライプスタイル定義を表します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableBandedStyle.Size">
+            <summary>
+            ストライプの単一テーブル領域内の行または列の数を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.WorkbookTableBorder">
+            <summary>
+            テーブル境界線定義を表します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableBorder.Vertical">
+            <summary>
+            垂直境界線の設定を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableBorder.Horizontal">
+            <summary>
+            水平境界線の設定を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.WorkbookTableColumn">
+            <summary>
+            テーブル列定義を表します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableColumn.Name">
+            <summary>
+            テーブル列の名前。
+            </summary>
+            <remarks>
+            いくつかの関数で参照されます。
+            </remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableColumn.TotalRowLabel">
+            <summary>
+            この列の合計行セルに表示する文字列を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableColumn.TotalRowFunction">
+            <summary>
+            この列の合計行セルに表示する関数を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.WorkbookTableColumn.ShowFilterButton">
+            <summary>
+            列のフィルタボタンを表示するかどうかを示します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Cell.Link">
+            <summary>
+            セルのハイパーリンクを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Cell.TextRuns">
+            <summary>
+             セルのリッチテキストを表すテキストランを取得します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.TextRun">
+            <summary>
+            テキストラン定義を表します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TextRun.Font">
+            <summary>
+            テキストランのフォントを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TextRun.Text">
+            <summary>
+            テキストランのテキストを取得または設定します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Sheet.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>
+            1 つの <see cref="T:C1.Web.Mvc.Sheet.Sheet" /> インスタンスを作成します。
+            </summary>
+            <param name="helper">HtmlHelper インスタンス。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Sheet.Tables">
+            <summary>
+            このシート内のテーブルオブジェクトのコレクションを取得します。
+            </summary>
+            <remarks>
+            このテーブルコレクションを通して、このシートにテーブルを挿入/削除できます。
+            </remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Sheet.Filter">
+            <summary>
+            このシートのフィルタ設定を取得します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Sheet.Helper">
+            <summary>
+            HtmlHelper オブジェクトを取得または設定します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Table">
+            <summary>
+            FlexSheet コントロール内の 1 つのテーブルを表します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Table.ShouldSerializeItemsSource">
+            <summary>
+            ItemsSource プロパティをシリアライズするかどうかを指定します。
+            </summary>
+            <returns>
+            true の場合、プロパティはシリアライズされます。
+            そうでない場合は、シリアライズされません。
+            </returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Table.#ctor">
+            <summary>
+            1 つの <see cref="T:C1.Web.Mvc.Sheet.Table" /> インスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Table.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>
+            1 つの <see cref="T:C1.Web.Mvc.Sheet.Table" /> インスタンスを作成します。
+            </summary>
+            <param name="helper">HtmlHelper インスタンス。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Table.ShowHeaderRow">
+            <summary>
+            テーブルにヘッダー行が含まれるかどうかを示します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Table.ShowTotalRow">
+            <summary>
+            テーブルに合計行が含まれるかどうかを示します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Table.ShowBandedColumns">
+            <summary>
+            結合列形式が適用されるかどうかを示します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Table.ShowBandedRows">
+            <summary>
+            結合行形式が適用されるかどうかを決定する値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Table.AlterFirstColumn">
+            <summary>
+            最初のテーブル列にスタイルが適用されるかどうかを決定する値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Table.AlterLastColumn">
+            <summary>
+            最後のテーブル列にスタイルが適用されるかどうかを決定する値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Table.Name">
+            <summary>
+            テーブル名を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Table.Range">
+            <summary>
+            テーブルの範囲を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Table.Style">
+            <summary>
+            このテーブルに関連付けられた TableStyle を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Table.Columns">
+            <summary>
+            テーブルの列を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.Table.ItemsSource">
+            <summary>
+            ItemsSource 設定を取得します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fluent.FilterSettingBuilder">
+            <summary>
+                <see cref="T:C1.Web.Mvc.Sheet.FilterSetting" /> を構成するためのビルダを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FilterSettingBuilder.FilterColumns(System.String[])">
+            <summary>
+            フィルタを持つ列の名前または連結を保持する配列を設定します。
+            </summary>
+            <param name="columns">この配列は、フィルタ処理可能な列を示します。</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FilterSettingBuilder.ColumnFilters(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.Sheet.ColumnFilterSetting,C1.Web.Mvc.Sheet.Fluent.ColumnFilterSettingBuilder}})">
+            <summary>
+            ColumnFilters プロパティを設定します。
+            </summary>
+            <param name="build">ビルドアクション。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FilterSettingBuilder.#ctor(C1.Web.Mvc.Sheet.FilterSetting)">
+            <summary>
+                <paramref name="obj" /> を構成するために 1 つの <see cref="T:C1.Web.Mvc.Sheet.Fluent.FilterSettingBuilder" /> インスタンスを作成します。
+            </summary>
+            <param name="obj">構成する <see cref="T:C1.Web.Mvc.Sheet.FilterSetting" /> オブジェクト。</param>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fluent.ValueFilterSettingBuilder">
+            <summary>
+                <see cref="T:C1.Web.Mvc.Sheet.ValueFilterSetting" /> を構成するためのビルダを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ValueFilterSettingBuilder.UniqueValues(System.Object[])">
+            <summary>
+            UniqueValues プロパティを設定します。
+            </summary>
+            <remarks>
+            リストに表示する一意の値を含む配列を取得または設定します。
+            </remarks>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ValueFilterSettingBuilder.#ctor(C1.Web.Mvc.Sheet.ValueFilterSetting)">
+            <summary>
+                <paramref name="obj" /> を構成するために 1 つの <see cref="T:C1.Web.Mvc.Sheet.Fluent.ValueFilterSettingBuilder" /> インスタンスを作成します。
+            </summary>
+            <param name="obj">構成する <see cref="T:C1.Web.Mvc.Sheet.ValueFilterSetting" /> オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ValueFilterSettingBuilder.MaxValues(System.Nullable{System.Int32})">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.ValueFilterSetting.MaxValues" /> を構成します。
+            表示値のリスト内にある要素の最大数。
+            </summary>
+            <remarks>
+            このプロパティは、デフォルトでは 250 に設定されます。
+            </remarks>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ValueFilterSettingBuilder.UniqueValues(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.ValueFilterSetting.UniqueValues" /> を構成します。
+            リストに表示する一意の値を含む配列。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ValueFilterSettingBuilder.SortValues(System.Nullable{System.Boolean})">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.ValueFilterSetting.SortValues" /> を構成します。
+            値をソートするかどうかを決定する値。
+            </summary>
+            <remarks>
+            デフォルト値は true です。
+            </remarks>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ValueFilterSettingBuilder.DataMap(System.Action{C1.Web.Mvc.Fluent.DataMapBuilder})">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.ValueFilterSetting.DataMap" /> を構成します。
+            未加工の値を、このフィルタの編集時に表示される表示値に変換するために使用される DataMap。
+            </summary>
+            <param name="build">ビルダ関数。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fluent.TableBuilder">
+            <summary>
+                <see cref="T:C1.Web.Mvc.Sheet.Table" /> を構成するためのビルダを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableBuilder.Bind(System.Action{C1.Web.Mvc.Fluent.CollectionViewServiceBuilder{System.Object}})">
+            <summary>
+            ビルダによって ItemsSource を設定します。
+            </summary>
+            <param name="itemsSourceBuild">ItemsSource を設定するためのビルドアクション。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableBuilder.Bind(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            コレクションに連結します。
+            </summary>
+            <param name="sourceCollection">ソースコレクション。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableBuilder.Bind(System.String)">
+            <summary>
+            読み取りアクション URL を設定します。
+            </summary>
+            <param name="readActionUrl">アクション URL。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableBuilder.BindODataSource(System.Action{C1.Web.Mvc.Fluent.ODataCollectionViewServiceBuilder{System.Object}})">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.Table.ItemsSource" /> を構成します。
+            ItemsSource を設定します。
+            </summary>
+            <param name="build">
+                <see cref="T:C1.Web.Mvc.ODataCollectionViewService`1" /> を構築するアクション。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableBuilder.Columns(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.Sheet.TableColumn,C1.Web.Mvc.Sheet.Fluent.TableColumnBuilder}})">
+            <summary>
+            Columns プロパティを設定します。
+            </summary>
+            <param name="build">ビルドアクション。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableBuilder.Range(C1.Web.Mvc.Grid.CellRange)">
+            <summary>
+            Range プロパティを設定します。
+            </summary>
+            <param name="range">セル範囲。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableBuilder.Range(System.Int32,System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Range プロパティを設定します。
+            </summary>
+            <param name="row">最初の行のインデックス。</param>
+            <param name="col">最初の列のインデックス。</param>
+            <param name="row2">最後の行のインデックス。</param>
+            <param name="col2">最後の列のインデックス。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableBuilder.Style(C1.Web.Mvc.Sheet.TableStyle)">
+            <summary>
+            Style プロパティを設定します。
+            </summary>
+            <param name="style">このテーブルのテーブルスタイル。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableBuilder.#ctor(C1.Web.Mvc.Sheet.Table)">
+            <summary>
+                <paramref name="obj" /> を構成するために 1 つの <see cref="T:C1.Web.Mvc.Sheet.Fluent.TableBuilder" /> インスタンスを作成します。
+            </summary>
+            <param name="obj">構成する <see cref="T:C1.Web.Mvc.Sheet.Table" /> オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableBuilder.ShowHeaderRow(System.Boolean)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.Table.ShowHeaderRow" /> を構成します。
+            テーブルにヘッダー行が含まれるかどうかを示します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableBuilder.ShowTotalRow(System.Boolean)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.Table.ShowTotalRow" /> を構成します。
+            テーブルに合計行が含まれるかどうかを示します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableBuilder.ShowBandedColumns(System.Boolean)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.Table.ShowBandedColumns" /> を構成します。
+            結合列形式が適用されるかどうかを示します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableBuilder.ShowBandedRows(System.Boolean)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.Table.ShowBandedRows" /> を構成します。
+            結合行形式が適用されるかどうかを決定する値を設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableBuilder.AlterFirstColumn(System.Boolean)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.Table.AlterFirstColumn" /> を構成します。
+            最初のテーブル列にスタイルが適用されるかどうかを決定する値を設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableBuilder.AlterLastColumn(System.Boolean)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.Table.AlterLastColumn" /> を構成します。
+            最後のテーブル列にスタイルが適用されるかどうかを決定する値を設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableBuilder.Name(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.Table.Name" /> を構成します。
+            テーブル名を設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.Filter">
+            <summary>
+            この FlexSheet のフィルタ設定を取得します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.Filter(System.Action{C1.Web.Mvc.Sheet.Fluent.FlexSheetFilterBuilder})">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.FlexSheet.Filter" /> を構成します。
+            この FlexSheet のフィルタ設定を設定します。
+            </summary>
+            <param name="build">ビルダ関数。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.BandedTableSectionStyle">
+            <summary>
+            テーブルストライプスタイル設定プロパティを定義します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.TableSectionStyle">
+            <summary>
+            テーブルスタイル設定プロパティを定義します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.CellStyle">
+            <summary>
+            セルスタイル設定プロパティを定義します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.ClassName">
+            <summary>
+            セルに追加する CSS クラス名。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.FontFamily">
+            <summary>
+            フォントファミリ。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.FontSize">
+            <summary>
+            フォントサイズ。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.FontStyle">
+            <summary>
+            フォントスタイル。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.FontWeight">
+            <summary>
+            フォントウェイト。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.TextDecoration">
+            <summary>
+            テキスト装飾。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.TextAlign">
+            <summary>
+            テキストの配置。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.VerticalAlign">
+            <summary>
+            垂直方向の配置。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.Color">
+            <summary>
+            フォントの色。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.Format">
+            <summary>
+            セルの値を書式設定するための書式文字列。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.WhiteSpace">
+            <summary>
+            要素内の空白を処理する方法を記述します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.BorderLeftColor">
+            <summary>
+            左境界線の色。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.BorderLeftStyle">
+            <summary>
+            左境界線のスタイル。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.BorderLeftWidth">
+            <summary>
+            左境界線の幅。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.BorderRightColor">
+            <summary>
+            右境界線の色。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.BorderRightStyle">
+            <summary>
+            右境界線のスタイル。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.BorderRightWidth">
+            <summary>
+            右境界線の幅。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.BorderTopColor">
+            <summary>
+            上境界線の色。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.BorderTopStyle">
+            <summary>
+            上境界線のスタイル。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.BorderTopWidth">
+            <summary>
+            上境界線の幅。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.BorderBottomColor">
+            <summary>
+            下境界線の色。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.BorderBottomStyle">
+            <summary>
+            下境界線のスタイル。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.CellStyle.BorderBottomWidth">
+            <summary>
+            下境界線の幅。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableSectionStyle.BorderHorizontalColor">
+            <summary>
+            水平境界線の色。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableSectionStyle.BorderHorizontalStyle">
+            <summary>
+            水平境界線のスタイル。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableSectionStyle.BorderHorizontalWidth">
+            <summary>
+            水平境界線の幅。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableSectionStyle.BorderVerticalColor">
+            <summary>
+            垂直境界線の色。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableSectionStyle.BorderVerticalStyle">
+            <summary>
+            垂直境界線のスタイル。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableSectionStyle.BorderVerticalWidth">
+            <summary>
+            垂直境界線の幅。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.BandedTableSectionStyle.Size">
+            <summary>
+            ストライプの単一テーブル領域内の行または列の数。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.ColumnFilterSetting">
+            <summary>
+            列フィルタの設定。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.ColumnFilterSetting.#ctor">
+            <summary>
+            1 つの <see cref="T:C1.Web.Mvc.Sheet.ColumnFilterSetting" /> インスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.ColumnFilterSetting.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>
+            1 つの <see cref="T:C1.Web.Mvc.Sheet.ColumnFilterSetting" /> インスタンスを作成します。
+            </summary>
+            <param name="helper">HtmlHelper インスタンス。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.ColumnFilterSetting.Column">
+            <summary>
+            列の名前または連結を示す文字列値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.ColumnFilterSetting.FilterType">
+            <summary>
+            このフィルタによって提供されるフィルタ処理のタイプ。
+            </summary>
+            <remarks>
+            このプロパティを null に設定すると、フィルタは DefaultFilterType プロパティで定義された値を使用します。
+            </remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.ColumnFilterSetting.ValueFilter">
+            <summary>
+            この列フィルタ設定内の値フィルタ設定。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.ColumnFilterSetting.ConditionFilter">
+            <summary>
+            この列フィルタ設定内の条件フィルタ設定。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.ColumnFilterSetting.DataMap">
+            <summary>
+            未加工の値を、このフィルタの編集時に表示される表示値に変換するために使用される DataMap。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.ColumnFilterSetting.Helper">
+            <summary>
+            HtmlHelper オブジェクトを取得または設定します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.ConditionFilterSetting">
+            <summary>
+            条件フィルタ設定。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.ConditionFilterSetting.#ctor">
+            <summary>
+            1 つの <see cref="T:C1.Web.Mvc.Sheet.ConditionFilterSetting" /> インスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.ConditionFilterSetting.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>
+            1 つの <see cref="T:C1.Web.Mvc.Sheet.ConditionFilterSetting" /> インスタンスを作成します。
+            </summary>
+            <param name="helper">HtmlHelper インスタンス。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.ConditionFilterSetting.DataMap">
+            <summary>
+            未加工の値を、このフィルタの編集時に表示される表示値に変換するために使用される DataMap。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.ConditionFilterSetting.Helper">
+            <summary>
+            HtmlHelper オブジェクトを取得または設定します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.FilterSetting">
+            <summary>
+            シートのフィルタ設定を定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FilterSetting.#ctor">
+            <summary>
+            1 つの <see cref="T:C1.Web.Mvc.Sheet.FilterSetting" /> インスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.FilterSetting.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>
+            1 つの <see cref="T:C1.Web.Mvc.Sheet.FilterSetting" /> インスタンスを作成します。
+            </summary>
+            <param name="helper">HtmlHelper インスタンス。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FilterSetting.FilterColumns">
+            <summary>
+            フィルタを持つ列の名前または連結を保持する配列。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FilterSetting.ColumnFilters">
+            <summary>
+            シートの列のフィルタ設定。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FilterSetting.Helper">
+            <summary>
+            HtmlHelper オブジェクトを取得または設定します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.FlexSheetFilter">
+            <summary>
+            FlexSheet コントロールに Excel 形式のフィルタを実装します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheetFilter.DefaultFilterType">
+            <summary>
+            使用するデフォルトのフィルタタイプを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheetFilter.OnClientFilterApplied">
+            <summary>
+            フィルタが適用された後に発生します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheetFilter.OnClientFilterChanged">
+            <summary>
+            ユーザーが列フィルタを編集した後で発生します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheetFilter.OnClientFilterChanging">
+            <summary>
+            ユーザーが列フィルタを編集しようとしたときに発生します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheetFilter.ShowFilterIcons">
+            <summary>
+            FlexSheetFilter がシートの列ヘッダーにフィルタ編集ボタンを追加するかどうかを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheetFilter.ShowSortButtons">
+            <summary>
+             フィルタエディタにソートボタンを入れるかどうかを示す値を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.TableColumn">
+            <summary>
+            テーブル内の 1 つの列を表します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.TableColumn.#ctor">
+            <summary>
+            1 つの <see cref="T:C1.Web.Mvc.Sheet.TableColumn" /> インスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableColumn.Name">
+            <summary>
+            テーブル列の名前を取得または設定します。
+            </summary>
+            <remarks>
+            いくつかの関数で参照されます。
+            </remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableColumn.TotalRowLabel">
+            <summary>
+            列の合計行セルに表示する文字列。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableColumn.TotalRowFunction">
+            <summary>
+            列の合計行セルに表示する関数。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.TableStyle">
+            <summary>
+            テーブルのテーブルスタイルを表します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.TableStyle.#ctor(System.String)">
+            <summary>
+            1 つの <see cref="T:C1.Web.Mvc.Sheet.TableStyle" /> インスタンスを作成します。
+            </summary>
+            <param name="name">テーブルスタイルの名前です。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.TableStyle.CreateBuiltInTableStyleLight(System.Int32)">
+            <summary>
+            組み込みの明るめスタイルから 1 つの <see cref="T:C1.Web.Mvc.Sheet.TableStyle" /> インスタンスを作成します。
+            </summary>
+            <param name="index">組み込みスタイルのインデックス。有効な範囲は 1 以上 21 以下です。</param>
+            <returns>TableStyle インスタンス。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.TableStyle.CreateBuiltInTableStyleMedium(System.Int32)">
+            <summary>
+            組み込みの標準スタイルから 1 つの <see cref="T:C1.Web.Mvc.Sheet.TableStyle" /> インスタンスを作成します。
+            </summary>
+            <param name="index">組み込みスタイルのインデックス。有効な範囲は 1 以上 28 以下です。</param>
+            <returns>TableStyle インスタンス。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.TableStyle.CreateBuiltInTableStyleDark(System.Int32)">
+            <summary>
+            組み込みの暗めスタイルから 1 つの <see cref="T:C1.Web.Mvc.Sheet.TableStyle" /> インスタンスを作成します。
+            </summary>
+            <param name="index">組み込みスタイルのインデックス。有効な範囲は 1 以上 11 以下です。</param>
+            <returns>TableStyle インスタンス。</returns>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableStyle.Name">
+            <summary>
+            テーブルスタイルの名前を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableStyle.WholeTableStyle">
+            <summary>
+            テーブルスタイル全体を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableStyle.FirstBandedColumnStyle">
+            <summary>
+            最初の結合列のスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableStyle.SecondBandedColumnStyle">
+            <summary>
+            2 番目の結合列のスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableStyle.FirstBandedRowStyle">
+            <summary>
+            最初の結合行のスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableStyle.SecondBandedRowStyle">
+            <summary>
+            2 番目の結合行のスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableStyle.FirstColumnStyle">
+            <summary>
+            最初の列のスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableStyle.LastColumnStyle">
+            <summary>
+            最後の列のスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableStyle.HeaderRowStyle">
+            <summary>
+            ヘッダー行のスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableStyle.TotalRowStyle">
+            <summary>
+            合計行のスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableStyle.FirstHeaderCellStyle">
+            <summary>
+            ヘッダー行の最初のセルのスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableStyle.LastHeaderCellStyle">
+            <summary>
+            ヘッダー行の最後のセルのスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableStyle.FirstTotalCellStyle">
+            <summary>
+            合計行の最初のセルのスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableStyle.LastTotalCellStyle">
+            <summary>
+            合計行の最後のセルのスタイルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.TableStyle.IsBuiltIn">
+            <summary>
+            テーブルスタイルが組み込みスタイルかどうかを示します。
+            </summary>
+            <remarks>
+            組み込みスタイルには、「TableStyleLight1」から「TableStyleLight21」、「TableStyleMedium1」から「TableStyleMedium28」、および「TableStyleDark1」から「TableStyleDark11」の名前が付いています。
+            組み込みスタイルの場合は、その他のプロパティの設定は無視されます。
+            </remarks>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.UnboundSheet.#ctor">
+            <summary>
+            1 つの <see cref="T:C1.Web.Mvc.Sheet.UnboundSheet" /> インスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.UnboundSheet.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>
+            1 つの <see cref="T:C1.Web.Mvc.Sheet.UnboundSheet" /> インスタンスを作成します。
+            </summary>
+            <param name="helper">HtmlHelper インスタンス。</param>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.ValueFilterSetting">
+            <summary>
+            値フィルタ設定。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.ValueFilterSetting.#ctor">
+            <summary>
+            1 つの <see cref="T:C1.Web.Mvc.Sheet.ValueFilterSetting" /> インスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.ValueFilterSetting.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>
+            1 つの <see cref="T:C1.Web.Mvc.Sheet.ValueFilterSetting" /> インスタンスを作成します。
+            </summary>
+            <param name="helper">HtmlHelper インスタンス。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.ValueFilterSetting.MaxValues">
+            <summary>
+            表示値のリスト内にある要素の最大数。
+            </summary>
+            <remarks>
+            このプロパティは、デフォルトでは 250 に設定されます。
+            </remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.ValueFilterSetting.UniqueValues">
+            <summary>
+            リストに表示する一意の値を含む配列。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.ValueFilterSetting.SortValues">
+            <summary>
+            値をソートするかどうかを決定する値。
+            </summary>
+            <remarks>
+            デフォルト値は true です。
+            </remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.ValueFilterSetting.DataMap">
+            <summary>
+            未加工の値を、このフィルタの編集時に表示される表示値に変換するために使用される DataMap。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.ValueFilterSetting.Helper">
+            <summary>
+            HtmlHelper オブジェクトを取得または設定します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.SheetBuilder`2.Filter(System.Action{C1.Web.Mvc.Sheet.Fluent.FilterSettingBuilder})">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.Sheet.Filter" /> を構成します。
+            このシートのフィルタ設定を設定します。
+            </summary>
+            <param name="build">ビルダ関数。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.SheetBuilder`2.Tables(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.Sheet.Table,C1.Web.Mvc.Sheet.Fluent.TableBuilder}})">
+            <summary>
+            Tables プロパティを設定します。
+            </summary>
+            <param name="build">ビルドアクション。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fluent.ColumnFilterSettingBuilder">
+            <summary>
+                <see cref="T:C1.Web.Mvc.Sheet.ColumnFilterSetting" /> を構成するためのビルダを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ColumnFilterSettingBuilder.#ctor(C1.Web.Mvc.Sheet.ColumnFilterSetting)">
+            <summary>
+                <paramref name="obj" /> を構成するために 1 つの <see cref="T:C1.Web.Mvc.Sheet.Fluent.ColumnFilterSettingBuilder" /> インスタンスを作成します。
+            </summary>
+            <param name="obj">構成する <see cref="T:C1.Web.Mvc.Sheet.ColumnFilterSetting" /> オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ColumnFilterSettingBuilder.Column(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.ColumnFilterSetting.Column" /> を構成します。
+            列の名前または連結を示す文字列値を設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ColumnFilterSettingBuilder.FilterType(System.Nullable{C1.Web.Mvc.FilterType})">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.ColumnFilterSetting.FilterType" /> を構成します。
+            このフィルタによって提供されるフィルタ処理のタイプ。
+            </summary>
+            <remarks>
+            このプロパティを null に設定すると、フィルタは DefaultFilterType プロパティで定義された値を使用します。
+            </remarks>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ColumnFilterSettingBuilder.ValueFilter(System.Action{C1.Web.Mvc.Sheet.Fluent.ValueFilterSettingBuilder})">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.ColumnFilterSetting.ValueFilter" /> を構成します。
+            この列フィルタ設定内の値フィルタ設定。
+            </summary>
+            <param name="build">ビルダ関数。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ColumnFilterSettingBuilder.ConditionFilter(System.Action{C1.Web.Mvc.Sheet.Fluent.ConditionFilterSettingBuilder})">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.ColumnFilterSetting.ConditionFilter" /> を構成します。
+            この列フィルタ設定内の条件フィルタ設定。
+            </summary>
+            <param name="build">ビルダ関数。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ColumnFilterSettingBuilder.DataMap(System.Action{C1.Web.Mvc.Fluent.DataMapBuilder})">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.ColumnFilterSetting.DataMap" /> を構成します。
+            未加工の値を、このフィルタの編集時に表示される表示値に変換するために使用される DataMap。
+            </summary>
+            <param name="build">ビルダ関数。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fluent.ConditionFilterSettingBuilder">
+            <summary>
+                <see cref="T:C1.Web.Mvc.Sheet.ConditionFilterSetting" /> を構成するためのビルダを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ConditionFilterSettingBuilder.#ctor(C1.Web.Mvc.Sheet.ConditionFilterSetting)">
+            <summary>
+                <paramref name="obj" /> を構成するために 1 つの <see cref="T:C1.Web.Mvc.Sheet.Fluent.ConditionFilterSettingBuilder" /> インスタンスを作成します。
+            </summary>
+            <param name="obj">構成する <see cref="T:C1.Web.Mvc.Sheet.ConditionFilterSetting" /> オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ConditionFilterSettingBuilder.DataMap(System.Action{C1.Web.Mvc.Fluent.DataMapBuilder})">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.ConditionFilterSetting.DataMap" /> を構成します。
+            未加工の値を、このフィルタの編集時に表示される表示値に変換するために使用される DataMap。
+            </summary>
+            <param name="build">ビルダ関数。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fluent.FlexSheetFilterBuilder">
+            <summary>
+                <see cref="T:C1.Web.Mvc.Sheet.FlexSheetFilter" /> を構成するためのビルダを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetFilterBuilder.#ctor(C1.Web.Mvc.Sheet.FlexSheetFilter)">
+            <summary>
+                <paramref name="obj" /> を構成するために 1 つの <see cref="T:C1.Web.Mvc.Sheet.Fluent.FlexSheetFilterBuilder" /> インスタンスを作成します。
+            </summary>
+            <param name="obj">構成する<see cref="T:C1.Web.Mvc.Sheet.FlexSheetFilter" />オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetFilterBuilder.DefaultFilterType(C1.Web.Mvc.FilterType)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.FlexSheetFilter.DefaultFilterType" /> を構成します。
+            使用するデフォルトのフィルタタイプを設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetFilterBuilder.OnClientFilterApplied(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.FlexSheetFilter.OnClientFilterApplied" /> クライアントイベントを構成します。
+            フィルタが適用された後に発生します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetFilterBuilder.OnClientFilterChanged(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.FlexSheetFilter.OnClientFilterChanged" /> クライアントイベントを構成します。
+            ユーザーが列フィルタを編集した後で発生します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetFilterBuilder.OnClientFilterChanging(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.FlexSheetFilter.OnClientFilterChanging" /> クライアントイベントを構成します。
+            ユーザーが列フィルタを編集しようとしたときに発生します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetFilterBuilder.ShowFilterIcons(System.Boolean)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.FlexSheetFilter.ShowFilterIcons" /> を構成します。
+            FlexSheetFilter がフィルタ編集ボタンをシートの列ヘッダーに追加するかどうかを設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetFilterBuilder.ShowSortButtons(System.Boolean)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.FlexSheetFilter.ShowSortButtons" /> を構成します。
+             フィルタエディタにソートボタンを入れるかどうかを示す値を取得または設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Sheet.Fluent.TableColumnBuilder">
+            <summary>
+                <see cref="T:C1.Web.Mvc.Sheet.TableColumn" /> を構成するためのビルダを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableColumnBuilder.#ctor(C1.Web.Mvc.Sheet.TableColumn)">
+            <summary>
+                <paramref name="obj" /> を構成するために 1 つの <see cref="T:C1.Web.Mvc.Sheet.Fluent.TableColumnBuilder" /> インスタンスを作成します。
+            </summary>
+            <param name="obj">構成する <see cref="T:C1.Web.Mvc.Sheet.TableColumn" /> オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableColumnBuilder.Name(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.TableColumn.Name" /> を構成します。
+            テーブル列の名前を設定します。
+            </summary>
+            <remarks>
+            いくつかの関数で参照されます。
+            </remarks>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableColumnBuilder.TotalRowLabel(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.TableColumn.TotalRowLabel" /> を構成します。
+            列の合計行セルに表示する文字列。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.TableColumnBuilder.TotalRowFunction(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.TableColumn.TotalRowFunction" /> を構成します。
+            列の合計行セルに表示する関数。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.EnableDragDrop(System.Boolean)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.FlexSheet.EnableDragDrop" /> を構成します。
+            FlexSheet で行または列のドラッグアンドドロップを有効にするかどうかを示す値を設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.EnableFormulas(System.Boolean)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.FlexSheet.EnableFormulas" /> を構成します。
+            FlexSheet で式を有効にするかどうかを示す値を設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.EnableDragDrop">
+            <summary>
+            FlexSheet で行または列のドラッグアンドドロップを有効にするかどうかを示す値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.EnableFormulas">
+            <summary>
+            FlexSheet で式を有効にするかどうかを示す値を取得または設定します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.ValueFilterSettingBuilder.ExclusiveValueSearch(System.Boolean)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.ValueFilterSetting.ExclusiveValueSearch" /> を構成します。
+            フィルタが @see:filterText プロパティによって選択された値のみを含むかどうかを決定する値を設定します。
+            </summary>
+            <remarks>
+            このプロパティはデフォルトで true に設定されます。これは Excel の動作と一致します。
+            </remarks>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientBeginDroppingRowColumn(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientBeginDroppingRowColumn" /> クライアントイベントを構成します。
+            FlexSheet の行または列のドロップを開始すると発生します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientEndDroppingRowColumn(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientEndDroppingRowColumn" /> クライアントイベントを構成します。
+            FlexSheet の行または列のドロップを終了すると発生します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientBeginDroppingRowColumn">
+            <summary>
+            FlexSheet の行または列のドロップを開始すると発生します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientEndDroppingRowColumn">
+            <summary>
+            FlexSheet の行または列のドロップを終了すると発生します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.ValueFilterSetting.ExclusiveValueSearch">
+            <summary>
+            フィルタが @see:filterText プロパティによって選択された値のみを含むかどうかを決定する値を取得または設定します。
+            </summary>
+            <remarks>
+            このプロパティはデフォルトで true に設定されます。これは Excel の動作と一致します。
+            </remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.AllowAutoFill">
+            <summary>
+            オートフィル（セルの右下隅をドラッグすることで、一定のパターンに従ってセルにデータを挿入できる機能）を有効にするかどうかを示す値を取得または設定します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.AllowAutoFill(System.Boolean)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.FlexSheet.AllowAutoFill" /> を構成します。
+            オートフィル（セルの右下隅をドラッグすることで、一定のパターンに従ってセルにデータを挿入できる機能）を有効にするかどうかを示す値を設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientAutoFilling(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientAutoFilling" /> クライアントイベントを構成します。
+            オートフィルの操作を実行する前に発生します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.OnClientAutoFilled(System.String)">
+            <summary>
+                <see cref="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientAutoFilled" /> クライアントイベントを構成します。
+            オートフィルの操作が実行された後で発生します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.SortingType(C1.Web.Mvc.Grid.AllowSorting)">
+            <summary>
+            FlexSheetではこのメソッドは使用できません。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientAutoFilling">
+            <summary>
+            オートフィルの操作を実行する前に発生します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.OnClientAutoFilled">
+            <summary>
+            オートフィルの操作が実行された後で発生します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.SortingType">
+            <summary>
+            FlexSheetではこのプロパティは使用できません。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.KeyActionTab">
+            <summary>
+            ［Tab］キーが押されたときに実行されるアクションを取得または設定します。
+            </summary>
+            <remarks>
+            このプロパティのデフォルト設定は<see cref="F:C1.Web.Mvc.Grid.KeyAction.CycleOut" /> です。これにより、カーソルがセルを通じて移動（<see cref="F:C1.Web.Mvc.Grid.KeyAction.Cycle" />　）してから、最後または最初のセルが選択されたときにページの次/前のコントロールに移動します 。
+            </remarks>
+        </member>
+        <member name="M:C1.Web.Mvc.Sheet.Fluent.FlexSheetBuilder.CalculationPrecision(System.Int32)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.Sheet.FlexSheet.CalculationPrecision" />を構成します。
+             数式を計算するときに四捨五入する小数点以下の桁数を設定します。 負の値は、四捨五入が実行されないことを意味します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="P:C1.Web.Mvc.Sheet.FlexSheet.CalculationPrecision">
+            <summary>
+            数式を計算するときに四捨五入する小数点以下の桁数を取得または設定します。 負の値は、四捨五入が実行されないことを意味します。
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,36 @@
+﻿@model CampusV4.Models.PartsListViewModel
+
+<div id="dlgPartsFileSetting">
+    <form id="frmPartsFileSetting" class="form-horizontal">
+        <h4 class="modal-header">
+            ファイルパス設定
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                @(Html.C1().FlexGrid()
+                    .Bind(Model.GridFileSettingDataList)
+                    .SelectionMode(SelectionMode.Row)
+                    .AutoGenerateColumns(false)
+                    .AllowAddNew(true)
+                    .Height("320px")
+                    .Width("850px")
+                    .Id("gridPartsList")
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("RowNumber").Width("60").Header("No").Align("center").IsReadOnly(true));
+                        b1.Add(cb => cb.Binding("FilePath").Width("750").Header("ファイルパス"));
+                    }))
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary wj-hide-ok">登録</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgPartsFileSetting")
+
+<script type="text/javascript">
+    
+</script>

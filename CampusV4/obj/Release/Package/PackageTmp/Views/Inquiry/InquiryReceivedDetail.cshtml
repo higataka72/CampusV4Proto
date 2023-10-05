@@ -1,0 +1,208 @@
+﻿@model CampusV4.Models.InquiryViewModel
+
+<div id="InquiryReceivedDetail">
+    <div style="transform-origin: left top;">
+        <div class="page-title">
+            <div class="title_left">
+                <ol class="breadcrumb">
+                    <li><a href="/Inquiry/InquiryRegist?mode=2">引合登録 <i class="fa fa-arrow-circle-left"></i></a></li>
+                    <li class="active">引合受け明細</li>
+                </ol>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    @using (Html.BeginForm("InquiryReceivedDetail", "Inquiry", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_DetailRequestDate" for="Text1">依頼日</label>
+                            <div class="col-md-2">
+                                @Html.C1().InputDate().Id("Text1").CssStyle("height", "35px").Value(Model.DetailRequestDate)
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_cmbSalesPersonCode" style="text-align: right;" for="Text2">営業担当者</label>
+                            <div class="col-md-2">
+                                @(Html.C1().AutoComplete().Id("cmbSalesPersonCode")
+                                  .Bind(Model.SalesPersoDataList)
+                                  .DisplayMemberPath("SalesPersonCode")
+                                  .HeaderPath("SalesPersonCode")
+                                  .SearchMemberPath("SalesPersonCode, SalesPersonName")
+                                  .SelectedValuePath("SalesPersonName")
+                                  .SelectedValue(Model.SalesPersonName))
+                            </div>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.SalesPersonName, new { @id = "selectedSalesPersonName", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">　</div>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @(Html.C1().FlexGrid()
+                                .AutoGenerateColumns(false).Height("350px").Id("theInquiryReceivedDetailGrid").AllowAddNew(true).AllowDelete(true)
+                                .Columns(b1 =>
+                                {
+                                    b1.Add(cb => cb.Binding("Col_1").Width("250").Header("分類記号"));
+                                    b1.Add(cb => cb.Binding("Col_2").Width("120").Header("数量").Format("n0"));
+                                    b1.Add(cb => cb.Binding("Col_3").Width("120").Header("単価").Format("n0"));
+                                    b1.Add(cb => cb.Binding("Col_4").Width("120").Header("金額").Format("n0"));
+                                    b1.Add(cb => cb.Binding("Col_5").Width("200").Header("納期").Format("d"));
+                                }))
+                            </div>
+                        </div>
+
+                        <div class="form-group">　</div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-10" style="text-align: right">
+                                <a href="#" class="btn btn-primary" id="btnInsert">登録</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 処理終了後のメッセージ表示 *@
+<div id="dialog" style="width: 600px; height: 200px;">
+    <div class="wj-dialog-header">
+        @Html.Raw("メッセージ")
+    </div>
+    <div class="wj-dialog-body">
+        <p>
+            @Html.Raw("登録が完了しました")
+        </p>
+    </div>
+    <div class="wj-dialog-footer">
+        <button class="btn btn-default wj-hide-ok">OK</button>
+    </div>
+</div>
+@Html.C1().Popup("#dialog")
+
+@section scripts{
+    <script>
+        c1.documentReady(function () {
+            // ラベルツールチップ設定
+            var tt = new wijmo.Tooltip();
+            tt.setTooltip('#lbl_DetailRequestDate', '依頼日<br><b>F1:削除</b>');
+            tt.setTooltip('#lbl_cmbSalesPersonCode', '営業担当者');
+            //var theGrid = wijmo.Control.getControl('#theInquiryReceivedDetailGrid');
+            //theGrid.formatItem.addHandler(function (s, e) {
+            //    if (e.panel == s.columnHeaders) {
+            //        if (s.columns[e.col].binding == 'Col_1') {
+            //            tt.setTooltip(e.cell,
+            //                e.getColumn().header +
+            //                '<br><b>F2:検索</b>');
+            //        }
+            //    }
+            //});
+
+            // 営業担当者リストボックス
+            var theSalesPersonCode = wijmo.Control.getControl('#cmbSalesPersonCode');
+            var template2 = '<table><tr>' +
+                '<td>{SalesPersonCode}</td>' +
+                '<td title="HINMEI">　{SalesPersonName}</td>' +
+                '</tr></table>';
+            theSalesPersonCode.formatItem.addHandler(function (s, e) {
+                var html = wijmo.format(template2, e.data);
+                e.item.innerHTML = html;
+            });
+            theSalesPersonCode.selectedIndexChanged.addHandler(function (s, e) {
+                setSelectedSalesPersonName(s);
+            });
+            function setSelectedSalesPersonName(s) {
+                setText('selectedSalesPersonName', s.selectedValue);
+            }
+            function setText(id, value) {
+                document.getElementById(id).value = value;
+            }
+
+            // 完了メッセージ
+            var dialog = wijmo.Control.getControl('#dialog');
+            document.getElementById('btnInsert').addEventListener('click', function (e) {
+                // show the dialog (modal window)
+                dialog.show(true, function (sender) { });
+            });
+
+            // 引合受け明細系
+            // create data maps
+            var classificationMap = new wijmo.grid.DataMap(getClassification(), 'id', 'mark', 'name');
+            var theGrid = wijmo.Control.getControl('#theInquiryReceivedDetailGrid');
+            theGrid.itemsSource = getData();
+            theGrid.columns[0].dataMap = classificationMap;
+            // create some random data
+            function getData() {
+                var classification = getClassification(),
+                    detail = getDetail(),
+                    data = [];
+                for (var i = 0; i < detail.length; i++) {
+                    data.push({
+                        Col_1: detail[i].Col_1,
+                        Col_2: detail[i].Col_2,
+                        Col_3: detail[i].Col_3,
+                        Col_4: detail[i].Col_4,
+                        Col_5: detail[i].Col_5,
+                    });
+                }
+                return data;
+            }
+            function getClassification() {
+                return [
+                    { id: 0, mark: 'AZ-001', name: 'AZ製品' },
+                    { id: 1, mark: 'AZ-002', name: 'AZ製品プラス' },
+                    { id: 2, mark: 'AX-001', name: 'AX製品' },
+                ];
+            }
+            function getDetail() {
+                return [
+                    { Col_1: 0, Col_2: 10, Col_3: 100, Col_4: 1000, Col_5: '2023/01/10' },
+                    { Col_1: 0, Col_2: 10, Col_3: 100, Col_4: 1000, Col_5: '2023/01/10' }
+                ];
+            }
+
+            // グリッド
+            var theGrid = wijmo.Control.getControl('#theInquiryReceivedDetailGrid');
+            var products = [
+                { id: 0, mark: 'AZ-001', name: 'AZ製品' },
+                { id: 1, mark: 'AZ-002', name: 'AZ製品プラス' },
+                { id: 2, mark: 'AX-001', name: 'AX製品' },
+            ];
+
+            // 分類記号
+            var multiColumnEditor = new CustomGridEditor(theGrid, 'Col_1', wijmo.input.ComboBox, {
+                headerPath: 'mark',
+                displayMemberPath: 'mark',
+                itemsSource: products
+            });
+            var combo = multiColumnEditor.control;
+            combo.listBox.formatItem.addHandler(function (s, e) {
+                e.item.innerHTML = '<table><tr>' +
+                    '<td style="width:30px;text-align:right;padding-right:6px">' + e.data.id + '</td>' +
+                    '<td style="width:100px;padding-right:6px"><b>' + e.data.mark + '</b></td>' +
+                    '<td style="width:100px;padding-right:6px"><b>' + e.data.name + '</b></td>' +
+                    '</tr></table>';
+            });
+
+            // 納期
+            new CustomGridEditor(theGrid, 'Col_5', wijmo.input.InputDate, {
+                format: 'd'
+            });
+
+            //theGrid.formatItem.addHandler(function (s, e) {
+            //    if (e.panel == s.cells) {
+            //        if (s.columns[e.col].binding == 'Col_1') {
+            //            var item = theGrid.cells.getCellData(e.row, e.col, false);
+            //            e.cell.innerHTML = '<div class="input-group"><input class="form-control" disabled value="' + item + '"><span class="input-group-btn"><a class="btn btn-info" name="drawing_number"><i class="fa fa-search"></i></a></span>';
+            //        }
+            //    }
+            //});
+        });
+
+       
+
+    </script>
+}

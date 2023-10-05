@@ -1,0 +1,157 @@
+﻿@model CampusV4.Models.InquiryCostEstimateViewModel
+
+<style>
+    .breadcrumb {
+        font-size: 24px;
+    }
+</style>
+
+<div id="MailSendHistoryManager">
+    <div style="transform-origin: left top;">
+        <div class="page-title">
+            <div class="title_left">
+                <ol class="breadcrumb">
+                    <li>引合別原価見積一覧</li>
+                    <li>見積回答</li>
+                    <li><a href="/InquiryCostEstimate/MailManager">メール送信 <i class="fa fa-arrow-circle-left"></i></a></li>
+                    <li class="active">メール送信履歴</li>
+                </ol>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    @using (Html.BeginForm("MailSendHistory", "InquiryCostEstimate", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <h4 class="modal-header">メール送信履歴</h4>
+                        @* 第5レベル *@
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_SendDateFrom" for="Text10">送信日時</label>
+                            <div class="col-md-5">
+                                @Html.C1().InputDateFor(m => m.SendDateFrom)
+                                &emsp;～ &emsp;
+                                @Html.C1().InputDateFor(m => m.SendDateTo)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_SendDateFrom" for="Text11">パートナー区分</label>
+                            <div class="col-md-3">
+                                <label class="radio-inline">
+                                    <input type="radio" name="Radio1" value="test">全て&emsp;&emsp;&emsp;
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="Radio1" value="test">得意先&emsp;&emsp;&emsp;
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="Radio1" value="test">パートナー区分&emsp;&emsp;&emsp;
+                                </label>
+                                @*<label class="control-label text-nowrap">CAMPUS-ID</label>*@
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_selectFactoryCode" for="Text100">CAMPUS-ID</label>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.selectFactoryCode, new { @id = "selectFactoryCode", @class = "form-control" })
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-info" id="btnSearchFactory"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(model => model.selectFactoryName, new { @id = "selectFactoryName", @class = "form-control" })
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_selectFactoryCode" for="Text13">CAMPUS-ID</label>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.selectFactoryCode, new { @id = "selectFactoryCode", @class = "form-control" })
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-info" id="btnSearchFactory"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(model => model.selectFactoryName, new { @id = "selectFactoryName", @class = "form-control" })
+                            </div>
+                        </div>*@
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_GroupingMark" for="Text2">カテゴリ</label>
+                            <div class="col-md-2">
+                                @(Html.C1().ComboBoxFor(model => model.MailCategoryDataList).Id("cmbMailCategoryDataList")
+                                .Bind(Model.MailCategoryDataList)
+                                .DisplayMemberPath("Col_2")
+                                .SelectedValuePath("Col_2")
+                                .CssStyle( "width" , "auto" )
+                                .IsRequired(false))
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-8 col-md-2" style="text-align: right">
+                                <a href="/InquiryCostEstimate/MailSendHistory" class="btn btn-primary">検索</a>
+                                @*<input type="submit" value="検索" name="submitBtn" class="btn btn-primary" id="ShowSubmitBtn" />*@
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false)
+                            .IsReadOnly(true)
+                            .Height("308px")
+                            .Id("grdEstimateReference")
+                            .Bind(Model.MailSendHistoryDataList)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("Col_1").Width("100").Header("送信日時").IsReadOnly(true).Align("center"));
+                                b1.Add(cb => cb.Binding("Col_2").Width("150").Header("送信フラグ").IsReadOnly(true).Align("center"));
+                                b1.Add(cb => cb.Binding("Col_3").Width("130").Header("パートナー区分").IsReadOnly(true).Align("center"));
+                                b1.Add(cb => cb.Binding("Col_4").Width("100").Header("CUMPUS-ID").IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("Col_5").Width("180").Header("会社名").IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("Col_6").Width("160").Header("送信先アドレス").IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("Col_7").Width("160").Header("送信先CC").IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("Col_8").Width("120").Header("カテゴリ").IsReadOnly(true).Align("center"));
+                                b1.Add(cb => cb.Binding("Col_9").Width("200").Header("件名").IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("Col_10").Width("200").Header("本文").IsReadOnly(true));
+                            }))
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("../Common/MasterSearch")
+
+<script type="text/javascript">
+    c1.documentReady(function () {
+    });
+
+    // 検索（F2）
+    var dlgMasterSearch = wijmo.Control.getControl('#dlgMasterSearch');
+    c1.documentReady(function () {
+        //CAMPUS-ID
+        document.getElementById('btnSearchFactory').addEventListener('click', function () {
+            loadMasterData();
+
+            dlgMasterSearch.show(true, function (sender) {
+                if (sender.dialogResult == 'wj-hide-ok') {
+                    document.getElementById('selectFactoryCode').setAttribute('value', masterSelected.code);
+                    document.getElementById('selectFactoryName').setAttribute('value', masterSelected.name);
+                }
+            });
+        });
+        document.getElementById('selectFactoryCode').addEventListener('keydown', CampusIdKeyDownEvent);
+        function CampusIdKeyDownEvent(e) {
+            if (e.keyCode == 113) {
+                let target = document.getElementById('btnSearchFactory');
+                let clickEvent = new Event('click', { "bubbles": true, "cancelable": true });
+                target.dispatchEvent(clickEvent);
+            }
+        }
+    });
+</script>

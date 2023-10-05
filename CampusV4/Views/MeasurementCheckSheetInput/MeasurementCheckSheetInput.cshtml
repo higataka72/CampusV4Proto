@@ -1,0 +1,344 @@
+﻿@model CampusV4.Models.MeasurementCheckSheetInputViewModel
+
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>測定チェックシート入力</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("Regist", "MeasurementCheckSheetInput", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_ProductionEmployeeCode" for="cmbProductionEmployeeData">製造担当者</label>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.ProductionEmployeeCode)
+                                .Id("cmbProductionEmployeeData")
+                                .Bind(Model.EmployeeDataList)
+                                .DisplayMemberPath("EmployeeCode")
+                                .SelectedValuePath("EmployeeCode")
+                                .HeaderPath("EmployeeCode")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.ProductionEmployeeCode)
+                                .IsRequired(false))
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ProductionEmployeeName, new { @id = "selectedProductionEmployee", @class = "form-control", @disabled = "true" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_PurchasingNumber" for="txtPurchasingNumber">受入番号</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.PurchasingNumber, new { @class = "form-control", @id = "txtPurchasingNumber" })
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info" id="btnSearchPurchasingNumber"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ProductionNumber" for="ProductionNumber">製番</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.ProductionNumber, new { @class = "form-control", @id = "ProductionNumber", @disabled = "true" })
+                            </div>
+                        </div>
+
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Splitdelivery" for="Splitdelivery">分納回数</label>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.Splitdelivery, new { @class = "form-control no-spin", @id = "Splitdelivery", @type = "number", @style = "text-align:right", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <hr class="hr-custom1" />
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_CampusId" for="Text5">CAMPUS-ID</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.CampusId, new { @id = "CampusId", @class = "form-control", @disabled = "true" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.CompanyName, new { @id = "CompanyName", @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_DepartmentName" for="DepartmentName">部署名</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.DepartmentName, new { @id = "DepartmentName", @class = "form-control", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_SuppliersName" for="SuppliersName">ご担当者様名</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.SuppliersName, new { @id = "SuppliersName", @class = "form-control", @disabled = "true" })
+                            </div>
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_PhoneNumber" for="PhoneNumber">連絡先</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.PhoneNumber, new { @id = "PhoneNumber", @class = "form-control", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Email" for="Email">メールアドレス</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.Email, new { @id = "Email", @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_PartsType" for="PartsType">部品分類</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.PartsType, new { @class = "form-control", @id = "PartsType", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_DrawingNumber" for="Text10">図面番号／型式</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.DrawingNumber, new { @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_PartsName" for="Text11">部品名</label>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(model => model.PartsName, new { @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_SurfaceTreatmentCode" for="SurfaceTreatmentCode">表面処理</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.SurfaceTreatmentCode, new { @id = "SurfaceTreatmentCode", @class = "form-control", @disabled = "true" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.SurfaceTreatment, new { @id = "selectedSurfaceTreatment", @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_DesignEmployeeCode" for="DesignEmployeeCode">設計担当者</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.DesignEmployeeCode, new { @id = "DesignEmployeeCode", @class = "form-control", @disabled = "true" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.DesignEmployeeName, new { @id = "selectedDesignEmployee", @class = "form-control", @disabled = "true" })
+
+                        </div>
+
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ProductionEmployeeCode" for="TestAssemblyEmployeeCode">検査組立担当者</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.TestAssemblyEmployeeCode, new { @id = "TestAssemblyEmployeeCode", @class = "form-control", @disabled = "true" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.TestAssemblyEmployeeName, new { @id = "selectedTestAssemblyEmployee", @class = "form-control", @disabled = "true" })
+
+                        </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ScheduleStartDate" for="ScheduleStartDate">予定　着手日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDate().Id("ScheduleStartDate").Value(Model.ScheduleStartDate).Placeholder("(必須)").IsRequired(false)
+                        </div>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.ScheduleStartTime).Placeholder("(必須)")
+                                .Id("cmbScheduleStartTime")
+                                .Bind(Model.TimeList)
+                                .DisplayMemberPath("Name")
+                                .HeaderPath("Name")
+                                .SelectedValuePath("Code")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.ScheduleStartTime)
+                                .IsRequired(false)
+                                )
+                        </div>
+
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ScheduleCompletionDate" for="ScheduleCompletionDate">完了日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDate().Id("ScheduleCompletionDate").Value(Model.ScheduleCompletionDate).Placeholder("(必須)").IsRequired(false)
+                        </div>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.ScheduleCompletionTime).Placeholder("(必須)")
+                                .Id("cmbScheduleCompletionTime")
+                                .Bind(Model.TimeList)
+                                .DisplayMemberPath("Name")
+                                .HeaderPath("Name")
+                                .SelectedValuePath("Code")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.ScheduleCompletionTime)
+                                .IsRequired(false)
+                                )
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ScheduleTime" for="ScheduleTime">時間</label>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.ScheduleTime, new { @class = "form-control no-spin", @id = "ScheduleTime", @style = "text-align:right", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_AchievementStartDate" for="AchievementStartDate">実績　着手日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDate().Id("AchievementStartDate").Value(Model.AchievementStartDate).Placeholder("(必須)").IsRequired(false)
+                        </div>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.AchievementStartTime).Placeholder("(必須)")
+                                .Id("cmbAchievementStartTime")
+                                .Bind(Model.TimeList)
+                                .DisplayMemberPath("Name")
+                                .HeaderPath("Name")
+                                .SelectedValuePath("Code")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.AchievementStartTime)
+                                .IsRequired(false)
+                                )
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_AchievementCompletionDate" for="AchievementCompletionDate">完了日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDate().Id("AchievementCompletionDate").Value(Model.AchievementCompletionDate).Placeholder("(必須)").IsRequired(false)
+                        </div>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.AchievementCompletionTime).Placeholder("(必須)")
+                                .Id("cmbAchievementCompletionTime")
+                                .Bind(Model.TimeList)
+                                .DisplayMemberPath("Name")
+                                .HeaderPath("Name")
+                                .SelectedValuePath("Code")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.AchievementCompletionTime)
+                                .IsRequired(false)
+                                )
+                        </div>
+
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_AchievementTime" for="AchievementTime">時間</label>
+                        <div class="col-md-1">
+                            @Html.TextBoxFor(model => model.AchievementTime, new { @class = "form-control no-spin", @id = "AchievementTime", @style = "text-align:right", @disabled = "true" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="ln_solid"></div>
+
+                    <div class="form-group">
+                        <div class="col-md-12" style="text-align: right">
+                            <a href="#" class="btn btn-primary" id="RegistBtn">登録</a>
+                        </div>
+                        <div class="col-md-1">
+                            <input type="submit" value="検索" name="ShowSearchBtn" class="btn btn-primary" formaction="/MeasurementCheckSheetInput/Search" id="ShowSearchBtn" style="display:none;" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 処理終了後のメッセージ表示 *@
+<div id="dialog" style="width: 600px; height: 200px;">
+    <div class="wj-dialog-header">
+        @Html.Raw("メッセージ")
+    </div>
+    <div class="wj-dialog-body">
+        <p>
+            @Html.Raw("登録が完了しました")
+        </p>
+    </div>
+    <div class="wj-dialog-footer">
+        <button class="btn btn-default wj-hide-ok">OK</button>
+    </div>
+</div>
+
+@Html.Partial("../Common/MasterSearch")
+@Html.C1().Popup("#dialog")
+
+@section scripts{
+    <script>
+
+        // ラベルツールチップ設定
+        var tt = new wijmo.Tooltip();
+        tt.setTooltip('#lbl_ProductionEmployeeCode', '製造担当者<br><b>F2:検索</b>');
+        tt.setTooltip('#lbl_PurchasingNumber', '受入番号<br><b>F2:検索 F5:クリア F9:終了</b>');
+        tt.setTooltip('#lbl_ProductionNumber', '製番');
+        tt.setTooltip('#lbl_Splitdelivery', '分納回数');
+
+        tt.setTooltip('#lbl_CampusId', 'CAMPUS-ID');
+
+        tt.setTooltip('#lbl_DepartmentName', '部署名');
+        tt.setTooltip('#lbl_SuppliersName', 'ご担当者様名');
+        tt.setTooltip('#lbl_PhoneNumber', '連絡先');
+        tt.setTooltip('#lbl_Email', 'メールアドレス');
+
+        tt.setTooltip('#lbl_PartsType', '部品番号');
+        tt.setTooltip('#lbl_DrawingNumber', '図面番号／型式');
+
+        tt.setTooltip('#lbl_PartsName', '部品名');
+
+        tt.setTooltip('#lbl_SurfaceTreatmentCode', '表面処理');
+
+        tt.setTooltip('#lbl_DesignEmployeeCode', '設計担当者');
+        tt.setTooltip('#lbl_ProductionEmployeeCode', '検査組立担当者');
+
+        tt.setTooltip('#lbl_ScheduleStartDate', '予定　着手日');
+        tt.setTooltip('#lbl_ScheduleCompletionDate', '完了日');
+        tt.setTooltip('#lbl_ScheduleTime', '時間');
+
+        tt.setTooltip('#lbl_AchievementStartDate', '予定　着手日');
+        tt.setTooltip('#lbl_AchievementCompletionDate', '完了日');
+        tt.setTooltip('#lbl_AchievementTime', '時間');
+
+
+        //受入番号イベント
+        var ObjSeiban = document.getElementById('txtPurchasingNumber');
+        //F2押下
+        ObjSeiban.addEventListener('keydown', PurchasingNumberF2_event);
+        function PurchasingNumberF2_event(e) {
+            if (e.keyCode === 113) {
+                var ShowSubmitBtnObj = document.getElementById('ShowSearchBtn');
+                ShowSubmitBtnObj.click();
+            }
+            return false;
+        };
+
+        // 受入番号イベント検索
+        var dlgMasterSearch = wijmo.Control.getControl('#dlgMasterSearch');
+        c1.documentReady(function () {
+            document.getElementById('btnSearchPurchasingNumber').addEventListener('click', function () {
+                loadMasterData();
+                dlgMasterSearch.show(true, function (sender) {
+                    if (sender.dialogResult == 'wj-hide-ok') {
+                        document.getElementById('txtPurchasingNumber').setAttribute('value', masterSelected.code);
+                    }
+                });
+            });
+        });
+
+        var templateEmployee = '<table><tr>' +
+            '<td>{EmployeeCode}</td>' +
+            '<td title="EmployeeName">　{EmployeeName}</td>' +
+            '</tr></table>';
+        //製造担当者イベント
+        var theProductionEmployeeCode = wijmo.Control.getControl('#cmbProductionEmployeeData');
+
+        theProductionEmployeeCode.formatItem.addHandler(function (s, e) {
+            var html = wijmo.format(templateEmployee, e.data);
+            e.item.innerHTML = html;
+        });
+        theProductionEmployeeCode.selectedIndexChanged.addHandler(function (s, e) {
+            document.getElementById('selectedProductionEmployee').value = s.selectedItem.EmployeeName;
+        });
+
+        // 登録ボタンイベント
+        var dialog = wijmo.Control.getControl('#dialog');
+        document.getElementById('RegistBtn').addEventListener('click', function (e) {
+            // show the dialog (modal window)
+            dialog.show(true, function (sender) { });
+        });
+    </script>
+}

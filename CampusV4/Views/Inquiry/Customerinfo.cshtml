@@ -1,0 +1,130 @@
+﻿@model CampusV4.Models.InquiryViewModel
+<div id="Customerinfo">
+    <div style="transform-origin: left top;">
+        <div class="page-title">
+            <div class="title_left">
+                <ol class="breadcrumb">
+                    <li><a href="/Inquiry/InquiryRegist?mode=2">引合登録 <i class="fa fa-arrow-circle-left"></i></a></li>
+                    <li class="active">得意先情報</li>
+                </ol>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    @using (Html.BeginForm("Customerinfo", "Inquiry", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">　</div>
+
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_InquiryNo" for="Text1">引合番号</label>
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(model => model.InquiryNo, new { @class = "form-control", @disabled = "true" })
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Subject" for="Text1">件名</label>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.Subject, new { @class = "form-control", @disabled = "true" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_CompanyName" for="Text3">会社名</label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(model => model.CompanyName, new { @class = "form-control", @disabled = "true" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_CustomerDepartment" for="Text4">部署名</label>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(model => model.CustomerDepartment, new { @class = "form-control" })
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_CustomerPerson" for="Text5">担当者名</label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.CustomerPerson, new { @class = "form-control", @placeholder = "(必須)" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_thePhone" for="Text6">電話番号</label>
+                            <div class="col-md-3">
+                                @(Html.C1().InputMask().Id("thePhone").Mask("(999) 000-0000")
+                                    .Value(Model.CustomerTel))
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_CustomerEmail" for="Text7">E-Mail</label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.CustomerEmail, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_theZip1" for="Text8">お客様住所</label>
+                            <div class="col-md-2">
+                                @(Html.C1().InputMask().Id("theZip1").Mask("000-0000")
+                                    .Value(Model.SalesPersonCode).IsRequired(false).Placeholder("(必須)"))
+                            </div>
+                            <div class="col-md-7">
+                                @Html.TextAreaFor(model => model.CustomerAddress, new { @class = "form-control", @placeholder = "(必須)" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_theZip2" for="Text9">納入先住所</label>
+                            <div class="col-md-2">
+                                @(Html.C1().InputMask().Id("theZip2").Mask("000-0000")
+                                    .Value(Model.SalesPersonCode))
+                            </div>
+                            <div class="col-md-7">
+                                @Html.TextAreaFor(model => model.CustomerDeliveryAddress, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-10" style="text-align: right">
+                                <a href="#" class="btn btn-primary" id="btnInsert">登録</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 処理終了後のメッセージ表示 *@
+<div id="dialog" style="width: 600px; height: 200px;">
+    <div class="wj-dialog-header">
+        @Html.Raw("メッセージ")
+    </div>
+    <div class="wj-dialog-body">
+        <p>
+            @Html.Raw("登録が完了しました")
+        </p>
+    </div>
+    <div class="wj-dialog-footer">
+        <button class="btn btn-default wj-hide-ok">OK</button>
+    </div>
+</div>
+@Html.C1().Popup("#dialog")
+
+@section scripts{
+    <script>
+        c1.documentReady(function () {
+            // ラベルツールチップ設定
+            var tt = new wijmo.Tooltip();
+            tt.setTooltip('#lbl_InquiryNo', '引合番号');
+            tt.setTooltip('#lbl_Subject', '件名');
+            tt.setTooltip('#lbl_CompanyName', '会社名');
+            tt.setTooltip('#lbl_CustomerDepartment', '部署名');
+            tt.setTooltip('#lbl_CustomerPerson', '担当者名');
+            tt.setTooltip('#lbl_thePhone', '電話番号');
+            tt.setTooltip('#lbl_CustomerEmail', 'E-Mail');
+            tt.setTooltip('#lbl_theZip1', 'お客様住所');
+            tt.setTooltip('#lbl_theZip2', '納入先住所');
+        });
+        // 完了メッセージ
+        var dialog = wijmo.Control.getControl('#dialog');
+        document.getElementById('btnInsert').addEventListener('click', function (e) {
+            // show the dialog (modal window)
+            dialog.show(true, function (sender) { });
+        });
+    </script>
+}

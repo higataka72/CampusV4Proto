@@ -1,0 +1,78 @@
+﻿<div id="dlgMasterSearch">
+    <form id="frmMasterSearch" class="form-horizontal">
+        <h4 class="modal-header">
+            マスタ検索
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="col-md-1 control-label" for="Text1">名称</label>
+                <div class="col-md-6">
+                    <input class="form-control" id="Text1" name="Text1" type="text" oninput="loadMasterData(this)" />
+                </div>
+            </div>
+            <div class="form-group">
+                @(Html.C1().FlexGrid().SelectionMode(SelectionMode.Row)
+                    .AutoGenerateColumns(false).IsReadOnly(true).Height("350px").Width("840px").Id("grdMasterSearch")
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("Code").Width("150").Header("コード"));
+                        b1.Add(cb => cb.Binding("Name").Width("650").Header("名称"));
+                    }))
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary wj-hide-ok">選択</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgMasterSearch")
+
+<script type="text/javascript">
+    var masterSelected = {
+        code: "",
+        name: ""
+    };
+
+    function loadMasterData($this) {
+        var textValue = ($this == null) ? "Dummy" : $this.value;
+
+        masterSelected.code = "";
+        masterSelected.name = "";
+
+        $.ajax({
+            type: "POST",
+            url: "/Common/GetMasterData",
+            data: {name: textValue },
+            dataType: "json",
+
+            success: function (result) {
+                var fg = wijmo.Control.getControl("#grdMasterSearch");
+                var data = JSON.parse(result);
+                fg.rows.clear();
+                var j = 0
+                for (var i in data) {
+                    var obj = [data[i].Code, data[i].Name];
+                    // FlexGridに新規行を追加します。
+                    var row = new wijmo.grid.Row();
+                    fg.rows.push(row);
+                    for (var col = 0; col <= fg.columns.length - 1; col++) {
+                        //FlexGrid のセルにデータを入力します。
+                        fg.setCellData(j, col, obj[col]);
+                    }
+                    j++;
+                }
+            }
+        });
+    }
+
+    var masterSearchGrid = wijmo.Control.getControl('#grdMasterSearch');
+    masterSearchGrid.selectionChanged.addHandler(function (s, e) {
+        var sel = masterSearchGrid.selection;
+        for (var r = sel.topRow; r <= sel.bottomRow; r++) {
+            masterSelected.code = masterSearchGrid.cells.getCellData(r, 0, false);
+            masterSelected.name = masterSearchGrid.cells.getCellData(r, 1, false);
+        }
+    });
+</script>

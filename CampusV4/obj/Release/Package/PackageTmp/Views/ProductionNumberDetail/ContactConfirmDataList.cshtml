@@ -1,0 +1,62 @@
+﻿<div id="dlgContactConfirmDataList">
+    <form id="frmContactConfirmDataList" class="form-horizontal">
+        <h4 class="modal-header">
+            連絡確認画面
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                @(Html.C1().FlexGrid().SelectionMode(SelectionMode.Row)
+                    .AutoGenerateColumns(false).IsReadOnly(true).Height("350px").Width("540px").Id("grdContactConfirmDataList")
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("RegistDate").Width("100").Header("登録日").WordWrap(true));
+                        b1.Add(cb => cb.Binding("InputContents").Width("300").Header("入力内容").WordWrap(true));
+                        b1.Add(cb => cb.Binding("ConfirmEmployeeName").Width("100").Header("確認者").WordWrap(true));
+                        
+                    }))
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary wj-hide-ok">閉じる</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgContactConfirmDataList")
+
+<script type="text/javascript">
+
+    function loadbtnContactConfirmDataList(summaryProductionNumber) {
+    
+        $.ajax({
+            type: "POST",
+            url: "/ProductionNumberDetail/GetContactConfirm",
+            data: { SummaryProductionNumber: summaryProductionNumber },
+            dataType: "json",
+
+            success: function (result) {
+                var fg = wijmo.Control.getControl("#grdContactConfirmDataList");
+                var data = JSON.parse(result);
+                fg.rows.clear();
+                var j = 0
+                for (var i in data) {
+                    var obj = [
+                        data[i].RegistDate,
+                        data[i].InputContents,
+                        data[i].ConfirmEmployeeName
+                    ];
+                    // FlexGridに新規行を追加します。
+                    var row = new wijmo.grid.Row();
+                    fg.rows.push(row);
+                    for (var col = 0; col <= fg.columns.length - 1; col++) {
+                        //FlexGrid のセルにデータを入力します。
+                        fg.setCellData(j, col, obj[col]);
+                    }
+                    j++;
+                }
+            }
+        });
+    }
+
+</script>

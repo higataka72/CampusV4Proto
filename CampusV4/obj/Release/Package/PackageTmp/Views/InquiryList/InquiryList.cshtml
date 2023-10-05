@@ -1,0 +1,268 @@
+﻿@model CampusV4.Models.InquiryListViewModel
+
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>引合一覧</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("InquiryList", "InquiryList", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_InquiryNumber" for="Text1">引合番号</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.InquiryNumber, new { @class = "form-control", @id = "txtInquiryNumber" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_SalesEmployeeCode" for="Select1">営業担当者</label>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.SalesEmployeeCode).Id("cmbSalesEmploeeData")
+                                .Bind(Model.SalesEmployeeDataList)
+                                .DisplayMemberPath("EmployeeCode")
+                                .SelectedValuePath("EmployeeCode")
+                                .HeaderPath("EmployeeCode")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.SalesEmployeeCode)
+                                .IsRequired(false))
+
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.SalesEmployeeName, new { @id = "selectedSalesEmployee", @class = "form-control", @disabled = "true" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_RequestDateFrom" for="Text2">依頼日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.RequestDateFrom)
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_RequestDateTo" for="Text3" style="text-align:center">～</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.RequestDateTo)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ExpectedOrderDateFrom" for="Text4">受注予定月</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.ExpectedOrderDateFrom)
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ExpectedOrderDateTo" for="Text5" style="text-align:center">～</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.ExpectedOrderDateTo)
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ReceptionDateFrom" for="Text6">受注月</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.ReceptionDateFrom)
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ReceptionDateTo" for="Text7" style="text-align:center">～</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.ReceptionDateTo)
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ProgressDetailsCodeFrom" for="Select2">進捗詳細</label>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.ProgressDetailsCodeFrom).Id("cmbProgressDetailsCodeListFrom")
+                                .Bind(Model.ProgressDetailsCodeListFrom)
+                                .DisplayMemberPath("Code")
+                                .SelectedValuePath("Code")
+                                .HeaderPath("Code")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.ProgressDetailsCodeFrom)
+                                .IsRequired(false))
+
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ProgressDetailsNameFrom, new { @id = "selectedProgressFrom", @class = "form-control", @disabled = "true" })
+
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ProgressDetailsCodeTo" for="Select3" style="text-align:center">～</label>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.ProgressDetailsCodeTo).Id("cmbProgressDetailsCodeListTo")
+                                .Bind(Model.ProgressDetailsCodeListTo)
+                                .DisplayMemberPath("Code")
+                                .SelectedValuePath("Code")
+                                .HeaderPath("Code")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.ProgressDetailsCodeTo)
+                                .IsRequired(false))
+
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ProgressDetailsNameTo, new { @id = "selectedProgressTo", @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_CustomerName" for="Text8">得意先名</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(model => model.CustomerName, new { @class = "form-control" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ProductName" for="Text9">品名</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(model => model.ProductName, new { @class = "form-control" })
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).IsReadOnly(true).Height("450px").Id("flexgrid").AllowAddNew(false)
+                            .Bind(Model.GridDataList)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("RowNumber").Width("50").Header("行").WordWrap(true).DataType(DataType.Number).IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("ExpectedOrderDate").Width("100").Header("受注予定月").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("ReceptionDate").Width("100").Header("受付月").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("InternalAnnouncementMark").Width("100").Header("内示マーク").WordWrap(true));
+                                b1.Add(cb => cb.Binding("SalesEmploeeName").Width("100").Header("営業担当者").WordWrap(true));
+                                b1.Add(cb => cb.Binding("CustomerName").Width("100").Header("得意先名").WordWrap(true));
+                                b1.Add(cb => cb.Binding("ProductName").Width("150").Header("品名").WordWrap(true));
+                                b1.Add(cb => cb.Binding("InquiryNumber").Width("100").Header("引合番号").WordWrap(true));
+                                b1.Add(cb => cb.Binding("OrderProbability").Width("100").Header("受注確率").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("SubcontractCost").Width("100").Header("外注原価").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("ProcessingRatio").Width("100").Header("加工比率").WordWrap(true).DataType(DataType.Number));
+
+                                b1.Add(cb => cb.Binding("EstimatedAmount").Width("100").Header("見積金額").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("OrderAmount").Width("100").Header("受注金額").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("LastOrderAmount").Width("100").Header("最終受注金額").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("ShippingDate").Width("100").Header("納期").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("UpdatedOn").Width("100").Header("更新日").WordWrap(true).DataType(DataType.Number));
+
+                            }))
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-1">
+                            <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                        </div>
+                        <div class="col-md-1">
+                            <input type="submit" value="検索" name="ShowSearchBtn" class="btn btn-primary" id="ShowSearchBtn" style="display:none;" />
+                        </div>
+
+                        <div class="col-md-12" style="text-align: right">
+                            <a href="#" class="btn btn-primary">ＣＳＶ出力</a>
+                            <a href="#" class="btn btn-primary" id="btnClose">閉じる</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 処理終了後のメッセージ表示 *@
+<div id="dialog" style="width: 600px; height: 200px;">
+    <div class="wj-dialog-header">
+        @Html.Raw("メッセージ")
+    </div>
+    <div class="wj-dialog-body">
+        <p>
+            @Html.Raw("登録が完了しました")
+        </p>
+    </div>
+    <div class="wj-dialog-footer">
+        <button class="btn btn-default wj-hide-ok">OK</button>
+    </div>
+</div>
+
+@Html.C1().Popup("#dialog")
+
+
+@section scripts{
+    <script>
+
+        // ラベルツールチップ設定
+        var tt = new wijmo.Tooltip();
+        tt.setTooltip('#lbl_InquiryNumber', '引合番号<br><b>F2:検索 F5:クリア F9:終了</b>');
+        tt.setTooltip('#lbl_SalesEmployeeCode', '営業担当者<br><b>F2:検索</b>');
+        tt.setTooltip('#lbl_RequestDateFrom', '依頼日');
+        tt.setTooltip('#lbl_ExpectedOrderDateFrom', '受注予定月');
+        tt.setTooltip('#lbl_ReceptionDateFrom', '受注月');
+        tt.setTooltip('#lbl_ProgressDetailsCodeFrom', '進捗詳細<br><b>F2:検索');
+        tt.setTooltip('#lbl_CustomerName', '得意先名');
+        tt.setTooltip('#lbl_ProductName', '品名');
+
+        //引合番号イベント
+        var ObjInquiryNumber = document.getElementById('txtInquiryNumber');
+        //Enter押下
+        ObjInquiryNumber.addEventListener('keydown', InquiryNoF2Enter_event);
+        function InquiryNoF2Enter_event(e) {
+            if (e.keyCode === 113) {
+                var ShowSubmitBtnObj = document.getElementById('ShowSearchBtn');
+                ShowSubmitBtnObj.click();
+            }
+            return false;
+        };
+        //担当者イベント
+        var theEmployeeCode = wijmo.Control.getControl('#cmbSalesEmploeeData');
+        var templateEmployee = '<table><tr>' +
+            '<td>{EmployeeCode}</td>' +
+            '<td title="EmployeeName">　{EmployeeName}</td>' +
+            '</tr></table>';
+        theEmployeeCode.formatItem.addHandler(function (s, e) {
+            var html = wijmo.format(templateEmployee, e.data);
+            e.item.innerHTML = html;
+        });
+
+        theEmployeeCode.selectedIndexChanged.addHandler(function (s, e) {
+            setText('selectedSalesEmployee', s.selectedItem.EmployeeName);
+        });
+
+        //進捗詳細リストFrom
+        var theProgressFrom = wijmo.Control.getControl('#cmbProgressDetailsCodeListFrom');
+        var templateProgressFrom = '<table><tr>' +
+            '<td>{Code}</td>' +
+            '<td title="Name">　{Name}</td>' +
+            '</tr></table>';
+        theProgressFrom.formatItem.addHandler(function (s, e) {
+            var html = wijmo.format(templateProgressFrom, e.data);
+            e.item.innerHTML = html;
+        });
+        theProgressFrom.selectedIndexChanged.addHandler(function (s, e) {
+            setText('selectedProgressFrom', s.selectedItem.Name);
+        });
+
+
+        //進捗詳細リストTo
+        var theProgressTo = wijmo.Control.getControl('#cmbProgressDetailsCodeListTo');
+        var templateProgressTo = '<table><tr>' +
+            '<td>{Code}</td>' +
+            '<td title="Name">　{Name}</td>' +
+            '</tr></table>';
+        theProgressTo.formatItem.addHandler(function (s, e) {
+            var html = wijmo.format(templateProgressTo, e.data);
+            e.item.innerHTML = html;
+        });
+        theProgressTo.selectedIndexChanged.addHandler(function (s, e) {
+            setText('selectedProgressTo', s.selectedItem.Name);
+        });
+
+        function setText(id, value) {
+            document.getElementById(id).value = value;
+        }
+
+        //Gridダブルクリックイベント
+        var grid = wijmo.Control.getControl('#flexgrid');
+        grid.hostElement.addEventListener('dblclick', function (e) {
+            var ht = grid.hitTest(e.pageX, e.pageY);
+
+            if (ht.cellType == wijmo.grid.CellType.Cell) {
+                var sel = grid.selection;
+                var Url = "";
+                for (var r = sel.topRow; r <= sel.bottomRow; r++) {
+                    var Url = grid.rows[r].dataItem.URL;
+                }
+                window.location.href = Url;
+            }
+
+        });
+
+    </script>
+}

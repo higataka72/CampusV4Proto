@@ -1,0 +1,111 @@
+﻿@model CampusV4.Models.EstimateInputViewModel
+<style>
+    #dlgInquirySearch {
+        width: 1200px;
+    }
+</style>
+<div id="dlgInquirySearch">
+    <form id="frmInquirySearch" class="form-horizontal">
+        <h4 class="modal-header">
+            引合照会
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="col-md-1 control-label text-nowrap" id="lbl_InquiryNo">引合番号</label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.inq_InquiryNo, new { @class = "form-control", @disabled = "true" })
+                </div>
+                <label class="col-md-2 control-label text-nowrap" id="lbl_UserRequestNo">お客様依頼番号</label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.inq_UserRequestNo, new { @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label text-nowrap" id="lbl_InqRequestDate">依頼日</label>
+                <div class="col-md-2">
+                    @Html.C1().InputDate().Id("InqRequestDate").Value(Model.inq_RequestDate).Placeholder("(必須)").IsDisabled(true)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label text-nowrap" id="lbl_InqCampusId">CAMPUS-ID</label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.inq_CampusId, new { @id = "InqCampusId", @class = "form-control", @disabled = "true" })
+                </div>
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.inq_CompanyName, new { @id = "CompanyName", @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label text-nowrap" id="lbl_InqSubject">件名</label>
+                <div class="col-md-7">
+                    @Html.TextBoxFor(model => model.inq_Subject, new { @id = "InqSubject", @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label text-nowrap" id="lbl_HinsyuCode">品種</label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.inq_HinsyuCode, new { @id = "HinsyuCode", @class = "form-control", @disabled = "true" })
+                </div>
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.inq_Hinmei, new { @id = "Hinmei", @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label text-nowrap" id="lbl_Quantity">数量</label>
+                <div class="col-md-1">
+                    @Html.TextBoxFor(model => model.inq_Quantity, new { @id = "Quantity", @class = "form-control", @disabled = "true" })
+                </div>
+                <div class="col-md-1">
+                    @Html.TextBoxFor(model => model.inq_Unit, new { @id = "Unit", @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label text-nowrap" id="lbl_ContentValue">お問合せ内容</label>
+                <div class="col-md-7">
+                    @Html.TextAreaFor(model => model.inq_ContentValue, new { @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label text-nowrap" id="lbl_Tenpu">添付資料</label>
+                <label class="col-md-1 control-label text-nowrap" id="lbl_TenpuUrl"><a href="#">・https://drive.google.com/xxxx/folders/xxxxxxxxxxxxx</a><br><a href="#">・https://drive.google.com/yyyy/folders/yyyyyyyyyy</a></label>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label text-nowrap" id="lbl_QuotationRequestDate">見積回答希望日</label>
+                <div class="col-md-2">
+                    @Html.C1().InputDate().Id("QuotationRequestDate").Value(Model.inq_QuotationRequestDate).IsDisabled(true)
+                </div>
+                <label class="col-md-1 control-label text-nowrap" id="lbl_DesiredDeliveryDate">希望納期</label>
+                <div class="col-md-2">
+                    @Html.C1().InputDate().Id("DesiredDeliveryDate").Value(Model.inq_DesiredDeliveryDate).IsDisabled(true)
+                </div>
+                <label class="col-md-1 control-label text-nowrap" id="lbl_ReferenceEstimateNo">参考見積番号</label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.inq_ReferenceEstimateNo, new { @id = "ReferenceEstimateNo", @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary wj-hide-ok">閉じる</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgInquirySearch")
+
+<script type="text/javascript">
+    var tt = new wijmo.Tooltip();
+    tt.setTooltip('#lbl_InquiryNo', '引合番号');
+    tt.setTooltip('#lbl_UserRequestNo', 'お客様依頼番号');
+    tt.setTooltip('#lbl_InqRequestDate', '依頼日');
+    tt.setTooltip('#lbl_InqCampusId', 'CAMPUS-ID');
+    tt.setTooltip('#lbl_InqSubject', '件名');
+    tt.setTooltip('#lbl_HinsyuCode', '品種');
+    tt.setTooltip('#lbl_Quantity', '数量/単位');
+    tt.setTooltip('#lbl_ContentValue', 'お問合せ内容');
+    tt.setTooltip('#lbl_Tenpu', '添付資料');
+    tt.setTooltip('#lbl_QuotationRequestDate', '見積回答希望日');
+    tt.setTooltip('#lbl_DesiredDeliveryDate', '希望納期');
+    tt.setTooltip('#lbl_ReferenceEstimateNo', '概算見積番号');
+
+</script>

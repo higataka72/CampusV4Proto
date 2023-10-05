@@ -1,0 +1,736 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>C1.Web.Mvc.TransposedMultiRow</name>
+    </assembly>
+    <members>
+        <member name="T:C1.Web.Mvc.TransposedMultiRow.CellGroup">
+            <summary>
+            TransposedMultiRowのレイアウト定義を表します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.CellGroup.Helper">
+            <summary>
+            HtmlHelperオブジェクトを取得または設定します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.CellGroup.#ctor">
+            <summary>
+            1つの<see cref="T:C1.Web.Mvc.TransposedMultiRow.CellGroup" />インスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.CellGroup.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>
+            1つの<see cref="T:C1.Web.Mvc.TransposedMultiRow.CellGroup" />インスタンスを作成します。
+            </summary>
+            <param name="helper">HtmlHelper インスタンス。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.CellGroup.Header">
+            <summary>
+            グループヘッダー（ヘッダーが折りたたまれたときに表示される）。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.CellGroup.Colspan">
+            <summary>
+            グループがまたがるグリッド列の数。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.CellGroup.Cells">
+            <summary>
+            colspanプロパティでColumnを拡張するセルオブジェクトの配列。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.CellGroup.IsRowHeader">
+            <summary>
+            行ヘッダーグループであるかどうかを決定する値を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedMultiRow.HeaderCellGroup">
+            <summary>
+            TransposedMultiRow内のHeaderLayoutDefinitionを表します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.HeaderCellGroup.Helper">
+            <summary>
+            HtmlHelperオブジェクトを取得または設定します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.HeaderCellGroup.#ctor">
+            <summary>
+            1つの<see cref="T:C1.Web.Mvc.TransposedMultiRow.HeaderCellGroup" />インスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.HeaderCellGroup.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>
+            1つの<see cref="T:C1.Web.Mvc.TransposedMultiRow.HeaderCellGroup" />インスタンスを作成します。
+            </summary>
+            <param name="helper">HtmlHelper インスタンス。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.HeaderCellGroup.Header">
+            <summary>
+            グループヘッダー（ヘッダーが折りたたまれたときに表示される）。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.HeaderCellGroup.Colspan">
+            <summary>
+            グループがまたがるグリッド列の数。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.HeaderCellGroup.Cells">
+            <summary>
+            colspanプロパティでColumnを拡張するセルオブジェクトの配列。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedMultiRow.Fluent.HeaderCellGroupBuilder">
+            <summary>
+            <see cref="T:C1.Web.Mvc.TransposedMultiRow.HeaderCellGroup" />を構成するビルダーを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.HeaderCellGroupBuilder.Cells(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.TransposedMultiRow.Cell,C1.Web.Mvc.TransposedMultiRow.Fluent.CellBuilder}})">
+            <summary>
+            <see cref="T:C1.Web.Mvc.TransposedMultiRow.Cell" />を設定します。
+            </summary>
+            <param name="builder">ビルダアクション。</param>
+            <returns>セルグループビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.HeaderCellGroupBuilder.#ctor(C1.Web.Mvc.TransposedMultiRow.HeaderCellGroup)">
+            <summary>
+            <paramref name="obj" />を構成する1つの<see cref="T:C1.Web.Mvc.TransposedMultiRow.Fluent.HeaderCellGroupBuilder" />インスタンスを作成します。
+            </summary>
+            <param name="obj">構成される<see cref="T:C1.Web.Mvc.TransposedMultiRow.HeaderCellGroup" />オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.HeaderCellGroupBuilder.Header(System.String)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.HeaderCellGroup.Header" />.を構成します。
+            ヘッダーが折りたたまれたときに表示されるグループヘッダー。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.HeaderCellGroupBuilder.Colspan(System.Int32)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.HeaderCellGroup.Colspan" />を構成します。
+            グループがまたがるグリッド列の数。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1">
+            <summary>
+            <see cref="T:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1" />を構成するビルダーを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.#ctor(C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow{`0})">
+            <summary>
+            <paramref name="component" />を構成する1つの<see cref="T:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1" />インスタンスを作成します。
+            </summary>
+            <param name="component">構成される<see cref="T:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1" />オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.AutoGenerateColumns(System.Boolean)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.AutoGenerateColumns" />を構成します。
+TransposedMultiRowでは無効にされています。グリッドがitemsSourceに基づいて列を自動的に生成するかどうかを決定する値を取得または設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.AllowDragging(C1.Web.Mvc.Grid.AllowDragging)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.AllowDragging" />を構成します。
+TransposedMultiRowでは無効にされています。ユーザーがマウスを使用して行、列、またはその両方をドラッグできるかどうかを決定する値を取得または設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.AllowMerging(C1.Web.Mvc.Grid.AllowMerging)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.AllowMerging" />を構成します。
+TransposedMultiRowでは無効にされています。グリッドのどの部分のセル結合を許可するかを取得または設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.ChildItemsPath(System.String)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.ChildItemsPath" />を構成します。
+TransposedMultiRowでは無効にされています。階層グリッドで子行の生成に使用されるプロパティの名前を取得または設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.OnClientDraggedColumn(System.String)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.OnClientDraggedColumn" />を構成します。
+
+TransposedMultiRowでは無効にされています。ユーザーが列のドラッグを完了したときに発生します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.OnClientDraggedRow(System.String)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.OnClientDraggedRow" />を構成します。TransposedMultiRowでは無効にされています。ユーザーが行のドラッグを完了したときに発生します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.OnClientDraggingColumn(System.String)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.OnClientDraggingColumn" />を構成します。
+TransposedMultiRowでは無効にされています。ユーザーが列のドラッグを開始するときに発生します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.OnClientDraggingRow(System.String)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.OnClientDraggingRow" />を構成します。
+
+TransposedMultiRowでは無効にされています。ユーザーが行のドラッグを開始するときに発生します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.ColumnLayout(System.String)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.ColumnLayout" /> を構成します。
+            TransposedMultiRowでは無効になっています。 現在の列レイアウトを定義するJSON文字列を取得または設定します。" remarks="列レイアウト文字列は、列とそのプロパティを含む配列を表します。 これを使用して、ユーザーが定義した列レイアウトをセッションを越えて保持できます。 また、ユーザーが列レイアウトを変更できるアプリケーションで元に戻す/やり直し機能を実装することもできます。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.NewRowAtTop(System.Boolean)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.NewRowAtTop" /> を構成します。
+            TransposedMultiRowでは無効になっています。 新しい行テンプレートをグリッドの上部に配置するか、下部に配置するかを示す値を取得または設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.CenterHeadersVertically(System.Boolean)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.CenterHeadersVertically" /> を構成します。
+            複数の行にまたがるセルのコンテンツを垂直方向に中央揃えにするかどうかを
+判定する値を取得または設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.CollapsedHeaders(System.Nullable{System.Boolean})">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.CollapsedHeaders" /> を構成します。
+            列ヘッダーを折りたたみ、単一の行としてグループヘッダーを表示するかどうかを判定する値を取得または設定します。
+            </summary>
+            <remarks>
+            nullに設定すると、グリッドにすべてのヘッダー情報（グループおよび列）が表示されます。
+            </remarks>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.ShowHeaderCollapseButton(System.Boolean)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.ShowHeaderCollapseButton" /> を構成します。
+            グリッドで、行フィールドの列ヘッダーにソートインジケータを
+グリッドの列ヘッダーパネルに表示するかどうかを判定する値を
+設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.OnClientCollapsedHeadersChanging(System.String)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.OnClientCollapsedHeadersChanging" /> クライアントイベントを構成します。
+            collapsedHeaders プロパティの値が変化した後に発生します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.OnClientCollapsedHeadersChanged(System.String)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.OnClientCollapsedHeadersChanged" /> クライアントイベントを構成します。
+            collapsedHeaders プロパティの値が変化した後に発生します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.AllowPinning(System.Boolean)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.AllowPinning" />を構成します。
+            TransposedMultiRowでは無効にされています。グリッドで、列ヘッダーに固定ボタンを追加するか、またその固定ボタンをクリックすると列の固定状態を切り替えるかどうかを取得または設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.LayoutDefinition(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.TransposedMultiRow.CellGroup,C1.Web.Mvc.TransposedMultiRow.Fluent.CellGroupBuilder}})">
+            <summary>
+            <see cref="T:C1.Web.Mvc.TransposedMultiRow.CellGroup" />を設定します。
+            </summary>
+            <param name="builder">ビルダアクション。</param>
+            <returns>TransposedMultiRow ビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.HeaderLayoutDefinition(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.TransposedMultiRow.HeaderCellGroup,C1.Web.Mvc.TransposedMultiRow.Fluent.HeaderCellGroupBuilder}})">
+            <summary>
+            <see cref="T:C1.Web.Mvc.TransposedMultiRow.HeaderCellGroup" />を設定します。
+            </summary>
+            <param name="builder">ビルダアクション。</param>
+            <returns>TransposedMultiRow ビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.Columns(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.Column,C1.Web.Mvc.Fluent.ColumnBuilder}})">
+            <summary>
+            <see cref="T:C1.Web.Mvc.Column" />を設定します。
+            </summary>
+            <remarks>TransposedMultiRowでは無効にされています。</remarks>
+            <param name="builder">ビルダアクション。</param>
+            <returns>TransposedMultiRow ビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.OnClientDraggingColumnOver(System.String)">
+            <summary>
+            このメソッドを非表示にするには、オーバーライドします。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.OnClientDraggingRowOver(System.String)">
+            <summary>
+            このメソッドを非表示にするには、オーバーライドします。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedMultiRow.Fluent.CellBuilder">
+            <summary>
+            <see cref="T:C1.Web.Mvc.TransposedMultiRow.Cell" />を構成するビルダーを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.CellBuilder.#ctor(C1.Web.Mvc.TransposedMultiRow.Cell)">
+            <summary>
+            <paramref name="obj" />を構成する1つの<see cref="T:C1.Web.Mvc.TransposedMultiRow.Fluent.CellBuilder" />インスタンスを作成します。
+            </summary>
+            <param name="obj">構成される<see cref="T:C1.Web.Mvc.TransposedMultiRow.Cell" />オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.CellBuilder.AllowMerging(System.Boolean)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.Cell.AllowMerging" /> を構成します。
+            TransposedMultiRowでは無効にされています。この行または列のセルを結合できるかどうかを取得または設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.CellBuilder.AllowDragging(System.Boolean)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.Cell.AllowDragging" />を構成します。
+            TransposedMultiRowでは無効にされています。ユーザーがマウスで列または行を新しい位置に移動できるかどうかを示す値を取得または設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.CellBuilder.AllowResizing(System.Boolean)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.Cell.AllowResizing" />を構成します。
+            TransposedMultiRowでは無効にされています。ユーザーがマウスで列または行をサイズ変更できるかどうかを示す値を取得または設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.CellBuilder.Visible(System.Boolean)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.Cell.Visible" /> を構成します。
+            TransposedMultiRowでは無効にされています。この列または行が表示されているかどうかを示す値を取得または設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.CellBuilder.Colspan(System.Int32)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.Cell.Colspan" />を構成します。
+            グループがまたがるグリッド列の数。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.CellBuilder.Rowspan(System.Int32)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.Cell.Rowspan" />を構成します。
+            グループがまたがるグリッド行の数。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedMultiRow.Fluent.CellGroupBuilder">
+            <summary>
+            <see cref="T:C1.Web.Mvc.TransposedMultiRow.CellGroup" />を構成するビルダーを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.CellGroupBuilder.#ctor(C1.Web.Mvc.TransposedMultiRow.CellGroup)">
+            <summary>
+            <paramref name="obj" />を構成する1つの<see cref="T:C1.Web.Mvc.TransposedMultiRow.Fluent.CellGroupBuilder" />インスタンスを作成します。
+            </summary>
+            <param name="obj">構成される<see cref="T:C1.Web.Mvc.TransposedMultiRow.CellGroup" />オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.CellGroupBuilder.Header(System.String)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.CellGroup.Header" />.を構成します。
+            ヘッダーが折りたたまれたときに表示されるグループヘッダー。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.CellGroupBuilder.Colspan(System.Int32)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.CellGroup.Colspan" />を構成します。
+            グループがまたがるグリッド列の数。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.CellGroupBuilder.IsRowHeader(System.Boolean)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.CellGroup.IsRowHeader" /> を構成します。
+            行ヘッダーグループであるかどうかを決定する値を設定します。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.CellGroupBuilder.Cells(System.Action{C1.Web.Mvc.Fluent.ListItemFactory{C1.Web.Mvc.TransposedMultiRow.Cell,C1.Web.Mvc.TransposedMultiRow.Fluent.CellBuilder}})">
+            <summary>
+            <see cref="T:C1.Web.Mvc.TransposedMultiRow.Cell" />を設定します。
+            </summary>
+            <param name="builder">ビルダアクション。</param>
+            <returns>セルグループビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedMultiRow.Fluent.ControlBuilderFactoryExtension">
+            <summary>
+            TransposedMultiRowChart関連のコントロールの作成用にControlBuilderFactoryを拡張します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.ControlBuilderFactoryExtension.TransposedMultiRow``1(C1.Web.Mvc.Fluent.ControlBuilderFactory,System.String)">
+            <summary>
+            TransposedMultiRowBuilderを作成します。
+            </summary>
+            <typeparam name="T">データ項目タイプ。</typeparam>
+            <param name="controlBuilderFactory">ControlBuilderFactory。</param>
+            <param name="selector">セレクター。</param>
+            <returns>TransposedMultiRowBuilder。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowFilterExtension">
+            <summary>
+            FlexGridFilterエクステンダを使用できるすべてのコントロールに 拡張メソッドを追加する静的クラスを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowFilterExtension.Filterable``1(C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder{``0},System.Action{C1.Web.Mvc.Fluent.FlexGridFilterBuilder{``0}})">
+            <summary>
+            TransposedMultiRowに FlexGridFilter エクステンダを適用します。
+            </summary>
+            <typeparam name="T">データレコードタイプ。</typeparam>
+            <param name="transposedMultiRowBuilder">指定されたTransposedMultiRow ビルダ。</param>
+            <param name="gridFilterBuilder">指定された FlexGridFilter ビルダ。</param>
+            <returns>TransposedMultiRow ビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowFilterExtension.Filterable``1(C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder{``0})">
+            <summary>
+            TransposedMultiRowに デフォルトのFlexGridFilter エクステンダを適用します。
+            </summary>
+            <typeparam name="T">データレコードタイプ。</typeparam>
+            <param name="transposedMultiRowBuilder">指定されたTransposedMultiRowビルダ。</param>
+            <returns>TransposedMultiRow フィルタ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowGroupPanelExtension">
+            <summary>
+            FlexGridFilterエクステンダを使用できるすべてのコントロールに 拡張メソッドを追加する静的クラスを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowGroupPanelExtension.ShowGroupPanel``1(C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder{``0},System.Action{C1.Web.Mvc.Fluent.FlexGridGroupPanelBuilder{``0}},System.String)">
+            <summary>
+            FlexGridにFlexGridGroupPanelエクステンダを適用します。
+            </summary>
+            <typeparam name="T">データレコードタイプ。</typeparam>
+            <param name="gridBuilder">指定された FlexGrid ビルダ。</param>
+            <param name="gridGroupPanelBuilder">指定された FlexGridGroupPanel ビルダ。</param>
+            <param name="selector">FlexGridGroupPanelのホスト要素に指定されたセレクター。</param>
+            <returns>TransposedMultiRow ビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowGroupPanelExtension.ShowGroupPanel``1(C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder{``0},System.String)">
+            <summary>
+            FlexGridにデフォルトのFlexGridGroupPanelエクステンダを適用します。
+            </summary>
+            <typeparam name="T">データレコードタイプ。</typeparam>
+            <param name="gridBuilder">指定されたFlexGridビルダ。</param>
+            <param name="selector">FlexGridGroupPanelのホスト要素に指定されたセレクター。</param>
+            <returns>TransposedMultiRow ビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedMultiRow.Fluent.ScriptsBuilderExtension">
+            <summary>
+            TransposedMultiRowスクリプト用に<see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />クラスを拡張します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.ScriptsBuilderExtension.TransposedMultiRow(C1.Web.Mvc.Fluent.ScriptsBuilder)">
+            <summary>
+            OLAP関連のスクリプトバンドルを登録します。
+            </summary>
+            <param name="scriptsBuilder"><see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />。</param>
+            <returns><see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1">
+            <summary>
+            転置レイアウトを使用してデータを表示するGridコントロール。 この場合、列はデータ項目、また、行は項目のプロパティを表します。 また、このコントロールを使用すると、各項目を複数列に表示できます。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.Columns">
+            <summary>
+            TransposedMultiRowでは無効にされています。グリッドの列コレクションを取得します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.OnClientDraggingColumnOver">
+            <summary>
+            このプロパティを非表示にするには、オーバーライドします。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.OnClientDraggingRowOver">
+            <summary>
+            このプロパティを非表示にするには、オーバーライドします。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.#ctor(System.Web.Mvc.HtmlHelper,System.String)">
+            <summary>
+            1つの<see cref="T:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1" />インスタンスを作成します。
+            </summary>
+            <param name="helper">HTML ヘルパー</param>
+            <param name="selector">セレクター</param>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.AutoGenerateColumns">
+            <summary>
+            TransposedMultiRowでは無効にされています。グリッドがitemsSourceに基づいて列を自動的に生成するかどうかを決定する値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.AllowDragging">
+            <summary>
+            TransposedMultiRowでは無効にされています。ユーザーがマウスを使用して行、列、またはその両方をドラッグできるかどうかを決定する値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.AllowMerging">
+            <summary>
+            TransposedMultiRowでは無効にされています。グリッドのどの部分のセル結合を許可するかを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.ChildItemsPath">
+            <summary>
+            TransposedMultiRowでは無効にされています。階層グリッドで子行の生成に使用されるプロパティの名前を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.OnClientDraggedColumn">
+            <summary>
+            TransposedMultiRowでは無効にされています。ユーザーが列のドラッグを完了したときに発生します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.OnClientDraggedRow">
+            <summary>
+            TransposedMultiRowでは無効にされています。ユーザーが行のドラッグを完了したときに発生します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.OnClientDraggingColumn">
+            <summary>
+            TransposedMultiRowでは無効にされています。ユーザーが列のドラッグを開始するときに発生します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.OnClientDraggingRow">
+            <summary>
+            TransposedMultiRowでは無効にされています。ユーザーが行のドラッグを開始するときに発生します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.ColumnLayout">
+            <summary>
+            TransposedMultiRowでは無効にされています。 現在の列レイアウトを定義するJSON文字列を取得または設定します。" remarks="列レイアウト文字列は、列とそのプロパティを含む配列を表します。 これを使用して、ユーザーが定義した列レイアウトをセッションを越えて保持できます。 また、ユーザーが列レイアウトを変更できるアプリケーションで元に戻す/やり直し機能を実装することもできます。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.LayoutDefinition">
+            <summary>
+            各データ項目の表示に使用される行のレイアウトを定義する配列を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.NewRowAtTop">
+            <summary>
+            TransposedMultiRowでは無効にされています。 新しい行テンプレートをグリッドの上部に配置するか、下部に配置するかを示す値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.CenterHeadersVertically">
+            <summary>
+            複数の行にまたがるセルのコンテンツを垂直方向に中央揃えにするかどうかを
+判定する値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.CollapsedHeaders">
+            <summary>
+            列ヘッダーを折りたたみ、単一の行としてグループヘッダーを表示するかどうかを判定する値を取得または設定します。
+            </summary>
+            <remarks>
+            nullに設定すると、グリッドにすべてのヘッダー情報（グループおよび列）が表示されます。
+            </remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.ShowHeaderCollapseButton">
+            <summary>
+            グリッドで、行フィールドの列ヘッダーにソートインジケータを
+グリッドの列ヘッダーパネルに表示するかどうかを判定する値を
+取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.OnClientCollapsedHeadersChanging">
+            <summary>
+            collapsedHeadersプロパティの値が変化した後に発生します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.OnClientCollapsedHeadersChanged">
+            <summary>
+            collapsedHeaders プロパティの値が変化した後に発生します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.HeaderLayoutDefinition">
+            <summary>
+            グリッドの列ヘッダーの表示に使用される行のレイアウトを定義する配列を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.AllowPinning">
+            <summary>
+            TransposedMultiRowでは無効にされています。グリッドで、列ヘッダーに固定ボタンを追加するか、またその固定ボタンをクリックすると列の固定状態を切り替えるかどうかを取得または設定します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.GetFlatColumns">
+            <summary>
+            グリッド内のすべての列を取得します。
+            </summary>
+            <returns>列のコレクション。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.GetColumn(C1.Web.Mvc.ColumnInfo)">
+            <summary>
+            指定された情報で列を取得します。
+            </summary>
+            <param name="columnInfo">列の情報。</param>
+            <returns>列は指定された列の情報を満たしています。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedMultiRow.Cell">
+            <summary>
+            TransposedMultiRowのセルを表します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.Cell.AllowMerging">
+            <summary>
+            TransposedMultiRowでは無効にされています。この行または列のセルを結合できるかどうかを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.Cell.AllowDragging">
+            <summary>
+            TransposedMultiRowでは無効にされています。ユーザーがマウスで列または行を新しい位置に移動できるかどうかを示す値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.Cell.AllowResizing">
+            <summary>
+            TransposedMultiRowでは無効にされています。ユーザーがマウスで列または行をサイズ変更できるかどうかを示す値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.Cell.Visible">
+            <summary>
+            TransposedMultiRowでは無効にされています。この列または行が表示されているかどうかを示す値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.Cell.Colspan">
+            <summary>
+            グループがまたがるグリッド列の数。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.Cell.Rowspan">
+            <summary>
+            グループがまたがるグリッド行の数。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Cell.#ctor">
+            <summary>
+            1つの<see cref="T:C1.Web.Mvc.TransposedMultiRow.Cell" />インスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Cell.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>
+            1つの<see cref="T:C1.Web.Mvc.TransposedMultiRow.Cell" />インスタンスを作成します。
+            </summary>
+            <param name="helper">HtmlHelper インスタンス。</param>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedMultiRow.CellInfo">
+            <summary>
+            TransposedMultiRowの列を説明するセル情報を表します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.CellInfo.#ctor">
+            <summary>
+            1つの<see cref="T:C1.Web.Mvc.TransposedMultiRow.CellInfo" />インスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.CellInfo.Group">
+            <summary>
+            セルが属するセルグループのインデックスを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.CellInfo.Index">
+            <summary>
+            セルグループのセルコレクション内の列のインデックスを取得または設定します。
+            </summary>
+        </member>
+        <member name="T:C1.Web.Mvc.TransposedMultiRow.LicenseDetector">
+            <summary>
+            C1.Web.Mvc.TransposedMultiRowライセンスを検出するためのクラスを定義します。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.LicenseDetector.#ctor">
+            <summary>
+            コンストラクター。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.AllowSorting">
+            <summary>
+            TransposedMultiRowではソートがサポートされません。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.AllowAddNew">
+            <summary>
+            TransposedMultiRowでは、項目の追加がサポートされません。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.AllowDelete">
+            <summary>
+            TransposedMultiRowでは、項目の削除追加がサポートされません。
+            </summary>
+        </member>
+        <member name="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.SortingType">
+            <summary>
+            TransposedMultiRowではソートがサポートされません。
+            </summary>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.AllowSorting(System.Boolean)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.AllowSorting" />を構成します。
+            TransposedMultiRowではソートがサポートされません。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.AllowAddNew(System.Boolean)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.AllowAddNew" />を構成します。TransposedMultiRowでは、項目の追加がサポートされません。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.AllowDelete(System.Boolean)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.AllowDelete" />を構成します。TransposedMultiRowでは、項目の削除追加がサポートされません。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.TransposedMultiRow.Fluent.TransposedMultiRowBuilder`1.SortingType(C1.Web.Mvc.Grid.AllowSorting)">
+            <summary>
+            <see cref="P:C1.Web.Mvc.TransposedMultiRow.TransposedMultiRow`1.SortingType" />を構成します。
+            TransposedMultiRowではソートがサポートされません。
+            </summary>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+    </members>
+</doc>

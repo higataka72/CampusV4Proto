@@ -1,0 +1,166 @@
+﻿@model CampusV4.Models.InspectViewModel
+
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>検収入力</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("InspectDataList", "Inspect", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_CampusId" for="Select3">CAMPUS-ID</label>
+                        <div class="col-md-2">
+                            @(Html.C1()
+                                .ComboBoxFor(model => model.Campus1ID).Id("cmbCampusData")                                
+                                .Bind(Model.CampusDataList)
+                                .HeaderPath("CampusID")
+                                .DisplayMemberPath("CampusID")
+                                .SelectedValuePath("CampusID")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.Campus1ID)
+                                .IsRequired(false)
+                                .Placeholder("(必須)")
+                                )
+                            
+                        </div>
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(model => model.Campus1Name, new { @id = "selectedCampusName", @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+                    
+                   
+                   <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_ReceiptDateFrom" for="Text2">受入日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.ReceiptDateFrom)
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_ReceiptDateTo" for="Text3" style="text-align:center">～</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.ReceiptDateTo)
+                        </div>
+                    </div>
+                   <div class="form-group">
+                       <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_ProductionNumber" for="Text3">製番</label>
+                       <div class="col-md-2">
+                           @Html.TextBoxFor(model => model.ProductionNumber, new { @class = "form-control", @placeholder = "(必須)", @id = "txtProductionNumber" })
+                       </div>
+                       <div class="col-md-6">
+                           <label class="control-label">(　</label>
+                           <label>
+                               <input type="radio" name="Radio1" value="test" style="vertical-align: top; " />　受入のみ　
+                           </label>
+                           <label>
+                               <input type="radio" name="Radio2" value="test" style="vertical-align: top; " />　発注残のみ　
+                           </label>
+                           <label>
+                               <input type="radio" name="Radio3" value="test" style="vertical-align: top; " />　 両方
+                           </label>
+                           <label class="control-label">　)</label>
+                       </div>
+                       <div class="col-md-1">
+                           <input type="submit" value="検索" name="ShowSearchBtn" class="btn btn-primary" id="ShowSearchBtn" />
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <div class="col-md-1">
+                           <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                       </div>
+                       <div class="col-md-1">
+                           <input type="submit" value="表示" name="submitBtn" class="btn btn-primary" id="ShowSubmitBtn" style="display:none;" />
+                       </div>                       
+                   </div>
+
+
+
+                    <div class="form-group">
+                        @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).IsReadOnly(false).Height("400px").Id("flexgrid").AllowAddNew(false)
+                            .Bind(Model.GridDataList)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("InspectCheck").Width("50").Header("検").DataType(DataType.Boolean));
+                                b1.Add(cb => cb.Binding("Situation").Width("50").Header("状態").WordWrap(true).DataType(DataType.Number).IsReadOnly(true).Align("center"));
+                                b1.Add(cb => cb.Binding("ProductionNumber").Width("150").Header("製番").WordWrap(true).IsReadOnly(true));
+                                b1.Add(cb => cb.Binding("OrderDate").Width("80").Header("発注日").WordWrap(true).DataType(DataType.Date));
+                                b1.Add(cb => cb.Binding("OrderNumber").Width("150").Header("発注番号").WordWrap(true));
+                                b1.Add(cb => cb.Binding("ReceiptDate").Width("80").Header("受入日").WordWrap(true).DataType(DataType.Date));
+                                b1.Add(cb => cb.Binding("ReceiptNumber").Width("150").Header("受入番号").WordWrap(true));
+                                b1.Add(cb => cb.Binding("PartsName").Width("200").Header("品名").WordWrap(true));
+                                b1.Add(cb => cb.Binding("DrawingNumber").Width("150").Header("図面番号/型式").WordWrap(true));
+                                b1.Add(cb => cb.Binding("OrderQuantity").Width("80").Header("発注数").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("ReceiptQuantity").Width("80").Header("受入数").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("DefectsQuantity").Width("80").Header("不良数").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Unitprice").Width("100").Header("単価").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Price").Width("100").Header("金額").WordWrap(true).DataType(DataType.Number));
+                            }))
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-12" style="text-align: right">
+                            <a href="#" class="btn btn-primary">印刷</a>
+                            <a href="#" class="btn btn-primary">閉じる</a>
+                        </div>
+                    </div>
+                }
+            </div>
+                </div>
+    </div>
+</div>
+
+@* 処理終了後のメッセージ表示 *@
+<div id="dialog" style="width: 600px; height: 200px;">
+    <div class="wj-dialog-header">
+        @Html.Raw("メッセージ")
+    </div>
+    <div class="wj-dialog-body">
+        <p>
+            @Html.Raw("登録が完了しました")
+        </p>
+    </div>
+    <div class="wj-dialog-footer">
+        <button class="btn btn-default wj-hide-ok">OK</button>
+    </div>
+</div>
+
+@Html.C1().Popup("#dialog")
+
+
+@section scripts{
+    <script>
+
+        // ラベルツールチップ設定
+        var tt = new wijmo.Tooltip();
+        tt.setTooltip('#lbl_CampusId', 'CAMPUS-ID');
+        tt.setTooltip('#lbl_ProductionNumber', '製番<br><b>F2:検索 F5:クリア</b>');
+        tt.setTooltip('#lbl_ReceiptDateFrom', '受入日');
+
+        //CAMPUS_IDイベント
+        var theCampusCode = wijmo.Control.getControl('#cmbCampusData');
+        var template = '<table><tr>' +
+            '<td>{CampusID}</td>' +
+            '<td title="CampusName">　{CampusName}</td>' +
+            '</tr></table>';
+        theCampusCode.formatItem.addHandler(function (s, e) {
+            var html = wijmo.format(template, e.data);
+            e.item.innerHTML = html;
+        });
+        theCampusCode.selectedIndexChanged.addHandler(function (s, e) {
+            setSelectedCampus(s);
+        });
+
+        function setSelectedCampus(s) {
+            setText('selectedCampusName', s.selectedItem.CampusName);
+        }
+
+        function setText(id, value) {
+            document.getElementById(id).value = value;
+        }
+    </script>
+}

@@ -1,0 +1,64 @@
+﻿@model CampusV4.Models.ReferenceEstimatePriceViewModel
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb">
+                <li class="active">参考見積</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("ReferenceEstimatePrice", "ReferenceEstimate", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label control-label text-nowrap" id="lbl_cmbHinsyuCode">
+                            ご指定の仕様に基づく概算見積は以下の通りとなります。<br>
+                            正式なお見積りに進むには、下記より選択してください。
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Kuuhaku" style="text-align:center">　</label>
+                            <div class="col-md-3">
+                                @Html.C1().InputNumber().Id("ApproximatePriceFrom").Value(Model.ApproximatePriceFrom).CssStyle("font-size", "32px")
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_TabletSize" for="ApproximatePriceFrom" style="text-align:center">～</label>
+                            <div class="col-md-3">
+                                @Html.C1().InputNumber().Id("ApproximatePriceTo").Value(Model.ApproximatePriceTo).CssStyle("font-size","32px")
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-6 control-label text-nowrap" id="lbl_Empty2"></label>
+                        <label control-label text-nowrap" id="lbl_cmbHinsyuCode">
+                            ＊詳細仕様確認後、正式お見積をご提示させて頂きます。<br>
+                            本概算見積は製作費を保証するものではありません。
+                        </label>
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-5 col-md-offset-4" style="text-align: right">
+                            <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                            <button class="btn btn-primary wj-hide-ok">ＰＤＦ保存</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-5 col-md-offset-4" style="text-align: right">
+                            <input type="submit" value="戻る" name="backBtn" class="btn btn-primary" formaction="/ReferenceEstimate/ReferenceEstimatePriceBack" id="backBtn" />
+                            <input type="submit" value="終了" name="EndBtn" class="btn btn-primary" id="EndBtn" />
+                            <input type="submit" value="商談予約" name="CustomerBaseInfoBtn" class="btn btn-primary" formaction="/ReferenceEstimate/CustomerBaseInfo" id="CustomerBaseInfoBtn" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

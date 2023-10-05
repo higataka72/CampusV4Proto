@@ -1,0 +1,150 @@
+﻿@model CampusV4.Models.AcceptanceListSearchViewModel
+
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>検収明細一覧</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("AcceptanceListSearch", "AcceptanceList", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_RequestDate" for="Text1">締次検収日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.AcceptanceDate).Format("yyyy年MM月")
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_CampusId" for="Text2">CAMPUS-ID</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.CampusIdFrom, new { @id = "CampusIdFrom", @class = "form-control" })
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info" id="btnSearchCampusFrom"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.CompanyNameFrom, new { @id = "CompanyNameFrom", @class = "form-control" })
+                        </div>
+
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_CampusId" for="Text3" style="text-align:center">～</label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.CampusIdTo, new { @id = "CampusIdTo", @class = "form-control" })
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info" id="btnSearchCampusTo"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.CompanyNameTo, new { @id = "CompanyNameTo", @class = "form-control" })
+                        </div>
+
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-12" style="text-align: right">
+                            <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                            <a href="#" class="btn btn-primary" id="btnInsert">送信</a>
+                            <a href="#" class="btn btn-primary" id="btnInsert">印刷</a>
+                            <input type="submit" value="表示" name="ShowSearchBtn" class="btn btn-primary" id="ShowBtn"/>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 処理終了後のメッセージ表示 *@
+<div id="dialog" style="width: 600px; height: 200px;">
+    <div class="wj-dialog-header">
+        @Html.Raw("メッセージ")
+    </div>
+    <div class="wj-dialog-body">
+        <p>
+            @Html.Raw("登録が完了しました")
+        </p>
+    </div>
+    <div class="wj-dialog-footer">
+        <button class="btn btn-default wj-hide-ok">OK</button>
+    </div>
+</div>
+
+@Html.C1().Popup("#dialog")
+
+@Html.Partial("../Common/MasterSearch")
+
+@section scripts{
+    <script>
+
+        // ラベルツールチップ設定
+        var tt = new wijmo.Tooltip();
+        tt.setTooltip('#lbl_RequestDate', '締次検収日<br><b>F5:クリア F9:終了</b>');
+        tt.setTooltip('#lbl_CampusId', 'lbl_CampusId-ID<br><b>F2:検索</b>');
+
+
+        // 検索（F2）
+        var dlgMasterSearch = wijmo.Control.getControl('#dlgMasterSearch');
+        c1.documentReady(function () {
+            //CAMPUS-ID_From
+            document.getElementById('btnSearchCampusFrom').addEventListener('click', function () {
+                loadMasterData();
+
+                dlgMasterSearch.show(true, function (sender) {
+                    if (sender.dialogResult == 'wj-hide-ok') {
+                        document.getElementById('CampusIdFrom').setAttribute('value', masterSelected.code);
+                        document.getElementById('CompanyNameFrom').setAttribute('value', masterSelected.name);
+                    }
+                });
+            });
+            document.getElementById('CampusIdFrom').addEventListener('keydown', CampusIdKeyDownEvent);
+            function CampusIdKeyDownEvent(e) {
+                if (e.keyCode == 113) {
+                    let target = document.getElementById('btnSearchCampusFrom');
+                    let clickEvent = new Event('click', { "bubbles": true, "cancelable": true });
+                    target.dispatchEvent(clickEvent);
+                }
+            }
+
+            //CAMPUS-ID_From
+            document.getElementById('btnSearchCampusTo').addEventListener('click', function () {
+                loadMasterData();
+
+                dlgMasterSearch.show(true, function (sender) {
+                    if (sender.dialogResult == 'wj-hide-ok') {
+                        document.getElementById('CampusIdTo').setAttribute('value', masterSelected.code);
+                        document.getElementById('CompanyNameTo').setAttribute('value', masterSelected.name);
+                    }
+                });
+            });
+            document.getElementById('CampusIdTo').addEventListener('keydown', CampusIdKeyDownEvent);
+            function CampusIdKeyDownEvent(e) {
+                if (e.keyCode == 113) {
+                    let target = document.getElementById('btnSearchCampusTo');
+                    let clickEvent = new Event('click', { "bubbles": true, "cancelable": true });
+                    target.dispatchEvent(clickEvent);
+                }
+            }
+
+        });
+/*
+        // 登録ボタンイベント
+        var dialog = wijmo.Control.getControl('#dialog');
+        document.getElementById('btnInsert').addEventListener('click', function (e) {
+            // show the dialog (modal window)
+            dialog.show(true, function (sender) { });
+        });
+*/
+
+    </script>
+}

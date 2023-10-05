@@ -1,0 +1,54 @@
+﻿@model CampusV4.Models.EstimateInputViewModel
+
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb">
+                <li><a href="/EstimateInput/EstimateInput?mode=2">見積入力 <i class="fa fa-arrow-circle-left"></i></a></li>
+                <li class="active">付属品明細</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("AccessoriesDetail", "EstimateInput", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @Html.HiddenFor(model => model.Mode)
+                    <div class="form-group">
+                        @(Html.C1().FlexGrid()
+                                .AutoGenerateColumns(false).IsReadOnly(false).Height("180px").Id("flexgrid").AllowAddNew(true)
+                                .Bind(Model.PartsList)
+                                .Columns(b1 =>
+                                {
+                                    b1.Add(cb => cb.Binding("HinmeiCode").Width("120").Header("コード").WordWrap(true));
+                                    b1.Add(cb => cb.Binding("HinmeiName").Width("450").Header("品名").WordWrap(true));
+                                    b1.Add(cb => cb.Binding("Suryo").Width("120").Header("数量").WordWrap(true).DataType(DataType.Number));
+                                    b1.Add(cb => cb.Binding("Unit").Width("120").Header("単位").WordWrap(true));
+                                    b1.Add(cb => cb.Binding("Unitprice").Width("120").Header("単価").WordWrap(true).DataType(DataType.Number));
+                                    b1.Add(cb => cb.Binding("Price").Width("120").Header("金額").WordWrap(true).DataType(DataType.Number));
+                                }))
+                    </div>
+
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-12" style="text-align: right">
+                            <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                            <button type="submit" class="btn btn-primary" id="btnEstimateInput" formaction="/EstimateInput/EstimateInput">登録</button>
+                            <a href="/EstimateInput/EstimateInput?mode=2" class="btn btn-primary" id="btnback">戻る</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+
+    </script>
+}

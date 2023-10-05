@@ -1,0 +1,167 @@
+﻿@model CampusV4.Models.ContactConfirmationInputViewModel
+
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb">
+                <li><a href="/Inquiry/InquiryRegist?mode=2">引合一覧 <i class="fa fa-arrow-circle-left"></i></a></li>
+                <li class="active">連絡確認入力</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("Regist", "ContactConfirmationInput", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_Seiban">製番</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.Seiban, new { @id = "Seiban", @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_RegistDate" for="RegistDate">登録日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.RegistDate).Id("RegistDate").Placeholder("（必須）")
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_ConfirmerDate" for="ConfirmerDate">確認日</label>
+                        <div class="col-md-2">
+                            @Html.C1().InputDateFor(m => m.ConfirmerDate).Id("ConfirmerDate").Placeholder("（必須）")
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_InputManCode" for="cmbInputManCode">入力者</label>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.InputManCode)
+                                .Id("cmbInputManCode")
+                                .Bind(Model.InputManDataList)
+                                .DisplayMemberPath("EmployeeCode")
+                                .SelectedValuePath("EmployeeCode")
+                                .HeaderPath("EmployeeCode")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.InputManCode)
+                                .IsRequired(false))
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.InputManName, new { @id = "selectedInputManName", @class = "form-control", @placeholder = "(必須)", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_ConfirmerCode" for="cmbConfirmerCode">確認者</label>
+                        <div class="col-md-2">
+                            @(Html.C1().ComboBoxFor(model => model.ConfirmerCode)
+                                .Id("cmbConfirmerCode")
+                                .Bind(Model.InputManDataList)
+                                .DisplayMemberPath("EmployeeCode")
+                                .SelectedValuePath("EmployeeCode")
+                                .HeaderPath("EmployeeCode")
+                                .CssStyle( "width" , "auto" )
+                                .SelectedValue(Model.ConfirmerCode)
+                                .IsRequired(false))
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ConfirmerName, new { @id = "selectedConfirmerName", @class = "form-control", @disabled = "true" })
+                        </div>
+                        <label class="col-md-1 control-label " style="text-align: left" id="lbl_ConfirmationCheck">@Html.CheckBoxFor(model => model.ConfirmationCheck, new { id = "ConfirmationCheck" })</label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_InputNote" for="Comment_InputNote">入力内容</label>
+
+                        <div class="col-md-5">
+                            @Html.TextAreaFor(model => model.InputNote, new { @id = "Comment_InputNote", @class = "form-control", @style = "height:150px;" })
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label text-nowrap lavel-functionkey" id="lbl_ConfirmedCheck">
+                                @Html.CheckBoxFor(model => model.ConfirmedCheck)
+                                確認済みを含む
+                            </label>
+                            <div style="text-align: left;margin-top:30px;">
+                                <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                                <input type="submit" value="メール送信" name="SendMainBtn" class="btn btn-primary" formaction="/ContactConfirmationInput/SendMail" id="SendMainBtn" />
+                                <input type="submit" value="登録" name="RegistBtn" class="btn btn-primary" id="RegistBtn" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).IsReadOnly(true).Height("450px").Id("flexgrid").AllowAddNew(false)
+                            .Bind(Model.ContactConfirmationList)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("RegistDate").Width("180").Header("登録日").WordWrap(true).DataType(DataType.Date));
+                                b1.Add(cb => cb.Binding("ConfirmerDate").Width("180").Header("確認日").WordWrap(true).DataType(DataType.Date));
+                                b1.Add(cb => cb.Binding("InputNote").Width("400").Header("入力内容").WordWrap(true));
+                                b1.Add(cb => cb.Binding("ConfirmerName").Width("180").Header("確認者名").WordWrap(true));
+
+                            }))
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+
+        // ラベルツールチップ設定
+        var tt = new wijmo.Tooltip();
+        tt.setTooltip('#lbl_Seiban', '製番');
+        tt.setTooltip('#lbl_RegistDate', '登録日');
+        tt.setTooltip('#lbl_ConfirmerDate', '確認日');
+        tt.setTooltip('#lbl_InputManCode', '入力者<br><b>F2:検索 F5:クリア</b>');
+        tt.setTooltip('#lbl_ConfirmerCode', '確認者名<br><b>F2:検索 F5:クリア</b>');
+        tt.setTooltip('#lbl_InputNote', '入力内容');
+
+
+        //入力者イベント
+        var templateEmployeeCode = '<table><tr>' +
+            '<td>{EmployeeCode}</td>' +
+            '<td title="EmployeeName">　{EmployeeName}</td>' +
+            '</tr></table>';
+
+        var theInputManCode = wijmo.Control.getControl('#cmbInputManCode');
+        theInputManCode.formatItem.addHandler(function (s, e) {
+            var html = wijmo.format(templateEmployeeCode, e.data);
+            e.item.innerHTML = html;
+        });
+        theInputManCode.selectedIndexChanged.addHandler(function (s, e) {
+            document.getElementById('selectedInputManName').value = s.selectedItem.EmployeeName;
+        });
+
+        //確認者イベント
+        var theConfirmerCode = wijmo.Control.getControl('#cmbConfirmerCode');
+        
+        theConfirmerCode.formatItem.addHandler(function (s, e) {
+            var html = wijmo.format(templateEmployeeCode, e.data);
+            e.item.innerHTML = html;
+        });
+        theConfirmerCode.selectedIndexChanged.addHandler(function (s, e) {
+            var theConfirmerCheck = document.getElementById('ConfirmationCheck').checked;
+            if (theConfirmerCheck === true) {
+                document.getElementById('selectedConfirmerName').value = s.selectedItem.EmployeeName;
+            }
+        });
+
+        var theConfirmerCheckObj = document.getElementById('ConfirmationCheck');
+        
+        theConfirmerCheckObj.addEventListener('change', function () {
+            if (theConfirmerCheckObj.checked) {
+                var selectedConfirmerName = wijmo.Control.getControl('#cmbConfirmerCode').selectedItem.EmployeeName;
+                document.getElementById('selectedConfirmerName').value = selectedConfirmerName;
+            } else {
+                document.getElementById('selectedConfirmerName').value = "";
+            } 
+        });
+
+    </script>
+}

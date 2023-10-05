@@ -1,0 +1,147 @@
+﻿@model CampusV4.Models.EarningsInputViewModel
+
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <h3>製番明細</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("ProductionNumberList", "EarningsInput", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @*<div class="form-group">
+                        @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).IsReadOnly(true).Height("450px").Id("flexgrid").AllowAddNew(false)
+                            .Bind(Model.GridProductionNumberDataList)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("ProductionNumber").Width("200").Header("製番").WordWrap(true));
+                                b1.Add(cb => cb.Binding("Quantity").Width("150").Header("数量").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Unitprice").Width("200").Header("単価").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("Price").Width("200").Header("金額").WordWrap(true).DataType(DataType.Number));
+                                b1.Add(cb => cb.Binding("DeliveryDate").Width("150").Header("納期").WordWrap(true).DataType(DataType.Date));
+                                b1.Add(cb => cb.Binding("Summary").Width("250").Header("摘要").WordWrap(true));
+
+                            }))
+                    </div>*@
+
+                    <div class="form-group">
+                            @(Html.C1().FlexGrid()
+                            .AutoGenerateColumns(false).Height("400px").Id("theProductNumDetailGrid")
+                            .AllowAddNew(false)
+                            .AllowDelete(false)
+                            .Bind(Model.ProductNumDataList)
+                            .Columns(b1 =>
+                            {
+                                b1.Add(cb => cb.Binding("Col_1").Width("120").Header("製番"));
+                                b1.Add(cb => cb.Binding("Col_2").Width("80").Header("製番"));
+                                b1.Add(cb => cb.Binding("Col_3").Width("50").Header("製番").Align("center"));
+                                b1.Add(cb => cb.Binding("Col_4").Width("80").Header("数量").Align("center"));
+                                b1.Add(cb => cb.Binding("Col_5").Width("120").Header("単価").Align("right"));
+                                b1.Add(cb => cb.Binding("Col_6").Width("120").Header("金額").Align("right"));
+                                b1.Add(cb => cb.Binding("Col_7").Width("120").Header("納期").Format("d"));
+                                b1.Add(cb => cb.Binding("Col_8").Width("250").Header("件名"));
+                                b1.Add(cb => cb.Binding("Col_9").Width("120").Header("キャンセル日").Format("d"));
+                            }))
+                        </div>
+                   
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-12" style="text-align: right">
+                            <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                            @*<a href="#" class="btn btn-primary" id="btnback">登録</a>*@
+                            <a href="#" class="btn btn-primary" id="btnback">選択</a>
+                            @{
+                                var mode = Model.Mode;
+                            }
+                            @if (mode == "1")
+                            {
+                                <a href="/EarningsInput/EarningsInput?mode=1" class="btn btn-primary" id="btnback">戻る</a>
+                            }
+                            else if (mode == "2")
+                            {
+                                <a href="/EarningsInput/EarningsInput?mode=2" class="btn btn-primary" id="btnback">戻る</a>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        c1.documentReady(function () {
+            var tt = new wijmo.Tooltip();
+            var theGrid = wijmo.Control.getControl('#theProductNumDetailGrid');
+            var productNumMap = new wijmo.grid.DataMap(getProductNum(), 'name', 'bunrui');
+            theGrid.formatItem.addHandler(function (s, e) {
+                if (e.panel == s.columnHeaders) {
+                    if (s.columns[e.col].binding == 'Col_1') {
+                        tt.setTooltip(e.cell,
+                            e.getColumn().header +
+                            '<br><b>F3:行追加　F4:行削除</b>');
+                    }
+                }
+            });
+            ////ヘッダー結合
+            theGrid.allowMerging = wijmo.grid.AllowMerging.ColumnHeaders;
+            var panel = theGrid.columnHeaders;
+            panel.rows[0].allowMerging = true;
+            for (col = 0; col <= 2; col++) {
+                panel.setCellData(0, col, '製番');
+            }
+
+            // 分類記号
+            var classification = getProductNum();
+            theGrid.columns[1].dataMap = productNumMap;
+            function getProductNum() {
+                return [
+                    { bunrui: 'A', name: '半導体金型・部品' },
+                    { bunrui: 'B', name: 'Chase Holder' },
+                    { bunrui: 'C', name: 'Kit' },
+                    { bunrui: 'D', name: '装置ユニット・装置部品' },
+                    { bunrui: 'E', name: '打抜金型・部品' },
+                    { bunrui: 'G', name: 'LED金型・部品' },
+                    { bunrui: 'H', name: '車載用金型・部品' },
+                ];
+            }
+            var productNums = [
+                { bunrui: 'A', name: '半導体金型・部品' },
+                { bunrui: 'B', name: 'Chase Holder' },
+                { bunrui: 'C', name: 'Kit' },
+                { bunrui: 'D', name: '装置ユニット・装置部品' },
+                { bunrui: 'E', name: '打抜金型・部品' },
+                { bunrui: 'G', name: 'LED金型・部品' },
+                { bunrui: 'H', name: '車載用金型・部品' },
+            ];
+            var multiColumnEditor = new CustomGridEditor(theGrid, 'Col_2', wijmo.input.ComboBox, {
+                headerPath: 'bunrui',
+                displayMemberPath: 'bunrui',
+                itemsSource: productNums
+            });
+            var combo = multiColumnEditor.control;
+            combo.listBox.formatItem.addHandler(function (s, e) {
+                e.item.innerHTML = '<table><tr>' +
+                    '<td style="width:50px;"><b>' + e.data.bunrui + '</b></td>' +
+                    '<td style="width:150px;padding-right:6px"><b>' + e.data.name + '</b></td>' +
+                    '</tr></table>';
+            });
+
+            // 納期
+            new CustomGridEditor(theGrid, 'Col_7', wijmo.input.InputDate, {
+                format: 'd'
+            });
+
+            // キャンセル日
+            new CustomGridEditor(theGrid, 'Col_9', wijmo.input.InputDate, {
+                format: 'd'
+            });
+
+        });
+    </script>
+}

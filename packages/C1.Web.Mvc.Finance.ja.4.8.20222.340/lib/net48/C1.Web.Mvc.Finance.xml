@@ -1,0 +1,1108 @@
+﻿<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>C1.Web.Mvc.Finance</name>
+    </assembly>
+    <members>
+        <member name="T:C1.Web.Mvc.Finance.FinancialChart`1">
+            <summary>株価チャートコントロール。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.FinancialChart`1.#ctor(System.Web.Mvc.HtmlHelper,System.String)">
+            <summary>1つのFinancialChartインスタンスを作成します。</summary>
+            <param name="helper">HTMLヘルパー</param>
+            <param name="selector">セレクタ</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FinancialChart`1.ChartType">
+            <summary>作成するチャートのタイプを取得または設定します</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FinancialChart`1.Options">
+            <summary>さまざまなチャートオプションを取得します。KajiFields、KagiRangeMode、KagiReversalAmount、LineBreakNewLineBreaks、RenkoFields、RenkoRangeMode、RenkoBoxSizeの各オプションがサポートされます。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.FinancialChartBuilder`1">
+            <summary>FinancialChartコントロールのビルダ。</summary>
+            <summary>FinancialChartコントロールのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialChartBuilder`1.#ctor(C1.Web.Mvc.Finance.FinancialChart{`0})">
+            <summary>1つのFinancialChartBuilderインスタンスを作成します。</summary>
+            <param name="component">構成する<see cref="T:C1.Web.Mvc.Finance.FinancialChart`1" />オブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialChartBuilder`1.ChartType(C1.Web.Mvc.Finance.ChartType)">
+            <summary>ChartTypeプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialChartBuilder`1.Options(System.Action{C1.Web.Mvc.Finance.Fluent.FinancialExtraOptionsBuilder})">
+            <summary>Optionsプロパティを設定します。</summary>
+            <param name="build">構築関数</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialChartBuilder`1.Series(System.Action{C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory{`0,C1.Web.Mvc.Finance.FinancialChart{`0},C1.Web.Mvc.Finance.FinancialSeries{`0},C1.Web.Mvc.Finance.Fluent.FinancialSeriesBuilder{`0},C1.Web.Mvc.Finance.ChartType}})">
+            <summary>FlexChart系列を設定します。</summary>
+            <param name="build">構築関数</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialChartBuilder`1.AddExtender(C1.Web.Mvc.Extender)">
+            <summary>エクステンダを追加します。</summary>
+            <remarks>これは使用されなくなったため、削除してください。代わりに、特定のエクステンダを使用してください。</remarks>
+            <param name="extender">指定されたエクステンダ。</param>
+            <returns></returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.ATR`1">
+            <summary>1つの系列をレンダリングするオーバーレイとインジケータの基本クラス。</summary>
+            <remarks>ATR（Average True Range）は、資産のボラティリティ（変動率）の測定に使用されます。ATRは、価格の動向を示すのではなく、価格のボラティリティの程度を示します。</remarks>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.SingleOverlayIndicatorBase`1">
+            <summary>1つの系列をレンダリングするオーバーレイとインジケータの基本クラス。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.SingleOverlayIndicatorBase`1.Period">
+            <summary>計算の期間を表す整数値を取得または設定します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.ATR`1.#ctor(C1.Web.Mvc.FlexChartCore{`0})">
+            <summary>ATRクラスの新しいインスタンスを初期化します。</summary>
+            <param name="owner">オーナーは、FlexChartCoreから派生している必要があります。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.ATR`1.ExtraSeriesTypeName">
+            <summary>この系列の名前を取得します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.BollingerBands`1">
+            <summary>FinancialChartのボリンジャーバンドオーバーレイ系列を表します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.BollingerBands`1.#ctor(C1.Web.Mvc.FlexChartCore{`0})">
+            <summary>BollingerBandsクラスの新しいインスタンスを初期化します。</summary>
+            <param name="owner">オーナーは、FlexChartCoreから派生している必要があります。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.BollingerBands`1.Period">
+            <summary>計算の期間を表す整数値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.BollingerBands`1.Multiplier">
+            <summary>標準偏差乗数を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.BollingerBands`1.ExtraSeriesTypeName">
+            <summary>この系列の名前を取得します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.CCI`1">
+            <summary>FinancialChartのCCI（商品チャンネル指数）インジケータ系列を表します。</summary>
+            <remarks>CCIは、資産の現在の時価レベルを、指定された期間の平均時価と比較して測定するオシレータです。</remarks>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.CCI`1.#ctor(C1.Web.Mvc.FlexChartCore{`0})">
+            <summary>CCIクラスの新しいインスタンスを初期化します。</summary>
+            <param name="owner">オーナーは、FlexChartCoreから派生している必要があります。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.CCI`1.Constant">
+            <summary>CCI計算の定数値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.CCI`1.ExtraSeriesTypeName">
+            <summary>この系列の名前を取得します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Envelopes`1">
+            <summary>FinancialChartの移動平均エンベロープオーバーレイ系列を表します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Envelopes`1.#ctor(C1.Web.Mvc.FlexChartCore{`0})">
+            <summary>Envelopesクラスの新しいインスタンスを初期化します。</summary>
+            <param name="owner">オーナーは、FlexChartCoreから派生している必要があります。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Envelopes`1.Period">
+            <summary>計算の期間を表す整数値を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Envelopes`1.Type">
+            <summary>エンベロープの移動平均タイプを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Envelopes`1.Size">
+            <summary>移動平均エンベロープのサイズを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Envelopes`1.ExtraSeriesTypeName">
+            <summary>この系列の名前を取得します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fibonacci`1">
+            <summary>FinancialChartのフィボナッチツールを表します。このツールにより、株価チャートで便利なさまざまな警告レベルの計算やプロットが可能になります。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fibonacci`1.#ctor(C1.Web.Mvc.FlexChartCore{`0})">
+            <summary>Fibonacciクラスの新しいインスタンスを初期化します。</summary>
+            <param name="owner">オーナーは、FlexChartCoreから派生している必要があります。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Fibonacci`1.High">
+            <summary>Fibonacciツールの高値を取得または設定します。</summary>
+            <remarks>指定されない場合、高値は、itemsSourceから提供されるデータ値に基づいて計算されます。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Fibonacci`1.Low">
+            <summary>Fibonacciツールの安値を取得または設定します。</summary>
+            <remarks>指定されない場合、安値は、itemsSourceから提供されるデータ値に基づいて計算されます。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Fibonacci`1.Levels">
+            <summary>プロットに使用するレベルの配列を取得または設定します。</summary>
+            <remarks>デフォルト値は[0, 23.6, 38.2, 50, 61.8, 100]です。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Fibonacci`1.MaxX">
+            <summary>Fibonacciツールの最大のX値を取得または設定します。</summary>
+            <remarks>指定されない場合は、X軸の現在の最大値が使用されます。値は、数値またはDateオブジェクトとして指定できます。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Fibonacci`1.MinX">
+            <summary>Fibonacciツールの最小のX値を取得または設定します。</summary>
+            <remarks>指定されない場合は、X軸の現在の最小値が使用されます。値は、数値またはDateオブジェクトとして指定できます。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Fibonacci`1.Uptrend">
+            <summary>上昇トレンドのFibonacciツールを作成するかどうかを示す値を取得または設定します。</summary>
+            <remarks>デフォルト値はtrue（上昇トレンド）です。この値がfalseの場合は、下降トレンドのレベルがプロットされます。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Fibonacci`1.LabelPosition">
+            <summary>データラベルの位置を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Fibonacci`1.ExtraSeriesTypeName">
+            <summary>この系列の名前を取得します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.FibonacciArcs`1">
+            <summary>FinancialChartのフィボナッチアークツールを表します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.FibonacciArcs`1.#ctor(C1.Web.Mvc.FlexChartCore{`0})">
+            <summary>FibonacciArcsクラスの新しいインスタンスを初期化します。</summary>
+            <param name="owner">オーナーは、FlexChartCoreから派生している必要があります。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FibonacciArcs`1.Start">
+            <summary>ベースラインの開始DataPointを取得または設定します。</summary>
+            <remarks>DataPoint X値には、数値またはDateオブジェクトを使用できます。他のフィボナッチツールとは異なり、未定義の場合、開始DataPointは自動的に計算されません。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FibonacciArcs`1.End">
+            <summary>ベースラインの終了DataPointを取得または設定します。</summary>
+            <remarks>DataPoint X値には、数値またはDateオブジェクト（時間ベースのデータの場合）を使用できます。他のフィボナッチツールとは異なり、未定義の場合、終了DataPointは自動的に計算されません。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FibonacciArcs`1.Levels">
+            <summary>プロットに使用するレベルの配列を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FibonacciArcs`1.LabelPosition">
+            <summary>FibonacciArcsツールのレベルのLabelPositionを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FibonacciArcs`1.ExtraSeriesTypeName">
+            <summary>この系列の名前を取得します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.FibonacciFans`1">
+            <summary>FinancialChartのフィボナッチファンツールを表します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.FibonacciFans`1.#ctor(C1.Web.Mvc.FlexChartCore{`0})">
+            <summary>FibonacciFansクラスの新しいインスタンスを初期化します。</summary>
+            <param name="owner">オーナーは、FlexChartCoreから派生している必要があります。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FibonacciFans`1.Start">
+            <summary>ベースラインの開始DataPointを取得または設定します。</summary>
+            <remarks>DataPoint X値には、数値またはDateオブジェクトを使用できます。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FibonacciFans`1.End">
+            <summary>ベースラインの終了DataPointを取得または設定します。</summary>
+            <remarks>DataPoint X値には、数値またはDateオブジェクト（時間ベースのデータの場合）を使用できます。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FibonacciFans`1.Levels">
+            <summary>プロットに使用するレベルの配列を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FibonacciFans`1.LabelPosition">
+            <summary>FibonacciArcsツールのレベルのLabelPositionを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FibonacciFans`1.ExtraSeriesTypeName">
+            <summary>この系列の名前を取得します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.FibonacciTimeZones`1">
+            <summary>FinancialChartのフィボナッチタイムゾーンツールを表します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.FibonacciTimeZones`1.#ctor(C1.Web.Mvc.FlexChartCore{`0})">
+            <summary>FibonacciTimeZonesクラスの新しいインスタンスを初期化します。</summary>
+            <param name="owner">オーナーは、FlexChartCoreから派生している必要があります。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FibonacciTimeZones`1.StartX">
+            <summary>タイムゾーンの開始Xデータポイントを取得または設定します。</summary>
+            <remarks>設定されない場合、開始Xデータポイントは自動的に計算されます。値には、数値またはDateオブジェクト（時間ベースのデータの場合）を使用できます。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FibonacciTimeZones`1.EndX">
+            <summary>タイムゾーンの終了Xデータポイントを取得または設定します。</summary>
+            <remarks>設定されない場合、終了Xデータポイントは自動的に計算されます。値には、数値またはDateオブジェクト（時間ベースのデータの場合）を使用できます。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FibonacciTimeZones`1.Levels">
+            <summary>プロットに使用するレベルの配列を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FibonacciTimeZones`1.LabelPosition">
+            <summary>FibonacciTimeZonesツールのレベルのLabelPositionを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FibonacciTimeZones`1.ExtraSeriesTypeName">
+            <summary>この系列の名前を取得します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.FinancialExtraOptions">
+            <summary>株価チャートの追加オプション。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FinancialExtraOptions.KagiFields">
+            <summary>カギ足チャートで使用されるDataFieldsを指定します。</summary>
+            <remarks>デフォルト値はDataFields.Closeです。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FinancialExtraOptions.KagiRangeMode">
+            <summary>カギ足チャートのRangeModeを指定します。</summary>
+            <remarks>デフォルト値はRangeMode.Fixedです。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FinancialExtraOptions.KagiReversalAmount">
+            <summary>カギ足チャートの反転幅を指定します。</summary>
+            <remarks>デフォルト値は14です。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FinancialExtraOptions.LineBreakNewLineBreaks">
+            <summary>新値足チャートで新しいボックスを描画する前に、比較する必要があるそれ以前のボックスの数を取得または設定します。</summary>
+            <remarks>デフォルト値は3です。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FinancialExtraOptions.RenkoFields">
+            <summary>練行足チャートで使用されるDataFieldsを指定します。</summary>
+            <remarks>デフォルト値はDataFields.Close.Noteです。練行足はHighLowをサポートしません。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FinancialExtraOptions.RenkoRangeMode">
+            <summary>練行足チャートのRangeModeを指定します。</summary>
+            <remarks>デフォルト値はRangeMode.Fixed.Noteです。練行足はPercentageをサポートしません。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FinancialExtraOptions.RenkoBoxSize">
+            <summary>練行足チャートのボックスサイズを指定します。</summary>
+            <remarks>デフォルト値は14です。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FinancialExtraOptions.PointAndFigureBoxSize">
+            <summary>ポイントアンドフィギュアチャートのボックスサイズを指定します。</summary>
+            <remarks>デフォルトは 1 です。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FinancialExtraOptions.PointAndFigureReversal">
+            <summary>ポイントアンドフィギュアチャート反転幅を指定します。</summary>
+            <remarks>デフォルトは 3 です。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FinancialExtraOptions.PointAndFigurePeriod">
+            <summary>ポイントアンドフィギュアチャートの ATR 期間を指定します。</summary>
+            <remarks>デフォルトは 20 です。データの長さ未満で 1 より大きな整数を指定する必要があります。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FinancialExtraOptions.PointAndFigureFields">
+            <summary>ポイントアンドフィギュアチャートで使用される DataFields を指定します。</summary>
+            <remarks>デフォルトは Close です。Close と HighLow だけがサポートされています。</remarks>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FinancialExtraOptions.PointAndFigureScaling">
+            <summary>ポイントアンドフィギュアチャートのスケーリングモードを指定します。</summary>
+            <remarks>デフォルトは Traditional です。</remarks>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.FinancialSeries`1">
+            <summary>チャートに表示する一連のデータポイントを表します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.FinancialSeries`1.#ctor(C1.Web.Mvc.Finance.FinancialChart{`0})">
+            <summary>FinancialSeriesクラスの新しいインスタンスを初期化します。</summary>
+            <param name="owner">オーナーはFinancialChartである必要があります。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.FinancialSeries`1.ChartType">
+            <summary>作成する株価チャートのタイプを取得または設定します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Macd`1">
+            <summary>FinancialChartのMACD（移動平均収束発散法）インジケータ系列を表します。</summary>
+            <remarks>MACDインジケータの目的は、資産の時価トレンドの強さ、方向、モメンタム、および期間の変化を示すことです。</remarks>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.MacdBase`1">
+            <summary>MacdおよびMacdHistogram系列の基本クラス（抽象）。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.MacdBase`1.FastPeriod">
+            <summary>MACD線の高速指数移動平均期間を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.MacdBase`1.SlowPeriod">
+            <summary>MACD線の低速指数移動平均期間を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.MacdBase`1.SmoothingPeriod">
+            <summary>シグナル線の指数移動平均期間を取得または設定します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Macd`1.#ctor(C1.Web.Mvc.FlexChartCore{`0})">
+            <summary>Macdクラスの新しいインスタンスを初期化します。</summary>
+            <param name="owner">オーナーは、FlexChartCoreから派生している必要があります。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Macd`1.Styles">
+            <summary>MACDおよびシグナル線のスタイルを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Macd`1.ExtraSeriesTypeName">
+            <summary>この系列の名前を取得します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.MacdHistogram`1">
+            <summary>FinancialChartのMACD（移動平均収束発散法）ヒストグラムインジケータ系列を表します。</summary>
+            <remarks>MACDインジケータの目的は、資産の時価トレンドの強さ、方向、モメンタム、および期間の変化を示すことです。</remarks>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.MacdHistogram`1.#ctor(C1.Web.Mvc.FlexChartCore{`0})">
+            <summary>MacdHistogramクラスの新しいインスタンスを初期化します。</summary>
+            <param name="owner">オーナーは、FlexChartCoreから派生している必要があります。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.MacdHistogram`1.ExtraSeriesTypeName">
+            <summary>この系列の名前を取得します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.RSI`1">
+            <summary>FinancialChartのRSI（相対力指数）インジケータ系列を表します。</summary>
+            <remarks>RSI（相対力指数）は、最新の取引期間の終値に基づいて、資産の現在および経時的な強みまたは弱みを測定するように設計されたモメンタムオシレータです。</remarks>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.RSI`1.#ctor(C1.Web.Mvc.FlexChartCore{`0})">
+            <summary>RSIクラスの新しいインスタンスを初期化します。</summary>
+            <param name="owner">オーナーは、FlexChartCoreから派生している必要があります。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.RSI`1.ExtraSeriesTypeName">
+            <summary>この系列の名前を取得します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Stochastic`1">
+            <summary>FinancialChartのストキャスティクスインジケータ系列を表します。</summary>
+            <remarks>ストキャスティクスは、資産の終値を高値と低値の範囲と比較して、時価のターニングポイントを予測するように設計されたモメンタムインジケータです。</remarks>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Stochastic`1.#ctor(C1.Web.Mvc.FlexChartCore{`0})">
+            <summary>Stochasticクラスの新しいインスタンスを初期化します。</summary>
+            <param name="owner">オーナーは、FlexChartCoreから派生している必要があります。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Stochastic`1.KPeriod">
+            <summary>%K計算の期間を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Stochastic`1.DPeriod">
+            <summary>%D単純移動平均の期間を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Stochastic`1.SmoothingPeriod">
+            <summary>フル%Kの平滑期間を取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Stochastic`1.Styles">
+            <summary>%Kおよび%D線のスタイルを取得または設定します。</summary>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.Stochastic`1.ExtraSeriesTypeName">
+            <summary>この系列の名前を取得します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.WilliamsR`1">
+            <summary>FinancialChartのウィリアムズ%Rインジケータ系列を表します。</summary>
+            <remarks>FinancialChartのウィリアムズ%Rインジケータ系列を表します。</remarks>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.WilliamsR`1.#ctor(C1.Web.Mvc.FlexChartCore{`0})">
+            <summary>WilliamsRクラスの新しいインスタンスを初期化します。</summary>
+            <param name="owner">オーナーは、FlexChartCoreから派生している必要があります。</param>
+        </member>
+        <member name="P:C1.Web.Mvc.Finance.WilliamsR`1.ExtraSeriesTypeName">
+            <summary>この系列の名前を取得します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.ATRBuilder`1">
+            <summary>ATRのビルダ。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.SingleOverlayIndicatorBaseBuilder`3">
+            <summary>SingleOverlayIndicatorBaseのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.SingleOverlayIndicatorBaseBuilder`3.#ctor(`1)">
+            <summary>1つのSingleOverlayIndicatorBaseBuilderインスタンスを作成します。</summary>
+            <param name="obj">SingleOverlayIndicatorBaseオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.SingleOverlayIndicatorBaseBuilder`3.Period(System.Double)">
+            <summary>Periodプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.ATRBuilder`1.#ctor(C1.Web.Mvc.Finance.ATR{`0})">
+            <summary>1つのATRBuilderインスタンスを作成します。</summary>
+            <param name="obj">ATRオブジェクト。</param>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.BollingerBandsBuilder`1">
+            <summary>BollingerBandsのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.BollingerBandsBuilder`1.#ctor(C1.Web.Mvc.Finance.BollingerBands{`0})">
+            <summary>1つのBollingerBandsBuilderインスタンスを作成します。</summary>
+            <param name="obj">BollingerBandsオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.BollingerBandsBuilder`1.Period(System.Double)">
+            <summary>Periodプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.BollingerBandsBuilder`1.Multiplier(System.Double)">
+            <summary>Multiplierプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.CCIBuilder`1">
+            <summary>CCIのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.CCIBuilder`1.#ctor(C1.Web.Mvc.Finance.CCI{`0})">
+            <summary>1つのCCIBuilderインスタンスを作成します。</summary>
+            <param name="obj">CCIオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.CCIBuilder`1.Constant(System.Double)">
+            <summary>Constantプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.EnvelopesBuilder`1">
+            <summary>Envelopesのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.EnvelopesBuilder`1.#ctor(C1.Web.Mvc.Finance.Envelopes{`0})">
+            <summary>1つのEnvelopesBuilderインスタンスを作成します。</summary>
+            <param name="obj">Envelopesオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.EnvelopesBuilder`1.Period(System.Double)">
+            <summary>Periodプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.EnvelopesBuilder`1.Type(C1.Web.Mvc.Finance.MovingAverageType)">
+            <summary>Typeプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.EnvelopesBuilder`1.Size(System.Double)">
+            <summary>Sizeプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.FibonacciBuilder`1">
+            <summary>Fibonacciのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciBuilder`1.#ctor(C1.Web.Mvc.Finance.Fibonacci{`0})">
+            <summary>1つのFibonacciBuilderインスタンスを作成します。</summary>
+            <param name="obj">Fibonacciオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciBuilder`1.High(System.Nullable{System.Double})">
+            <summary>Highプロパティを設定します。</summary>
+            <remarks>Fibonacciツールの高値を取得または設定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciBuilder`1.Low(System.Nullable{System.Double})">
+            <summary>Lowプロパティを設定します。</summary>
+            <remarks>Fibonacciツールの安値を取得または設定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciBuilder`1.Levels(System.Double[])">
+            <summary>Levelsプロパティを設定します。</summary>
+            <remarks>プロットに使用するレベルの配列を取得または設定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciBuilder`1.MaxX(System.Object)">
+            <summary>MaxXプロパティを設定します。</summary>
+            <remarks>Fibonacciツールの最大のX値を取得または設定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciBuilder`1.MinX(System.Object)">
+            <summary>MinXプロパティを設定します。</summary>
+            <remarks>Fibonacciツールの最小のX値を取得または設定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciBuilder`1.Uptrend(System.Boolean)">
+            <summary>Uptrendプロパティを設定します。</summary>
+            <remarks>上昇トレンドのFibonacciツールを作成するかどうかを示す値を取得または設定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciBuilder`1.LabelPosition(C1.Web.Mvc.Chart.LabelPosition)">
+            <summary>LabelPositionプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.FibonacciArcsBuilder`1">
+            <summary>FibonacciArcsのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciArcsBuilder`1.#ctor(C1.Web.Mvc.Finance.FibonacciArcs{`0})">
+            <summary>1つのFibonacciArcsBuilderインスタンスを作成します。</summary>
+            <param name="obj">FibonacciArcsオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciArcsBuilder`1.Start(C1.Web.Mvc.DataPoint)">
+            <summary>Startプロパティを設定します。</summary>
+            <remarks>ベースラインの開始DataPointを取得または設定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciArcsBuilder`1.End(C1.Web.Mvc.DataPoint)">
+            <summary>Endプロパティを設定します。</summary>
+            <remarks>ベースラインの終了DataPointを取得または設定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciArcsBuilder`1.Levels(System.Double[])">
+            <summary>Levelsプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciArcsBuilder`1.LabelPosition(C1.Web.Mvc.Chart.LabelPosition)">
+            <summary>LabelPositionプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.FibonacciFansBuilder`1">
+            <summary>FibonacciFansのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciFansBuilder`1.#ctor(C1.Web.Mvc.Finance.FibonacciFans{`0})">
+            <summary>1つのFibonacciFansBuilderインスタンスを作成します。</summary>
+            <param name="obj">FibonacciFansオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciFansBuilder`1.Start(C1.Web.Mvc.DataPoint)">
+            <summary>Startプロパティを設定します。</summary>
+            <remarks>ベースラインの開始DataPointを取得または設定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciFansBuilder`1.End(C1.Web.Mvc.DataPoint)">
+            <summary>Endプロパティを設定します。</summary>
+            <remarks>ベースラインの終了DataPointを取得または設定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciFansBuilder`1.Levels(System.Double[])">
+            <summary>Levelsプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciFansBuilder`1.LabelPosition(C1.Web.Mvc.Chart.LabelPosition)">
+            <summary>LabelPositionプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.FibonacciTimeZonesBuilder`1">
+            <summary>FibonacciTimeZonesのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciTimeZonesBuilder`1.#ctor(C1.Web.Mvc.Finance.FibonacciTimeZones{`0})">
+            <summary>1つのFibonacciTimeZonesBuilderインスタンスを作成します。</summary>
+            <param name="obj">FibonacciTimeZonesオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciTimeZonesBuilder`1.StartX(System.Object)">
+            <summary>StartXプロパティを設定します。</summary>
+            <remarks>タイムゾーンの開始Xデータポイントを取得または設定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciTimeZonesBuilder`1.EndX(System.Object)">
+            <summary>EndXプロパティを設定します。</summary>
+            <remarks>タイムゾーンの終了Xデータポイントを取得または設定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciTimeZonesBuilder`1.Levels(System.Double[])">
+            <summary>Levelsプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FibonacciTimeZonesBuilder`1.LabelPosition(C1.Web.Mvc.Chart.LabelPosition)">
+            <summary>LabelPositionプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.FinancialExtraOptionsBuilder">
+            <summary>FinancialExtraOptionsのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialExtraOptionsBuilder.#ctor(C1.Web.Mvc.Finance.FinancialExtraOptions)">
+            <summary>1つのFinancialExtraOptionsBuilderインスタンスを作成します。</summary>
+            <param name="obj">FinancialExtraOptionsオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialExtraOptionsBuilder.KagiFields(C1.Web.Mvc.Finance.DataFields)">
+            <summary>KagiFieldsプロパティを設定します。</summary>
+            <remarks>カギ足チャートで使用されるDataFieldsを指定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialExtraOptionsBuilder.KagiRangeMode(C1.Web.Mvc.Finance.RangeMode)">
+            <summary>KagiRangeModeプロパティを設定します。</summary>
+            <remarks>カギ足チャートのRangeModeを指定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialExtraOptionsBuilder.KagiReversalAmount(System.Int32)">
+            <summary>KagiReversalAmountプロパティを設定します。</summary>
+            <remarks>カギ足チャートの反転幅を指定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialExtraOptionsBuilder.LineBreakNewLineBreaks(System.Int32)">
+            <summary>LineBreakNewLineBreaksプロパティを設定します。</summary>
+            <remarks>新値足チャートで新しいボックスを描画する前に、比較する必要があるそれ以前のボックスの数を取得または設定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialExtraOptionsBuilder.RenkoFields(C1.Web.Mvc.Finance.DataFields)">
+            <summary>RenkoFieldsプロパティを設定します。</summary>
+            <remarks>練行足チャートで使用されるDataFieldsを指定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialExtraOptionsBuilder.RenkoRangeMode(C1.Web.Mvc.Finance.RangeMode)">
+            <summary>RenkoRangeModeプロパティを設定します。</summary>
+            <remarks>練行足チャートのRangeModeを指定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialExtraOptionsBuilder.RenkoBoxSize(System.Int32)">
+            <summary>RenkoBoxSizeプロパティを設定します。</summary>
+            <remarks>練行足チャートのボックスサイズを指定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialExtraOptionsBuilder.PointAndFigureBoxSize(System.Int32)">
+            <summary><see cref="P:C1.Web.Mvc.Finance.FinancialExtraOptions.PointAndFigureBoxSize" /> を構成します。
+            ポイントアンドフィギュアチャートのボックスサイズを指定します。</summary>
+            <remarks>デフォルトは 1 です。</remarks>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialExtraOptionsBuilder.PointAndFigureReversal(System.Int32)">
+            <summary><see cref="P:C1.Web.Mvc.Finance.FinancialExtraOptions.PointAndFigureReversal" /> を構成します。
+            ポイントアンドフィギュアチャート反転幅を指定します。</summary>
+            <remarks>デフォルトは 3 です。</remarks>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialExtraOptionsBuilder.PointAndFigurePeriod(System.Int32)">
+            <summary><see cref="P:C1.Web.Mvc.Finance.FinancialExtraOptions.PointAndFigurePeriod" /> を構成します。
+            ポイントアンドフィギュアチャートの ATR 期間を指定します。</summary>
+            <remarks>デフォルトは 20 です。データの長さ未満で 1 より大きな整数を指定する必要があります。</remarks>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialExtraOptionsBuilder.PointAndFigureFields(C1.Web.Mvc.Finance.DataFields)">
+            <summary><see cref="P:C1.Web.Mvc.Finance.FinancialExtraOptions.PointAndFigureFields" /> を構成します。
+            ポイントアンドフィギュアチャートで使用される DataFields を指定します。</summary>
+            <remarks>デフォルトは Close です。Close と HighLow だけがサポートされています。</remarks>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialExtraOptionsBuilder.PointAndFigureScaling(C1.Web.Mvc.Finance.PointAndFigureScaling)">
+            <summary><see cref="P:C1.Web.Mvc.Finance.FinancialExtraOptions.PointAndFigureScaling" /> を構成します。
+            ポイントアンドフィギュアチャートのスケーリングモードを指定します。</summary>
+            <remarks>デフォルトは Traditional です。</remarks>
+            <param name="value">値。</param>
+            <returns>現在のビルダ。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.FinancialSeriesBuilder`1">
+            <summary>FinancialSeriesのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialSeriesBuilder`1.#ctor(C1.Web.Mvc.Finance.FinancialSeries{`0})">
+            <summary>1つのFinancialSeriesBuilderインスタンスを作成します。</summary>
+            <param name="obj">FinancialSeriesオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinancialSeriesBuilder`1.ChartType(C1.Web.Mvc.Finance.ChartType)">
+            <summary>ChartTypeプロパティを設定します。</summary>
+            <remarks>作成する株価チャートのタイプを取得または設定します。</remarks>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.MacdBuilder`1">
+            <summary>Macdのビルダ。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.MacdBaseBuilder`3">
+            <summary>MacdBaseのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.MacdBaseBuilder`3.#ctor(`1)">
+            <summary>1つのMacdBaseBuilderインスタンスを作成します。</summary>
+            <param name="obj">MacdBaseオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.MacdBaseBuilder`3.FastPeriod(System.Double)">
+            <summary>FastPeriodプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.MacdBaseBuilder`3.SlowPeriod(System.Double)">
+            <summary>SlowPeriodプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.MacdBaseBuilder`3.SmoothingPeriod(System.Double)">
+            <summary>SmoothingPeriodプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.MacdBuilder`1.#ctor(C1.Web.Mvc.Finance.Macd{`0})">
+            <summary>1つのMacdBuilderインスタンスを作成します。</summary>
+            <param name="obj">Macdオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.MacdBuilder`1.SetMacdLineStyle(System.String,System.Nullable{System.Int32})">
+            <summary>MACD線スタイルを設定します。</summary>
+            <param name="stroke">ストローク</param>
+            <param name="strokeWidth">ストローク幅</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.MacdBuilder`1.SetSignalLineStyle(System.String,System.Nullable{System.Int32})">
+            <summary>シグナル線スタイルを設定します。</summary>
+            <param name="stroke">ストローク</param>
+            <param name="strokeWidth">ストローク幅</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.MacdHistogramBuilder`1">
+            <summary>MacdHistogramのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.MacdHistogramBuilder`1.#ctor(C1.Web.Mvc.Finance.MacdHistogram{`0})">
+            <summary>1つのMacdHistogramBuilderインスタンスを作成します。</summary>
+            <param name="obj">MacdHistogramオブジェクト。</param>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.RSIBuilder`1">
+            <summary>RSIのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.RSIBuilder`1.#ctor(C1.Web.Mvc.Finance.RSI{`0})">
+            <summary>1つのRSIBuilderインスタンスを作成します。</summary>
+            <param name="obj">RSIオブジェクト。</param>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.StochasticBuilder`1">
+            <summary>Stochasticのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.StochasticBuilder`1.#ctor(C1.Web.Mvc.Finance.Stochastic{`0})">
+            <summary>1つのStochasticBuilderインスタンスを作成します。</summary>
+            <param name="obj">Stochasticオブジェクト。</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.StochasticBuilder`1.KPeriod(System.Double)">
+            <summary>KPeriodプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.StochasticBuilder`1.DPeriod(System.Double)">
+            <summary>DPeriodプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.StochasticBuilder`1.SmoothingPeriod(System.Double)">
+            <summary>SmoothingPeriodプロパティを設定します。</summary>
+            <param name="value">値</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.StochasticBuilder`1.SetKLineStyle(System.String,System.Nullable{System.Int32})">
+            <summary>k線スタイルを設定します。</summary>
+            <param name="stroke">ストローク</param>
+            <param name="strokeWidth">ストローク幅</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.StochasticBuilder`1.SetDLineStyle(System.String,System.Nullable{System.Int32})">
+            <summary>d線スタイルを設定します。</summary>
+            <param name="stroke">ストローク</param>
+            <param name="strokeWidth">ストローク幅</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.WilliamsRBuilder`1">
+            <summary>WilliamsRのビルダ。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.WilliamsRBuilder`1.#ctor(C1.Web.Mvc.Finance.WilliamsR{`0})">
+            <summary>1つのWilliamsRBuilderインスタンスを作成します。</summary>
+            <param name="obj">WilliamsRオブジェクト。</param>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.MovingAverageType">
+            <summary>エンベロープの移動平均タイプを表します。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.MovingAverageType.Simple">
+            <summary>単純移動平均は、最後のn個の値の単純平均です。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.MovingAverageType.Exponential">
+            <summary>指数移動平均は、最後のn個の値の加重平均で、1つ前の値の重みが指数関数的に減ります。</summary> 
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.ChartType">
+            <summary>株価チャートのタイプを指定します。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.ChartType.Column">
+            <summary>縦棒を表示して、カテゴリ間で項目の値を比較できるようにします。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.ChartType.Scatter">
+            <summary>X座標とY座標を使用して、データのパターンを表示します。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.ChartType.Line">
+            <summary>一定期間のトレンドまたはカテゴリ間のトレンドを表示します。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.ChartType.LineSymbols">
+            <summary>各データポイントにシンボルを使用する折れ線グラフを表示します。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.ChartType.Area">
+            <summary>線の下の領域が色で塗りつぶされた折れ線グラフを表示します。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.ChartType.Candlestick">
+            <summary>高値、安値、始値、終値を持つ項目を表示します。
+            ヒゲ線のサイズは高値と安値で決定され、
+            棒のサイズは、始値と終値で決定されます。棒は、
+            終値が始値より高いか低いかに基づいて異なる色で表示されます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.ChartType.HighLowOpenClose">
+            <summary>ローソク足チャートと同じ情報を表示しますが、
+            始値が左向きの線、終値が右向きの線 
+            で表されます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.ChartType.HeikinAshi">
+            <summary>ローソク足チャートから派生され、現在および前の期間の情報を使用してノイズを除去します。
+            
+            これらのチャートを他の任意の系列オブジェクトと組み合わせることができます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.ChartType.LineBreak">
+            <summary>価格の変化だけに注目することで、ノイズを除去します。
+            これらのチャートを他の任意の系列オブジェクトと組み合わせることができます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.ChartType.Renko">
+            <summary>時間を無視し、指定された金額に一致する価格の変化に注目します。
+            これらのチャートを他の任意の系列オブジェクトと組み合わせることができます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.ChartType.Kagi">
+            <summary>時間を無視し、価格の動きに注目します。これらのチャートを他の任意の系列オブジェクトと組み合わせることができます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.ChartType.ColumnVolume">
+            <summary>標準の縦棒グラフと似ていますが、各棒の幅がVolume値によって決定されます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.ChartType.EquiVolume">
+            <summary>ローソク足チャートと似ていますが、高値と安値だけが表示されます。
+            また、各棒の幅は、Volume値によって決まります。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.ChartType.CandleVolume">
+            <summary>標準のローソク足チャートと似ていますが、各棒の幅がVolume値によって決定されます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.ChartType.ArmsCandleVolume">
+            <summary>このチャートは、EquiVolumeおよびCandleVolumeチャートタイプの組み合わせとして、Richard Armsによって作成されました。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.ChartType.PointAndFigure">
+            <summary>ポイントアンドフィギュア株価チャート。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.DataFields">
+            <summary>計算に使用されるフィールドを指定します。練行足およびカギ足チャートタイプに適用されます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.DataFields.Close">
+            <summary>計算に終値が使用されます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.DataFields.High">
+            <summary>計算に高値が使用されます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.DataFields.Low">
+            <summary>計算に安値が使用されます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.DataFields.Open">
+            <summary>計算に始値が使用されます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.DataFields.HighLow">
+            <summary>計算にHigh-Lowメソッドが使用されます。現在、練行足チャートタイプはDataFields.HighLowをサポートしていません。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.DataFields.HL2">
+            <summary>計算に高値および安値の平均が使用されます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.DataFields.HLC3">
+            <summary>計算に高値、安値、終値の平均が使用されます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.DataFields.HLOC4">
+            <summary>計算に高値、安値、始値、終値の平均が使用されます。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.RangeMode">
+            <summary>カギ足および練行足チャートタイプの単位を指定します。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.RangeMode.Fixed">
+            <summary>カギ足チャートの反転幅または練行足チャートのボックスサイズに、正の固定値を使用します。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.RangeMode.ATR">
+            <summary>カギ足チャートの反転幅または練行足チャートのボックスサイズに現在のATR（Average True Range）
+            値を使用します。ATRを使用する場合は、これらのチャートの反転幅または
+            ボックスサイズオプションを整数にする必要があります。これらは、ATR計算の 
+            期間として使用されます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.RangeMode.Percentage">
+            <summary>カギ足チャートの反転幅に割合を使用します。現在、練行足チャートタイプはRangeMode.Percentageを
+            サポートしていません。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.PointAndFigureScaling">
+            <summary>ポイントアンドフィギュアチャートのスケーリングモードを指定します。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.PointAndFigureScaling.Traditional">
+            <summary>標準スケーリング。ボックスサイズは、価格範囲に基づいて自動的に計算されます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.PointAndFigureScaling.Fixed">
+            <summary>固定スケーリング。ボックスサイズは、boxSize プロパティによって定義されます。</summary>
+        </member>
+        <member name="F:C1.Web.Mvc.Finance.PointAndFigureScaling.Dynamic">
+            <summary>動的（ATR）スケーリング。ボックスサイズは、ATR に基づいて計算されます。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.FinanceWebResourcesManager.#ctor(System.Web.Mvc.HtmlHelper)">
+            <summary>FinanceWebResourcesManagerクラスの新しいインスタンスを初期化します。</summary>
+            <param name="helper">HtmlHelperのインスタンス</param>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.C1FinancialChart">
+            <summary>C1 FinancialChartに関連するjsおよびcssを定義します。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.ScriptsBuilderExtension">
+            <summary>FinancialChartコントロール用に<see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />クラスを拡張します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.ScriptsBuilderExtension.Finance(C1.Web.Mvc.Fluent.ScriptsBuilder)">
+            <summary>財務関連のスクリプトバンドルを登録します。このバンドルには、FinancialChartコントロールが含まれています。</summary>
+            <param name="scriptsBuilder"><see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />。</param>
+            <returns><see cref="T:C1.Web.Mvc.Fluent.ScriptsBuilder" />。</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.DataPointConvert">
+            <summary>このコンバータは、FibonacciArcsクラスのStartプロパティとEndプロパティ、
+            FibonacciFansクラスのStartプロパティとEndプロパティにだけ機能します。
+            これは、クライアント側では、wijmo.chart.DataPointタイプしか受け入れないためです。</summary>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.FinanceAnnotationExtension">
+            <summary>FinancialChartのAnnotationLayer拡張メソッドを追加する静的クラスを定義します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceAnnotationExtension.AddAnnotationLayer``1(C1.Web.Mvc.Finance.Fluent.FinancialChartBuilder{``0},System.Action{C1.Web.Mvc.Fluent.AnnotationLayerBuilder{``0}})">
+            <summary>FinancialChartにAnnotationLayerエクステンダを適用します。</summary>
+            <typeparam name="T"></typeparam>
+            <param name="financialChartBuilder">指定されたfinancialChartビルダ。</param>
+            <param name="annotationLayerBuilder">指定されたannotationlayerビルダ</param>
+            <returns></returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.FinanceLineMarkerExtension">
+            <summary>FinancialChartの拡張メソッドを提供します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceLineMarkerExtension.AddLineMarker``1(C1.Web.Mvc.Finance.Fluent.FinancialChartBuilder{``0},System.Action{C1.Web.Mvc.Fluent.LineMarkerBuilder{``0}})">
+            <summary>FinancialChartにLineMarkerエクステンダを適用します。</summary>
+            <typeparam name="T"></typeparam>
+            <param name="financialChartBuilder">指定されたFinancialchartBuilder。</param>
+            <param name="lineMarkerBuilder">指定されたLinemarkerBuilder</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceLineMarkerExtension.AddLineMarker``1(C1.Web.Mvc.Finance.Fluent.FinancialChartBuilder{``0})">
+            <summary>FinancialChartでデフォルトのLineMarkerエクステンダを適用します。</summary>
+            <param name="financialChartBuilder">指定されたFinancialchartBuilder。</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.FinanceRangeSelectorExtension">
+            <summary>FinancialChartの拡張メソッドを提供します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceRangeSelectorExtension.AddRangeSelector``1(C1.Web.Mvc.Finance.Fluent.FinancialChartBuilder{``0},System.Action{C1.Web.Mvc.Fluent.RangeSelectorBuilder{``0}})">
+            <summary>FinancialChartにRangeSelectorエクステンダを適用します。</summary>
+            <typeparam name="T"></typeparam>
+            <param name="financialChartBuilder">指定されたFinancialchartBuilder。</param>
+            <param name="rangeSelectorBuilder">指定されたRangeselectorBuilder</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceRangeSelectorExtension.AddRangeSelector``1(C1.Web.Mvc.Finance.Fluent.FinancialChartBuilder{``0})">
+            <summary>FinancialChartでデフォルトのRangeSelectorエクステンダを適用します。</summary>
+            <param name="financialChartBuilder">指定されたFinancialchartBuilder。</param>
+            <returns>現在のビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.ControlBuilderFactoryExtension">
+            <summary>ControlBuilderFactoryを拡張してFinancialChart関連コントロールを作成します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.ControlBuilderFactoryExtension.FinancialChart``1(C1.Web.Mvc.Fluent.ControlBuilderFactory,System.String)">
+            <summary>FinancialChartBuilderを作成します。</summary>
+            <typeparam name="T">データ項目タイプ</typeparam>
+            <param name="controlBuilderFactory">ControlBuilderFactory</param>
+            <param name="selector">セレクタ</param>
+            <returns>FinancialChartBuilder</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.ControlBuilderFactoryExtension.FinancialChart(C1.Web.Mvc.Fluent.ControlBuilderFactory,System.String)">
+            <summary>FinancialChartBuilderを作成します。</summary>
+            <param name="controlBuilderFactory">ControlBuilderFactory</param>
+            <param name="selector">セレクタ</param>
+            <returns>ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.ControlBuilderFactoryExtension.FinanceResources(C1.Web.Mvc.Fluent.ControlBuilderFactory)">
+            <summary>財務に関連するjsリソースをレンダリングします。</summary>
+            <returns>HTML文字列</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5">
+            <summary>さまざまな系列を作成するためのファクトリを定義します。</summary>
+            <typeparam name="T">Modelタイプ</typeparam>
+            <typeparam name="TOwner">FlexChartCoreから派生したチャート</typeparam>
+            <typeparam name="TSeries">ChartSeriesBaseから派生したChartSeries</typeparam>
+            <typeparam name="TSeriesBuilder">ChartSeriesBuilder</typeparam>
+            <typeparam name="TChartType">ChartType</typeparam>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.#ctor(System.Collections.Generic.IList{C1.Web.Mvc.ChartSeriesBase{`0}},`1)">
+            <summary>FinanceSeriesListFactoryクラスの新しいインスタンスを初期化します。</summary>
+            <param name="list">ChartSeriesリスト</param>
+            <param name="owner">FinancialChart</param>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddFibonacci">
+            <summary>Fibonacci系列をFinancialChart系列リストに追加します。</summary>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddFibonacci(System.String)">
+            <summary>Fibonacci系列をFinancialChart系列リストに追加します。</summary>
+            <param name="name">系列の名前</param>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddFibonacciArcs">
+            <summary>FibonacciArcs系列をFinancialChart系列リストに追加します。</summary>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddFibonacciArcs(System.String)">
+            <summary>FibonacciArcs系列をFinancialChart系列リストに追加します。</summary>
+            <param name="name">系列の名前</param>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddFibonacciFans">
+            <summary>FibonacciFans系列をFinancialChart系列リストに追加します。</summary>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddFibonacciFans(System.String)">
+            <summary>FibonacciFans系列をFinancialChart系列リストに追加します。</summary>
+            <param name="name">系列の名前</param>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddFibonacciTimeZones">
+            <summary>FibonacciTimeZones系列をFinancialChart系列リストに追加します。</summary>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddFibonacciTimeZones(System.String)">
+            <summary>FibonacciTimeZones系列をFinancialChart系列リストに追加します。</summary>
+            <param name="name">系列の名前</param>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddBollingerBands">
+            <summary>BollingerBands系列をFinancialChart系列リストに追加します。</summary>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddBollingerBands(System.String)">
+            <summary>BollingerBands系列をFinancialChart系列リストに追加します。</summary>
+            <param name="name">系列の名前</param>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddEnvelopes">
+            <summary>Envelopes系列をFinancialChart系列リストに追加します。</summary>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddEnvelopes(System.String)">
+            <summary>Envelopes系列をFinancialChart系列リストに追加します。</summary>
+            <param name="name">系列の名前</param>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddRSI">
+            <summary>RSI系列をFinancialChart系列リストに追加します。</summary>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddRSI(System.String)">
+            <summary>RSI系列をFinancialChart系列リストに追加します。</summary>
+            <param name="name">系列の名前</param>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddWilliamsR">
+            <summary>WilliamsR系列をFinancialChart系列リストに追加します。</summary>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddWilliamsR(System.String)">
+            <summary>WilliamsR系列をFinancialChart系列リストに追加します。</summary>
+            <param name="name">系列の名前</param>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddATR">
+            <summary>ATR系列をFinancialChart系列リストに追加します。</summary>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddATR(System.String)">
+            <summary>ATR系列をFinancialChart系列リストに追加します。</summary>
+            <param name="name">系列の名前</param>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddCCI">
+            <summary>CCI系列をFinancialChart系列リストに追加します。</summary>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddCCI(System.String)">
+            <summary>CCI系列をFinancialChart系列リストに追加します。</summary>
+            <param name="name">系列の名前</param>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddStochastic">
+            <summary>Stochastic系列をFinancialChart系列リストに追加します。</summary>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddStochastic(System.String)">
+            <summary>Stochastic系列をFinancialChart系列リストに追加します。</summary>
+            <param name="name">系列の名前</param>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddMacd">
+            <summary>Macd系列をFinancialChart系列リストに追加します。</summary>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddMacd(System.String)">
+            <summary>Macd系列をFinancialChart系列リストに追加します。</summary>
+            <param name="name">系列の名前</param>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddMacdHistogram">
+            <summary>MacdHistogram系列をFinancialChart系列リストに追加します。</summary>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.Fluent.FinanceSeriesListFactory`5.AddMacdHistogram(System.String)">
+            <summary>MacdHistogram系列をFinancialChart系列リストに追加します。</summary>
+            <param name="name">系列の名前</param>
+            <returns>系列ビルダ</returns>
+        </member>
+        <member name="T:C1.Web.Mvc.Finance.LicenseDetector">
+            <summary>C1.Web.Mvc.Financeライセンスを検出するためのクラスを定義します。</summary>
+        </member>
+        <member name="M:C1.Web.Mvc.Finance.LicenseDetector.#ctor">
+            <summary>コンストラクタ。</summary>
+        </member>
+    </members>
+</doc>

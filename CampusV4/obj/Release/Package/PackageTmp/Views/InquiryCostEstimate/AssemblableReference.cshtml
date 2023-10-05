@@ -1,0 +1,69 @@
+﻿<style>
+    #dlgAssemblableReference {
+        width: 1088px;
+    }
+</style>
+
+<div id="dlgAssemblableReference">
+    <form id="frmAssemblableReference" class="form-horizontal">
+        <h4 class="modal-header">
+            組立可能数照会
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                @(Html.C1().FlexGrid()
+                    .AutoGenerateColumns(false).IsReadOnly(true).Height("308px").Id("grdAssemblableReference")
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("Col_1").Width("80").Header("行"));
+                        b1.Add(cb => cb.Binding("Col_2").Header("部品分類"));
+                        b1.Add(cb => cb.Binding("Col_3").Width("220").Header("部品名"));
+                        b1.Add(cb => cb.Binding("Col_6").Width("120").Header("入数"));
+                        b1.Add(cb => cb.Binding("Col_7").Width("120").Header("個数"));
+                        b1.Add(cb => cb.Binding("Col_8").Width("120").Header("数量"));
+                        b1.Add(cb => cb.Binding("Col_9").Width("120").Header("仕入数"));
+                        b1.Add(cb => cb.Binding("Col_10").Width("120").Header("可能数"));
+                    }))
+            </div>
+            <div class="form-group">                
+                <label class="col-md-offset-8 col-md-2 control-label" for="Text1">組立可能数</label>
+                <div class="col-md-2">
+                    <input class="form-control" id="Text1" name="Text1" type="text" disabled />
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default wj-hide">閉じる</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgAssemblableReference")
+
+<script type="text/javascript">
+    function loadAssemblableReferenceData() {
+        $.ajax({
+            type: "POST",
+            url: "/InquiryCostEstimate/GetAssemblableReferenceData",
+            dataType: "json",
+            success: function (result) {
+                var fg = wijmo.Control.getControl("#grdAssemblableReference");
+                var data = JSON.parse(result);
+                fg.rows.clear();
+                var j = 0
+                for (var i in data) {
+                    var obj = [data[i].Col_1, data[i].Col_2, data[i].Col_3, data[i].Col_4, data[i].Col_5, data[i].Col_6, data[i].Col_7, data[i].Col_8, data[i].Col_9, data[i].Col_10];
+                    // FlexGridに新規行を追加します。
+                    var row = new wijmo.grid.Row();
+                    fg.rows.push(row);
+                    for (var col = 0; col <= fg.columns.length - 1; col++) {
+                        //FlexGrid のセルにデータを入力します。
+                        fg.setCellData(j, col, obj[col]);
+                    }
+                    j++;
+                }
+            }
+        });
+    }
+</script>

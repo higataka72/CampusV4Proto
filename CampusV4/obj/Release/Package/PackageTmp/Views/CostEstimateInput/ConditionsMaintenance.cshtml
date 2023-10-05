@@ -1,0 +1,190 @@
+﻿@model CampusV4.Models.CostEstimateInputViewModel
+
+<div id="FactorySelection">
+    <div style="transform-origin: left top;">
+        <div class="page-title">
+            <div class="title_left">
+                <ol class="breadcrumb">
+                    <li>原価見積依頼入力</li>
+                    <li><a href="/CostEstimateInput/FactorySelection?mode=1">工場選択 <i class="fa fa-arrow-circle-left"></i></a></li>
+                    <li class="active">キーワードメンテナンス</li>
+                </ol>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    @using (Html.BeginForm("FactorySelection", "CostEstimateInput", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_CampusId" for="Text1_1">CAMPUS-ID</label>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.Key_CampusId, new { @id = "Key_CampusId", @class = "form-control" })
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-info" id="btnSearch"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                @Html.TextBoxFor(model => model.Key_CampusName, new { @id = "Key_CampusName", @class = "form-control"})
+                            </div>
+                        </div>
+
+                        @* 第1レベル *@
+                        <div class="form-group">
+                            <div class="col-md-offset-1 col-md-1" style="width:140px">
+                                <input class="form-control" id="Text1" name="Text1" type="text" value="" />
+                            </div>
+                            <div class="col-md-1" style="width:140px">
+                                <input class="form-control" id="Text2" name="Text2" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:140px">
+                                <input class="form-control" id="Text3" name="Text3" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:75px">
+                                <input class="form-control" id="Text4" name="Text4" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:75px">
+                                <input class="form-control" id="Text5" name="Text5" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:75px">
+                                <input class="form-control" id="Text6" name="Text6" type="text" />
+                            </div>
+                        </div>
+
+                        @* 第2レベル *@
+                        <div class="form-group">
+                            <div class="col-md-offset-1 col-md-1" style="width:140px">
+                                <input class="form-control" id="Text1" name="Text1" type="text" value="" />
+                            </div>
+                            <div class="col-md-1" style="width:140px">
+                                <input class="form-control" id="Text2" name="Text2" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:140px">
+                                <input class="form-control" id="Text3" name="Text3" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:75px">
+                                <input class="form-control" id="Text4" name="Text4" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:75px">
+                                <input class="form-control" id="Text5" name="Text5" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:75px">
+                                <input class="form-control" id="Text6" name="Text6" type="text" />
+                            </div>
+                        </div>
+
+                        @* 第3レベル *@
+                        <div class="form-group">
+                            <div class="col-md-offset-1 col-md-1" style="width:140px">
+                                <input class="form-control" id="Text1" name="Text1" type="text" value="" />
+                            </div>
+                            <div class="col-md-1" style="width:140px">
+                                <input class="form-control" id="Text2" name="Text2" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:140px">
+                                <input class="form-control" id="Text3" name="Text3" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:75px">
+                                <input class="form-control" id="Text4" name="Text4" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:75px">
+                                <input class="form-control" id="Text5" name="Text5" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:75px">
+                                <input class="form-control" id="Text6" name="Text6" type="text" />
+                            </div>
+                        </div>
+
+                        @* 第4レベル *@
+                        <div class="form-group">
+                            <div class="col-md-offset-1 col-md-1" style="width:140px">
+                                <input class="form-control" id="Text1" name="Text1" type="text" value="" />
+                            </div>
+                            <div class="col-md-1" style="width:140px">
+                                <input class="form-control" id="Text2" name="Text2" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:140px">
+                                <input class="form-control" id="Text3" name="Text3" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:75px">
+                                <input class="form-control" id="Text4" name="Text4" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:75px">
+                                <input class="form-control" id="Text5" name="Text5" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:75px">
+                                <input class="form-control" id="Text6" name="Text6" type="text" />
+                            </div>
+                        </div>
+
+                        @* 第5レベル *@
+                        <div class="form-group">
+                            <div class="col-md-offset-1 col-md-1" style="width:140px">
+                                <input class="form-control" id="Text1" name="Text1" type="text" value="" />
+                            </div>
+                            <div class="col-md-1" style="width:140px">
+                                <input class="form-control" id="Text2" name="Text2" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:140px">
+                                <input class="form-control" id="Text3" name="Text3" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:75px">
+                                <input class="form-control" id="Text4" name="Text4" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:75px">
+                                <input class="form-control" id="Text5" name="Text5" type="text" />
+                            </div>
+                            <div class="col-md-1" style="width:75px">
+                                <input class="form-control" id="Text6" name="Text6" type="text" />
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-offset-4 col-md-2" style="text-align: right">
+                                <button class="btn btn-primary" type="button" id="btnSelect">登録</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("../Common/MasterSearch")
+
+@section scripts{
+    <script>
+        c1.documentReady(function () {
+        });
+
+        // 検索（F2）
+        var dlgMasterSearch = wijmo.Control.getControl('#dlgMasterSearch');
+        c1.documentReady(function () {
+            //CAMPUS-ID
+            document.getElementById('btnSearch').addEventListener('click', function () {
+                loadMasterData();
+
+                dlgMasterSearch.show(true, function (sender) {
+                    if (sender.dialogResult == 'wj-hide-ok') {
+                        document.getElementById('Key_CampusId').setAttribute('value', masterSelected.code);
+                        document.getElementById('Key_CampusName').setAttribute('value', masterSelected.name);
+                    }
+                });
+            });
+            document.getElementById('Key_CampusId').addEventListener('keydown', CampusIdKeyDownEvent);
+            function CampusIdKeyDownEvent(e) {
+                if (e.keyCode == 113) {
+                    let target = document.getElementById('btnSearch');
+                    let clickEvent = new Event('click', { "bubbles": true, "cancelable": true });
+                    target.dispatchEvent(clickEvent);
+                }
+            }
+        });
+    </script>
+}

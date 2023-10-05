@@ -1,0 +1,80 @@
+﻿<div id="dlgSupplierSearch">
+    <form id="frmSupplierSearch" class="form-horizontal">
+        <h4 class="modal-header">
+            担当者選択画面
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                @(Html.C1().FlexGrid().SelectionMode(SelectionMode.Row)
+                    .AutoGenerateColumns(false).IsReadOnly(true).Height("350px").Width("840px").Id("grdSupplierSearch")
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("SupplierCode").Width("120").Header("コード"));
+                        b1.Add(cb => cb.Binding("SupplierName").Width("210").Header("名称"));
+                        b1.Add(cb => cb.Binding("DepartmentName").Width("210").Header("部署名"));
+                        b1.Add(cb => cb.Binding("Email").Width("250").Header("E-Mail"));
+                    }))
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary wj-hide-ok">選択</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgSupplierSearch")
+
+<script type="text/javascript">
+    var SupplierSelected = {
+        supplierCode: "",
+        supplierName: "",
+        departmentName: "",
+        email: ""
+    };
+
+    function loadbtnSupplierData($this) {
+        var textValue = ($this == null) ? "Dummy" : $this.value;
+
+        SupplierSelected.supplierCode = "";
+        SupplierSelected.supplierName = "";
+        SupplierSelected.departmentName = "";
+        SupplierSelected.email = "";
+
+        $.ajax({
+            type: "POST",
+            url: "/Common/GetSupplierData",
+            data: {name: textValue },
+            dataType: "json",
+
+            success: function (result) {
+                var fg = wijmo.Control.getControl("#grdSupplierSearch");
+                var data = JSON.parse(result);
+                fg.rows.clear();
+                var j = 0
+                for (var i in data) {
+                    var obj = [data[i].SupplierCode, data[i].SupplierName, data[i].departmentName, data[i].email];
+                    // FlexGridに新規行を追加します。
+                    var row = new wijmo.grid.Row();
+                    fg.rows.push(row);
+                    for (var col = 0; col <= fg.columns.length - 1; col++) {
+                        //FlexGrid のセルにデータを入力します。
+                        fg.setCellData(j, col, obj[col]);
+                    }
+                    j++;
+                }
+            }
+        });
+    }
+
+    var supplierSearchGrid = wijmo.Control.getControl('#grdSupplierSearch');
+    supplierSearchGrid.selectionChanged.addHandler(function (s, e) {
+        var sel = supplierSearchGrid.selection;
+        for (var r = sel.topRow; r <= sel.bottomRow; r++) {
+            supplierSelected.supplierCode = supplierSearchGrid.cells.getCellData(r, 0, false);
+            supplierSelected.supplierName = supplierSearchGrid.cells.getCellData(r, 1, false);
+            supplierSelected.departmentName = supplierSearchGrid.cells.getCellData(r, 2, false);
+            supplierSelected.email = supplierSearchGrid.cells.getCellData(r, 3, false);
+        }
+    });
+</script>

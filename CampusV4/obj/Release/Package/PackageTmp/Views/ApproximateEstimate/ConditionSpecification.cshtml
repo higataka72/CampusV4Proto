@@ -1,0 +1,464 @@
+﻿<style>
+    .design-header {
+        text-align: center;
+    }
+
+    .design-label {
+        width: 4%;
+        text-align: center;
+    }
+
+    .design-content {
+        width: 9%;
+    }
+
+    .cost-content {
+        width: 36%;
+    }
+
+    .cost-label {
+        width: 12%;
+        text-align: center;
+    }
+</style>
+
+<div id="ApproximateEstimate">
+    <div style="transform-origin: left top;">
+        <div class="page-title">
+            <div class="title_left">
+                <ol class="breadcrumb">
+                    <li class="active">概算見積</li>
+                </ol>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    @using (Html.BeginForm("ConditionSpecification", "ApproximateEstimate", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text1" for="Text1">製番指定</label>
+                            <div class="col-md-4">
+                                <input class="form-control" id="Text1" name="Text1" type="text" />
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" id="Text2" name="Text2" type="text" />
+                            </div>
+                        </div>
+                        <hr />
+                        <p class="h4">【設計項目】</p>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Select1" for="Select1">品種</label>
+                            <div class="col-md-1">
+                                <select class="form-control" id="Select1" name="Select1">
+                                </select>
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Select2" for="Select2">製作区分</label>
+                            <div class="col-md-1">
+                                <select class="form-control" id="Select2" name="Select2">
+                                </select>
+                            </div>
+                            <label class="col-md-2 control-label text-nowrap" id="lbl_Text3" for="Text3">フレームセット数／shot</label>
+                            <div class="col-md-1">
+                                <input class="form-control" id="Text3" name="Text3" type="text" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Select3" for="Select3">材質</label>
+                            <div class="col-md-2">
+                                <select class="form-control" id="Select3" name="Select3">
+                                </select>
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Select4" for="Select4">表面処理</label>
+                            <div class="col-md-1">
+                                <select class="form-control" id="Select4" name="Select4">
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" id="Text4" name="Text4" type="text" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text5" for="Text5">PKG数／frame</label>
+                            <div class="col-md-11">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3" class="design-header">
+                                                <label class="control-label">連</label>
+                                            </td>
+                                            <td class="design-label"></td>
+                                            <td colspan="3" class="design-header">
+                                                <label class="control-label">列</label>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="design-content">
+                                                <input class="form-control" id="Text5" name="Text5" type="text" />
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">～</label>
+                                            </td>
+                                            <td class="design-content">
+                                                <input class="form-control" id="Text6" name="Text6" type="text" />
+                                            </td>
+                                            <td class="design-label"></td>
+                                            <td class="design-content">
+                                                <input class="form-control" id="Text7" name="Text7" type="text" />
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">～</label>
+                                            </td>
+                                            <td class="design-content">
+                                                <input class="form-control" id="Text8" name="Text8" type="text" />
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text9" for="Text9">PKGサイズ</label>
+                            <div class="col-md-11">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3" class="design-header">
+                                                <label class="control-label">幅</label>
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3" class="design-header">
+                                                <label class="control-label">長</label>
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3" class="design-header">
+                                                <label class="control-label">厚</label>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="design-content">
+                                                <input class="form-control" id="Text9" name="Text9" type="text" />
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">～</label>
+                                            </td>
+                                            <td class="design-content">
+                                                <input class="form-control" id="Text10" name="Text10" type="text" />
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">×</label>
+                                            </td>
+                                            <td class="design-content">
+                                                <input class="form-control" id="Text11" name="Text11" type="text" />
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">～</label>
+                                            </td>
+                                            <td class="design-content">
+                                                <input class="form-control" id="Text12" name="Text12" type="text" />
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">×</label>
+                                            </td>
+                                            <td class="design-content">
+                                                <input class="form-control" id="Text13" name="Text13" type="text" />
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">～</label>
+                                            </td>
+                                            <td class="design-content">
+                                                <input class="form-control" id="Text14" name="Text14" type="text" />
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text15" for="Text15">リードフレーム</label>
+                            <div class="col-md-11">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3" class="design-header">
+                                                <label class="control-label">幅</label>
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3" class="design-header">
+                                                <label class="control-label">長</label>
+                                            </td>
+                                            <td></td>
+                                            <td colspan="3" class="design-header">
+                                                <label class="control-label">厚</label>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="design-content">
+                                                <input class="form-control" id="Text15" name="Text15" type="text" />
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">～</label>
+                                            </td>
+                                            <td class="design-content">
+                                                <input class="form-control" id="Text16" name="Text16" type="text" />
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">×</label>
+                                            </td>
+                                            <td class="design-content">
+                                                <input class="form-control" id="Text17" name="Text17" type="text" />
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">～</label>
+                                            </td>
+                                            <td class="design-content">
+                                                <input class="form-control" id="Text18" name="Text18" type="text" />
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">×</label>
+                                            </td>
+                                            <td class="design-content">
+                                                <input class="form-control" id="Text19" name="Text19" type="text" />
+                                            </td>
+                                            <td class="design-label">
+                                                <label class="control-label">～</label>
+                                            </td>
+                                            <td class="design-content">
+                                                <input class="form-control" id="Text20" name="Text20" type="text" />
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr />
+                        <p class="h4">【リスト項目】</p>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Select4" for="Select4">搭載機種</label>
+                            <div class="col-md-1">
+                                <select class="form-control" id="Select4" name="Select4">
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" id="Text21" name="Text21" type="text" />
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Select5" for="Select5">CAV材質</label>
+                            <div class="col-md-2">
+                                <select class="form-control" id="Select5" name="Select5">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Select6" for="Select6">型タイプ</label>
+                            <div class="col-md-2">
+                                <select class="form-control" id="Select6" name="Select6">
+                                </select>
+                            </div>
+                            <label class="col-md-2 control-label text-nowrap" id="lbl_Text22" for="Text22">アウトサイドプレート幅</label>
+                            <div class="col-md-1">
+                                <input class="form-control" id="Text22" name="Text22" type="text" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text23" for="Text23">パイロットピン固定</label>
+                            <div class="col-md-2">
+                                <input class="form-control" id="Text23" name="Text23" type="text" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text24" for="Text24">ホルダーベース厚み</label>
+                            <div class="col-md-3">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td style="text-align:center">
+                                                <label class="control-label">上</label>
+                                            </td>
+                                            <td></td>
+                                            <td style="text-align:center">
+                                                <label class="control-label">下</label>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cost-content">
+                                                <input class="form-control" id="Text25" name="Text25" type="text" />
+                                            </td>
+                                            <td></td>
+                                            <td class="cost-content">
+                                                <input class="form-control" id="Text26" name="Text26" type="text" />
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Select7" for="Select7">フローティング</label>
+                            <div class="col-md-3">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td style="text-align:center">
+                                                <label class="control-label">上</label>
+                                            </td>
+                                            <td></td>
+                                            <td style="text-align:center">
+                                                <label class="control-label">下</label>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cost-content">
+                                                <select class="form-control" id="Select7" name="Select7">
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                            <td class="cost-content">
+                                                <select class="form-control" id="Select8" name="Select8">
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Select9" for="Select9">ベースプレート</label>
+                            <div class="col-md-1">
+                                <select class="form-control" id="Select9" name="Select9">
+                                </select>
+                            </div>
+                            <label class="col-md-2 control-label text-nowrap" id="lbl_Select10" for="Select10">リリースフィルム</label>
+                            <div class="col-md-1">
+                                <select class="form-control" id="Select10" name="Select10">
+                                </select>
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Select11" for="Select11">基板吸着</label>
+                            <div class="col-md-1">
+                                <select class="form-control" id="Select11" name="Select11">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Select12" for="Select12">カルヒータ</label>
+                            <div class="col-md-1">
+                                <select class="form-control" id="Select12" name="Select12">
+                                </select>
+                            </div>
+                            <label class="col-md-2 control-label text-nowrap" id="lbl_Select13" for="Select13">カルピース</label>
+                            <div class="col-md-1">
+                                <select class="form-control" id="Select13" name="Select13">
+                                </select>
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Select14" for="Select14">ゲートピース</label>
+                            <div class="col-md-1">
+                                <select class="form-control" id="Select14" name="Select14">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Select15" for="Select15">カル形状</label>
+                            <div class="col-md-1">
+                                <select class="form-control" id="Select15" name="Select15">
+                                </select>
+                            </div>
+                            <label class="col-md-2 control-label text-nowrap" id="lbl_Text27" for="Text27">ポット数／型</label>
+                            <div class="col-md-1">
+                                <input class="form-control" id="Text27" name="Text27" type="text" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text28" for="Text28">TAB径</label>
+                            <div class="col-md-1">
+                                <input class="form-control" id="Text28" name="Text28" type="text" />
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text29" for="Text29">TAB高</label>
+                            <div class="col-md-3">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="cost-content">
+                                                <input class="form-control" id="Text29" name="Text29" type="text" />
+                                            </td>
+                                            <td class="cost-label">
+                                                <label class="control-label">～</label>
+                                            </td>
+                                            <td class="cost-content">
+                                                <input class="form-control" id="Text30" name="Text30" type="text" />
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text31" for="Text31">上型キャビティ構造</label>
+                            <div class="col-md-2">
+                                <input class="form-control" id="Text31" name="Text31" type="text" />
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Select16" for="Select16">上型ダム</label>
+                            <div class="col-md-1">
+                                <select class="form-control" id="Select16" name="Select16">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Text32" for="Text32">下型キャビティ構造</label>
+                            <div class="col-md-2">
+                                <input class="form-control" id="Text32" name="Text32" type="text" />
+                            </div>
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_Select17" for="Select17">下型ダム</label>
+                            <div class="col-md-1">
+                                <select class="form-control" id="Select17" name="Select17">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-7 col-md-offset-2" style="text-align: right">
+                                <a href="/ApproximateEstimate/PartsList" class="btn btn-primary">部品一覧</a>
+                                <a href="#" class="btn btn-primary" id="btnProductNumberSpecification">表示</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("ProductNumberSpecification")
+
+@section scripts{
+    <script>
+        c1.documentReady(function () {
+            var dlgProductNumberSpecification = wijmo.Control.getControl('#dlgProductNumberSpecification');
+
+            // show forms
+            document.getElementById('btnProductNumberSpecification').addEventListener('click', function () {
+                loadProductNumberSpecificationData();
+                dlgProductNumberSpecification.show(true, function (sender) {
+                    switch (sender.dialogResult) {
+                        case 'submit':
+                            alert('form submitted');
+                            break;
+                        case 'wj-hide-create':
+                            break;
+                    }
+                });
+            });
+        });
+    </script>
+}
+

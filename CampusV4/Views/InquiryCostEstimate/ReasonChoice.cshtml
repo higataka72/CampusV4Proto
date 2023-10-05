@@ -1,0 +1,31 @@
+﻿<style>
+    #dlgReasonChoice {
+        width: 600px;
+    }
+</style>
+
+<div id="dlgReasonChoice">
+    <form id="frmReasonChoice" class="form-horizontal">
+        <h4 class="modal-header">
+            理由選択
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <p>理由を選択してください。</p>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <select class="form-control" id="Select1" name="Select1">
+                    </select>
+                </div>
+                <div class="col-md-8">
+                    <input class="form-control" id="Text1" name="Text1" type="text" />
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default wj-hide">閉じる</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgReasonChoice")

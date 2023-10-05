@@ -1,0 +1,217 @@
+﻿@model CampusV4.Models.ProductionAddInfoViewModel
+<div>
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb">
+                <li class="active">製品追加情報</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                @using (Html.BeginForm("ProductionAddInfoBackNext", "ReferenceEstimate", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label control-label text-nowrap" id="lbl_cmbHinsyuCode">製品の追加情報を登録してください。</label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_cmbHCavMaterial" for="cmbCavMaterial">ＣＡＶ材質</label>
+                        <div class="col-md-2">
+                            @(Html.C1().AutoComplete().Id("cmbCavMaterial")
+                            .Bind(Model.CavMaterialDataList)
+                            .DisplayMemberPath("ItemCode")
+                            .HeaderPath("ItemCode")
+                            .SearchMemberPath("ItemCode, ItemName")
+                            .SelectedValuePath("Hinmei")
+                            .SelectedValue(Model.CavMaterialCode))
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.CavMaterial, new { @id = "selectedCavMaterial", @class = "form-control", @placeholder = "(必須)", @disabled = "true" })
+                        </div>
+                        <div class="col-md-1">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_CavMaterialTT"><i class="fa fa-info-circle fa-2x"></i></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_cmbSurfaceTreatmentDataList" for="cmbSurfaceTreatmentDataList">表面処理</label>
+                        <div class="col-md-2">
+                            @(Html.C1().AutoComplete().Id("cmbSurfaceTreatment")
+                                .Bind(Model.SurfaceTreatmentDataList)
+                                .DisplayMemberPath("ItemCode")
+                                .HeaderPath("ItemCode")
+                                .SearchMemberPath("ItemCode, ItemName")
+                                .SelectedValuePath("ItemName")
+                                .SelectedValue(Model.SurfaceTreatmentCode))
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.SurfaceTreatment, new { @id = "selectedSurfaceTreatment", @class = "form-control", @placeholder = "(必須)", @disabled = "true" })
+                        </div>
+                        <div class="col-md-1">
+                            <label class="col-md-1 control-label text-nowrap" id="lbl_SurfaceTreatmentTT"><i class="fa fa-info-circle fa-2x"></i></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check1_1"></label>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check1_2" style="text-align: left">
+                            <input type="checkbox" id="Check1" value="IssueTypeReceipt" />&emsp;真空成型&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            <label class="control-label text-nowrap" id="lbl_check1_3">&emsp;<i class="fa fa-question-circle fa-2x"></i></label>
+                        </label>
+
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check2_1"></label>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check2_2">
+                            <input type="checkbox" id="Check2" value="IssueTypeReceipt" />&emsp;カルインサート&emsp;
+                            <label class="control-label text-nowrap" id="lbl_check2_3">&emsp;<i class="fa fa-question-circle fa-2x"></i></label>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check3_1"></label>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check3_2" style="text-align: left">
+                            <input type="checkbox" id="Check3" value="IssueTypeReceipt" />&emsp;基盤吸着&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            <label class="control-label text-nowrap" id="lbl_check3_3">&emsp;<i class="fa fa-question-circle fa-2x"></i></label>
+                        </label>
+
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check4_1"></label>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check4_2">
+                            <input type="checkbox" id="Check4" value="IssueTypeReceipt" />&emsp;ゲートインサート
+                            <label class="control-label text-nowrap" id="lbl_check4_3">&emsp;<i class="fa fa-question-circle fa-2x"></i></label>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check5_1"></label>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check5_2" style="text-align: left">
+                            <input type="checkbox" id="Check5" value="IssueTypeReceipt" />&emsp;リリースフィルム&emsp;&emsp;
+                            <label class="control-label text-nowrap" id="lbl_check5_3">&emsp;<i class="fa fa-question-circle fa-2x"></i></label>
+                        </label>
+
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check6_1"></label>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check6_2">
+                            <input type="checkbox" id="Check6" value="IssueTypeReceipt" />&emsp;テフロンリング&emsp;
+                            <label class="control-label text-nowrap" id="lbl_check6_3">&emsp;<i class="fa fa-question-circle fa-2x"></i></label>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check7_1"></label>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check7_2" style="text-align: left">
+                            <input type="checkbox" id="Check7" value="IssueTypeReceipt" />&emsp;ソフトランプ&emsp;&emsp;&emsp;&emsp;
+                            <label class="control-label text-nowrap" id="lbl_check7_3">&emsp;<i class="fa fa-question-circle fa-2x"></i></label>
+                        </label>
+
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check8_1"></label>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check8_2">
+                            <input type="checkbox" id="Check8" value="IssueTypeReceipt" />&emsp;イエプコ処理&emsp;&emsp;
+                            <label class="control-label text-nowrap" id="lbl_check8_3">&emsp;<i class="fa fa-question-circle fa-2x"></i></label>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check9_1"></label>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_check9_2" style="text-align: left">
+                            <input type="checkbox" id="Check9" value="IssueTypeReceipt" />&emsp;エアベントシャッター
+                            <label class="control-label text-nowrap" id="lbl_check9_3">&emsp;<i class="fa fa-question-circle fa-2x"></i></label>
+                        </label>
+                    </div>
+                    @*<div>
+                        @for (var t = 0; t < Model.OptionList.Count; t = t + 2)
+                        {
+                            <div class="form-group">
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label">
+                                        <input type="checkbox" name="Check1" value="@Model.OptionList[t].OptionFlg" /> @Model.OptionList[t].OptionName
+                                    </label>
+                                    <label class="control-label text-nowrap" id="@Model.OptionList[t].OptionCode">&emsp;<i class="fa fa-question-circle fa-2x"></i></label>
+                                </div>
+
+                                @if (t + 1 < Model.OptionList.Count)
+                                {
+                                    <div class="col-md-2">
+                                        <label class="control-label">
+                                            <input type="checkbox" name="Check1" value="@Model.OptionList[t+1].OptionFlg" /> @Model.OptionList[t + 1].OptionName
+                                        </label>
+                                        <label class="control-label text-nowrap" id="@Model.OptionList[t+1].OptionCode">&emsp;<i class="fa fa-question-circle fa-2x"></i></label>
+
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>*@
+
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-5 col-md-offset-4" style="text-align: right">
+                            <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                            <input type="submit" value="戻る" name="backBtn" class="btn btn-primary" formaction="/ReferenceEstimate/ProductionAddInfoBack" id="backBtn" />
+                            <input type="submit" value="参考見積へ" name="NextBtn" class="btn btn-primary" id="NextBtn" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        c1.documentReady(function () {
+            // ラベルツールチップ設定
+            var tt = new wijmo.Tooltip();
+            tt.setTooltip('#lbl_cmbHCavMaterial', 'ＣＡＶ材質');
+            tt.setTooltip('#lbl_cmbSurfaceTreatmentDataList', '表面処理');
+            @{
+                @:tt.setTooltip('#lbl_CavMaterialTT', '@Model.CavMaterialTT');
+                @:tt.setTooltip('#lbl_SurfaceTreatmentTT', '@Model.SurfaceTreatmentTT');
+            }
+            tt.setTooltip('#lbl_check1_2', '真空成型');
+            tt.setTooltip('#lbl_check1_3', '真空成型');
+            tt.setTooltip('#lbl_check2_2', 'カルインサート');
+            tt.setTooltip('#lbl_check2_3', 'カルインサート');
+            tt.setTooltip('#lbl_check3_2', '基盤吸着');
+            tt.setTooltip('#lbl_check3_3', '基盤吸着');
+            tt.setTooltip('#lbl_check4_2', 'ゲートインサート');
+            tt.setTooltip('#lbl_check4_3', 'ゲートインサート');
+            tt.setTooltip('#lbl_check5_2', 'リリースフィルム');
+            tt.setTooltip('#lbl_check5_3', 'リリースフィルム');
+            tt.setTooltip('#lbl_check6_2', 'テフロンリング');
+            tt.setTooltip('#lbl_check6_3', 'テフロンリング');
+            tt.setTooltip('#lbl_check7_2', 'ソフトランプ');
+            tt.setTooltip('#lbl_check7_3', 'ソフトランプ');
+            tt.setTooltip('#lbl_check8_2', 'イエプコ処理');
+            tt.setTooltip('#lbl_check8_3', 'イエプコ処理');
+            tt.setTooltip('#lbl_check9_2', 'エアベントシャッター');
+            tt.setTooltip('#lbl_check9_3', 'エアベントシャッター');
+
+            var templateVarietyCode = '<table><tr>' +
+                '<td>{ItemCode}</td>' +
+                '<td title="ItemName">　{ItemName}</td>' +
+                '</tr></table>';
+
+            //ＣＡＶ材質イベント
+            var theCavMaterial = wijmo.Control.getControl('#cmbCavMaterial');
+            theCavMaterial.formatItem.addHandler(function (s, e) {
+                var html = wijmo.format(templateVarietyCode, e.data);
+                e.item.innerHTML = html;
+            });
+            theCavMaterial.selectedIndexChanged.addHandler(function (s, e) {
+                document.getElementById('selectedCavMaterial').value = s.selectedItem.ItemName;
+            });
+
+            //表面処理イベント
+            var theSurfaceTreatment = wijmo.Control.getControl('#cmbSurfaceTreatment');
+            theSurfaceTreatment.formatItem.addHandler(function (s, e) {
+                var html = wijmo.format(templateVarietyCode, e.data);
+                e.item.innerHTML = html;
+            });
+            theSurfaceTreatment.selectedIndexChanged.addHandler(function (s, e) {
+                document.getElementById('selectedSurfaceTreatment').value = s.selectedItem.ItemName;
+            });
+
+        });
+    </script>
+}

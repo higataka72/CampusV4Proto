@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ComponentOne ASP.NET MVC Project</title>
+    @Styles.Render("~/Content/css")
+    @Html.C1().Styles().Theme("cerulean")
+
+    @RenderSection("styles", required: false)
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    @Html.C1().Scripts().Basic().Finance().FlexSheet().FlexViewer().MultiRow().TransposedGrid().TransposedMultiRow()
+
+</head>
+<body class="nav-md">
+    @*GreapCity FlexGrid 個別対応*@
+    <style>
+        .wj-cell {
+            border-color: black;
+            border: 0.5px solid #e6e6fa;
+            transition: all 100ms;
+        }
+
+            .wj-cell.wj-header {
+                background: #efffff;
+                color: #007d7f;
+                font-weight: bold;
+                text-align: center;
+            }
+        .wj-control .wj-input-group .wj-form-control {
+            background: #ffffff;
+            border: 1px solid #ccc;
+            height: 35px;
+        }
+        .wj-popup .wj-dialog-header {
+            width: 100%;
+            background: #efffff;
+            color: #007d7f;
+            border: 0.5px solid #e6e6fa;
+            font-weight: bold;
+            font-size: 120%;
+            padding: 1em;
+        }
+    </style>
+    <script>
+        c1.documentReady(function () {
+            var display = 100;
+
+            $('#ickExpand').click(function () {
+                if (display <= 150) {
+                    display += 10;
+                }
+                $("body").css("zoom", display + "%");
+            });
+
+            $('#ickCompress').click(function () {
+                if (display >= 50) {
+                    display -= 10;
+                }
+                $("body").css("zoom", display + "%");
+            });
+
+            $('#ickNormal').click(function () {
+                display = 100;
+                $("body").css("zoom", "100%");
+            });
+        });
+    </script>
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="index.html" class="site_title"><img src="~/Content/Images/campus_logo_main.png" width="220" height="52" /></a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>MENU</h3>
+                            <ul class="nav side-menu">
+                                <li><a href="/Inquiry/Index"><i class="fa fa-edit"></i> 引合登録</a></li>
+                                <li><a href="/InquiryList/InquiryList"><i class="fa fa-th-list"></i> 引合一覧</a></li>
+                                <li><a href="/Order/Index"><i class="fa fa-edit"></i> 受注登録</a></li>
+                                <li><a href="/DesignInformation/DesignInformation"><i class="fa fa-edit"></i> 設計情報入力</a></li>
+                                <li><a href="/PartsList/PartsListDataList"><i class="fa fa-edit"></i> 部品リスト</a></li>
+                                <li><a href="/InquiryCostEstimate/Index"><i class="fa fa-th-list"></i> 引合別原価見積一覧</a></li>
+                                <li><a href="/CostEstimateInput/CostEstimateInput"><i class="fa fa-edit"></i> 原価見積依頼入力</a></li>
+                                <li><a href="/EstimateReplyInput/EstimateReplyInput?InquiryNumber=0001&CampusId=A001"><i class="fa fa-edit"></i> 見積回答入力（原価）</a></li>
+                                <li><a href="/OrderInput/Regist"><i class="fa fa-edit"></i> 発注入力</a></li>
+                                <li><a href="/Purchase/Index"><i class="fa fa-edit"></i> 仕入入力</a></li>
+                                <li><a href="/Inspect/InspectDataList"><i class="fa fa-edit"></i> 検収入力</a></li>
+                                <li><a href="/ApproximateEstimate/ConditionSpecification"><i class="fa fa-edit"></i> 概算見積</a></li>
+                                <li><a href="/EstimateInput/EstimateInput?mode=1"><i class="fa fa-edit"></i> 見積入力</a></li>
+                                <li><a href="/AcceptanceList/AcceptanceListSearch"><i class="fa fa-th-list"></i> 検収明細一覧</a></li>
+                                <li><a href="/ProgressList/ProgressList"><i class="fa fa-th-list"></i> 進捗一覧</a></li>
+                                <li><a href="/ProductionNumberDetail/ProductionNumberDetail"><i class="fa fa-th-list"></i> 製番詳細</a></li>
+                                <li><a href="/EarningsInput/Index"><i class="fa fa-edit"></i> 売上入力</a></li>
+                                <li><a href="/YearFeedback/YearFeedback"><i class="fa fa-th-list"></i> 年間フィードバック</a></li>
+                                <li><a href="/ReferenceEstimate/ReferenceEstimate"><i class="fa fa-edit"></i> 参考見積</a></li>
+                                <li><a href="/ContactConfirmationInput/ContactConfirmationInput?Inquiry=0001"><i class="fa fa-edit"></i> 連絡確認入力</a></li>
+                                <li><a href="/MeasurementCheckSheetInput/MeasurementCheckSheetInput"><i class="fa fa-edit"></i> 測定チェックシート入力</a></li>
+                                <li><a href="/ProductionControlAlignmentDataOutput/ProductionControlAlignmentDataOutput"><i class="fa fa-th-list"></i> 生産管理連携データ出力</a></li>
+                                <li><a href="/AccountantAlignmentDataOutput/AccountantAlignmentDataOutput"><i class="fa fa-th-list"></i> 会計連携データ出力</a></li>
+                                <li><a href="/Portal/index?LoginID="><i class="fa fa-th-list"></i> 社内ポータル</a></li>
+                                <li><a href="/Portal/index?LoginID=1"><i class="fa fa-th-list"></i> 社外ポータル</a></li>
+                                <li>　</li>
+                                <li><a href="#"><i class="fa fa-line-chart"></i> 年間評価</a></li>
+                                <li class="active">
+                                    <a><i class="fa fa-table"></i> マスタ保守<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: block;">
+                                        <li><a href="#">　パートナーマスタ</a></li>
+                                        <li><a href="/M_Employee/Index">　担当者マスタ</a></li>
+                                        <li><a href="#">　所属部門マスタ</a></li>
+                                    </ul>
+                                </li>
+                                <li>　</li>
+                                <li>
+                                    <a href="mailto:info&#64;example.com"><i class="fa fa-envelope-o"></i> メールこちらから</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--
+                <div class="menu_section">
+                    <h3>CAPABLE</h3>
+                    <div class="panel information">
+                        <div class="panel-body">
+                            CAPABLEより、最新の情報をお届けしております。<br />
+                            2024年よりCAMPUSがリニューアルいたします。
+                        </div>
+                    </div>
+                </div>
+                -->
+                    </div>
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a href="#">
+                            <img src="~/Content/Images/chatwork48_48.png" width="24" height="24" />
+                        </a>
+                        <a href="#">
+                            <img src="~/Content/Images/youtube48_48.png" width="24" height="24" />
+                        </a>
+                        <a href="#">
+                            <img src="~/Content/Images/facebook48_48.png" width="24" height="24" />
+                        </a>
+                        <a href="#">
+                            <img src="~/Content/Images/twitter48_48.png" width="24" height="24" />
+                        </a>
+                        <a href="#">
+                            <img src="~/Content/Images/instagram48_48.png" width="24" height="24" />
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                    <div class="nav toggle" style="width: 90px; vertical-align: middle;">
+                        <a id="ickExpand" href="#"><i class="fa fa-expand"></i> 拡大</a>
+                    </div>
+                    <div class="nav toggle" style="width:90px">
+                        <a id="ickNormal" href="#"><i class="fa fa-home"></i> 標準</a>
+                    </div>
+                    <div class="nav toggle" style="width:90px">
+                        <a id="ickCompress" href="#"><i class="fa fa-compress"></i> 縮小</a>
+                    </div>
+                    <div class="nav toggle" style="width:120px">
+                        <a href="#"><i class="fa fa-question-circle"></i> ガイド</a>
+                    </div>
+                    <nav class="nav navbar-nav">
+                        <ul class=" navbar-right">
+                            <li class="dropdown" style="padding-left: 18px;">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                                    ユーザーA <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">ユーザー情報編集</a></li>
+                                    <li><a href="#">パスワード変更</a></li>
+                                    <li><a href="/Sample/Login">ログアウト</a></li>
+                                </ul>
+                            </li>
+
+                            <li role="presentation" class="nav-item dropdown">
+                                <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="badge bg-green">1</span>
+                                </a>
+                                <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span>
+                                                <span>CAPABLE</span>
+                                                <span class="time">3分前</span>
+                                            </span>
+                                            <span class="message">
+                                                CAPABLEより、最新の情報をお届けしております。<br />
+                                                2024年よりCAMPUSがリニューアルいたします。
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <div class="text-center">
+                                            <a class="dropdown-item">
+                                                <strong>全て表示する</strong>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 ">
+                        <!-- Edit Account form -->
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    c2023 All Rights Reserved. Campus!
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

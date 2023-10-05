@@ -1,0 +1,34 @@
+﻿<style>
+    #dlgInstallmentPayment {
+        width: 796px;
+    }
+</style>
+
+<div id="dlgInstallmentPayment">
+    <form id="frmInstallmentPayment" class="form-horizontal">
+        <h4 class="modal-header">
+            分納明細
+            <button type="button" tabindex="-1" class="close wj-hide">&times;</button>
+        </h4>
+        <div class="modal-body">
+            <div class="form-group">
+                @(Html.C1().FlexGrid()
+                    .AutoGenerateColumns(false).Height("308px").Id("grdInstallmentPayment").AllowAddNew(true).AllowDelete(true)
+                    .Columns(b1 =>
+                    {
+                        b1.Add(cb => cb.Binding("Col_1").Width("60").Header("回").IsReadOnly(true).Align("center"));
+                        b1.Add(cb => cb.Binding("Col_2").Width("80").Header("数量").Align("center"));
+                        b1.Add(cb => cb.Binding("Col_3").Width("120").Header("単価").DataType(DataType.Number));
+                        b1.Add(cb => cb.Binding("Col_4").Width("120").Header("金額").DataType(DataType.Number));
+                        b1.Add(cb => cb.Binding("Col_5").Width("120").Header("納期").DataType(DataType.Date));
+                        b1.Add(cb => cb.Binding("Col_6").Width("120").Header("完納").DataType(DataType.Boolean));
+                    }))
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default wj-hide">登録</button>
+        </div>
+    </form>
+</div>
+
+@Html.C1().Popup("#dlgInstallmentPayment")
