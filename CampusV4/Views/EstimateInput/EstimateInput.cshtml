@@ -203,8 +203,8 @@
                             <a href="#" class="btn btn-primary" id="btnInsert">登録</a>
                         </div>
                         <label class="col-md-2 control-label" id="lbl_Approvaltype" style="text-align: left">
-                            &emsp;@Html.RadioButtonFor(model => model.ApprovalType, "1") 承認　
-                            @Html.RadioButtonFor(model => model.ApprovalType, "2") 否決
+                            &emsp;@Html.RadioButtonFor(model => model.ApprovalType, "1")&nbsp;<label style="vertical-align: middle;">承認</label>
+                            &emsp;@Html.RadioButtonFor(model => model.ApprovalType, "2")&nbsp;<label style="vertical-align: middle;">否決</label>
                         </label>
                     </div>
                 }

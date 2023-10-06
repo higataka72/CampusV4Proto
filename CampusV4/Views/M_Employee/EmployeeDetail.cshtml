@@ -110,8 +110,8 @@
                     <div class="form-group">
                         <label class="col-md-1 control-label text-nowrap" id="lbl_Retired">在職区分</label>
                         <label class="col-md-2 control-label" style="text-align:left">
-                            @Html.RadioButtonFor(model => model.IsRetired, "0") 退職
-                            &emsp;&emsp;@Html.RadioButtonFor(model => model.IsRetired, "1") 在職
+                            @Html.RadioButtonFor(model => model.IsRetired, "0")&nbsp;<label style="vertical-align: middle;">退職</label>
+                            &emsp;&emsp;@Html.RadioButtonFor(model => model.IsRetired, "1")&nbsp;<label style="vertical-align: middle;">在職</label>
                         </label>
                     </div>
 
@@ -139,7 +139,7 @@
                         <label class="col-md-1 control-label text-nowrap" id="lbl_IsApprover">承認者区分</label>
                         <div class="col-md-4">
                             <label class="control-label" id="lbl_IsApprovert">
-                                <input type="checkbox" name="Check1" value="IsApprover" /> 承認者
+                                <input type="checkbox" name="Check1" value="IsApprover" />&nbsp;<label style="vertical-align: middle;">承認者</label>
                             </label>
                         </div>
                     </div>

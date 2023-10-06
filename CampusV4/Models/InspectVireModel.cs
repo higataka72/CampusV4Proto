@@ -23,7 +23,9 @@ namespace CampusV4.Models
         public DateTime? ReceiptDateTo { get; set; }
         //製番
         public string ProductionNumber { get; set; }
-       
+        //発注区分（1:受入のみ(受入基準) / 2:発注残のみ(検収基準)/ 0:両方)
+        public int Po_type { get; set; }
+
         //CAMUS-IDリスト
         public List<CampusData> CampusDataList { get; set; }
 

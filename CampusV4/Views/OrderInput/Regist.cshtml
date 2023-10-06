@@ -37,7 +37,7 @@
                             <div class="col-md-2">
                                 <div class="checkbox">
                                     <label>
-                                        @Html.CheckBoxFor(model => model.KariHatyuFlag)&emsp;仮発注
+                                        @Html.CheckBoxFor(model => model.KariHatyuFlag)&emsp;&nbsp;<label style="vertical-align: middle;">仮発注</label>
                                     </label>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                             <div class="col-md-2">
                                 <div class="checkbox">
                                     <label>
-                                        @Html.CheckBoxFor(model => model.SyanaiFlag)&emsp;社内発注
+                                        @Html.CheckBoxFor(model => model.SyanaiFlag)&emsp;<label style="vertical-align: middle;">社内発注</label>
                                     </label>
                                 </div>
                             </div>
@@ -116,14 +116,14 @@
                             <div class="col-md-1">
                                 <div class="checkbox">
                                     <label>
-                                        @Html.CheckBoxFor(model => model.HatyuFlag)&emsp;注文書
+                                        @Html.CheckBoxFor(model => model.HatyuFlag)&emsp;<label style="vertical-align: middle;">注文書</label>
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-1">
                                 <div class="checkbox">
                                     <label>
-                                        @Html.CheckBoxFor(model => model.GenpinFlag)&emsp;現品票
+                                        @Html.CheckBoxFor(model => model.GenpinFlag)&emsp;<label style="vertical-align: middle;">現品票</label>
                                     </label>
                                 </div>
                             </div>
@@ -177,8 +177,8 @@
                                 <input type="submit" class="btn btn-primary" value="登録">
                             </div>
                             <label class="col-md-2 control-label" for="Text17" style="text-align: left">
-                                &emsp;@Html.RadioButtonFor(model => model.ApprovalType, "1") 承認　
-                                @Html.RadioButtonFor(model => model.ApprovalType, "2") 否決
+                                &emsp;@Html.RadioButtonFor(model => model.ApprovalType, "1")&nbsp;<label style="vertical-align: middle;">承認</label>
+                                &emsp;@Html.RadioButtonFor(model => model.ApprovalType, "2")&nbsp;<label style="vertical-align: middle;">否決</label>
                             </label>
                         </div>
                     }

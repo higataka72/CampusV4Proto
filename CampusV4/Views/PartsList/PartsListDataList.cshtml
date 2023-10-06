@@ -134,11 +134,15 @@
                             @Html.C1().InputDateFor(m => m.LastUpdateDate)
                         </div>
                         <div class="col-md-2">
-                            <div class="checkbox">
+                            @*<div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="Check1" value="Complete" />完了
                                 </label>
-                            </div>
+                            </div>*@
+                            <label class="col-md-1 control-label text-nowrap">
+                                @Html.CheckBoxFor(model => model.Complete)
+                                &nbsp;<label style="vertical-align: middle;">完了</label>
+                            </label>
                         </div>
                     </div>
                     <div class="ln_solid"></div>

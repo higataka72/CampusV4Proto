@@ -15,30 +15,34 @@
 
                     <div class="form-group">
                         <label class="col-md-1 control-label text-nowrap" id="lbl_ProcessKbn">処理区分</label>
-                        <label class="col-md-1 control-label text-nowrap " style="text-align:left;">
-                            @Html.RadioButtonFor(model => model.ProcessKbn, 1 ,new { @id = "rdoProcessKbnOutput" }) 出力　
-                        </label>
-                        <label class="col-md-1 control-label text-nowrap " style="text-align:left;">
-                            @Html.RadioButtonFor(model => model.ProcessKbn, 2, new { @id = "rdoProcessKbnDel" }) 削除　
-                        </label>
+                        <div class="col-md-1">
+                            <label class="control-label text-nowrap">
+                                @Html.RadioButtonFor(model => model.ProcessKbn, 1, new { @id = "rdoProcessKbnOutput" })&nbsp;<label style="vertical-align: middle;">出力</label>
+                            </label>
+                        </div>
+                        <div class="col-md-1">
+                            <label class="control-label text-nowrap">
+                                @Html.RadioButtonFor(model => model.ProcessKbn, 2, new { @id = "rdoProcessKbnDel" })&nbsp;<label style="vertical-align: middle;">削除</label>
+                            </label>
+                        </div>
 
-                    </div>
+                        </div>
 
                     <div class="form-group">
                         <label class="col-md-1 control-label text-nowrap" id="lbl_SlipKbnOrder" for="Text1">対象伝票</label>
                         <div class="col-md-1">
                             <label class="control-label text-nowrap" id="lbl_SlipKbnPurchase">
-                                @Html.CheckBoxFor(model => model.SlipKbnPurchase) 仕入
+                                @Html.CheckBoxFor(model => model.SlipKbnPurchase)&nbsp;<label style="vertical-align: middle;">仕入</label>
                             </label>
                         </div>
                         <div class="col-md-1">
                             <label class="control-label text-nowrap" id="lbl_SlipKbnUsage">
-                                @Html.CheckBoxFor(model => model.SlipKbnUsage) 利用料
+                                @Html.CheckBoxFor(model => model.SlipKbnUsage)&nbsp;<label style="vertical-align: middle;">利用料</label>
                             </label>
                         </div>
                         <div class="col-md-1">
                             <label class="control-label text-nowrap" id="lbl_SlipKbnEarnings">
-                                @Html.CheckBoxFor(model => model.SlipKbnEarnings) 売上
+                                @Html.CheckBoxFor(model => model.SlipKbnEarnings)&nbsp;<label style="vertical-align: middle;">売上</label>
                             </label>
                         </div>
 

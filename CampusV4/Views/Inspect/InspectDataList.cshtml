@@ -51,17 +51,13 @@
                            @Html.TextBoxFor(model => model.ProductionNumber, new { @class = "form-control", @placeholder = "(必須)", @id = "txtProductionNumber" })
                        </div>
                        <div class="col-md-6">
-                           <label class="control-label">(　</label>
-                           <label>
-                               <input type="radio" name="Radio1" value="test" style="vertical-align: top; " />　受入のみ　
+                           <label class="control-label" for="Text11" style="text-align:left;">
+                               （
+                               @Html.RadioButtonFor(model => model.Po_type, 1)&nbsp;&nbsp;&nbsp;<label style="vertical-align: middle;">受入のみ</label>
+                               &nbsp;&nbsp;@Html.RadioButtonFor(model => model.Po_type, 2)&nbsp;&nbsp;&nbsp;<label style="vertical-align: middle;">発注残のみ</label>
+                               &nbsp;&nbsp;@Html.RadioButtonFor(model => model.Po_type, 0)&nbsp;&nbsp;&nbsp;<label style="vertical-align: middle;">両方</label>
+                               ）
                            </label>
-                           <label>
-                               <input type="radio" name="Radio2" value="test" style="vertical-align: top; " />　発注残のみ　
-                           </label>
-                           <label>
-                               <input type="radio" name="Radio3" value="test" style="vertical-align: top; " />　 両方
-                           </label>
-                           <label class="control-label">　)</label>
                        </div>
                        <div class="col-md-1">
                            <input type="submit" value="検索" name="ShowSearchBtn" class="btn btn-primary" id="ShowSearchBtn" />
