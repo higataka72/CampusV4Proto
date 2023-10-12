@@ -7,6 +7,8 @@ namespace CampusV4.Models
 {
     public class PortalInternalViewModel
     {
+        //対象年月
+        public DateTime? TargetDate { get; set; }
         public List<PortalInternalDashboardViewModel> PortalInternalDashboardList { get; set; }
         public List<PortalInternalDetailData> PortalInternalDetailDataList { get; set; }
 

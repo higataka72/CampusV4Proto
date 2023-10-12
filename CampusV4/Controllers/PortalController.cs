@@ -85,6 +85,7 @@ namespace CampusV4.Controllers.Portal
 
             portalInternalDashboardList.Add(portalInternalDashboardViewModel);
 
+            model.TargetDate = DateTime.Now;
             model.PortalInternalDashboardList = portalInternalDashboardList;
         }
 

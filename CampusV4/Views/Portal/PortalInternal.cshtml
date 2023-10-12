@@ -3,98 +3,149 @@
 <div id="Index">
     <div class="page-title">
         <div class="title_left">
-            <h3>ダッシュボード</h3>
+            <h3>社内ポータル</h3>
         </div>
     </div>
+    <div class="x_panel">
+        <div class="x_title">
+            <h2><i class="fa fa-volume-up"></i> CAMPUS<small>Topics</small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">新着</a>
+                        <a class="dropdown-item" href="#">全て</a>
+                    </div>
+                </li>
+                <li>
+                    <a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="">
+                <ul class="to_do" style="font-size: 15px;">
+                    <li>
+                        <p>
+                            <div class="icheckbox_flat-green" style="position: relative;">
+                                <input type="checkbox" class="flat" style="position: absolute; opacity: 0;">
+                                <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                            </div>2023年12月01日：【新着】新規パートナ工場の追加
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <div class="icheckbox_flat-green" style="position: relative;">
+                                <input type="checkbox" class="flat" style="position: absolute; opacity: 0;">
+                                <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                            </div>2023年11月20日：【新着】年末年始(12月30日～01月10日)
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <div class="icheckbox_flat-green" style="position: relative;">
+                                <input type="checkbox" class="flat" style="position: absolute; opacity: 0;">
+                                <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                            </div>2023年11月01日：10月の受注件数100件
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <div class="clearfix"></div>
     <div class="row">
         <div class="col-md-12">
-            <div class="x_panel">
+            <div class="x_panel" style="text-align:left;">
 
 
                 @using (Ajax.BeginForm("PortalInternalDetail", "Portal", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "PortalInternalDetail" }))
                 {
+                    <input type="submit" value="1" name="btnDetailDetail" class="btn btn-primary" id="btnDetail" style="display:none;" />
+                    <input type="submit" value="1" name="btnDetailDetailDetail" class="btn btn-primary" id="btnDetail" style="display:none;" />
 
-                    <div class="row" style="display: inline-block;">
-                        <div class="top_tiles">
-                            <div class="animated flipInY col-md-3">
-                                <div class="tile-stats" style="background: #efffff;">
-                                    <div class="icon"><i class="fa fa-plane"></i></div>
-                                    <div class="count"><a href="#" onclick="clickDetail()">36</a></div>
-                                    <p></p>
-                                    <h3><a href="#" onclick="clickDetail()">出荷予定数</a></h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="x_panel fixed_height_100" style="background: #efffff;">
+                                <div class="x_title">
+                                    <div class="form-group">
+                                        <label class="col-md-1 text-nowrap" style="padding-top: 8px; font-size: 15px; height: 35px;" id="lbl_TargetDate">対象年月</label>
+                                        <div class="col-md-2">
+                                            @Html.C1().InputDateFor(model => model.TargetDate).Id("txtTargetDate").Format("yyyy年MM月")
+                                        </div>
+                                        <div class="col-md-offset-7 col-md-2" style="text-align:right;">
+                                            <label class="col-md-1 text-nowrap" style="padding-top: 7px; font-size: 20px; height: 35px;" id="lbl_TargetDate">
+                                                <span class="tile_count"><a href="#" onclick="panelList1()"><i class="fa fa-backward"></i></a></span>
+                                                &nbsp;&nbsp;パネルリスト&nbsp;&nbsp;
+                                                <span class="tile_count"><a href="#" onclick="panelList2()"><i class="fa fa-forward"></i></a></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
                                 </div>
-                            </div>
-                            <div class="animated flipInY col-md-3">
-                                <div class="tile-stats" style="background: #efffff;">
-                                    <div class="icon"><i class="fa fa-file-text"></i></div>
-                                    <div class="count"><a href="#" onclick="clickDetail()">10</a></div>
-                                    <p></p>
-                                    <h3><a href="#" onclick="clickDetail()">設計予定数</a></h3>
+                                <div class="form-group" id="panel01">
+                                    <div class="tile_count" style="text-align: center;">
+                                        <div class="col-md-2 tile_stats_count">
+                                            <span class="count_top" style="font-size: 20px;"><a href="#" onclick="clickDetail()"><i class="fa fa-list"></i> 公募</a></span>
+                                            <div class="count"><a href="#" onclick="clickDetail()">3</a></div>
+                                        </div>
+                                        <div class="col-md-2 tile_stats_count">
+                                            <span class="count_top" style="font-size: 20px;"><a href="#" onclick="clickDetail()"><i class="fa fa-list"></i> 受注数</a></span>
+                                            <div class="count"><a href="#" onclick="clickDetail()">38</a></div>
+                                        </div>
+                                        <div class="col-md-2 tile_stats_count">
+                                            <span class="count_top" style="font-size: 20px;"><a href="#" onclick="clickDetail()"><i class="fa fa-ship"></i> 出荷予定数</a></span>
+                                            <div class="count"><a href="#" onclick="clickDetail()">36</a></div>
+                                        </div>
+                                        <div class="col-md-2 tile_stats_count">
+                                            <span class="count_top" style="font-size: 20px;"><a href="#" onclick="clickDetail()"><i class="fa fa-file-text"></i> 設計予定数</a></span>
+                                            <div class="count"><a href="#" onclick="clickDetail()">10</a></div>
+                                        </div>
+                                        <div class="col-md-2 tile_stats_count">
+                                            <span class="count_top" style="font-size: 20px;"><a href="#" onclick="clickDetail()"><i class="fa fa-shopping-basket"></i> 発注予定数</a></span>
+                                            <div class="count"><a href="#" onclick="clickDetail()">56</a></div>
+                                        </div>
+                                        <div class="col-md-2 tile_stats_count">
+                                            <span class="count_top" style="font-size: 20px;"><a href="#" onclick="clickDetail()"><i class="fa fa-truck"></i> 入荷予定数</a></span>
+                                            <div class="count"><a href="#" onclick="clickDetail()">126</a></div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="animated flipInY col-md-3">
-                                <div class="tile-stats" style="background: #efffff;">
-                                    <div class="icon"><i class="fa fa-shopping-basket"></i></div>
-                                    <div class="count"><a href="#" onclick="clickDetail()">56</a></div>
-                                    <p></p>
-                                    <h3><a href="#" onclick="clickDetail()">発注予定数</a></h3>
-                                </div>
-                            </div>
-                            <div class="animated flipInY col-md-3">
-                                <div class="tile-stats" style="background: #efffff;">
-                                    <div class="icon"><i class="fa fa-cube"></i></div>
-                                    <div class="count"><a href="#" onclick="clickDetail()">126</a></div>
-                                    <p></p>
-                                    <h3><a href="#" onclick="clickDetail()">入荷予定数</a></h3>
-                                </div>
-                            </div>
-                            <div class="animated flipInY col-md-4">
-                                <div class="tile-stats" style="background: #efffff;">
-                                    <div class="icon"><i class="fa fa-calculator"></i></div>
-                                    <div class="count"><a href="#" onclick="clickDetail()">1,260,000</a></div>
-                                    <p></p>
-                                    <h3><a href="#" onclick="clickDetail()">仕入金額計</a></h3>
-                                </div>
-                            </div>
-                            <div class="animated flipInY col-md-4">
-                                <div class="tile-stats" style="background: #efffff;">
-                                    <div class="icon"><i class="fa fa-thumbs-o-up"></i></div>
-                                    <div class="count"><a href="#" onclick="clickDetail()">12,000,000</a></div>
-                                    <p></p>
-                                    <h3><a href="#" onclick="clickDetail()">売上金額計</a></h3>
+                                <div class="form-group" id="panel02">
+                                    <div class="tile_count" style="text-align: center;">
+                                        <div class="col-md-2 tile_stats_count">
+                                            <span class="count_top" style="font-size: 20px;"><a href="#" onclick="clickDetail()"><i class="fa fa-calculator"></i> 仕入金額計</a></span>
+                                            <div class="count"><a href="#" onclick="clickDetail()">2,200</a></div>
+                                            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>(単位：千円) </i></span>
+                                        </div>
+                                        <div class="col-md-2 tile_stats_count">
+                                            <span class="count_top" style="font-size: 20px;"><a href="#" onclick="clickDetail()"><i class="fa fa-yen"></i> 売上金額計</a></span>
+                                            <div class="count"><a href="#" onclick="clickDetail()">3,600</a></div>
+                                            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>(単位：千円) </i></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    @*@Html.HiddenFor(model => model.SelectCol, new { id = "SelectCol" })*@
-                    @*<div class="form-group">
-                @(Html.C1().FlexGrid()
-                    .AutoGenerateColumns(false).Height("100px").Id("gridIndex")
-                    .Bind(Model.PortalInternalDashboardList).AllowAddNew(false).IsReadOnly(true)
-                    .Columns(b1 =>
-                    {
-                        b1.Add(cb => cb.Binding("EstimatedShippingNum").Width("120").Header("出荷予定数").DataType(DataType.Number));
-                        b1.Add(cb => cb.Binding("EstimatedDesignNum").Width("120").Header("設計予定数").DataType(DataType.Number));
-                        b1.Add(cb => cb.Binding("EstimatedOrderNum").Width("120").Header("発注予定数").DataType(DataType.Number));
-                        b1.Add(cb => cb.Binding("EstimatedComeInNum").Width("120").Header("入荷予定数").DataType(DataType.Number));
-                        b1.Add(cb => cb.Binding("PurchaseAmount").Width("120").Header("仕入金額計").DataType(DataType.Number));
-                        b1.Add(cb => cb.Binding("EarningsAmount").Width("120").Header("売上金額計").DataType(DataType.Number));
-                    }))
-            </div>*@
-                    <input type="submit" value="1" name="btnDetailDetail" class="btn btn-primary" id="btnDetail" style="display:none;" />
-                    <input type="submit" value="1" name="btnDetailDetailDetail" class="btn btn-primary" id="btnDetail" style="display:none;" />
+                    </div>
                 }
 
 
             </div>
         </div>
+
         <div class="col-md-12">
             <div id="PortalInternalDetail" class="form-group">
             </div>
         </div>
-       
+
 
     </div>
 </div>
@@ -105,9 +156,20 @@
 
 @section scripts{
     <script>
+        document.getElementById("panel02").style.display = "none";
 
         function clickDetail() {
             document.getElementById('btnDetail').click();
+        }
+
+        function panelList1() {
+            document.getElementById("panel01").style.display = "block"
+            document.getElementById("panel02").style.display = "none"
+        }
+
+        function panelList2() {
+            document.getElementById("panel01").style.display = "none"
+            document.getElementById("panel02").style.display = "block"
         }
 
         //c1.documentReady(function () {
