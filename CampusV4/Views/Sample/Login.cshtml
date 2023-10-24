@@ -9,6 +9,58 @@
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
+
+@*<style>
+    #checkPassword {
+        display: none;
+    }
+
+    .hideText, .showText {
+        border: none;
+        outline: none;
+    }
+
+    .togglePassword {
+        border: 1px solid;
+        border-radius: 2px;
+        width: 205px;
+    }
+
+    .showText {
+        display: none;
+    }
+
+    .hideText {
+        display: inline;
+    }
+
+    .fa-eye:before {
+        display: inline;
+        margin-left: 5px;
+    }
+
+    .fa-eye-slash:before {
+        display: none;
+    }
+
+    #checkPassword:checked + .togglePassword > .fa-eye:before {
+        display: none;
+    }
+
+    #checkPassword:checked + .togglePassword > .fa-eye-slash:before {
+        display: inline-block;
+    }
+
+    #checkPassword:checked + .togglePassword > .hideText {
+        display: none;
+    }
+
+    #checkPassword:checked + .togglePassword > .showText {
+        display: inline-block;
+    }
+
+</style>*@
+
 <div class="row">
     <div class="col-md-12">
         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -16,7 +68,7 @@
             @Html.AntiForgeryToken()
             <div class="form-group" style="text-align:center;">
                 <div class="col-md-12">
-                    <label class="control-label text-nowrap"><font size="5">CAMPUSにログインして下さい</font></label>
+                    <label class="control-label text-nowrap"><font size="5"><i class="fa fa-user"></i>&nbsp;&nbsp;CAMPUSにログインして下さい</font></label>
                 </div>
             </div>
 
@@ -28,6 +80,13 @@
                 <input class="form-control" id="UserId" name="UserId" type="text" placeholder="Eメール" />
             </div>
             <div class="form-group">
+                @*<input type="checkbox" id="checkPassword">
+                <div class="togglePassword">
+                    <input type="password" class="hideText form-control" value="password123">
+                    <input type="text" class="showText form-control" value="password123">
+                    <label for="checkPassword" class="fa fa-eye"></label>
+                    <label for="checkPassword" class="fa fa-eye-slash"></label>
+                </div>*@
                 <input class="form-control" id="Password" name="Password" type="password" placeholder="パスワード" />
             </div>
             <div class="form-group">
@@ -42,17 +101,17 @@
                         &nbsp;&nbsp;<label style="vertical-align: middle;"><font size="3">ログインしたままにする</font></label>
                     </label>
                     <br />
-                    <label class="control-label text-nowrap" id="lbl_CompletePayment">
+                    @*<label class="control-label text-nowrap" id="lbl_CompletePayment">
                         <input id="AutoLogin" name="AutoLogin" type="checkbox" value="true" />
                         &nbsp;&nbsp;<label style="vertical-align: middle;">
                             <font size="3">ブラウザを閉じる時、オートログインを有効にする</font>
                         </label>
-                    </label>
+                    </label>*@
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-9" style="text-align: right">
-                    <a class="btn btn-primary submit" href="/Sample/Index">ログイン</a>
+                    <a class="btn btn-primary submit" href="/Portal/index?LoginID=">ログイン</a>
                     <a class="btn btn-primary" href="#">キャンセル</a>
                 </div>
             </div>
@@ -71,12 +130,12 @@
                             <a href="#" style="text-decoration: underline; color: #7f7fff; ">&nbsp;<font size="3">こちら</font></a>
                         </label>
                         @*<label class="control-label text-nowrap">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;言語は<a href="#" style="text-decoration: underline;color: #ff7f7f; ">&nbsp;&nbsp;日本語</a>です。
-                            異なる場合は<a href="#" style="text-decoration: underline; color: #ff7f7f;">&nbsp;&nbsp;こちら</a>をクリック
-                        </label>*@
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;言語は<a href="#" style="text-decoration: underline;color: #ff7f7f; ">&nbsp;&nbsp;日本語</a>です。
+                                異なる場合は<a href="#" style="text-decoration: underline; color: #ff7f7f;">&nbsp;&nbsp;こちら</a>をクリック
+                            </label>*@
                         <label class="control-label text-nowrap">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <font size="3">概算見積を希望の方は</font>
+                            <font size="3">参考見積を希望の方は</font>
                             <a href="#" style="text-decoration: underline; color: #7f7fff; ">&nbsp;&nbsp;<font size="3">こちら</font></a>
                         </label>
                     </div>
