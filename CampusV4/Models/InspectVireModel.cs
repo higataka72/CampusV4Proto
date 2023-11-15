@@ -73,10 +73,18 @@ namespace CampusV4.Models
         public double? ReceiptQuantity { get; set; }
         //不良数
         public double? DefectsQuantity { get; set; }
+        //検収数
+        public double? AcceptanceQuantity { get; set; }
         //単価
         public double? Unitprice { get; set; }
         //金額
         public double? Price { get; set; }
+        //検収日
+        public DateTime? AcceptanceDate { get; set; }
+        //検収担当
+        public string AcceptancePicCode { get; set; }
+        //検収日
+        public DateTime? AccountingConnectedDate { get; set; }
 
 
         public InspectListData()

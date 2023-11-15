@@ -92,8 +92,15 @@
                                 b1.Add(cb => cb.Binding("OrderQuantity").Width("80").Header("発注数").WordWrap(true).DataType(DataType.Number));
                                 b1.Add(cb => cb.Binding("ReceiptQuantity").Width("80").Header("受入数").WordWrap(true).DataType(DataType.Number));
                                 b1.Add(cb => cb.Binding("DefectsQuantity").Width("80").Header("不良数").WordWrap(true).DataType(DataType.Number));
+
+                                b1.Add(cb => cb.Binding("AcceptanceQuantity").Width("80").Header("検収数").WordWrap(true).DataType(DataType.Number));
+
                                 b1.Add(cb => cb.Binding("Unitprice").Width("100").Header("単価").WordWrap(true).DataType(DataType.Number));
                                 b1.Add(cb => cb.Binding("Price").Width("100").Header("金額").WordWrap(true).DataType(DataType.Number));
+
+                                b1.Add(cb => cb.Binding("AcceptanceDate").Width("80").Header("検収日").WordWrap(true).DataType(DataType.Date));
+                                b1.Add(cb => cb.Binding("AcceptancePicCode").Width("80").Header("検収担当").WordWrap(true));
+                                b1.Add(cb => cb.Binding("AccountingConnectedDate").Width("80").Header("会計連携日").WordWrap(true).DataType(DataType.Date));
                             }))
                     </div>
 
