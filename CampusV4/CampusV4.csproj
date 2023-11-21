@@ -233,6 +233,7 @@
     <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Controllers\ReferenceEstimateController.cs" />
     <Compile Include="Controllers\SampleController.cs" />
+    <Compile Include="Controllers\TransferController.cs" />
     <Compile Include="Controllers\YearFeedbackController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -247,6 +248,7 @@
     <Compile Include="Models\ContactConfirmationInputViewModel.cs" />
     <Compile Include="Models\ProductionControlAlignmentDataViewModel.cs" />
     <Compile Include="Models\PortalInternalViewModel.cs" />
+    <Compile Include="Models\TransferViewModel.cs" />
     <Compile Include="Models\YearFeedbackViewModel.cs" />
     <Compile Include="Models\AcceptanceListViewModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -482,6 +484,7 @@
     <Content Include="Views\M_Employee\EmployeeDetail.cshtml" />
     <Content Include="Views\Portal\PortalInternalDetail.cshtml" />
     <Content Include="Views\Portal\PortalInternalDetailDetail.cshtml" />
+    <Content Include="Views\Transfer\TransferInput.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
