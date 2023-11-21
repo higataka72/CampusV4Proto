@@ -81,7 +81,7 @@
                             .Columns(b1 =>
                             {
                                 b1.Add(cb => cb.Binding("InspectCheck").Width("50").Header("検").DataType(DataType.Boolean));
-                                b1.Add(cb => cb.Binding("Situation").Width("50").Header("状態").WordWrap(true).DataType(DataType.Number).IsReadOnly(true).Align("center"));
+                                //b1.Add(cb => cb.Binding("Situation").Width("50").Header("状態").WordWrap(true).DataType(DataType.Number).IsReadOnly(true).Align("center"));
                                 b1.Add(cb => cb.Binding("ProductionNumber").Width("150").Header("製番").WordWrap(true).IsReadOnly(true));
                                 b1.Add(cb => cb.Binding("OrderDate").Width("80").Header("発注日").WordWrap(true).DataType(DataType.Date));
                                 b1.Add(cb => cb.Binding("OrderNumber").Width("150").Header("発注番号").WordWrap(true));
