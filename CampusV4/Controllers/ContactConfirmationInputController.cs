@@ -32,7 +32,7 @@ namespace CampusV4.Controllers
             ContactConfirmationInputViewModel model = new ContactConfirmationInputViewModel();
             GetCombDataList(ref model);
             GetContactConfirmationDataList(ref model);
-            model.ContactConfirmationList.Add(new ContactConfirmationListData(DateTime.Parse("2024/04/29"), "入力内容追加", "佐藤　一郎", DateTime.Parse("2024/04/30")));
+            model.ContactConfirmationList.Add(new ContactConfirmationListData("","",DateTime.Parse("2024/04/29"), "入力内容追加", "佐藤　一郎", DateTime.Parse("2024/04/30")));
 
             return View("ContactConfirmationInput",model);
         }
@@ -72,9 +72,9 @@ namespace CampusV4.Controllers
         private void GetContactConfirmationDataList(ref ContactConfirmationInputViewModel model)
         {
             List<ContactConfirmationListData> DataList = new List<ContactConfirmationListData>();
-            DataList.Add(new ContactConfirmationListData(DateTime.Parse("2024/01/01"), "入力内容1", "佐藤　一郎", DateTime.Parse("2024/01/02")));
-            DataList.Add(new ContactConfirmationListData(DateTime.Parse("2024/02/27"), "入力内容2", "佐藤　次郎", DateTime.Parse("2024/02/28")));
-            DataList.Add(new ContactConfirmationListData(DateTime.Parse("2024/03/30"), "入力内容3", "佐藤　三郎", DateTime.Parse("2024/03/31")));
+            DataList.Add(new ContactConfirmationListData("Upper Main Cavity","",DateTime.Parse("2024/01/01"), "入力内容1", "佐藤　一郎", DateTime.Parse("2024/01/02")));
+            DataList.Add(new ContactConfirmationListData("Lower Main Cavity", "", DateTime.Parse("2024/02/27"), "入力内容2", "佐藤　次郎", DateTime.Parse("2024/02/28")));
+            DataList.Add(new ContactConfirmationListData("", "テスト検索項目", DateTime.Parse("2024/03/30"), "入力内容3", "佐藤　三郎", DateTime.Parse("2024/03/31")));
 
             model.ContactConfirmationList = DataList;
         }

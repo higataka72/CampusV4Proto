@@ -36,6 +36,12 @@ namespace CampusV4.Models
         //確認者リスト
         public List<ContactConfirmationListData> ContactConfirmationList { get; set; }
 
+        //部品名
+        public string PartsName { get; set; }
+
+        //検索項目
+        public string SearchItem { get; set; }
+
     }
     public class ContactConfirmationListData
     {
@@ -47,9 +53,15 @@ namespace CampusV4.Models
         public string ConfirmerName { get; set; }
         //確認日
         public DateTime? ConfirmerDate { get; set; }
+        //部品名
+        public string PartsName { get; set; }
+        //検索項目
+        public string SearchItem { get; set; }
 
-        public ContactConfirmationListData(DateTime? _registDate, string _inputNote, string _confirmerName, DateTime? _confirmerDate)
+        public ContactConfirmationListData(string _partsname, string _searchitem, DateTime? _registDate, string _inputNote, string _confirmerName, DateTime? _confirmerDate)
         {
+            PartsName = _partsname;
+            SearchItem = _searchitem;
             RegistDate = _registDate;
             InputNote = _inputNote;
             ConfirmerName = _confirmerName;

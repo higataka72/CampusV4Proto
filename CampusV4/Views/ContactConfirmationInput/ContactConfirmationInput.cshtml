@@ -25,6 +25,17 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_PartsName">部品名</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.PartsName, new { @id = "PartsName", @class = "form-control" })
+                        </div>
+                        <label class="col-md-1 control-label text-nowrap" id="lbl_SearchItem">検索項目</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.SearchItem, new { @id = "SearchItem", @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_RegistDate" for="RegistDate">登録日</label>
                         <div class="col-md-2">
                             @Html.C1().InputDateFor(m => m.RegistDate).Id("RegistDate").Placeholder("（必須）")
@@ -71,6 +82,17 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_FileName" for="Text12">資料添付</label>
+                        <div class="col-md-5">
+                            <div class="dropzone dz-clickable" id="myDrop">
+                                <div class="dz-default dz-message" data-dz-message="">
+                                    <span>ファイルをドラッグ＆ドロップしてしてください。<br>またはここをクリック(タップ)して選択してください。</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label class="col-md-1 control-label text-nowrap" id="lbl_InputNote" for="Comment_InputNote">入力内容</label>
 
                         <div class="col-md-5">
@@ -89,13 +111,14 @@
                         </div>
                     </div>
 
-
                     <div class="form-group">
                         @(Html.C1().FlexGrid()
                             .AutoGenerateColumns(false).IsReadOnly(true).Height("450px").Id("flexgrid").AllowAddNew(false)
                             .Bind(Model.ContactConfirmationList)
                             .Columns(b1 =>
                             {
+                                b1.Add(cb => cb.Binding("PartsName").Width("180").Header("部品名").WordWrap(false));
+                                b1.Add(cb => cb.Binding("SearchItem").Width("180").Header("検索項目").WordWrap(false));
                                 b1.Add(cb => cb.Binding("RegistDate").Width("180").Header("登録日").WordWrap(true).DataType(DataType.Date));
                                 b1.Add(cb => cb.Binding("ConfirmerDate").Width("180").Header("確認日").WordWrap(true).DataType(DataType.Date));
                                 b1.Add(cb => cb.Binding("InputNote").Width("400").Header("入力内容").WordWrap(true));
