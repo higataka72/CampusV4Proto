@@ -46,7 +46,7 @@
                         </div>
 
                     </div>
-                    <div class="form-group">
+                   @* <div class="form-group">
                         <label class="col-md-1 control-label text-nowrap" id="lbl_Pattern">パターン</label>
                         <label class="col-md-1 control-label text-nowrap " style="text-align:left;">
                             @Html.RadioButtonFor(model => model.Pattern, 1)&nbsp;<label style="vertical-align: middle;">概算</label>　
@@ -54,7 +54,7 @@
                         <label class="col-md-1 control-label text-nowrap " style="text-align:left;">
                             @Html.RadioButtonFor(model => model.Pattern, 2)&nbsp;<label style="vertical-align: middle;">受注</label>　
                         </label>
-                    </div>
+                    </div>*@
 
                     <div class="form-group">
                         <label class="col-md-1 control-label text-nowrap" id="lbl_ProductNo" for="ProductNoFrom">製番</label>
@@ -107,11 +107,11 @@
                     <div class="form-group">
                         <label class="col-md-1 control-label text-nowrap" id="lbl_SlipNo" for="SlipNoFrom">伝票№</label>
                         <div class="col-md-2">
-                            @Html.TextBoxFor(model => model.SlipNoFrom, new { @class = "form-control", @id = "SlipNoFrom", @placeholder = "(必須)" })
+                            @Html.TextBoxFor(model => model.SlipNoFrom, new { @class = "form-control", @id = "SlipNoFrom" })
                         </div>
                         <label class="col-md-1 control-label text-nowrap" id="lbl_SlipNoRange" style="text-align:center">～</label>
                         <div class="col-md-2">
-                            @Html.TextBoxFor(model => model.SlipNoTo, new { @class = "form-control", @id = "SlipNoTo", @placeholder = "(必須)" })
+                            @Html.TextBoxFor(model => model.SlipNoTo, new { @class = "form-control", @id = "SlipNoTo" })
                         </div>
                     </div>
 

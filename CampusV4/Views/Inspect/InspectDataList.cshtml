@@ -13,11 +13,31 @@
                 @using (Html.BeginForm("InspectDataList", "Inspect", FormMethod.Post, new { @class = "form-horizontal", role = "form", defaultbutton = "dummySubmit" }))
                 {
                     @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_ProductionNumber" for="Text3">製番</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ProductionNumber, new { @class = "form-control", @id = "txtProductionNumber" })
+                        </div>
+                        <div class="col-md-6">
+                            <label class="control-label" for="Text11" style="text-align:left;">
+                                （
+                                @Html.RadioButtonFor(model => model.Po_type, 1)&nbsp;&nbsp;&nbsp;<label style="vertical-align: middle;">受入のみ</label>
+                                &nbsp;&nbsp;@Html.RadioButtonFor(model => model.Po_type, 2)&nbsp;&nbsp;&nbsp;<label style="vertical-align: middle;">発注残のみ</label>
+                                &nbsp;&nbsp;@Html.RadioButtonFor(model => model.Po_type, 0)&nbsp;&nbsp;&nbsp;<label style="vertical-align: middle;">両方</label>
+                                ）
+                            </label>
+                        </div>
+                        <div class="col-md-1">
+                            <input type="submit" value="検索" name="ShowSearchBtn" class="btn btn-primary" id="ShowSearchBtn" />
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_CampusId" for="Select3">CAMPUS-ID</label>
                         <div class="col-md-2">
                             @(Html.C1()
-                                .ComboBoxFor(model => model.Campus1ID).Id("cmbCampusData")                                
+                                .ComboBoxFor(model => model.Campus1ID).Id("cmbCampusData")
                                 .Bind(Model.CampusDataList)
                                 .HeaderPath("CampusID")
                                 .DisplayMemberPath("CampusID")
@@ -25,17 +45,16 @@
                                 .CssStyle( "width" , "auto" )
                                 .SelectedValue(Model.Campus1ID)
                                 .IsRequired(false)
-                                .Placeholder("(必須)")
-                                )
-                            
+                             )
+
                         </div>
                         <div class="col-md-5">
                             @Html.TextBoxFor(model => model.Campus1Name, new { @id = "selectedCampusName", @class = "form-control", @disabled = "true" })
                         </div>
                     </div>
-                    
-                   
-                   <div class="form-group">
+
+
+                    <div class="form-group">
                         <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_ReceiptDateFrom" for="Text2">受入日</label>
                         <div class="col-md-2">
                             @Html.C1().InputDateFor(m => m.ReceiptDateFrom)
@@ -45,32 +64,15 @@
                             @Html.C1().InputDateFor(m => m.ReceiptDateTo)
                         </div>
                     </div>
-                   <div class="form-group">
-                       <label class="col-md-1 control-label text-nowrap lavel-functionkey" id="lbl_ProductionNumber" for="Text3">製番</label>
-                       <div class="col-md-2">
-                           @Html.TextBoxFor(model => model.ProductionNumber, new { @class = "form-control", @placeholder = "(必須)", @id = "txtProductionNumber" })
-                       </div>
-                       <div class="col-md-6">
-                           <label class="control-label" for="Text11" style="text-align:left;">
-                               （
-                               @Html.RadioButtonFor(model => model.Po_type, 1)&nbsp;&nbsp;&nbsp;<label style="vertical-align: middle;">受入のみ</label>
-                               &nbsp;&nbsp;@Html.RadioButtonFor(model => model.Po_type, 2)&nbsp;&nbsp;&nbsp;<label style="vertical-align: middle;">発注残のみ</label>
-                               &nbsp;&nbsp;@Html.RadioButtonFor(model => model.Po_type, 0)&nbsp;&nbsp;&nbsp;<label style="vertical-align: middle;">両方</label>
-                               ）
-                           </label>
-                       </div>
-                       <div class="col-md-1">
-                           <input type="submit" value="検索" name="ShowSearchBtn" class="btn btn-primary" id="ShowSearchBtn" />
-                       </div>
-                   </div>
-                   <div class="form-group">
-                       <div class="col-md-1">
-                           <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
-                       </div>
-                       <div class="col-md-1">
-                           <input type="submit" value="表示" name="submitBtn" class="btn btn-primary" id="ShowSubmitBtn" style="display:none;" />
-                       </div>                       
-                   </div>
+
+                    <div class="form-group">
+                        <div class="col-md-1">
+                            <input type="submit" id="dummySubmit" value="Dummy" class="btn btn-primary" name="submitBtn" style="display:none;" onclick="return false;" />
+                        </div>
+                        <div class="col-md-1">
+                            <input type="submit" value="表示" name="submitBtn" class="btn btn-primary" id="ShowSubmitBtn" style="display:none;" />
+                        </div>
+                    </div>
 
 
 
@@ -107,7 +109,8 @@
                     <div class="ln_solid"></div>
                     <div class="form-group">
                         <div class="col-md-12" style="text-align: right">
-                            <a href="#" class="btn btn-primary">印刷</a>
+                            @*<a href="#" class="btn btn-primary">印刷</a>*@
+                            <a href="#" class="btn btn-primary">登録</a>
                             <a href="#" class="btn btn-primary">閉じる</a>
                         </div>
                     </div>
